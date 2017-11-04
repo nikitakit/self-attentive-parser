@@ -8,6 +8,10 @@
 EVALB/evalb
 EVALB/evalb.dSYM/
 
+# Uncompressed models
+models/*.data
+models/*.meta
+
 # Python byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
