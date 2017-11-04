@@ -44,7 +44,7 @@ As an example, to train with exploration using the default hyperparameters, you 
 python3 src/main.py train --explore --model-path-base models/top-down-model --evalb-dir EVALB/ --train-path data/02-21.10way.clean --dev-path data/22.auto.clean
 ```
 
-A pre-trained top-down model with these settings is provided in the `models/` directory.
+A compressed pre-trained top-down model with these settings is provided in the `models/zipped/` directory. Run `unzip zipped/*` in the `models/` directory to extract it.
 
 ## Evaluation
 
