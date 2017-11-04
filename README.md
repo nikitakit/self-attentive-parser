@@ -2,11 +2,12 @@
 
 This is a reference Python implementation of the constituency parser described in [A Minimal Span-Based Neural Constituency Parser](https://arxiv.org/abs/1705.03919) from ACL 2017.
 
-## Requirements
+## Requirements and Setup
 
 * Python 3.5 or higher.
 * [DyNet](https://github.com/clab/dynet). We recommend installing DyNet from source with MKL support for significantly faster run time.
 * [EVALB](http://nlp.cs.nyu.edu/evalb/). Before starting, run `make` inside the `EVALB/` directory to compile an `evalb` executable. This will be called from Python for evaluation.
+* (Optional) Before starting, run `unzip zipped/*` in the `models/` directory to extract the pre-trained model.
 
 ## Training
 
@@ -44,7 +45,7 @@ As an example, to train with exploration using the default hyperparameters, you 
 python3 src/main.py train --explore --model-path-base models/top-down-model --evalb-dir EVALB/ --train-path data/02-21.10way.clean --dev-path data/22.auto.clean
 ```
 
-A compressed pre-trained top-down model with these settings is provided in the `models/zipped/` directory. Run `unzip zipped/*` in the `models/` directory to extract it.
+A compressed pre-trained model with these settings is provided in the `models/zipped/` directory. Run `unzip zipped/*` in the `models/` directory to extract it.
 
 ## Evaluation
 
