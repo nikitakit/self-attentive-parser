@@ -7,7 +7,7 @@ This is a reference Python implementation of the constituency parser described i
 * Python 3.5 or higher.
 * [DyNet](https://github.com/clab/dynet). We recommend installing DyNet from source with MKL support for significantly faster run time.
 * [EVALB](http://nlp.cs.nyu.edu/evalb/). Before starting, run `make` inside the `EVALB/` directory to compile an `evalb` executable. This will be called from Python for evaluation.
-* (Optional) Before starting, run `unzip zipped/*` in the `models/` directory to extract the pre-trained model.
+* Pre-trained model. Before starting, run `unzip zipped/*` in the `models/` directory to extract the pre-trained model.
 
 ## Training
 
@@ -25,9 +25,9 @@ Argument | Description | Default
 `--dropout` | Dropout rate for LSTMs | 0.4
 `--explore` | Train with exploration using a dynamic oracle | Train using a static oracle
 `--model-path-base` | Path base to use for saving models | N/A
-`--evalb-dir` |  Path to EVALB directory | N/A
-`--train-path` | Path to training trees | N/A
-`--dev-path` | Path to development trees | N/A
+`--evalb-dir` |  Path to EVALB directory | `EVALB/`
+`--train-path` | Path to training trees | `data/02-21.10way.clean`
+`--dev-path` | Path to development trees | `data/22.auto.clean`
 `--batch-size` | Number of examples per training update | 10
 `--epochs` | Number of training epochs | No limit
 `--checks-per-epoch` | Number of development evaluations per epoch | 4
@@ -42,7 +42,7 @@ For each development evaluation, the F-score on the development set is computed 
 As an example, to train with exploration using the default hyperparameters, you can use the command:
 
 ```
-python3 src/main.py train --explore --model-path-base models/top-down-model --evalb-dir EVALB/ --train-path data/02-21.10way.clean --dev-path data/22.auto.clean
+python3 src/main.py train --explore --model-path-base models/top-down-model
 ```
 
 A compressed pre-trained model with these settings is provided in the `models/zipped/` directory. Run `unzip zipped/*` in the `models/` directory to extract it.
@@ -51,20 +51,20 @@ A compressed pre-trained model with these settings is provided in the `models/zi
 
 A saved model can be evaluated on a test corpus using the command `python3 src/main.py test ...` with the following arguments:
 
-Argument | Description
---- | ---
+Argument | Description | Default
+--- | --- | ---
 `--model-path-base` | Path base of saved model | N/A
-`--evalb-dir` |  Path to EVALB directory | N/A
-`--test-path` | Path to test trees | N/A
+`--evalb-dir` |  Path to EVALB directory | `EVALB/`
+`--test-path` | Path to test trees | `data/23.auto.clean`
 
 As above, any of the DyNet command line options can also be specified.
 
 The test trees are assumed to have predicted part-of-speech tags.
 
-As an example, to evaluate the pre-trained top-down model on the test set, you can use the command:
+As an example, after extracting the pre-trained model, you can evaluate it on the test set using the following command:
 
 ```
-python3 src/main.py test --model-path-base models/top-down-model_dev=92.34 --evalb-dir EVALB/ --test-path data/23.auto.clean
+python3 src/main.py test --model-path-base models/top-down-model_dev=92.34
 ```
 
 ## Parsing New Sentences
