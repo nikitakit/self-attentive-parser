@@ -1,8 +1,10 @@
 # Minimal Span-Based Neural Constituency Parser
 
-This is a reference Python implementation of the constituency parser described in [A Minimal Span-Based Neural Constituency Parser](https://arxiv.org/abs/1705.03919) from ACL 2017.
+This is a reference Python implementation of the top-down and chart-based constituency parsers described in [A Minimal Span-Based Neural Constituency Parser](https://arxiv.org/abs/1705.03919) from ACL 2017.
 
-The chart parser includes the simplifications outlined in the ACL 2017 presentation, namely:
+The top-down parser is implemented as described in the paper.
+
+The chart parser includes the simplifications outlined in the ACL 2017 oral presentation, namely:
 
   * Removing the unlabeled span-scoring terms from the model.
   * Fixing the score of the empty label at 0.
