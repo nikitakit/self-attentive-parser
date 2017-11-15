@@ -102,7 +102,7 @@ class InternalParseNode(ParseNode):
             return enclosing.label
         return ()
 
-    def oracle_split(self, left, right):
+    def oracle_splits(self, left, right):
         return [
             child.left
             for child in self.enclosing(left, right).children

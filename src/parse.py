@@ -173,7 +173,7 @@ class TopDownParser(object):
             split_scores = dy.reshape(split_scores, (len(left_encodings),))
 
             if is_train:
-                oracle_splits = gold.oracle_split(left, right)
+                oracle_splits = gold.oracle_splits(left, right)
                 oracle_split = min(oracle_splits)
                 oracle_split_index = oracle_split - (left + 1)
                 split_scores = augment(split_scores, oracle_split_index)
@@ -330,7 +330,7 @@ class ChartParser(object):
                         continue
 
                     if force_gold:
-                        oracle_splits = gold.oracle_split(left, right)
+                        oracle_splits = gold.oracle_splits(left, right)
                         oracle_split = min(oracle_splits)
                         best_split = oracle_split
                     else:
