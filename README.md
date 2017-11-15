@@ -2,12 +2,19 @@
 
 This is a reference Python implementation of the constituency parser described in [A Minimal Span-Based Neural Constituency Parser](https://arxiv.org/abs/1705.03919) from ACL 2017.
 
+The chart parser includes the simplifications from the ACL 2017 presentation, including:
+
+  * Removing the unlabeled span-scoring terms from the model.
+  * Fixing the score of the empty label at 0.
+
+These changes improve speed and reduce memory usage without affecting final performance. Moreover, they result in the score of a tree decomposing directly into a sum of labeled span scores, eliminating score differences that arise due to different choices of binarization.
+
 ## Requirements and Setup
 
 * Python 3.5 or higher.
 * [DyNet](https://github.com/clab/dynet). We recommend installing DyNet from source with MKL support for significantly faster run time.
 * [EVALB](http://nlp.cs.nyu.edu/evalb/). Before starting, run `make` inside the `EVALB/` directory to compile an `evalb` executable. This will be called from Python for evaluation.
-* Pre-trained model. Before starting, run `unzip zipped/*` in the `models/` directory to extract the pre-trained model.
+* Pre-trained models. Before starting, run `unzip zipped/top-down-model_dev=92.34.zip` and `unzip zipped/chart-model_dev=92.24.zip` in the `models/` directory to extract the pre-trained models.
 
 ## Training
 
@@ -16,14 +23,15 @@ A new model can be trained using the command `python3 src/main.py train ...` wit
 Argument | Description | Default
 --- | --- | ---
 `--numpy-seed` | NumPy random seed | Random
+`--parser-type` | `top-down` or `chart` | N/A
 `--tag-embedding-dim` | Tag embedding dimension | 50
 `--word-embedding-dim` | Word embedding dimension | 100
 `--lstm-layers` | Number of bidirectional LSTM layers | 2
 `--lstm-dim` | Hidden dimension of each LSTM within each layer | 250
 `--label-hidden-dim` | Hidden dimension of label-scoring feedforward network | 250
-`--split-hidden-dim` | Hidden dimension of split-scoring feedforward network | 250
+`--split-hidden-dim`* | Hidden dimension of split-scoring feedforward network | 250
 `--dropout` | Dropout rate for LSTMs | 0.4
-`--explore` | Train with exploration using a dynamic oracle | Train using a static oracle
+`--explore`* | Train with exploration using a dynamic oracle | Train using a static oracle
 `--model-path-base` | Path base to use for saving models | N/A
 `--evalb-dir` |  Path to EVALB directory | `EVALB/`
 `--train-path` | Path to training trees | `data/02-21.10way.clean`
@@ -33,19 +41,27 @@ Argument | Description | Default
 `--checks-per-epoch` | Number of development evaluations per epoch | 4
 `--print-vocabs` | Print the vocabularies before training | Do not print the vocabularies
 
+\*These arguments only apply to the top-down parser.
+
 Any of the DyNet command line options can also be specified.
 
 The training and development trees are assumed to have predicted part-of-speech tags.
 
 For each development evaluation, the F-score on the development set is computed and compared to the previous best. If the current model is better, the previous model will be deleted and the current model will be saved. The new filename will be derived from the provided model path base and the development F-score.
 
-As an example, to train with exploration using the default hyperparameters, you can use the command:
+As an example, to train a top-down parser with exploration using the default hyperparameters, you can use the command:
 
 ```
-python3 src/main.py train --explore --model-path-base models/top-down-model
+python3 src/main.py train --parser-type top-down --explore --model-path-base models/top-down-model
 ```
 
-A compressed pre-trained model with these settings is provided in the `models/zipped/` directory. Run `unzip zipped/*` in the `models/` directory to extract it.
+Alternatively, to train a chart parser using the default hyperparameters, you can use the command:
+
+```
+python3 src/main.py train --parser-type chart --model-path-base models/chart-model
+```
+
+Compressed pre-trained models with these settings are provided in the `models/zipped/` directory. See the section above for extraction instructions.
 
 ## Evaluation
 
@@ -61,11 +77,13 @@ As above, any of the DyNet command line options can also be specified.
 
 The test trees are assumed to have predicted part-of-speech tags.
 
-As an example, after extracting the pre-trained model, you can evaluate it on the test set using the following command:
+As an example, after extracting the pre-trained top-down model, you can evaluate it on the test set using the following command:
 
 ```
 python3 src/main.py test --model-path-base models/top-down-model_dev=92.34
 ```
+
+The pre-trained top-down model obtains F-scores of 92.34 on the development set and 91.80 on the test set. The pre-trained chart model obtains F-scores of 92.24 on the development set and 91.86 on the test set.
 
 ## Parsing New Sentences
 
