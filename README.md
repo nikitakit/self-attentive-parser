@@ -2,7 +2,7 @@
 
 This is a reference Python implementation of the constituency parser described in [A Minimal Span-Based Neural Constituency Parser](https://arxiv.org/abs/1705.03919) from ACL 2017.
 
-The chart parser includes the simplifications from the ACL 2017 presentation, including:
+The chart parser includes the simplifications outlined in the ACL 2017 presentation, namely:
 
   * Removing the unlabeled span-scoring terms from the model.
   * Fixing the score of the empty label at 0.
