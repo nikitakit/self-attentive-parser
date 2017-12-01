@@ -190,6 +190,8 @@ def run_train(args):
         for start_index in range(0, len(train_parse), args.batch_size):
             if not args.use_pytorch:
                 dy.renew_cg()
+            else:
+                trainer.zero_grad()
             batch_losses = []
             for tree in train_parse[start_index:start_index + args.batch_size]:
                 sentence = [(leaf.tag, leaf.word) for leaf in tree.leaves()]
