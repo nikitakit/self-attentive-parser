@@ -58,6 +58,7 @@ class ChartParser(nn.Module):
             hidden_size=lstm_dim,
             num_layers=lstm_layers,
             bidirectional=True,
+            dropout=dropout,
             batch_first=False)
 
         self.f_label = nn.Sequential(
