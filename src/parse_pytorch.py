@@ -102,20 +102,18 @@ class ChartParser(nn.Module):
         lstm_outputs, _ = self.lstm(embeddings)
         lstm_outputs = lstm_outputs.squeeze(1)
 
-        @functools.lru_cache(maxsize=None)
-        def get_span_encoding(left, right):
-            forward = (
-                lstm_outputs[right][:self.lstm_dim] -
-                lstm_outputs[left][:self.lstm_dim])
-            backward = (
-                lstm_outputs[left + 1][self.lstm_dim:] -
-                lstm_outputs[right + 1][self.lstm_dim:])
-            return torch.cat([forward, backward])
+        lstm_outputs_rearranged = torch.cat([
+            lstm_outputs[:-1,:self.lstm_dim],
+            -lstm_outputs[1:,self.lstm_dim:], # negative for compatibility with dynet code
+            ], 1)
 
-        @functools.lru_cache(maxsize=None)
-        def get_label_scores(left, right):
-            non_empty_label_scores = self.f_label(get_span_encoding(left, right))
-            return torch.cat([Variable(torch.zeros(1)), non_empty_label_scores]) # NOCUDA
+        span_features = (torch.unsqueeze(lstm_outputs_rearranged, 0)
+                         - torch.unsqueeze(lstm_outputs_rearranged, 1))
+        label_scores_chart = self.f_label(span_features)
+        label_scores_chart = torch.cat([
+            Variable(torch.zeros(label_scores_chart.size(0), label_scores_chart.size(1), 1), requires_grad=False),
+            label_scores_chart
+            ], 2)
 
         def helper(force_gold):
             if force_gold:
@@ -127,7 +125,7 @@ class ChartParser(nn.Module):
                 for left in range(0, len(sentence) + 1 - length):
                     right = left + length
 
-                    label_scores = get_label_scores(left, right)
+                    label_scores = label_scores_chart[left, right]
 
                     if is_train:
                         oracle_label = gold.oracle_label(left, right)
