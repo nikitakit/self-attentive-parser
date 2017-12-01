@@ -179,7 +179,8 @@ def run_train(args):
 
         if dev_fscore.fscore > best_dev_fscore:
             if best_dev_model_path is not None:
-                for ext in [".data", ".meta"]:
+                extensions = [".pt"] if args.use_pytorch else [".data", ".meta"]
+                for ext in extensions:
                     path = best_dev_model_path + ext
                     if os.path.exists(path):
                         print("Removing previous model file {}...".format(path))
@@ -192,7 +193,11 @@ def run_train(args):
             if not args.use_pytorch:
                 dy.save(best_dev_model_path, [parser])
             else:
-                print("WARNING: saving not implemented when using pytorch")
+                torch.save({
+                    'spec': parser.spec,
+                    'state_dict': parser.state_dict(),
+                    'trainer' : trainer.state_dict(),
+                    }, best_dev_model_path + ".pt")
 
     for epoch in itertools.count(start=1):
         if args.epochs is not None and epoch > args.epochs:
@@ -325,7 +330,8 @@ def run_test(args):
         if not args.use_pytorch:
             raise NotImplementedError("Can't use pytorch parameter savefiles with dynet backend")
 
-        raise NotImplementedError("Pytorch savefiles not implemented yet")
+        info = torch.load(args.model_path_base)
+        parser = parse_pytorch.ChartParser.from_spec(info['spec'], info['state_dict'])
     else:
         assert have_dynet, "Need dynet to load models saved by dynet"
         model = dy.ParameterCollection()

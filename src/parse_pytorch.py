@@ -43,6 +43,7 @@ class ChartParser(nn.Module):
         super().__init__()
         self.spec = locals()
         self.spec.pop("self")
+        self.spec.pop("__class__")
 
         self.tag_vocab = tag_vocab
         self.word_vocab = word_vocab
