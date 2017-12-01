@@ -22,8 +22,10 @@ import numpy as np
 import evaluate
 if have_dynet:
     import parse
+    tokens = parse
 if have_torch:
     import parse_pytorch
+    tokens = parse_pytorch
 import trees
 import vocabulary
 
@@ -56,13 +58,13 @@ def run_train(args):
     print("Constructing vocabularies...")
 
     tag_vocab = vocabulary.Vocabulary()
-    tag_vocab.index(parse.START)
-    tag_vocab.index(parse.STOP)
+    tag_vocab.index(tokens.START)
+    tag_vocab.index(tokens.STOP)
 
     word_vocab = vocabulary.Vocabulary()
-    word_vocab.index(parse.START)
-    word_vocab.index(parse.STOP)
-    word_vocab.index(parse.UNK)
+    word_vocab.index(tokens.START)
+    word_vocab.index(tokens.STOP)
+    word_vocab.index(tokens.UNK)
 
     label_vocab = vocabulary.Vocabulary()
     label_vocab.index(())
@@ -83,7 +85,7 @@ def run_train(args):
     label_vocab.freeze()
 
     def print_vocabulary(name, vocab):
-        special = {parse.START, parse.STOP, parse.UNK}
+        special = {tokens.START, tokens.STOP, tokens.UNK}
         print("{} ({:,}): {}".format(
             name, vocab.size,
             sorted(value for value in vocab.values if value in special) +
