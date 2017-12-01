@@ -3,13 +3,27 @@ import itertools
 import os.path
 import time
 
-import dynet as dy
+have_dynet = False
+have_torch = False
+try:
+    import dynet as dy
+    have_dynet = True
+except ModuleNotFoundError:
+    pass
+
+try:
+    import torch
+    have_torch = True
+except ModuleNotFoundError:
+    pass
+
 import numpy as np
 
 import evaluate
-import parse
-import parse_pytorch
-import torch
+if have_dynet:
+    import parse
+if have_torch:
+    import parse_pytorch
 import trees
 import vocabulary
 
@@ -313,6 +327,7 @@ def run_test(args):
 
         raise NotImplementedError("Pytorch savefiles not implemented yet")
     else:
+        assert have_dynet, "Need dynet to load models saved by dynet"
         model = dy.ParameterCollection()
         [parser] = dy.load(args.model_path_base, model)
 
@@ -388,6 +403,10 @@ def main():
     subparser.add_argument("--use-pytorch", action="store_true")
 
     args = parser.parse_args()
+    if args.use_pytorch and not have_torch:
+        assert False, "pytorch not found"
+    elif not args.use_pytorch and not have_dynet:
+        assert False, "dynet not found"
     args.callback(args)
 
 if __name__ == "__main__":
