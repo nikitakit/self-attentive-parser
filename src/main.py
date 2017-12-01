@@ -232,8 +232,9 @@ def run_train(args):
             else:
                 batch_loss = sum(batch_losses) / len(batch_losses)
                 batch_loss_value = float(batch_loss.data.numpy())
-                batch_loss.backward()
-                trainer.step()
+                if batch_loss_value > 0:
+                    batch_loss.backward()
+                    trainer.step()
 
             print(
                 "epoch {:,} "

@@ -185,7 +185,7 @@ class ChartParser(nn.Module):
             oracle_tree, oracle_score = helper(True)
             assert oracle_tree.convert().linearize() == gold.convert().linearize()
             correct = tree.convert().linearize() == gold.convert().linearize()
-            loss = torch.Variable(torch.zeros(1)) if correct else score - oracle_score # NOCUDA
+            loss = Variable(torch.zeros(1)) if correct else score - oracle_score # NOCUDA
             return tree, loss
         else:
             return tree, score
