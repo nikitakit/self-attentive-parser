@@ -61,6 +61,7 @@ class ChartParser(nn.Module):
         self.tag_embeddings = nn.Embedding(tag_vocab.size, tag_embedding_dim)
         self.word_embeddings = nn.Embedding(word_vocab.size, word_embedding_dim)
 
+        self.pre_lstm_dropout = nn.Dropout(dropout)
         self.lstm = nn.LSTM(
             input_size=tag_embedding_dim + word_embedding_dim,
             hidden_size=lstm_dim,
@@ -68,6 +69,7 @@ class ChartParser(nn.Module):
             bidirectional=True,
             dropout=dropout,
             batch_first=False)
+        self.post_lstm_dropout = nn.Dropout(dropout)
 
         self.f_label = nn.Sequential(
             nn.Linear(2 * lstm_dim, label_hidden_dim),
@@ -120,8 +122,8 @@ class ChartParser(nn.Module):
             self.word_embeddings(word_idxs)
             ], dim=2)
 
-        lstm_outputs, _ = self.lstm(embeddings)
-        lstm_outputs = lstm_outputs.squeeze(1)
+        lstm_outputs, _ = self.lstm(self.pre_lstm_dropout(embeddings))
+        lstm_outputs = self.post_lstm_dropout(lstm_outputs.squeeze(1))
 
         lstm_outputs_rearranged = torch.cat([
             lstm_outputs[:-1,:self.lstm_dim],
