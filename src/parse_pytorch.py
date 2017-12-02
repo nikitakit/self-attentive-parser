@@ -7,6 +7,15 @@ from torch.autograd import Variable
 import torch.nn as nn
 import torch.nn.init as init
 
+use_cuda = torch.cuda.is_available()
+if use_cuda:
+    torch_t = torch.cuda
+    def from_numpy(ndarray):
+        return torch.from_numpy(ndarray).cuda()
+else:
+    torch_t = torch
+    from torch import from_numpy
+
 import trees
 
 START = "<START>"
@@ -14,7 +23,6 @@ STOP = "<STOP>"
 UNK = "<UNK>"
 
 def augment(scores, oracle_index):
-    # NOCUDA
     increment = torch.ones(scores.size())
     increment[oracle_index] = 0
     increment = Variable(increment, requires_grad=False)
@@ -67,6 +75,10 @@ class ChartParser(nn.Module):
             nn.Linear(label_hidden_dim, label_vocab.size - 1),
             )
 
+
+        if use_cuda:
+            self.cuda()
+
     @property
     def model(self):
         return self.state_dict()
@@ -74,7 +86,11 @@ class ChartParser(nn.Module):
     @classmethod
     def from_spec(cls, spec, model):
         res = cls(**spec)
+        if use_cuda:
+            res.cpu()
         res.load_state_dict(model)
+        if use_cuda:
+            res.cuda()
         return res
 
     def parse(self, sentence, gold=None):
@@ -95,7 +111,10 @@ class ChartParser(nn.Module):
         tag_idxs = Variable(torch.from_numpy(tag_idxs), requires_grad=False, volatile=not is_train)
         word_idxs = Variable(torch.from_numpy(word_idxs), requires_grad=False, volatile=not is_train)
 
-        # NOCUDA
+        if use_cuda:
+            tag_idxs = tag_idxs.cuda()
+            word_idxs = word_idxs.cuda()
+
         embeddings = torch.cat([
             self.tag_embeddings(tag_idxs),
             self.word_embeddings(word_idxs)
@@ -112,6 +131,7 @@ class ChartParser(nn.Module):
         span_features = (torch.unsqueeze(lstm_outputs_rearranged, 0)
                          - torch.unsqueeze(lstm_outputs_rearranged, 1))
         label_scores_chart = self.f_label(span_features)
+        label_scores_chart = label_scores_chart.cpu()
         label_scores_chart = torch.cat([
             Variable(torch.zeros(label_scores_chart.size(0), label_scores_chart.size(1), 1), requires_grad=False),
             label_scores_chart
@@ -185,7 +205,7 @@ class ChartParser(nn.Module):
             oracle_tree, oracle_score = helper(True)
             assert oracle_tree.convert().linearize() == gold.convert().linearize()
             correct = tree.convert().linearize() == gold.convert().linearize()
-            loss = Variable(torch.zeros(1)) if correct else score - oracle_score # NOCUDA
+            loss = Variable(torch.zeros(1)) if correct else score - oracle_score
             return tree, loss
         else:
             return tree, score
