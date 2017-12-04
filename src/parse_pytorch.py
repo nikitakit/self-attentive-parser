@@ -69,7 +69,6 @@ class ChartParser(nn.Module):
             bidirectional=True,
             dropout=dropout,
             batch_first=False)
-        self.post_lstm_dropout = nn.Dropout(dropout)
 
         self.f_label = nn.Sequential(
             nn.Linear(2 * lstm_dim, label_hidden_dim),
@@ -123,7 +122,7 @@ class ChartParser(nn.Module):
             ], dim=2)
 
         lstm_outputs, _ = self.lstm(self.pre_lstm_dropout(embeddings))
-        lstm_outputs = self.post_lstm_dropout(lstm_outputs.squeeze(1))
+        lstm_outputs = lstm_outputs.squeeze(1)
 
         lstm_outputs_rearranged = torch.cat([
             lstm_outputs[:-1,:self.lstm_dim],
