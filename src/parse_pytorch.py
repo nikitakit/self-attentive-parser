@@ -16,6 +16,10 @@ else:
     torch_t = torch
     from torch import from_numpy
 
+import pyximport
+pyximport.install(setup_args={"include_dirs": np.get_include()})
+import chart_helper
+
 import trees
 
 START = "<START>"
@@ -138,75 +142,53 @@ class ChartParser(nn.Module):
             label_scores_chart
             ], 2)
 
-        def helper(force_gold):
-            if force_gold:
-                assert is_train
+        decoder_args = dict(
+            sentence_len=len(sentence),
+            label_scores_chart=label_scores_chart.data.numpy(),
+            gold=gold,
+            label_vocab=self.label_vocab,
+            is_train=is_train)
 
-            chart = {}
+        if is_train:
+            p_score, p_i, p_j, p_label, p_augment = chart_helper.decode(False, **decoder_args)
+            g_score, g_i, g_j, g_label, g_augment = chart_helper.decode(True, **decoder_args)
 
-            for length in range(1, len(sentence) + 1):
-                for left in range(0, len(sentence) + 1 - length):
-                    right = left + length
+            p_i = torch.from_numpy(p_i)
+            p_j = torch.from_numpy(p_j)
+            p_label = torch.from_numpy(p_label)
+            g_i = torch.from_numpy(g_i)
+            g_j = torch.from_numpy(g_j)
+            g_label = torch.from_numpy(g_label)
 
-                    label_scores = label_scores_chart[left, right]
-
-                    if is_train:
-                        oracle_label = gold.oracle_label(left, right)
-                        oracle_label_index = self.label_vocab.index(oracle_label)
-
-                    if force_gold:
-                        label = oracle_label
-                        label_score = label_scores[oracle_label_index]
-                    else:
-                        if is_train:
-                            label_scores = augment(label_scores, oracle_label_index)
-                        label_scores_np = label_scores.data.numpy()
-                        argmax_label_index = int(
-                            label_scores_np.argmax() if length < len(sentence) else
-                            label_scores_np[1:].argmax() + 1)
-                        argmax_label = self.label_vocab.value(argmax_label_index)
-                        label = argmax_label
-                        label_score = label_scores[argmax_label_index]
-
-                    if length == 1:
-                        tag, word = sentence[left]
-                        tree = trees.LeafParseNode(left, tag, word)
-                        if label:
-                            tree = trees.InternalParseNode(label, [tree])
-                        chart[left, right] = [tree], label_score
-                        continue
-
-                    if force_gold:
-                        oracle_splits = gold.oracle_splits(left, right)
-                        oracle_split = min(oracle_splits)
-                        best_split = oracle_split
-                    else:
-                        best_split = max(
-                            range(left + 1, right),
-                            key=lambda split:
-                                chart[left, split][1].data[0] +
-                                chart[split, right][1].data[0])
-
-                    left_trees, left_score = chart[left, best_split]
-                    right_trees, right_score = chart[best_split, right]
-
+            loss = label_scores_chart[p_i, p_j, p_label].sum() + p_augment - label_scores_chart[g_i, g_j, g_label].sum()
+            # during training, we don't actually need to construct a tree
+            return None, loss
+        else:
+            # The optimized cython decoder implementation doesn't actually
+            # generate trees, only scores and span indices. When converting to a
+            # tree, we assume that the indices follow a preorder traversal.
+            score, p_i, p_j, p_label, _ = chart_helper.decode(False, **decoder_args)
+            last_splits = []
+            idx = -1
+            def make_tree():
+                nonlocal idx
+                idx += 1
+                i, j, label_idx = p_i[idx], p_j[idx], p_label[idx]
+                label = self.label_vocab.value(label_idx)
+                if (i + 1) >= j:
+                    tag, word = sentence[i]
+                    tree = trees.LeafParseNode(int(i), tag, word)
+                    if label:
+                        tree = trees.InternalParseNode(label, [tree])
+                    return [tree]
+                else:
+                    left_trees = make_tree()
+                    right_trees = make_tree()
                     children = left_trees + right_trees
                     if label:
-                        children = [trees.InternalParseNode(label, children)]
+                        return [trees.InternalParseNode(label, children)]
+                    else:
+                        return children
 
-                    chart[left, right] = (
-                        children, label_score + left_score + right_score)
-
-            children, score = chart[0, len(sentence)]
-            assert len(children) == 1
-            return children[0], score
-
-        tree, score = helper(False)
-        if is_train:
-            oracle_tree, oracle_score = helper(True)
-            assert oracle_tree.convert().linearize() == gold.convert().linearize()
-            correct = tree.convert().linearize() == gold.convert().linearize()
-            loss = Variable(torch.zeros(1)) if correct else score - oracle_score
-            return tree, loss
-        else:
+            tree = make_tree()[0]
             return tree, score
