@@ -30,6 +30,13 @@ class Vocabulary(object):
         else:
             raise ValueError("Unknown value: {}".format(value))
 
+    def index_or_unk(self, value, unk_value):
+        assert self.frozen
+        if value in self.indices:
+            return self.indices[value]
+        else:
+            return self.indices[unk_value]
+
     def count(self, value):
         return self.counts[value]
 

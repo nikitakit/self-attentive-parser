@@ -1,0 +1,323 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v3.0.json",
+  "width": 700,
+  "height": 1500,
+  "padding": 5,
+
+  "config": {
+    "background": "white",
+    "axisY": {
+      "titleX": -2,
+      "titleY": 410,
+      "titleAngle": 0,
+      "titleAlign": "right",
+      "titleBaseline": "top"
+    }
+  },
+
+  "signals": [
+    {
+      "name": "clear", "value": true,
+      "on": [
+        {
+          "events": "mouseup[!event.item]",
+          "update": "true",
+          "force": true
+        }
+      ]
+    },
+    {
+      "name": "head_shift", "value": false,
+      "on": [
+        {
+          "events": "@legendSymbol:click, @legendLabel:click",
+          "update": "event.shiftKey",
+          "force":  true
+        }
+      ]
+    },
+    {
+      "name": "head_clicked", "value": null,
+      "on": [
+        {
+          "events": "@legendSymbol:click, @legendLabel:click",
+          "update": "{value: datum.value}",
+          "force":  true
+        }
+      ]
+    },
+    {
+      "name": "layer1_shift", "value": false,
+      "on": [
+        {
+          "events": "@layer1_label:click",
+          "update": "event.shiftKey",
+          "force":  true
+        }
+      ]
+    },
+    {
+      "name": "layer1_clicked", "value": null,
+      "on": [
+        {
+          "events": "@layer1_label:click",
+          "update": "{value: datum.pos}",
+          "force":  true
+        }
+      ]
+    },
+    {
+      "name": "layer0_shift", "value": false,
+      "on": [
+        {
+          "events": "@layer0_label:click",
+          "update": "event.shiftKey",
+          "force":  true
+        }
+      ]
+    },
+    {
+      "name": "layer0_clicked", "value": null,
+      "on": [
+        {
+          "events": "@layer0_label:click",
+          "update": "{value: datum.pos}",
+          "force":  true
+        }
+      ]
+    },
+    {
+      "name": "sharpen", "value": 1,
+      "bind": {
+        "input": "range", "min": 1, "max": 5, "step": 0.25
+        }
+      }
+  ],
+
+  "data": [
+    {
+      "name": "words",
+      "values": [
+        {"word": "<s>", "pos": 0},
+        {"word": "A", "pos": 1},
+        {"word": "</s>", "pos": 2}
+      ]
+    },
+    {
+      "name": "attention",
+      "values": [
+        {"src": 0, "dst": 0, "weight": 1, "head": 0},
+        {"src": 1, "dst": 1, "weight": 0.7, "head": 0},
+        {"src": 1, "dst": 2, "weight": 0.3, "head": 0},
+        {"src": 2, "dst": 0, "weight": 0.5, "head": 0},
+        {"src": 2, "dst": 2, "weight": 1, "head": 1}
+      ]
+    },
+    {
+      "name": "words_dummy",
+      "source": "words",
+      "transform": [
+        {
+          "type": "extent",
+          "signal": "word_extent",
+          "field": "pos"
+        }
+      ]
+    },
+    {
+      "name": "links",
+      "source": "attention",
+      "transform": [
+        {"type": "project", "fields":["src", "dst", "weight", "head"], "as":["layer1", "layer0", "raw_weight", "head"]},
+        {"type": "formula", "as": "unnormed_weight", "expr": "pow(datum.raw_weight, sharpen)"},
+        {
+          "type": "joinaggregate",
+          "fields": ["unnormed_weight", "raw_weight"],
+          "ops": ["sum", "sum"],
+          "as": ["total_weight", "raw_total_weight"],
+          "groupby": ["layer1", "head"]
+        },
+        {"type": "formula", "as": "weight", "expr": "datum.unnormed_weight / (datum.total_weight + pow(1.0 - datum.raw_total_weight, sharpen) * pow(word_extent[1], 1.0 - sharpen))"}
+      ]
+    },
+    {
+      "name": "all_layers",
+      "values": [
+        "layer1",
+        "layer0"
+      ]
+    },
+    {
+      "name": "layer1to0",
+      "values": [
+        "layer1",
+        "layer0"
+      ]
+    },
+    {
+      "name": "heads_selected",
+      "on": [
+        {"trigger": "clear", "remove": true},
+        {"trigger": "!head_shift", "remove": true},
+        {"trigger": "!head_shift && head_clicked", "insert": "head_clicked"},
+        {"trigger": "head_shift && head_clicked", "toggle": "head_clicked"}
+      ]
+    },
+    {
+      "name": "layer1_selected",
+      "on": [
+        {"trigger": "clear", "remove": true},
+        {"trigger": "!layer1_shift", "remove": true},
+        {"trigger": "!layer1_shift && layer1_clicked", "insert": "layer1_clicked"},
+        {"trigger": "layer1_shift && layer1_clicked", "toggle": "layer1_clicked"}
+      ]
+    },
+    {
+      "name": "layer0_selected",
+      "on": [
+        {"trigger": "clear", "remove": true},
+        {"trigger": "!layer0_shift", "remove": true},
+        {"trigger": "!layer0_shift && layer0_clicked", "insert": "layer0_clicked"},
+        {"trigger": "layer0_shift && layer0_clicked", "toggle": "layer0_clicked"}
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "all_layers_scale", "type": "point",
+      "range": "width", "round": true,
+      "domain": {"data": "all_layers", "field": "data"}
+    },
+    {
+      "name": "words_vertical", "type": "point",
+      "range": "height", "zero": false, "nice": true,
+      "domain": {"data": "links", "fields": ["layer1", "layer0"], "sort": true}
+    },
+    {
+      "name": "head_color",
+      "type": "ordinal",
+      "domain": {"data": "links", "field": "head"},
+      "range": {"scheme": "viridis"}
+    }
+  ],
+
+  "axes": [
+    {
+      "orient": "left", "zindex": 1,
+      "scale": "words_vertical", "title": "Higher layer",
+      "offset": {"scale": "all_layers_scale", "value": "layer1", "mult": -1}
+    },
+    {
+      "orient": "left", "zindex": 1,
+      "scale": "words_vertical", "title": "Lower layer",
+      "offset": {"scale": "all_layers_scale", "value": "layer0", "mult": -1}
+    }
+  ],
+
+  "legends": [
+      {
+        "title": "Head #",
+        "orient": "bottom",
+        "fill": "head_color",
+        "offset": 40,
+        "encode": {
+          "symbols": {
+            "name": "legendSymbol",
+            "interactive": true,
+            "update": {
+              "opacity": [
+                {"test": "!length(data('heads_selected')) || indata('heads_selected', 'value', datum.value)", "value": 0.7},
+                {"value": 0.15}
+              ]
+            }
+          },
+          "labels": {
+            "name": "legendLabel",
+            "interactive": true,
+            "update": {
+              "opacity": [
+                {"test": "!length(data('heads_selected')) || indata('heads_selected', 'value', datum.value)", "value": 1},
+                {"value": 0.25}
+              ]
+            }
+          }
+        }
+      }
+  ],
+
+
+  "marks": [
+    {
+      "type": "text",
+      "from": {"data": "words"},
+      "interactive": true,
+      "name": "layer1_label",
+      "encode": {
+        "enter": {
+          "x": {"value": -50},
+          "y": {"scale": "words_vertical", "field": "pos"},
+          "text": {"field": "word"},
+          "baseline": {"value": "middle"}
+        },
+        "update": {
+          "opacity": [
+            {"test": "!length(data('layer1_selected')) || indata('layer1_selected', 'value', datum.pos)", "value": 1},
+              {"value": 0.25}
+          ]
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "words"},
+      "interactive": true,
+      "name": "layer0_label",
+      "encode": {
+        "enter": {
+          "x": {"scale": "all_layers_scale", "value": "layer0"},
+          "dx": {"value": 20},
+          "y": {"scale": "words_vertical", "field": "pos"},
+          "text": {"field": "word"},
+          "baseline": {"value": "middle"}
+        },
+        "update": {
+          "opacity": [
+            {"test": "!length(data('layer0_selected')) || indata('layer0_selected', 'value', datum.pos)", "value": 1},
+              {"value": 0.25}
+          ]
+        }
+      }
+    },
+    {
+      "type": "group",
+      "from": {"data": "links"},
+      "marks": [
+        {
+          "type": "line",
+          "from": {"data": "layer1to0"},
+          "encode": {
+            "enter": {
+              "x": {"scale": "all_layers_scale", "field": "data"},
+              "y": {
+                "scale": "words_vertical",
+                "field": {"parent": {"datum": "data"}}
+              },
+              "stroke": {"field": {"parent": "head"}, "scale": "head_color"},
+              "strokeWidth": {"value": 3.01}
+            },
+            "update": {
+              "opacity": [
+                {"test": "(!!length(data('heads_selected')) && !indata('heads_selected', 'value', parent.head))", "value": 0.0},
+                {"test": "(!!length(data('layer1_selected')) && !indata('layer1_selected', 'value', parent.layer1))", "value": 0.0},
+                {"test": "(!!length(data('layer0_selected')) && !indata('layer0_selected', 'value', parent.layer0))", "value": 0.0},
+                {"value": 1.0}
+              ],
+              "strokeOpacity": {"field": {"parent": "weight"}}
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

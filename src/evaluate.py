@@ -16,10 +16,18 @@ class FScore(object):
         return "(Recall={:.2f}, Precision={:.2f}, FScore={:.2f})".format(
             self.recall, self.precision, self.fscore)
 
-def evalb(evalb_dir, gold_trees, predicted_trees):
+def evalb(evalb_dir, gold_trees, predicted_trees, ref_gold_path=None):
     assert os.path.exists(evalb_dir)
     evalb_program_path = os.path.join(evalb_dir, "evalb")
-    evalb_param_path = os.path.join(evalb_dir, "COLLINS.prm")
+    evalb_spmrl_program_path = os.path.join(evalb_dir, "evalb_spmrl")
+    assert os.path.exists(evalb_program_path) or os.path.exists(evalb_spmrl_program_path)
+
+    if os.path.exists(evalb_program_path):
+        evalb_param_path = os.path.join(evalb_dir, "COLLINS.prm")
+    else:
+        evalb_program_path = evalb_spmrl_program_path
+        evalb_param_path = os.path.join(evalb_dir, "spmrl.prm")
+
     assert os.path.exists(evalb_program_path)
     assert os.path.exists(evalb_param_path)
 
@@ -40,8 +48,16 @@ def evalb(evalb_dir, gold_trees, predicted_trees):
     output_path = os.path.join(temp_dir.name, "output.txt")
 
     with open(gold_path, "w") as outfile:
-        for tree in gold_trees:
-            outfile.write("{}\n".format(tree.linearize()))
+        if ref_gold_path is None:
+            for tree in gold_trees:
+                outfile.write("{}\n".format(tree.linearize()))
+        else:
+            # For the SPMRL dataset our data loader performs some modifications
+            # (like stripping morphological features), so we compare to the
+            # raw gold file to be certain that we haven't spoiled the evaluation
+            # in some way.
+            with open(ref_gold_path) as goldfile:
+                outfile.write(goldfile.read())
 
     with open(predicted_path, "w") as outfile:
         for tree in predicted_trees:

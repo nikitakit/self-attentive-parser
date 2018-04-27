@@ -1,4 +1,5 @@
 import collections.abc
+import gzip
 
 class TreebankNode(object):
     pass
@@ -21,7 +22,7 @@ class InternalTreebankNode(TreebankNode):
         for child in self.children:
             yield from child.leaves()
 
-    def convert(self, index=0):
+    def convert(self, index=0, nocache=False):
         tree = self
         sublabels = [self.label]
 
@@ -35,7 +36,7 @@ class InternalTreebankNode(TreebankNode):
             children.append(child.convert(index=index))
             index = children[-1].right
 
-        return InternalParseNode(tuple(sublabels), children)
+        return InternalParseNode(tuple(sublabels), children, nocache=nocache)
 
 class LeafTreebankNode(TreebankNode):
     def __init__(self, tag, word):
@@ -58,7 +59,7 @@ class ParseNode(object):
     pass
 
 class InternalParseNode(ParseNode):
-    def __init__(self, label, children):
+    def __init__(self, label, children, nocache=False):
         assert isinstance(label, tuple)
         assert all(isinstance(sublabel, str) for sublabel in label)
         assert label
@@ -75,6 +76,8 @@ class InternalParseNode(ParseNode):
 
         self.left = children[0].left
         self.right = children[-1].right
+
+        self.nocache = nocache
 
     def leaves(self):
         for child in self.children:
@@ -128,9 +131,20 @@ class LeafParseNode(ParseNode):
     def convert(self):
         return LeafTreebankNode(self.tag, self.word)
 
-def load_trees(path, strip_top=True):
+def load_trees(path, strip_top=True, strip_spmrl_features=True):
     with open(path) as infile:
-        tokens = infile.read().replace("(", " ( ").replace(")", " ) ").split()
+        treebank = infile.read()
+
+    # Features bounded by `##` may contain spaces, so if we strip the features
+    # we need to do so prior to tokenization
+    if strip_spmrl_features:
+        treebank = "".join(treebank.split("##")[::2])
+
+    tokens = treebank.replace("(", " ( ").replace(")", " ) ").split()
+
+    # XXX(nikita): this should really be passed as an argument
+    if 'Hebrew' in path or 'Hungarian' in path or 'Arabic' in path:
+        strip_top = False
 
     def helper(index):
         trees = []
@@ -162,10 +176,73 @@ def load_trees(path, strip_top=True):
     trees, index = helper(0)
     assert index == len(tokens)
 
+    # XXX(nikita): this behavior should really be controlled by an argument
+    if 'German' in path:
+        # Utterances where the root is a terminal symbol break our parser's
+        # assumptions, so insert a dummy root node.
+        for i, tree in enumerate(trees):
+            if isinstance(tree, LeafTreebankNode):
+                trees[i] = InternalTreebankNode("VROOT", [tree])
+
     if strip_top:
         for i, tree in enumerate(trees):
-            if tree.label == "TOP":
+            if tree.label in ("TOP", "ROOT"):
                 assert len(tree.children) == 1
                 trees[i] = tree.children[0]
 
     return trees
+
+def load_silver_trees_single(path):
+    with gzip.open(path, mode='rt') as f:
+        linenum = 0
+        for line in f:
+            linenum += 1
+            tokens = line.replace("(", " ( ").replace(")", " ) ").split()
+
+            def helper(index):
+                trees = []
+
+                while index < len(tokens) and tokens[index] == "(":
+                    paren_count = 0
+                    while tokens[index] == "(":
+                        index += 1
+                        paren_count += 1
+
+                    label = tokens[index]
+                    index += 1
+
+                    if tokens[index] == "(":
+                        children, index = helper(index)
+                        trees.append(InternalTreebankNode(label, children))
+                    else:
+                        word = tokens[index]
+                        index += 1
+                        trees.append(LeafTreebankNode(label, word))
+
+                    while paren_count > 0:
+                        assert tokens[index] == ")"
+                        index += 1
+                        paren_count -= 1
+
+                return trees, index
+
+            trees, index = helper(0)
+            assert index == len(tokens)
+
+            assert len(trees) == 1
+            tree = trees[0]
+
+            # Strip the root S1 node
+            assert tree.label == "S1"
+            assert len(tree.children) == 1
+            tree = tree.children[0]
+
+            yield tree
+
+def load_silver_trees(path, batch_size):
+    batch = []
+    for tree in load_silver_trees_single(path):
+        batch.append(tree)
+        if len(batch) == batch_size:
+            yield batch
+            batch = []

@@ -1,69 +1,70 @@
-# Minimal Span-Based Neural Constituency Parser
+# Constituency Parsing with a Self-Attentive Encoder
 
-This is a reference Python implementation of the top-down and chart-based constituency parsers described in [A Minimal Span-Based Neural Constituency Parser](https://arxiv.org/abs/1705.03919) from ACL 2017.
+This is a Python implementation of the parsers described in "Constituency Parsing with a Self-Attentive Encoder" from ACL 2018.
 
-The top-down parser is implemented as described in the paper.
+## Requirements
 
-The chart parser includes the simplifications outlined in the ACL 2017 oral presentation, namely:
+### Software
+* Python 3.6 or higher.
+* Cython 0.25.2 or any compatible version.
+* [PyTorch](http://pytorch.org/) 0.3.x. This code has not been tested with newer releases of PyTorch.
+* [EVALB](http://nlp.cs.nyu.edu/evalb/). Before starting, run `make` inside the `EVALB/` directory to compile an `evalb` executable. This will be called from Python for evaluation. If training on the SPMRL datasets, you will need to run `make` inside the `EVALB_SPMRL/` directory instead.
+* [AllenNLP](http://allennlp.org/) 0.4.0 or any compatible version (only required when using ELMo word representations)
 
-  * Removing the unlabeled span-scoring terms from the model.
-  * Fixing the score of the empty label at 0.
+### Pre-trained models
 
-These changes improve speed and reduce memory usage without affecting final performance. Moreover, they result in the score of a tree decomposing directly into a sum of labeled span scores, eliminating score differences that arise due to different choices of binarization.
+The following pre-trained parser models are available for download:
+* [`en_charlstm_dev.93.61.pt`](https://github.com/nikitakit/self-attentive-parser/releases/download/models/en_charlstm_dev.93.61.pt): Our best English single-system parser that does not rely on external word representations
+* [`en_elmo_dev.95.21.pt`](https://github.com/nikitakit/self-attentive-parser/releases/download/models/en_elmo_dev.95.21.pt): Our best English parser. Using this parser requires ELMo weights, which must be downloaded separately.
 
-## Requirements and Setup
+To use ELMo embeddings, download the following files into the `data/` folder (preserving their names):
 
-* Python 3.5 or higher.
-* [DyNet](https://github.com/clab/dynet). We recommend installing DyNet from source with MKL support for significantly faster run time.
-* [EVALB](http://nlp.cs.nyu.edu/evalb/). Before starting, run `make` inside the `EVALB/` directory to compile an `evalb` executable. This will be called from Python for evaluation.
-* Pre-trained models. Before starting, run `unzip zipped/top-down-model_dev=92.34.zip` and `unzip zipped/chart-model_dev=92.24.zip` in the `models/` directory to extract the pre-trained models.
+
+* https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x4096_512_2048cnn_2xhighway/elmo_2x4096_512_2048cnn_2xhighway_options.json
+* https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x4096_512_2048cnn_2xhighway/elmo_2x4096_512_2048cnn_2xhighway_weights.hdf5
+
+There is currently no command-line option for configuring the locations/names of the ELMo files.
 
 ## Training
 
-A new model can be trained using the command `python3 src/main.py train ...` with the following arguments:
+A new model can be trained using the command `python3 src/main.py train ...`. Some of the available arguments are:
 
 Argument | Description | Default
 --- | --- | ---
-`--numpy-seed` | NumPy random seed | Random
-`--parser-type` | `top-down` or `chart` | N/A
-`--tag-embedding-dim` | Tag embedding dimension | 50
-`--word-embedding-dim` | Word embedding dimension | 100
-`--lstm-layers` | Number of bidirectional LSTM layers | 2
-`--lstm-dim` | Hidden dimension of each LSTM within each layer | 250
-`--label-hidden-dim` | Hidden dimension of label-scoring feedforward network | 250
-`--split-hidden-dim`* | Hidden dimension of split-scoring feedforward network | 250
-`--dropout` | Dropout rate for LSTMs | 0.4
-`--explore`* | Train with exploration using a dynamic oracle | Train using a static oracle
 `--model-path-base` | Path base to use for saving models | N/A
 `--evalb-dir` |  Path to EVALB directory | `EVALB/`
 `--train-path` | Path to training trees | `data/02-21.10way.clean`
 `--dev-path` | Path to development trees | `data/22.auto.clean`
-`--batch-size` | Number of examples per training update | 10
+`--batch-size` | Number of examples per training update | 250
 `--epochs` | Number of training epochs | No limit
 `--checks-per-epoch` | Number of development evaluations per epoch | 4
+`--subbatch-max-tokens` | Maximum number of words to process in parallel while training (a full batch may not fit in GPU memory) | 2000
+`--eval-batch-size` | Number of examples to process in parallel when evaluating on the development set | 100
 `--print-vocabs` | Print the vocabularies before training | Do not print the vocabularies
+`--numpy-seed` | NumPy random seed | Random
+`--use-words` | Use learned word embeddings | Do not use word embeddings
+`--use-chars-lstm` | Use learned CharLSTM word representations | Do not use CharLSTM
+`--use-elmo` | Use pre-trained ELMo word representations | Do not use ELMo
 
-\*These arguments only apply to the top-down parser.
+Additional arguments are available for other hyperparameters; see `make_hparams()` in `src/main.py`. These can be specified on the command line, such as `--d-char-emb 64` (for numerical paramters), `--use-tags` (for boolean parameters that default to False), or `--no-partitioned` (for boolean parameters that default to True).
 
-Any of the DyNet command line options can also be specified.
-
-The training and development trees are assumed to have predicted part-of-speech tags.
+The training and development trees are assumed to have predicted part-of-speech tags, but they only affect final parser output if the `--use-tags` option is passed.
 
 For each development evaluation, the F-score on the development set is computed and compared to the previous best. If the current model is better, the previous model will be deleted and the current model will be saved. The new filename will be derived from the provided model path base and the development F-score.
 
-As an example, to train a top-down parser with exploration using the default hyperparameters, you can use the command:
+As an example, to train an English parser using the default hyperparameters, you can use the command:
 
 ```
-python3 src/main.py train --parser-type top-down --explore --model-path-base models/top-down-model
+python src/main.py train --use-words --use-chars-lstm --model-path-base models/en_charlstm --d-char-emb 64
 ```
 
-Alternatively, to train a chart parser using the default hyperparameters, you can use the command:
+To train an English parser that uses ELMo embeddings, the command is:
 
 ```
-python3 src/main.py train --parser-type chart --model-path-base models/chart-model
+python src/main.py train --use-elmo --model-path-base models/en_elmo --num-layers 4
 ```
 
-Compressed pre-trained models with these settings are provided in the `models/zipped/` directory. See the section above for extraction instructions.
+The above commands were used to train our two best English parsers; the `EXPERIMENTS.md` file contains additional notes about the experiments reported in our paper.
 
 ## Evaluation
 
@@ -74,22 +75,20 @@ Argument | Description | Default
 `--model-path-base` | Path base of saved model | N/A
 `--evalb-dir` |  Path to EVALB directory | `EVALB/`
 `--test-path` | Path to test trees | `data/23.auto.clean`
-
-As above, any of the DyNet command line options can also be specified.
+`--test-path-raw` | Alternative path to test trees that is used for evalb only (used to double-check that evaluation against pre-processed trees does not contain any bugs) | Compare to trees from `--test-path`
+`--eval-batch-size` | Number of examples to process in parallel when evaluating on the test set | 100
 
 The test trees are assumed to have predicted part-of-speech tags.
 
 As an example, after extracting the pre-trained top-down model, you can evaluate it on the test set using the following command:
 
 ```
-python3 src/main.py test --model-path-base models/top-down-model_dev=92.34
+python src/main.py test --model-path-base models/nk_base6_lstm_dev.93.61.pt
 ```
 
-The pre-trained top-down model obtains F-scores of 92.34 on the development set and 91.80 on the test set. The pre-trained chart model obtains F-scores of 92.24 on the development set and 91.86 on the test set.
+The pre-trained model with CharLSTM embeddings obtains F-scores of 93.61 on the development set and 93.55 on the test set. The pre-trained model with ELMo embeddings obtains F-scores of 95.21 on the development set and 95.13 on the test set.
 
 ## Parsing New Sentences
-
-The `parse` method of a parser can be used to parse new sentences. In particular, `parser.parse(sentence)` will return a tuple containing the predicted tree and a DyNet expression for the score of the tree under the model. The input sentence should be pre-tagged and represented as a list of (tag, word) pairs.
 
 See the `run_test` function in `src/main.py` for an example of how a parser can be loaded from disk and used to parse sentences.
 
@@ -98,15 +97,17 @@ See the `run_test` function in `src/main.py` for an example of how a parser can 
 If you use this software for research, please cite our paper as follows:
 
 ```
-@InProceedings{Stern2017Minimal,
-  author    = {Stern, Mitchell and Andreas, Jacob and Klein, Dan},
-  title     = {A Minimal Span-Based Neural Constituency Parser},
-  booktitle = {Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+@InProceedings{Kitaev-2018-SelfAttentive,
+  author    = {Kitaev, Nikita and Klein, Dan},
+  title     = {Constituency Parsing with a Self-Attentive Encoder},
+  booktitle = {Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
   month     = {July},
-  year      = {2017},
-  address   = {Vancouver, Canada},
+  year      = {2018},
+  address   = {Melbourne, Australia},
   publisher = {Association for Computational Linguistics},
-  pages     = {818--827},
-  url       = {http://aclweb.org/anthology/P17-1076}
 }
 ```
+
+## Credits
+
+The code in this repository and portions of this README are based on https://github.com/mitchellstern/minimal-span-parser

@@ -3,31 +3,23 @@ import itertools
 import os.path
 import time
 
-have_dynet = False
-have_torch = False
-try:
-    import dynet as dy
-    have_dynet = True
-except ModuleNotFoundError:
-    pass
-
-try:
-    import torch
-    have_torch = True
-except ModuleNotFoundError:
-    pass
+import torch
+import torch.optim.lr_scheduler
 
 import numpy as np
 
 import evaluate
-if have_dynet:
-    import parse
-    tokens = parse
-if have_torch:
-    import parse_pytorch
-    tokens = parse_pytorch
 import trees
 import vocabulary
+import nkutil
+import parse_nk
+tokens = parse_nk
+
+def torch_load(load_path):
+    if parse_nk.use_cuda:
+        return torch.load(load_path)
+    else:
+        return torch.load(load_path, map_location=lambda storage, location: storage)
 
 def format_elapsed(start_time):
     elapsed_time = int(time.time() - start_time)
@@ -39,17 +31,80 @@ def format_elapsed(start_time):
         elapsed_string = "{}d{}".format(days, elapsed_string)
     return elapsed_string
 
-def run_train(args):
+def make_hparams():
+    return nkutil.HParams(
+        max_len_train=0, # no length limit
+        max_len_dev=0, # no length limit
+
+        sentence_max_len=300,
+
+        learning_rate=0.0008,
+        learning_rate_warmup_steps=160,
+        clip_grad_norm=0., #no clipping
+        step_decay=True, # note that disabling step decay is not implemented
+        step_decay_factor=0.5,
+        step_decay_patience=5,
+
+        partitioned=True,
+        num_layers_position_only=0,
+
+        num_layers=8,
+        d_model=1024,
+        num_heads=8,
+        d_kv=64,
+        d_ff=2048,
+        d_label_hidden=250,
+
+        attention_dropout=0.2,
+        embedding_dropout=0.0,
+        relu_dropout=0.1,
+        residual_dropout=0.2,
+
+        use_tags=False,
+        use_words=False,
+        use_chars_lstm=False,
+        use_chars_concat=False,
+        use_elmo=False,
+
+        d_char_emb=32, # A larger value may be better for use_chars_lstm
+
+        tag_emb_dropout=0.2,
+        word_emb_dropout=0.4,
+        morpho_emb_dropout=0.2,
+        timing_dropout=0.0,
+        char_lstm_input_dropout=0.2,
+        elmo_dropout=0.5, # Note that this semi-stacks with morpho_emb_dropout!
+        )
+
+def run_train(args, hparams):
     if args.numpy_seed is not None:
         print("Setting numpy random seed to {}...".format(args.numpy_seed))
         np.random.seed(args.numpy_seed)
 
+    # Make sure that pytorch is actually being initialized randomly.
+    # On my cluster I was getting highly correlated results from multiple
+    # runs, but calling reset_parameters() changed that. A brief look at the
+    # pytorch source code revealed that pytorch initializes its RNG by
+    # calling std::random_device, which according to the C++ spec is allowed
+    # to be deterministic.
+    seed_from_numpy = np.random.randint(2147483648)
+    print("Manual seed for pytorch:", seed_from_numpy)
+    torch.manual_seed(seed_from_numpy)
+
+    hparams.set_from_args(args)
+    print("Hyperparameters:")
+    hparams.print()
+
     print("Loading training trees from {}...".format(args.train_path))
     train_treebank = trees.load_trees(args.train_path)
+    if hparams.max_len_train > 0:
+        train_treebank = [tree for tree in train_treebank if len(list(tree.leaves())) <= hparams.max_len_train]
     print("Loaded {:,} training examples.".format(len(train_treebank)))
 
     print("Loading development trees from {}...".format(args.dev_path))
     dev_treebank = trees.load_trees(args.dev_path)
+    if hparams.max_len_dev > 0:
+        dev_treebank = [tree for tree in dev_treebank if len(list(tree.leaves())) <= hparams.max_len_dev]
     print("Loaded {:,} development examples.".format(len(dev_treebank)))
 
     print("Processing trees for training...")
@@ -60,6 +115,7 @@ def run_train(args):
     tag_vocab = vocabulary.Vocabulary()
     tag_vocab.index(tokens.START)
     tag_vocab.index(tokens.STOP)
+    tag_vocab.index(tokens.TAG_UNK)
 
     word_vocab = vocabulary.Vocabulary()
     word_vocab.index(tokens.START)
@@ -68,6 +124,8 @@ def run_train(args):
 
     label_vocab = vocabulary.Vocabulary()
     label_vocab.index(())
+
+    char_set = set()
 
     for tree in train_parse:
         nodes = [tree]
@@ -79,10 +137,35 @@ def run_train(args):
             else:
                 tag_vocab.index(node.tag)
                 word_vocab.index(node.word)
+                char_set |= set(node.word)
+
+    char_vocab = vocabulary.Vocabulary()
+
+    # If codepoints are small (e.g. Latin alphabet), index by codepoint directly
+    highest_codepoint = max(ord(char) for char in char_set)
+    if highest_codepoint < 512:
+        if highest_codepoint < 256:
+            highest_codepoint = 256
+        else:
+            highest_codepoint = 512
+
+        # This also takes care of constants like tokens.CHAR_PAD
+        for codepoint in range(highest_codepoint):
+            char_index = char_vocab.index(chr(codepoint))
+            assert char_index == codepoint
+    else:
+        char_vocab.index(tokens.CHAR_UNK)
+        char_vocab.index(tokens.CHAR_START_SENTENCE)
+        char_vocab.index(tokens.CHAR_START_WORD)
+        char_vocab.index(tokens.CHAR_STOP_WORD)
+        char_vocab.index(tokens.CHAR_STOP_SENTENCE)
+        for char in sorted(char_set):
+            char_vocab.index(char)
 
     tag_vocab.freeze()
     word_vocab.freeze()
     label_vocab.freeze()
+    char_vocab.freeze()
 
     def print_vocabulary(name, vocab):
         special = {tokens.START, tokens.STOP, tokens.UNK}
@@ -97,54 +180,49 @@ def run_train(args):
         print_vocabulary("Label", label_vocab)
 
     print("Initializing model...")
-    if not args.use_pytorch:
-        model = dy.ParameterCollection()
-    if args.use_pytorch and args.parser_type == "chart":
-        parser = parse_pytorch.ChartParser(
-            tag_vocab,
-            word_vocab,
-            label_vocab,
-            args.tag_embedding_dim,
-            args.word_embedding_dim,
-            args.lstm_layers,
-            args.lstm_dim,
-            args.label_hidden_dim,
-            args.dropout,
-        )
-    elif args.use_pytorch:
-        raise NotImplementedError("This parser type unsupported with pytorch")
-    elif args.parser_type == "top-down":
-        parser = parse.TopDownParser(
-            model,
-            tag_vocab,
-            word_vocab,
-            label_vocab,
-            args.tag_embedding_dim,
-            args.word_embedding_dim,
-            args.lstm_layers,
-            args.lstm_dim,
-            args.label_hidden_dim,
-            args.split_hidden_dim,
-            args.dropout,
-        )
-    else:
-        parser = parse.ChartParser(
-            model,
-            tag_vocab,
-            word_vocab,
-            label_vocab,
-            args.tag_embedding_dim,
-            args.word_embedding_dim,
-            args.lstm_layers,
-            args.lstm_dim,
-            args.label_hidden_dim,
-            args.dropout,
-        )
-    if not args.use_pytorch:
-        trainer = dy.AdamTrainer(model)
-    else:
-        trainer = torch.optim.Adam(parser.parameters())
 
+    load_path = None
+    if load_path is not None:
+        print(f"Loading parameters from {load_path}")
+        info = torch_load(load_path)
+        parser = parse_nk.NKChartParser.from_spec(info['spec'], info['state_dict'])
+    else:
+        parser = parse_nk.NKChartParser(
+            tag_vocab,
+            word_vocab,
+            label_vocab,
+            char_vocab,
+            hparams,
+        )
+
+    print("Initializing optimizer...")
+    trainable_parameters = [param for param in parser.parameters() if param.requires_grad]
+    trainer = torch.optim.Adam(trainable_parameters, lr=1., betas=(0.9, 0.98), eps=1e-9)
+    if load_path is not None:
+        trainer.load_state_dict(info['trainer'])
+
+    def set_lr(new_lr):
+        for param_group in trainer.param_groups:
+            param_group['lr'] = new_lr
+
+    assert hparams.step_decay, "Only step_decay schedule is supported"
+
+    warmup_coeff = hparams.learning_rate / hparams.learning_rate_warmup_steps
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+        trainer, 'max',
+        factor=hparams.step_decay_factor,
+        patience=hparams.step_decay_patience,
+        verbose=True,
+    )
+    def schedule_lr(iteration):
+        iteration = iteration + 1
+        if iteration <= hparams.learning_rate_warmup_steps:
+            set_lr(iteration * warmup_coeff)
+
+    clippable_parameters = trainable_parameters
+    grad_clip_threshold = np.inf if hparams.clip_grad_norm == 0 else hparams.clip_grad_norm
+
+    print("Training...")
     total_processed = 0
     current_processed = 0
     check_every = len(train_parse) / args.checks_per_epoch
@@ -160,12 +238,12 @@ def run_train(args):
         dev_start_time = time.time()
 
         dev_predicted = []
-        for tree in dev_treebank:
-            if not args.use_pytorch:
-                dy.renew_cg()
-            sentence = [(leaf.tag, leaf.word) for leaf in tree.leaves()]
-            predicted, _ = parser.parse(sentence)
-            dev_predicted.append(predicted.convert())
+        for dev_start_index in range(0, len(dev_treebank), args.eval_batch_size):
+            subbatch_trees = dev_treebank[dev_start_index:dev_start_index+args.eval_batch_size]
+            subbatch_sentences = [[(leaf.tag, leaf.word) for leaf in tree.leaves()] for tree in subbatch_trees]
+            predicted, _ = parser.parse_batch(subbatch_sentences)
+            del _
+            dev_predicted.extend([p.convert() for p in predicted])
 
         dev_fscore = evaluate.evalb(args.evalb_dir, dev_treebank, dev_predicted)
 
@@ -181,7 +259,7 @@ def run_train(args):
 
         if dev_fscore.fscore > best_dev_fscore:
             if best_dev_model_path is not None:
-                extensions = [".pt"] if args.use_pytorch else [".data", ".meta"]
+                extensions = [".pt"]
                 for ext in extensions:
                     path = best_dev_model_path + ext
                     if os.path.exists(path):
@@ -192,14 +270,11 @@ def run_train(args):
             best_dev_model_path = "{}_dev={:.2f}".format(
                 args.model_path_base, dev_fscore.fscore)
             print("Saving new best model to {}...".format(best_dev_model_path))
-            if not args.use_pytorch:
-                dy.save(best_dev_model_path, [parser])
-            else:
-                torch.save({
-                    'spec': parser.spec,
-                    'state_dict': parser.state_dict(),
-                    'trainer' : trainer.state_dict(),
-                    }, best_dev_model_path + ".pt")
+            torch.save({
+                'spec': parser.spec,
+                'state_dict': parser.state_dict(),
+                'trainer' : trainer.state_dict(),
+                }, best_dev_model_path + ".pt")
 
     for epoch in itertools.count(start=1):
         if args.epochs is not None and epoch > args.epochs:
@@ -209,38 +284,35 @@ def run_train(args):
         epoch_start_time = time.time()
 
         for start_index in range(0, len(train_parse), args.batch_size):
-            if not args.use_pytorch:
-                dy.renew_cg()
-            else:
-                trainer.zero_grad()
-            batch_losses = []
-            for tree in train_parse[start_index:start_index + args.batch_size]:
-                sentence = [(leaf.tag, leaf.word) for leaf in tree.leaves()]
-                if args.parser_type == "top-down":
-                    _, loss = parser.parse(sentence, tree, args.explore)
-                else:
-                    _, loss = parser.parse(sentence, tree)
-                batch_losses.append(loss)
-                total_processed += 1
-                current_processed += 1
+            trainer.zero_grad()
+            schedule_lr(total_processed // args.batch_size)
 
-            if not args.use_pytorch:
-                batch_loss = dy.average(batch_losses)
-                batch_loss_value = batch_loss.scalar_value()
-                batch_loss.backward()
-                trainer.update()
-            else:
-                batch_loss = sum(batch_losses) / len(batch_losses)
-                batch_loss_value = float(batch_loss.data.numpy())
-                if batch_loss_value > 0:
-                    batch_loss.backward()
-                    trainer.step()
+            batch_loss_value = 0.0
+            batch_trees = train_parse[start_index:start_index + args.batch_size]
+            batch_sentences = [[(leaf.tag, leaf.word) for leaf in tree.leaves()] for tree in batch_trees]
+
+            for subbatch_sentences, subbatch_trees in parser.split_batch(batch_sentences, batch_trees, args.subbatch_max_tokens):
+                _, loss = parser.parse_batch(subbatch_sentences, subbatch_trees)
+
+                loss = loss / len(batch_trees)
+                loss_value = float(loss.data.cpu().numpy())
+                batch_loss_value += loss_value
+                if loss_value > 0:
+                    loss.backward()
+                del loss
+                total_processed += len(subbatch_trees)
+                current_processed += len(subbatch_trees)
+
+            grad_norm = torch.nn.utils.clip_grad_norm(clippable_parameters, grad_clip_threshold)
+
+            trainer.step()
 
             print(
                 "epoch {:,} "
                 "batch {:,}/{:,} "
                 "processed {:,} "
                 "batch-loss {:.4f} "
+                "grad-norm {:.4f} "
                 "epoch-elapsed {} "
                 "total-elapsed {}".format(
                     epoch,
@@ -248,6 +320,7 @@ def run_train(args):
                     int(np.ceil(len(train_parse) / args.batch_size)),
                     total_processed,
                     batch_loss_value,
+                    grad_norm,
                     format_elapsed(epoch_start_time),
                     format_elapsed(start_time),
                 )
@@ -257,71 +330,10 @@ def run_train(args):
                 current_processed -= check_every
                 check_dev()
 
-def dynet_to_pytoch(dynet_parser):
-    spec = dynet_parser.spec
-
-    def map_name(k):
-        if k.startswith("/Parser/_"):
-            num = int(k.split("_")[1])
-            if num == 0:
-                return "tag_embeddings.weight"
-            else:
-                return "word_embeddings.weight"
-        elif k.startswith("/Parser/Feedforward"):
-            num = int(k.split("_")[1])
-            base_idx = (num // 2) * 2
-            role = "weight" if (num % 2 == 0) else "bias"
-            return f"f_label.{base_idx}.{role}"
-        elif k.startswith("/Parser/birnn/vanilla-lstm-builder"):
-            key = k.split("/Parser/birnn/vanilla-lstm-builder")[1]
-            key = key[1:]
-            birnn_num, param_num = key.split("_")
-            birnn_num = 0 if not birnn_num else int(birnn_num[:-1])
-            param_num = int(param_num)
-
-            layer = birnn_num // 2
-            reverse = "_reverse" if (birnn_num % 2 == 1) else ""
-
-
-            if param_num == 0:
-                return f"lstm.weight_ih_l{layer}{reverse}"
-            elif param_num == 1:
-                return f"lstm.weight_hh_l{layer}{reverse}"
-            elif param_num == 2:
-                return f"lstm.bias_ih_l{layer}{reverse}"
-            else:
-                raise NotImplementedError(f"Key {k} cannot be mapped to pytorch")
-
-            return birnn_num, param_num
-
-        raise NotImplementedError(f"Key {k} cannot be mapped to pytorch")
-
-    state_dict = {}
-    for param in (dynet_parser.model.lookup_parameters_list()
-                    + dynet_parser.model.parameters_list()):
-        name = param.name()
-        torch_name = map_name(name)
-        value = param.as_array()
-        if 'lstm' in torch_name:
-            # reorder the array
-            observed_lstm_size = value.shape[0] // 4
-            value = np.concatenate([
-                value[0*observed_lstm_size:1*observed_lstm_size],
-                value[1*observed_lstm_size:2*observed_lstm_size],
-                value[3*observed_lstm_size:4*observed_lstm_size],
-                value[2*observed_lstm_size:3*observed_lstm_size],
-                ])
-
-        torch_value = torch.from_numpy(value)
-        state_dict[torch_name] = torch_value
-
-        if "bias_ih" in torch_name:
-            second_torch_name = torch_name.replace("bias_ih", "bias_hh")
-            second_torch_value = torch.zeros(torch_value.size())
-            second_torch_value[observed_lstm_size:2*observed_lstm_size] = 1.0
-            state_dict[second_torch_name] = second_torch_value
-
-    return parse_pytorch.ChartParser.from_spec(spec, state_dict)
+        # adjust learning rate at the end of an epoch
+        if hparams.step_decay:
+            if (total_processed // args.batch_size + 1) > hparams.learning_rate_warmup_steps:
+                scheduler.step(best_dev_fscore)
 
 def run_test(args):
     print("Loading test trees from {}...".format(args.test_path))
@@ -329,32 +341,37 @@ def run_test(args):
     print("Loaded {:,} test examples.".format(len(test_treebank)))
 
     print("Loading model from {}...".format(args.model_path_base))
-    if args.model_path_base.endswith(".pt"):
-        if not args.use_pytorch:
-            raise NotImplementedError("Can't use pytorch parameter savefiles with dynet backend")
+    assert args.model_path_base.endswith(".pt"), "Only pytorch savefiles supported"
 
-        info = torch.load(args.model_path_base)
-        parser = parse_pytorch.ChartParser.from_spec(info['spec'], info['state_dict'])
-    else:
-        assert have_dynet, "Need dynet to load models saved by dynet"
-        model = dy.ParameterCollection()
-        [parser] = dy.load(args.model_path_base, model)
-
-        if args.use_pytorch:
-            parser = dynet_to_pytoch(parser)
+    info = torch_load(args.model_path_base)
+    assert 'hparams' in info['spec'], "Older savefiles not supported"
+    parser = parse_nk.NKChartParser.from_spec(info['spec'], info['state_dict'])
 
     print("Parsing test sentences...")
     start_time = time.time()
 
     test_predicted = []
-    for tree in test_treebank:
-        if not args.use_pytorch:
-            dy.renew_cg()
-        sentence = [(leaf.tag, leaf.word) for leaf in tree.leaves()]
-        predicted, _ = parser.parse(sentence)
-        test_predicted.append(predicted.convert())
+    for start_index in range(0, len(test_treebank), args.eval_batch_size):
+        subbatch_trees = test_treebank[start_index:start_index+args.eval_batch_size]
+        subbatch_sentences = [[(leaf.tag, leaf.word) for leaf in tree.leaves()] for tree in subbatch_trees]
+        predicted, _ = parser.parse_batch(subbatch_sentences)
+        del _
+        test_predicted.extend([p.convert() for p in predicted])
 
-    test_fscore = evaluate.evalb(args.evalb_dir, test_treebank, test_predicted)
+    # The tree loader does some preprocessing to the trees (e.g. stripping TOP
+    # symbols or SPMRL morphological features). We compare with the input file
+    # directly to be extra careful about not corrupting the evaluation. We also
+    # allow specifying a separate "raw" file for the gold trees: the inputs to
+    # our parser have traces removed and may have predicted tags substituted,
+    # and we may wish to compare against the raw gold trees to make sure we
+    # haven't made a mistake. As far as we can tell all of these variations give
+    # equivalent results.
+    ref_gold_path = args.test_path
+    if args.test_path_raw is not None:
+        print("Comparing with raw trees from", args.test_path_raw)
+        ref_gold_path = args.test_path_raw
+
+    test_fscore = evaluate.evalb(args.evalb_dir, test_treebank, test_predicted, ref_gold_path=ref_gold_path)
 
     print(
         "test-fscore {} "
@@ -364,59 +381,157 @@ def run_test(args):
         )
     )
 
-def main():
-    dynet_args = [
-        "--dynet-mem",
-        "--dynet-weight-decay",
-        "--dynet-autobatch",
-        "--dynet-gpus",
-        "--dynet-gpu",
-        "--dynet-devices",
-        "--dynet-seed",
-    ]
+#%%
+def run_ensemble(args):
+    print("Loading test trees from {}...".format(args.test_path))
+    test_treebank = trees.load_trees(args.test_path)
+    print("Loaded {:,} test examples.".format(len(test_treebank)))
 
+    parsers = []
+    for model_path_base in args.model_path_base:
+        print("Loading model from {}...".format(model_path_base))
+        assert model_path_base.endswith(".pt"), "Only pytorch savefiles supported"
+
+        info = torch_load(model_path_base)
+        assert 'hparams' in info['spec'], "Older savefiles not supported"
+        parser = parse_nk.NKChartParser.from_spec(info['spec'], info['state_dict'])
+        parsers.append(parser)
+
+    # Ensure that label scores charts produced by the models can be combined
+    # using simple averaging
+    ref_label_vocab = parsers[0].label_vocab
+    for parser in parsers:
+        assert parser.label_vocab.indices == ref_label_vocab.indices
+
+    print("Parsing test sentences...")
+    start_time = time.time()
+
+    test_predicted = []
+    # Ensemble by averaging label score charts from different models
+    # We did not observe any benefits to doing weighted averaging, probably
+    # because all our parsers output label scores of around the same magnitude
+    for start_index in range(0, len(test_treebank), args.eval_batch_size):
+        subbatch_trees = test_treebank[start_index:start_index+args.eval_batch_size]
+        subbatch_sentences = [[(leaf.tag, leaf.word) for leaf in tree.leaves()] for tree in subbatch_trees]
+
+        chart_lists = []
+        for parser in parsers:
+            charts = parser.parse_batch(subbatch_sentences, return_label_scores_charts=True)
+            chart_lists.append(charts)
+
+        subbatch_charts = [np.mean(list(sentence_charts), 0) for sentence_charts in zip(*chart_lists)]
+        predicted, _ = parsers[0].decode_from_chart_batch(subbatch_sentences, subbatch_charts)
+        del _
+        test_predicted.extend([p.convert() for p in predicted])
+
+    test_fscore = evaluate.evalb(args.evalb_dir, test_treebank, test_predicted, ref_gold_path=args.test_path)
+
+    print(
+        "test-fscore {} "
+        "test-elapsed {}".format(
+            test_fscore,
+            format_elapsed(start_time),
+        )
+    )
+
+#%%
+def run_viz(args):
+    assert args.model_path_base.endswith(".pt"), "Only pytorch savefiles supported"
+
+    print("Loading test trees from {}...".format(args.viz_path))
+    viz_treebank = trees.load_trees(args.viz_path)
+    print("Loaded {:,} test examples.".format(len(viz_treebank)))
+
+    print("Loading model from {}...".format(args.model_path_base))
+
+    info = torch_load(args.model_path_base)
+
+    assert 'hparams' in info['spec'], "Only self-attentive models are supported"
+    parser = parse_nk.NKChartParser.from_spec(info['spec'], info['state_dict'])
+
+    from viz import viz_attention
+
+    stowed_values = {}
+    orig_multihead_forward = parse_nk.MultiHeadAttention.forward
+    def wrapped_multihead_forward(self, inp, batch_idxs, **kwargs):
+        res, attns = orig_multihead_forward(self, inp, batch_idxs, **kwargs)
+        stowed_values[f'attns{stowed_values["stack"]}'] = attns.cpu().data.numpy()
+        stowed_values['stack'] += 1
+        return res, attns
+
+    parse_nk.MultiHeadAttention.forward = wrapped_multihead_forward
+
+    # Select the sentences we will actually be visualizing
+    max_len_viz = 15
+    if max_len_viz > 0:
+        viz_treebank = [tree for tree in viz_treebank if len(list(tree.leaves())) <= max_len_viz]
+    viz_treebank = viz_treebank[:1]
+
+    print("Parsing viz sentences...")
+
+    for start_index in range(0, len(viz_treebank), args.eval_batch_size):
+        subbatch_trees = viz_treebank[start_index:start_index+args.eval_batch_size]
+        subbatch_sentences = [[(leaf.tag, leaf.word) for leaf in tree.leaves()] for tree in subbatch_trees]
+        stowed_values = dict(stack=0)
+        predicted, _ = parser.parse_batch(subbatch_sentences)
+        del _
+        predicted = [p.convert() for p in predicted]
+        stowed_values['predicted'] = predicted
+
+        for snum, sentence in enumerate(subbatch_sentences):
+            sentence_words = [tokens.START] + [x[1] for x in sentence] + [tokens.STOP]
+
+            for stacknum in range(stowed_values['stack']):
+                attns_padded = stowed_values[f'attns{stacknum}']
+                attns = attns_padded[snum::len(subbatch_sentences), :len(sentence_words), :len(sentence_words)]
+                viz_attention(sentence_words, attns)
+
+
+def main():
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers()
 
+    hparams = make_hparams()
     subparser = subparsers.add_parser("train")
-    subparser.set_defaults(callback=run_train)
-    for arg in dynet_args:
-        subparser.add_argument(arg)
+    subparser.set_defaults(callback=lambda args: run_train(args, hparams))
+    hparams.populate_arguments(subparser)
     subparser.add_argument("--numpy-seed", type=int)
-    subparser.add_argument("--parser-type", choices=["top-down", "chart"], required=True)
-    subparser.add_argument("--tag-embedding-dim", type=int, default=50)
-    subparser.add_argument("--word-embedding-dim", type=int, default=100)
-    subparser.add_argument("--lstm-layers", type=int, default=2)
-    subparser.add_argument("--lstm-dim", type=int, default=250)
-    subparser.add_argument("--label-hidden-dim", type=int, default=250)
-    subparser.add_argument("--split-hidden-dim", type=int, default=250)
-    subparser.add_argument("--dropout", type=float, default=0.4)
-    subparser.add_argument("--explore", action="store_true")
     subparser.add_argument("--model-path-base", required=True)
     subparser.add_argument("--evalb-dir", default="EVALB/")
     subparser.add_argument("--train-path", default="data/02-21.10way.clean")
     subparser.add_argument("--dev-path", default="data/22.auto.clean")
-    subparser.add_argument("--batch-size", type=int, default=10)
+    subparser.add_argument("--batch-size", type=int, default=250)
+    subparser.add_argument("--subbatch-max-tokens", type=int, default=2000)
+    subparser.add_argument("--eval-batch-size", type=int, default=100)
     subparser.add_argument("--epochs", type=int)
     subparser.add_argument("--checks-per-epoch", type=int, default=4)
     subparser.add_argument("--print-vocabs", action="store_true")
-    subparser.add_argument("--use-pytorch", action="store_true")
 
     subparser = subparsers.add_parser("test")
     subparser.set_defaults(callback=run_test)
-    for arg in dynet_args:
-        subparser.add_argument(arg)
     subparser.add_argument("--model-path-base", required=True)
     subparser.add_argument("--evalb-dir", default="EVALB/")
     subparser.add_argument("--test-path", default="data/23.auto.clean")
-    subparser.add_argument("--use-pytorch", action="store_true")
+    subparser.add_argument("--test-path-raw", type=str)
+    subparser.add_argument("--eval-batch-size", type=int, default=100)
+
+    subparser = subparsers.add_parser("ensemble")
+    subparser.set_defaults(callback=run_ensemble)
+    subparser.add_argument("--model-path-base", nargs='+', required=True)
+    subparser.add_argument("--evalb-dir", default="EVALB/")
+    subparser.add_argument("--test-path", default="data/22.auto.clean")
+    subparser.add_argument("--eval-batch-size", type=int, default=100)
+
+    subparser = subparsers.add_parser("viz")
+    subparser.set_defaults(callback=run_viz)
+    subparser.add_argument("--model-path-base", required=True)
+    subparser.add_argument("--evalb-dir", default="EVALB/")
+    subparser.add_argument("--viz-path", default="data/22.auto.clean")
+    subparser.add_argument("--eval-batch-size", type=int, default=100)
 
     args = parser.parse_args()
-    if args.use_pytorch and not have_torch:
-        assert False, "pytorch not found"
-    elif not args.use_pytorch and not have_dynet:
-        assert False, "dynet not found"
     args.callback(args)
 
+# %%
 if __name__ == "__main__":
     main()

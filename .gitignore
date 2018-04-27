@@ -7,10 +7,15 @@
 # EVALB output files
 EVALB/evalb
 EVALB/evalb.dSYM/
+EVALB_SPMRL/evalb_spmrl
+EVALB_SPMRL/evalb_spmrl.dSYM/
 
-# Uncompressed models
-models/*.data
-models/*.meta
+# ELMo data
+data/elmo_2x4096_512_2048cnn_2xhighway_options.json
+data/elmo_2x4096_512_2048cnn_2xhighway_weights.hdf5
+
+# Models
+models/
 
 # Python byte-compiled / optimized / DLL files
 __pycache__/
