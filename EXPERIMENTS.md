@@ -67,6 +67,14 @@ python src/main.py train \
     --model-path-base models/nk_base6_concat
 ```
 
+## Factored model with ELMo embeddings (Section 5.2)
+
+```bash
+python src/main.py train \
+    --use-elmo \
+    --model-path-base models/nk_base6_elmo1_layers=4_trainproj_nogamma_fixtoks --num-layers 4
+```
+
 ## SPMRL models (Section 6.2)
 
 Below is our code for training and evaluating models on the SPMRL dataset. Note that the data itself must be obtained separately.
