@@ -1,0 +1,90 @@
+From 78ec64ecd3c66d05f67add4185661109276da917 Mon Sep 17 00:00:00 2001
+From: Nikita Kitaev <nikitakit@gmail.com>
+Date: Fri, 25 May 2018 21:36:09 -0700
+Subject: [PATCH] bilm-tf changes for use with benepar
+
+---
+ bilm/model.py | 45 ++++++++-------------------------------------
+ 1 file changed, 8 insertions(+), 37 deletions(-)
+
+diff --git a/bilm/model.py b/bilm/model.py
+index 2c08169..14fddc2 100644
+--- a/bilm/model.py
++++ b/bilm/model.py
+@@ -130,25 +130,9 @@ class BidirectionalLanguageModel(object):
+                     )
+                 )
+ 
+-            # The layers include the BOS/EOS tokens.  Remove them
+-            sequence_length_wo_bos_eos = lm_graph.sequence_lengths - 2
+-            layers_without_bos_eos = []
+-            for layer in layers:
+-                layer_wo_bos_eos = layer[:, 1:, :]
+-                layer_wo_bos_eos = tf.reverse_sequence(
+-                    layer_wo_bos_eos, 
+-                    lm_graph.sequence_lengths - 1,
+-                    seq_axis=1,
+-                    batch_axis=0,
+-                )
+-                layer_wo_bos_eos = layer_wo_bos_eos[:, 1:, :]
+-                layer_wo_bos_eos = tf.reverse_sequence(
+-                    layer_wo_bos_eos,
+-                    sequence_length_wo_bos_eos,
+-                    seq_axis=1,
+-                    batch_axis=0,
+-                )
+-                layers_without_bos_eos.append(layer_wo_bos_eos)
++            print("Keeping BOS/EOS tokens around for use in the parser")
++            sequence_length_wo_bos_eos = lm_graph.sequence_lengths
++            layers_without_bos_eos = layers
+ 
+             # concatenate the layers
+             lm_embeddings = tf.concat(
+@@ -539,15 +523,12 @@ class BidirectionalLanguageModelGraph(object):
+                 # the LSTMs are stateful.  To support multiple batch sizes,
+                 # we'll allocate size for states up to max_batch_size,
+                 # then use the first batch_size entries for each batch
+-                init_states = [
+-                    tf.Variable(
+-                        tf.zeros([self._max_batch_size, dim]),
+-                        trainable=False
+-                    )
+-                    for dim in lstm_cell.state_size
+-                ]
++
++                # NOTE(nikita): I don't see why LSTM states need to be saved.
++                # This messes with graph exporting, so just get rid of it.
+                 batch_init_states = [
+-                    state[:batch_size, :] for state in init_states
++                    tf.zeros([batch_size, dim])
++                    for dim in lstm_cell.state_size
+                 ]
+ 
+                 if direction == 'forward':
+@@ -566,7 +547,6 @@ class BidirectionalLanguageModelGraph(object):
+                     )
+ 
+                 self.lstm_state_sizes[direction].append(lstm_cell.state_size)
+-                self.lstm_init_states[direction].append(init_states)
+                 self.lstm_final_states[direction].append(final_state)
+                 if direction == 'forward':
+                     self.lstm_outputs[direction].append(layer_output)
+@@ -580,15 +560,6 @@ class BidirectionalLanguageModelGraph(object):
+                         )
+                     )
+ 
+-                with tf.control_dependencies([layer_output]):
+-                    # update the initial states
+-                    for i in range(2):
+-                        new_state = tf.concat(
+-                            [final_state[i][:batch_size, :],
+-                             init_states[i][batch_size:, :]], axis=0)
+-                        state_update_op = tf.assign(init_states[i], new_state)
+-                        update_ops.append(state_update_op)
+-    
+                 layer_input = layer_output
+ 
+         self.mask = mask
+-- 
+2.11.0 (Apple Git-81)
+

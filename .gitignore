@@ -17,7 +17,31 @@ data/elmo_2x4096_512_2048cnn_2xhighway_weights.hdf5
 # Models
 models/
 
+# Cython-generated code
+benepar/chart_decoder.c
+
 # Python byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
