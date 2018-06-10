@@ -16,7 +16,7 @@ If you are primarily interested in training your own parsing models, skip to the
 
 To install the parser, run the commands:
 ```bash
-$ pip install cython numpy tensorflow
+$ pip install cython numpy tensorflow>=1.8.0
 $ pip install benepar
 ```
 
