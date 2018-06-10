@@ -28,7 +28,10 @@ Parsing models need to be downloaded separately, using the commands:
 >>> benepar.download('benepar_en')
 ```
 
-This will download the English parsing model that uses ELMo embeddings.
+The following English parsing models are available:
+* `benepar_en` (95.07 F1 on test, 91.2 MB on disk): default English model, uses the original ELMo embeddings
+* `benepar_en_small` (94.65 F1 on test, 25.4 MB on disk): A smaller model that is 3-4x faster than the original when running on CPU. Uses the same self-attentive architecture as the original, but small ELMo embeddings.
+* `benepar_en_ensemble` (95.43 F1 on test, 214 MB on disk): An ensemble of two parsers: one that uses the original ELMo embeddings and one that uses the 5.5B ELMo embeddings. A GPU is highly recommended for running the ensemble.
 
 ### Additional Required Models
 
@@ -120,7 +123,7 @@ The code used to train our parsing models is currently different from the code u
 
 The following pre-trained parser models are available for download:
 * [`en_charlstm_dev.93.61.pt`](https://github.com/nikitakit/self-attentive-parser/releases/download/models/en_charlstm_dev.93.61.pt): Our best English single-system parser that does not rely on external word representations
-* [`en_elmo_dev.95.21.pt`](https://github.com/nikitakit/self-attentive-parser/releases/download/models/en_elmo_dev.95.21.pt): Our best English parser. Using this parser requires ELMo weights, which must be downloaded separately.
+* [`en_elmo_dev.95.21.pt`](https://github.com/nikitakit/self-attentive-parser/releases/download/models/en_elmo_dev.95.21.pt): Our best English single-system parser. Using this parser requires ELMo weights, which must be downloaded separately.
 
 To use ELMo embeddings, download the following files into the `data/` folder (preserving their names):
 
