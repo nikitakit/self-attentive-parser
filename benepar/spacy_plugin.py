@@ -104,7 +104,7 @@ def get_constituent(span):
         raise Exception("No constituency parse is available for this document. Consider adding a BeneparComponent to the pipeline.")
 
     search_start = constituent_data.loc_to_constituent[span.start]
-    if span.start + 1 < len(constituent_data.ends):
+    if span.start + 1 < len(constituent_data.loc_to_constituent):
         search_end = constituent_data.loc_to_constituent[span.start + 1]
     else:
         search_end = len(constituent_data.ends)
