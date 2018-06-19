@@ -16,11 +16,11 @@ If you are primarily interested in training your own parsing models, skip to the
 
 To install the parser, run the commands:
 ```bash
-$ pip install cython numpy tensorflow>=1.8.0
-$ pip install benepar
+$ pip install cython numpy
+$ pip install benepar[cpu]
 ```
 
-Cython, numpy, and tensorflow should be installed separately prior to installing benepar. Note that `pip install tensorflow` will install a CPU-only version of TensorFlow; consult the [official TensorFlow installation instructions](https://www.tensorflow.org/install/) for how to install a GPU-enabled version instead.
+Cython and numpy should be installed separately prior to installing benepar. Note that `pip install benepar[cpu]` has a dependency on the `tensorflow` pip package, which is a CPU-only version of tensorflow. Use `pip install benepar[gpu]` to instead introduce a dependency on `tensorflow-gpu`. Installing a GPU-enabled version of TensorFlow will likely require additional steps; see the [official TensorFlow installation instructions](https://www.tensorflow.org/install/) for details.
 
 Parsing models need to be downloaded separately, using the commands:
 ```python
