@@ -435,6 +435,52 @@ def run_ensemble(args):
     )
 
 #%%
+
+def run_parse(args):
+    if args.output_path != '-' and os.path.exists(args.output_path):
+        print("Error: output file already exists:", args.output_path)
+        return
+
+    print("Loading model from {}...".format(args.model_path_base))
+    assert args.model_path_base.endswith(".pt"), "Only pytorch savefiles supported"
+
+    info = torch_load(args.model_path_base)
+    assert 'hparams' in info['spec'], "Older savefiles not supported"
+    parser = parse_nk.NKChartParser.from_spec(info['spec'], info['state_dict'])
+
+    print("Parsing sentences...")
+    with open(args.input_path) as input_file:
+        sentences = input_file.readlines()
+    sentences = [sentence.split() for sentence in sentences]
+
+    # Parser does not do tagging, so use a dummy tag when parsing from raw text
+    if 'UNK' in parser.tag_vocab.indices:
+        dummy_tag = 'UNK'
+    else:
+        dummy_tag = parser.tag_vocab.value(0)
+
+    start_time = time.time()
+
+    all_predicted = []
+    for start_index in range(0, len(sentences), args.eval_batch_size):
+        subbatch_sentences = sentences[start_index:start_index+args.eval_batch_size]
+
+        subbatch_sentences = [[(dummy_tag, word) for word in sentence] for sentence in subbatch_sentences]
+        predicted, _ = parser.parse_batch(subbatch_sentences)
+        del _
+        if args.output_path == '-':
+            for p in predicted:
+                print(p.convert().linearize())
+        else:
+            all_predicted.extend([p.convert() for p in predicted])
+
+    if args.output_path != '-':
+        with open(args.output_path, 'w') as output_file:
+            for tree in all_predicted:
+                output_file.write("{}\n".format(tree.linearize()))
+        print("Output written to:", args.output_path)
+
+#%%
 def run_viz(args):
     assert args.model_path_base.endswith(".pt"), "Only pytorch savefiles supported"
 
@@ -520,6 +566,13 @@ def main():
     subparser.add_argument("--model-path-base", nargs='+', required=True)
     subparser.add_argument("--evalb-dir", default="EVALB/")
     subparser.add_argument("--test-path", default="data/22.auto.clean")
+    subparser.add_argument("--eval-batch-size", type=int, default=100)
+
+    subparser = subparsers.add_parser("parse")
+    subparser.set_defaults(callback=run_parse)
+    subparser.add_argument("--model-path-base", required=True)
+    subparser.add_argument("--input-path", type=str, required=True)
+    subparser.add_argument("--output-path", type=str, default="-")
     subparser.add_argument("--eval-batch-size", type=int, default=100)
 
     subparser = subparsers.add_parser("viz")
