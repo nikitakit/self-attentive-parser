@@ -146,6 +146,8 @@ LABEL_VOCAB = ((),
  ('RRC', 'VP'),
  ('ADJP', 'ADVP'))
 
+SENTENCE_MAX_LEN = 300
+
 #%%
 class BaseParser(object):
     def __init__(self, name, batch_size=64):
@@ -172,6 +174,9 @@ class BaseParser(object):
 
     def _charify(self, sentences):
         padded_len = max([len(sentence) + 2 for sentence in sentences])
+        if padded_len > SENTENCE_MAX_LEN:
+            raise ValueError("Sentence of length {} exceeds the maximum supported length of {}".format(
+                padded_len - 2, SENTENCE_MAX_LEN - 2))
 
         all_chars = np.zeros((len(sentences), padded_len, 50), dtype=np.int32)
 
