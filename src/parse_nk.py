@@ -148,7 +148,7 @@ class ScaledDotProductAttention(nn.Module):
         super(ScaledDotProductAttention, self).__init__()
         self.temper = d_model ** 0.5
         self.dropout = nn.Dropout(attention_dropout)
-        self.softmax = nn.Softmax(dim=1)
+        self.softmax = nn.Softmax(dim=-1)
 
     def forward(self, q, k, v, attn_mask=None):
         # q: [batch, slot, feat]
@@ -165,8 +165,7 @@ class ScaledDotProductAttention(nn.Module):
 
             attn.data.masked_fill_(attn_mask, -float('inf'))
 
-        # Transposes to avoid https://github.com/pytorch/pytorch/issues/4893
-        attn = self.softmax(attn.transpose(1, 2)).transpose(1, 2)
+        attn = self.softmax(attn)
         # Note that this makes the distribution not sum to 1. At some point it
         # may be worth researching whether this is the right way to apply
         # dropout to the attention.
