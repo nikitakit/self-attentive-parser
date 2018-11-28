@@ -63,7 +63,6 @@ def make_hparams():
         use_tags=False,
         use_words=False,
         use_chars_lstm=False,
-        use_chars_concat=False,
         use_elmo=False,
 
         d_char_emb=32, # A larger value may be better for use_chars_lstm
