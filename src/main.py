@@ -303,7 +303,7 @@ def run_train(args, hparams):
                 total_processed += len(subbatch_trees)
                 current_processed += len(subbatch_trees)
 
-            grad_norm = torch.nn.utils.clip_grad_norm(clippable_parameters, grad_clip_threshold)
+            grad_norm = torch.nn.utils.clip_grad_norm_(clippable_parameters, grad_clip_threshold)
 
             trainer.step()
 

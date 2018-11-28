@@ -3,7 +3,6 @@ import functools
 import numpy as np
 
 import torch
-from torch.autograd import Variable
 import torch.nn as nn
 import torch.nn.init as init
 
@@ -89,7 +88,7 @@ class FeatureDropoutFunction(nn.functional._functions.dropout.InplaceFunction):
     @staticmethod
     def backward(ctx, grad_output):
         if ctx.p > 0 and ctx.train:
-            return grad_output.mul(Variable(ctx.noise)), None, None, None, None
+            return grad_output.mul(ctx.noise), None, None, None, None
         else:
             return grad_output, None, None, None, None
 
@@ -208,21 +207,21 @@ class MultiHeadAttention(nn.Module):
             self.w_ks2 = nn.Parameter(torch_t.FloatTensor(n_head, self.d_positional, d_k // 2))
             self.w_vs2 = nn.Parameter(torch_t.FloatTensor(n_head, self.d_positional, d_v // 2))
 
-            init.xavier_normal(self.w_qs1)
-            init.xavier_normal(self.w_ks1)
-            init.xavier_normal(self.w_vs1)
+            init.xavier_normal_(self.w_qs1)
+            init.xavier_normal_(self.w_ks1)
+            init.xavier_normal_(self.w_vs1)
 
-            init.xavier_normal(self.w_qs2)
-            init.xavier_normal(self.w_ks2)
-            init.xavier_normal(self.w_vs2)
+            init.xavier_normal_(self.w_qs2)
+            init.xavier_normal_(self.w_ks2)
+            init.xavier_normal_(self.w_vs2)
         else:
             self.w_qs = nn.Parameter(torch_t.FloatTensor(n_head, d_model, d_k))
             self.w_ks = nn.Parameter(torch_t.FloatTensor(n_head, d_model, d_k))
             self.w_vs = nn.Parameter(torch_t.FloatTensor(n_head, d_model, d_v))
 
-            init.xavier_normal(self.w_qs)
-            init.xavier_normal(self.w_ks)
-            init.xavier_normal(self.w_vs)
+            init.xavier_normal_(self.w_qs)
+            init.xavier_normal_(self.w_ks)
+            init.xavier_normal_(self.w_vs)
 
         self.attention = ScaledDotProductAttention(d_model, attention_dropout=attention_dropout)
         self.layer_norm = LayerNormalization(d_model)
@@ -272,13 +271,10 @@ class MultiHeadAttention(nn.Module):
 
         len_padded = batch_idxs.max_len
         mb_size = batch_idxs.batch_size
-        q_padded = q_s.data.new(n_head, mb_size, len_padded, d_k).fill_(0.)
-        k_padded = k_s.data.new(n_head, mb_size, len_padded, d_k).fill_(0.)
-        v_padded = v_s.data.new(n_head, mb_size, len_padded, d_v).fill_(0.)
-        q_padded = Variable(q_padded)
-        k_padded = Variable(k_padded)
-        v_padded = Variable(v_padded)
-        invalid_mask = torch_t.ByteTensor(mb_size, len_padded).fill_(True)
+        q_padded = q_s.new_zeros((n_head, mb_size, len_padded, d_k))
+        k_padded = k_s.new_zeros((n_head, mb_size, len_padded, d_k))
+        v_padded = v_s.new_zeros((n_head, mb_size, len_padded, d_v))
+        invalid_mask = q_s.new_ones((mb_size, len_padded), dtype=torch.uint8)
 
         for i, (start, end) in enumerate(zip(batch_idxs.boundaries_np[:-1], batch_idxs.boundaries_np[1:])):
             q_padded[:,i,:end-start,:] = q_s[:,start:end,:]
@@ -464,7 +460,7 @@ class MultiLevelEmbedding(nn.Module):
 
         # Learned embeddings
         self.position_table = nn.Parameter(torch_t.FloatTensor(max_len, self.d_positional))
-        init.normal(self.position_table)
+        init.normal_(self.position_table)
 
     def forward(self, xs, batch_idxs, extra_content_annotations=None):
         content_annotations = [
@@ -519,9 +515,9 @@ class CharacterLSTM(nn.Module):
     def forward(self, chars_padded_np, word_lens_np, batch_idxs):
         # copy to ensure nonnegative stride for successful transfer to pytorch
         decreasing_idxs_np = np.argsort(word_lens_np)[::-1].copy()
-        decreasing_idxs_torch = Variable(from_numpy(decreasing_idxs_np), requires_grad=False)
+        decreasing_idxs_torch = from_numpy(decreasing_idxs_np)
 
-        chars_padded = Variable(from_numpy(chars_padded_np[decreasing_idxs_np]), requires_grad=False)
+        chars_padded = from_numpy(chars_padded_np[decreasing_idxs_np])
         word_lens = from_numpy(word_lens_np[decreasing_idxs_np])
 
         inp_sorted = nn.utils.rnn.pack_padded_sequence(chars_padded, word_lens_np[decreasing_idxs_np], batch_first=True)
@@ -773,6 +769,7 @@ class NKChartParser(nn.Module):
     def parse_batch(self, sentences, golds=None, return_label_scores_charts=False):
         is_train = golds is not None
         self.train(is_train)
+        torch.set_grad_enabled(is_train)
 
         if golds is None:
             golds = [None] * len(sentences)
@@ -802,7 +799,7 @@ class NKChartParser(nn.Module):
             'words': word_idxs,
         }
         emb_idxs = [
-            Variable(from_numpy(emb_idxs_map[emb_type]), requires_grad=False, volatile=not is_train)
+            from_numpy(emb_idxs_map[emb_type])
             for emb_type in self.emb_types
             ]
 
@@ -855,7 +852,7 @@ class NKChartParser(nn.Module):
                     i += 1
             assert i == packed_len
 
-            char_idxs_encoder = Variable(from_numpy(char_idxs_encoder), requires_grad=False, volatile=not is_train)
+            char_idxs_encoder = from_numpy(char_idxs_encoder)
 
             extra_content_annotations = self.char_embedding(char_idxs_encoder)
             extra_content_annotations = extra_content_annotations.view(-1, self.num_chars_flat * self.char_embedding.embedding_dim)
@@ -888,7 +885,7 @@ class NKChartParser(nn.Module):
                     # +1 for masking (everything that stays 0 is past the end of the sentence)
                     char_idxs_encoder[snum, wordnum, :] += 1
 
-            char_idxs_encoder = Variable(from_numpy(char_idxs_encoder), requires_grad=False)
+            char_idxs_encoder = from_numpy(char_idxs_encoder)
 
             elmo_out = self.elmo.forward(char_idxs_encoder)
             elmo_rep0 = elmo_out['elmo_representations'][0]
@@ -971,10 +968,10 @@ class NKChartParser(nn.Module):
 
         cells_label_scores = self.f_label(fencepost_annotations[cells_j] - fencepost_annotations[cells_i])
         cells_label_scores = torch.cat([
-                    Variable(torch_t.FloatTensor(cells_label_scores.size(0), 1).fill_(0), requires_grad=False),
+                    cells_label_scores.new_zeros((cells_label_scores.size(0), 1)),
                     cells_label_scores
                     ], 1)
-        cells_scores = torch.gather(cells_label_scores, 1, Variable(cells_label[:, None]))
+        cells_scores = torch.gather(cells_label_scores, 1, cells_label[:, None])
         loss = cells_scores[:num_p].sum() - cells_scores[num_p:].sum() + paugment_total
         return None, loss
 
@@ -986,7 +983,7 @@ class NKChartParser(nn.Module):
 
         label_scores_chart = self.f_label(span_features)
         label_scores_chart = torch.cat([
-            Variable(torch_t.FloatTensor(label_scores_chart.size(0), label_scores_chart.size(1), 1).fill_(0), requires_grad=False),
+            label_scores_chart.new_zeros((label_scores_chart.size(0), label_scores_chart.size(1), 1)),
             label_scores_chart
             ], 2)
         return label_scores_chart
