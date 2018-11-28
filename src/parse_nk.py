@@ -291,7 +291,7 @@ class MultiHeadAttention(nn.Module):
             k_padded.view(-1, len_padded, d_k),
             v_padded.view(-1, len_padded, d_v),
             invalid_mask.unsqueeze(1).expand(mb_size, len_padded, len_padded).repeat(n_head, 1, 1),
-            (~invalid_mask).repeat(n_head, 1).unsqueeze(-1),
+            (~invalid_mask).repeat(n_head, 1),
             )
 
     def combine_v(self, outputs):
@@ -543,52 +543,7 @@ class CharacterLSTM(nn.Module):
 def get_elmo_class():
     # Avoid a hard dependency by only importing Elmo if it's being used
     from allennlp.modules.elmo import Elmo
-
-    class ModElmo(Elmo):
-       def forward(self, inputs):
-            """
-            Unlike Elmo.forward, return vector representations for bos/eos tokens
-
-            This modified version does not support extra tensor dimensions
-
-            Parameters
-            ----------
-            inputs : ``torch.autograd.Variable``
-                Shape ``(batch_size, timesteps, 50)`` of character ids representing the current batch.
-
-            Returns
-            -------
-            Dict with keys:
-            ``'elmo_representations'``: ``List[torch.autograd.Variable]``
-                A ``num_output_representations`` list of ELMo representations for the input sequence.
-                Each representation is shape ``(batch_size, timesteps + 2, embedding_dim)``
-            ``'mask'``:  ``torch.autograd.Variable``
-                Shape ``(batch_size, timesteps + 2)`` long tensor with sequence mask.
-            """
-            # reshape the input if needed
-            original_shape = inputs.size()
-            timesteps, num_characters = original_shape[-2:]
-            assert len(original_shape) == 3, "Only 3D tensors supported here"
-            reshaped_inputs = inputs
-
-            # run the biLM
-            bilm_output = self._elmo_lstm(reshaped_inputs)
-            layer_activations = bilm_output['activations']
-            mask_with_bos_eos = bilm_output['mask']
-
-            # compute the elmo representations
-            representations = []
-            for i in range(len(self._scalar_mixes)):
-                scalar_mix = getattr(self, 'scalar_mix_{}'.format(i))
-                representation_with_bos_eos = scalar_mix(layer_activations, mask_with_bos_eos)
-                # We don't remove bos/eos here!
-                representations.append(self._dropout(representation_with_bos_eos))
-
-            mask = mask_with_bos_eos
-            elmo_representations = representations
-
-            return {'elmo_representations': elmo_representations, 'mask': mask}
-    return ModElmo
+    return Elmo
 
 # %%
 
@@ -718,6 +673,7 @@ class NKChartParser(nn.Module):
                 num_output_representations=1,
                 requires_grad=False,
                 do_layer_norm=False,
+                keep_sentence_boundaries=True,
                 dropout=hparams.elmo_dropout,
                 )
             d_elmo_annotations = 1024
@@ -938,7 +894,7 @@ class NKChartParser(nn.Module):
             elmo_rep0 = elmo_out['elmo_representations'][0]
             elmo_mask = elmo_out['mask']
 
-            elmo_annotations_packed = elmo_rep0[elmo_mask.byte().unsqueeze(-1)].view(packed_len, -1)
+            elmo_annotations_packed = elmo_rep0[elmo_mask.byte()].view(packed_len, -1)
 
             # Apply projection to match dimensionality
             extra_content_annotations = self.project_elmo(elmo_annotations_packed)
@@ -997,18 +953,17 @@ class NKChartParser(nn.Module):
         gis = []
         gjs = []
         glabels = []
-        fencepost_annotations_d = fencepost_annotations.detach()
-        fencepost_annotations_d.volatile = True
-        for i, (start, end) in enumerate(zip(fp_startpoints, fp_endpoints)):
-            p_i, p_j, p_label, p_augment, g_i, g_j, g_label = self.parse_from_annotations(fencepost_annotations_d[start:end,:], sentences[i], golds[i])
-            paugment_total += p_augment
-            num_p += p_i.shape[0]
-            pis.append(p_i + start)
-            pjs.append(p_j + start)
-            gis.append(g_i + start)
-            gjs.append(g_j + start)
-            plabels.append(p_label)
-            glabels.append(g_label)
+        with torch.no_grad():
+            for i, (start, end) in enumerate(zip(fp_startpoints, fp_endpoints)):
+                p_i, p_j, p_label, p_augment, g_i, g_j, g_label = self.parse_from_annotations(fencepost_annotations[start:end,:], sentences[i], golds[i])
+                paugment_total += p_augment
+                num_p += p_i.shape[0]
+                pis.append(p_i + start)
+                pjs.append(p_j + start)
+                gis.append(g_i + start)
+                gjs.append(g_j + start)
+                plabels.append(p_label)
+                glabels.append(g_label)
 
         cells_i = from_numpy(np.concatenate(pis + gis))
         cells_j = from_numpy(np.concatenate(pjs + gjs))
