@@ -36,6 +36,18 @@ CHAR_START_WORD = "\2"
 CHAR_STOP_WORD = "\3"
 CHAR_STOP_SENTENCE = "\4"
 
+PTB_TOKEN_UNESCAPE = {
+    "-LRB-": "(",
+    "-RRB-": ")",
+    "-LCB-": "{",
+    "-RCB-": "}",
+    "-LSB-": "[",
+    "-RSB-": "]",
+    "``": '"',
+    "''": '"',
+    "`": "'",
+    }
+
 # %%
 
 class BatchIndices:
@@ -541,6 +553,17 @@ def get_elmo_class():
     return Elmo
 
 # %%
+def get_bert(bert_model, bert_do_lower_case):
+    # Avoid a hard dependency on BERT by only importing it if it's being used
+    from pytorch_pretrained_bert import BertTokenizer, BertModel
+    if bert_model.endswith('.tar.gz'):
+        tokenizer = BertTokenizer.from_pretrained(bert_model.replace('.tar.gz', '-vocab.txt'), bert_do_lower_case)
+    else:
+        tokenizer = BertTokenizer.from_pretrained(bert_model, bert_do_lower_case)
+    bert = BertModel.from_pretrained(bert_model)
+    return tokenizer, bert
+
+# %%
 
 class Encoder(nn.Module):
     def __init__(self, embedding,
@@ -634,15 +657,17 @@ class NKChartParser(nn.Module):
         self.use_tags = hparams.use_tags
 
         self.morpho_emb_dropout = None
-        if hparams.use_chars_lstm or hparams.use_elmo:
+        if hparams.use_chars_lstm or hparams.use_elmo or hparams.use_bert:
             self.morpho_emb_dropout = hparams.morpho_emb_dropout
         else:
-            assert self.emb_types, "Need at least one of: use_tags, use_words, use_chars_lstm, use_elmo"
+            assert self.emb_types, "Need at least one of: use_tags, use_words, use_chars_lstm, use_elmo, use_bert"
 
         self.char_encoder = None
         self.elmo = None
+        self.bert = None
         if hparams.use_chars_lstm:
             assert not hparams.use_elmo, "use_chars_lstm and use_elmo are mutually exclusive"
+            assert not hparams.use_bert, "use_chars_lstm and use_bert are mutually exclusive"
             self.char_encoder = CharacterLSTM(
                 num_embeddings_map['chars'],
                 hparams.d_char_emb,
@@ -650,6 +675,7 @@ class NKChartParser(nn.Module):
                 char_dropout=hparams.char_lstm_input_dropout,
             )
         elif hparams.use_elmo:
+            assert not hparams.use_bert, "use_elmo and use_bert are mutually exclusive"
             self.elmo = get_elmo_class()(
                 options_file="data/elmo_2x4096_512_2048cnn_2xhighway_options.json",
                 weight_file="data/elmo_2x4096_512_2048cnn_2xhighway_weights.hdf5",
@@ -668,6 +694,13 @@ class NKChartParser(nn.Module):
             # Reshapes the embeddings to match the model dimension, and making
             # the projection trainable appears to improve parsing accuracy
             self.project_elmo = nn.Linear(d_elmo_annotations, self.d_content, bias=False)
+        elif hparams.use_bert:
+            self.bert_tokenizer, self.bert = get_bert(hparams.bert_model, hparams.bert_do_lower_case)
+
+            d_bert_annotations = self.bert.pooler.dense.in_features
+            self.bert_max_len = self.bert.embeddings.position_embeddings.num_embeddings
+
+            self.project_bert = nn.Linear(d_bert_annotations, self.d_content, bias=False)
 
         self.embedding = MultiLevelEmbedding(
             [num_embeddings_map[emb_type] for emb_type in self.emb_types],
@@ -719,6 +752,8 @@ class NKChartParser(nn.Module):
             hparams['use_elmo'] = False
         if 'elmo_dropout' not in hparams:
             hparams['elmo_dropout'] = 0.5
+        if 'use_bert' not in hparams:
+            hparams['use_bert'] = False
 
         spec['hparams'] = nkutil.HParams(**hparams)
         res = cls(**spec)
@@ -861,6 +896,69 @@ class NKChartParser(nn.Module):
 
             # Apply projection to match dimensionality
             extra_content_annotations = self.project_elmo(elmo_annotations_packed)
+        elif self.bert is not None:
+            all_input_ids = np.zeros((len(sentences), self.bert_max_len), dtype=int)
+            all_input_mask = np.zeros((len(sentences), self.bert_max_len), dtype=int)
+            all_word_start_mask = np.zeros((len(sentences), self.bert_max_len), dtype=int)
+            all_word_end_mask = np.zeros((len(sentences), self.bert_max_len), dtype=int)
+
+            subword_max_len = 0
+            for snum, sentence in enumerate(sentences):
+                tokens = []
+                word_start_mask = []
+                word_end_mask = []
+
+                tokens.append("[CLS]")
+                word_start_mask.append(1)
+                word_end_mask.append(1)
+
+                cleaned_words = []
+                for _, word in sentence:
+                    word = PTB_TOKEN_UNESCAPE.get(word, word)
+                    if word == "n't" and cleaned_words:
+                        cleaned_words[-1] = cleaned_words[-1] + "n"
+                        word = "'t"
+                    cleaned_words.append(word)
+
+                for word in cleaned_words:
+                    word_tokens = self.bert_tokenizer.tokenize(word)
+                    for _ in range(len(word_tokens)):
+                        word_start_mask.append(0)
+                        word_end_mask.append(0)
+                    word_start_mask[len(tokens)] = 1
+                    word_end_mask[-1] = 1
+                    tokens.extend(word_tokens)
+                tokens.append("[SEP]")
+                word_start_mask.append(1)
+                word_end_mask.append(1)
+
+                input_ids = self.bert_tokenizer.convert_tokens_to_ids(tokens)
+
+                # The mask has 1 for real tokens and 0 for padding tokens. Only real
+                # tokens are attended to.
+                input_mask = [1] * len(input_ids)
+
+                subword_max_len = max(subword_max_len, len(input_ids))
+
+                all_input_ids[snum, :len(input_ids)] = input_ids
+                all_input_mask[snum, :len(input_mask)] = input_mask
+                all_word_start_mask[snum, :len(word_start_mask)] = word_start_mask
+                all_word_end_mask[snum, :len(word_end_mask)] = word_end_mask
+
+            all_input_ids = from_numpy(np.ascontiguousarray(all_input_ids[:, :subword_max_len]))
+            all_input_mask = from_numpy(np.ascontiguousarray(all_input_mask[:, :subword_max_len]))
+            all_word_start_mask = from_numpy(np.ascontiguousarray(all_word_start_mask[:, :subword_max_len]))
+            all_word_end_mask = from_numpy(np.ascontiguousarray(all_word_end_mask[:, :subword_max_len]))
+            all_encoder_layers, _ = self.bert(all_input_ids, attention_mask=all_input_mask)
+            del _
+            features = all_encoder_layers[-1]
+            assert features.sum().item() != 0.0, "Sanity check for bug"
+            assert not is_train or features.requires_grad
+
+            features_packed = features.masked_select(all_word_end_mask.to(torch.uint8).unsqueeze(-1)).reshape(-1, features.shape[-1])
+
+            # For now, just project the features from the last word piece in each word
+            extra_content_annotations = self.project_bert(features_packed)
 
         annotations, _ = self.encoder(emb_idxs, batch_idxs, extra_content_annotations=extra_content_annotations)
 

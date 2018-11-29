@@ -64,6 +64,7 @@ def make_hparams():
         use_words=False,
         use_chars_lstm=False,
         use_elmo=False,
+        use_bert=False,
 
         d_char_emb=32, # A larger value may be better for use_chars_lstm
 
@@ -73,6 +74,9 @@ def make_hparams():
         timing_dropout=0.0,
         char_lstm_input_dropout=0.2,
         elmo_dropout=0.5, # Note that this semi-stacks with morpho_emb_dropout!
+
+        bert_model="bert-base-uncased",
+        bert_do_lower_case=True,
         )
 
 def run_train(args, hparams):

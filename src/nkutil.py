@@ -26,7 +26,7 @@ class HParams():
                 continue
             v = self[k]
             k = k.replace('_', '-')
-            if type(v) in (int, float):
+            if type(v) in (int, float, str):
                 parser.add_argument(f'--{k}', type=type(v), default=v)
             elif isinstance(v, bool):
                 if not v:
