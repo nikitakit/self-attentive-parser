@@ -44,6 +44,7 @@ def make_hparams():
         step_decay=True, # note that disabling step decay is not implemented
         step_decay_factor=0.5,
         step_decay_patience=5,
+        max_consecutive_decays=3, # establishes a termination criterion
 
         partitioned=True,
         num_layers_position_only=0,
@@ -231,12 +232,14 @@ def run_train(args, hparams):
     check_every = len(train_parse) / args.checks_per_epoch
     best_dev_fscore = -np.inf
     best_dev_model_path = None
+    best_dev_processed = 0
 
     start_time = time.time()
 
     def check_dev():
         nonlocal best_dev_fscore
         nonlocal best_dev_model_path
+        nonlocal best_dev_processed
 
         dev_start_time = time.time()
 
@@ -272,6 +275,7 @@ def run_train(args, hparams):
             best_dev_fscore = dev_fscore.fscore
             best_dev_model_path = "{}_dev={:.2f}".format(
                 args.model_path_base, dev_fscore.fscore)
+            best_dev_processed = total_processed
             print("Saving new best model to {}...".format(best_dev_model_path))
             torch.save({
                 'spec': parser.spec,
@@ -334,9 +338,11 @@ def run_train(args, hparams):
                 check_dev()
 
         # adjust learning rate at the end of an epoch
-        if hparams.step_decay:
-            if (total_processed // args.batch_size + 1) > hparams.learning_rate_warmup_steps:
-                scheduler.step(best_dev_fscore)
+        if (total_processed // args.batch_size + 1) > hparams.learning_rate_warmup_steps:
+            scheduler.step(best_dev_fscore)
+            if (total_processed - best_dev_processed) > ((hparams.step_decay_patience + 1) * hparams.max_consecutive_decays * len(train_parse)):
+                print("Terminating due to lack of improvement in dev fscore.")
+                break
 
 def run_test(args):
     print("Loading test trees from {}...".format(args.test_path))
