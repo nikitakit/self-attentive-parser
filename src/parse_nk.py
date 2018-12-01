@@ -657,10 +657,10 @@ class NKChartParser(nn.Module):
         self.use_tags = hparams.use_tags
 
         self.morpho_emb_dropout = None
-        if hparams.use_chars_lstm or hparams.use_elmo or hparams.use_bert:
+        if hparams.use_chars_lstm or hparams.use_elmo or hparams.use_bert or hparams.use_bert_only:
             self.morpho_emb_dropout = hparams.morpho_emb_dropout
         else:
-            assert self.emb_types, "Need at least one of: use_tags, use_words, use_chars_lstm, use_elmo, use_bert"
+            assert self.emb_types, "Need at least one of: use_tags, use_words, use_chars_lstm, use_elmo, use_bert, use_bert_only"
 
         self.char_encoder = None
         self.elmo = None
@@ -668,6 +668,7 @@ class NKChartParser(nn.Module):
         if hparams.use_chars_lstm:
             assert not hparams.use_elmo, "use_chars_lstm and use_elmo are mutually exclusive"
             assert not hparams.use_bert, "use_chars_lstm and use_bert are mutually exclusive"
+            assert not hparams.use_bert_only, "use_chars_lstm and use_bert_only are mutually exclusive"
             self.char_encoder = CharacterLSTM(
                 num_embeddings_map['chars'],
                 hparams.d_char_emb,
@@ -676,6 +677,7 @@ class NKChartParser(nn.Module):
             )
         elif hparams.use_elmo:
             assert not hparams.use_bert, "use_elmo and use_bert are mutually exclusive"
+            assert not hparams.use_bert_only, "use_elmo and use_bert_only are mutually exclusive"
             self.elmo = get_elmo_class()(
                 options_file="data/elmo_2x4096_512_2048cnn_2xhighway_options.json",
                 weight_file="data/elmo_2x4096_512_2048cnn_2xhighway_weights.hdf5",
@@ -694,44 +696,58 @@ class NKChartParser(nn.Module):
             # Reshapes the embeddings to match the model dimension, and making
             # the projection trainable appears to improve parsing accuracy
             self.project_elmo = nn.Linear(d_elmo_annotations, self.d_content, bias=False)
-        elif hparams.use_bert:
+        elif hparams.use_bert or hparams.use_bert_only:
             self.bert_tokenizer, self.bert = get_bert(hparams.bert_model, hparams.bert_do_lower_case)
 
             d_bert_annotations = self.bert.pooler.dense.in_features
             self.bert_max_len = self.bert.embeddings.position_embeddings.num_embeddings
 
-            self.project_bert = nn.Linear(d_bert_annotations, self.d_content, bias=False)
+            if hparams.use_bert_only:
+                self.project_bert = nn.Linear(d_bert_annotations, hparams.d_model, bias=False)
+            else:
+                self.project_bert = nn.Linear(d_bert_annotations, self.d_content, bias=False)
 
-        self.embedding = MultiLevelEmbedding(
-            [num_embeddings_map[emb_type] for emb_type in self.emb_types],
-            hparams.d_model,
-            d_positional=self.d_positional,
-            dropout=hparams.embedding_dropout,
-            timing_dropout=hparams.timing_dropout,
-            emb_dropouts_list=[emb_dropouts_map[emb_type] for emb_type in self.emb_types],
-            extra_content_dropout=self.morpho_emb_dropout,
-            max_len=hparams.sentence_max_len,
-        )
-
-        self.encoder = Encoder(
-            self.embedding,
-            num_layers=hparams.num_layers,
-            num_heads=hparams.num_heads,
-            d_kv=hparams.d_kv,
-            d_ff=hparams.d_ff,
-            d_positional=self.d_positional,
-            num_layers_position_only=hparams.num_layers_position_only,
-            relu_dropout=hparams.relu_dropout,
-            residual_dropout=hparams.residual_dropout,
-            attention_dropout=hparams.attention_dropout,
-        )
-
-        self.f_label = nn.Sequential(
-            nn.Linear(hparams.d_model, hparams.d_label_hidden),
-            LayerNormalization(hparams.d_label_hidden),
-            nn.ReLU(),
-            nn.Linear(hparams.d_label_hidden, label_vocab.size - 1),
+        if not hparams.use_bert_only:
+            self.embedding = MultiLevelEmbedding(
+                [num_embeddings_map[emb_type] for emb_type in self.emb_types],
+                hparams.d_model,
+                d_positional=self.d_positional,
+                dropout=hparams.embedding_dropout,
+                timing_dropout=hparams.timing_dropout,
+                emb_dropouts_list=[emb_dropouts_map[emb_type] for emb_type in self.emb_types],
+                extra_content_dropout=self.morpho_emb_dropout,
+                max_len=hparams.sentence_max_len,
             )
+
+            self.encoder = Encoder(
+                self.embedding,
+                num_layers=hparams.num_layers,
+                num_heads=hparams.num_heads,
+                d_kv=hparams.d_kv,
+                d_ff=hparams.d_ff,
+                d_positional=self.d_positional,
+                num_layers_position_only=hparams.num_layers_position_only,
+                relu_dropout=hparams.relu_dropout,
+                residual_dropout=hparams.residual_dropout,
+                attention_dropout=hparams.attention_dropout,
+            )
+
+            self.f_label = nn.Sequential(
+                nn.Linear(hparams.d_model, hparams.d_label_hidden),
+                LayerNormalization(hparams.d_label_hidden),
+                nn.ReLU(),
+                nn.Linear(hparams.d_label_hidden, label_vocab.size - 1),
+                )
+        else:
+            self.embedding = None
+            self.encoder = None
+
+            self.f_label = nn.Sequential(
+                nn.Linear(hparams.d_model, hparams.d_label_hidden),
+                LayerNormalization(hparams.d_label_hidden),
+                nn.ReLU(),
+                nn.Linear(hparams.d_label_hidden, label_vocab.size - 1),
+                )
 
         if use_cuda:
             self.cuda()
@@ -754,6 +770,8 @@ class NKChartParser(nn.Module):
             hparams['elmo_dropout'] = 0.5
         if 'use_bert' not in hparams:
             hparams['use_bert'] = False
+        if 'use_bert_only' not in hparams:
+            hparams['use_bert_only'] = False
 
         spec['hparams'] = nkutil.HParams(**hparams)
         res = cls(**spec)
@@ -955,26 +973,36 @@ class NKChartParser(nn.Module):
             assert features.sum().item() != 0.0, "Sanity check for bug"
             assert not is_train or features.requires_grad
 
-            features_packed = features.masked_select(all_word_end_mask.to(torch.uint8).unsqueeze(-1)).reshape(-1, features.shape[-1])
+            if self.encoder is not None:
+                features_packed = features.masked_select(all_word_end_mask.to(torch.uint8).unsqueeze(-1)).reshape(-1, features.shape[-1])
 
-            # For now, just project the features from the last word piece in each word
-            extra_content_annotations = self.project_bert(features_packed)
+                # For now, just project the features from the last word piece in each word
+                extra_content_annotations = self.project_bert(features_packed)
 
-        annotations, _ = self.encoder(emb_idxs, batch_idxs, extra_content_annotations=extra_content_annotations)
+        if self.encoder is not None:
+            annotations, _ = self.encoder(emb_idxs, batch_idxs, extra_content_annotations=extra_content_annotations)
 
-        if self.partitioned:
-            # Rearrange the annotations to ensure that the transition to
-            # fenceposts captures an even split between position and content.
-            # TODO(nikita): try alternatives, such as omitting position entirely
-            annotations = torch.cat([
-                annotations[:, 0::2],
-                annotations[:, 1::2],
-            ], 1)
+            if self.partitioned:
+                # Rearrange the annotations to ensure that the transition to
+                # fenceposts captures an even split between position and content.
+                # TODO(nikita): try alternatives, such as omitting position entirely
+                annotations = torch.cat([
+                    annotations[:, 0::2],
+                    annotations[:, 1::2],
+                ], 1)
 
-        fencepost_annotations = torch.cat([
-            annotations[:-1, :self.d_model//2],
-            annotations[1:, self.d_model//2:],
-            ], 1)
+            fencepost_annotations = torch.cat([
+                annotations[:-1, :self.d_model//2],
+                annotations[1:, self.d_model//2:],
+                ], 1)
+            fencepost_annotations_start = fencepost_annotations
+            fencepost_annotations_end = fencepost_annotations
+        else:
+            assert self.bert is not None
+            features = self.project_bert(features)
+            fencepost_annotations_start = features.masked_select(all_word_start_mask.to(torch.uint8).unsqueeze(-1)).reshape(-1, features.shape[-1])
+            fencepost_annotations_end = features.masked_select(all_word_end_mask.to(torch.uint8).unsqueeze(-1)).reshape(-1, features.shape[-1])
+
         # Note that the subtraction above creates fenceposts at sentence
         # boundaries, which are not used by our parser. Hence subtract 1
         # when creating fp_endpoints
@@ -985,7 +1013,7 @@ class NKChartParser(nn.Module):
         if return_label_scores_charts:
             charts = []
             for i, (start, end) in enumerate(zip(fp_startpoints, fp_endpoints)):
-                chart = self.label_scores_from_annotations(fencepost_annotations[start:end,:])
+                chart = self.label_scores_from_annotations(fencepost_annotations_start[start:end,:], fencepost_annotations_end[start:end,:])
                 charts.append(chart.cpu().data.numpy())
             return charts
 
@@ -993,7 +1021,7 @@ class NKChartParser(nn.Module):
             trees = []
             scores = []
             for i, (start, end) in enumerate(zip(fp_startpoints, fp_endpoints)):
-                tree, score = self.parse_from_annotations(fencepost_annotations[start:end,:], sentences[i], golds[i])
+                tree, score = self.parse_from_annotations(fencepost_annotations_start[start:end,:], fencepost_annotations_end[start:end,:], sentences[i], golds[i])
                 trees.append(tree)
                 scores.append(score)
             return trees, scores
@@ -1016,7 +1044,7 @@ class NKChartParser(nn.Module):
         glabels = []
         with torch.no_grad():
             for i, (start, end) in enumerate(zip(fp_startpoints, fp_endpoints)):
-                p_i, p_j, p_label, p_augment, g_i, g_j, g_label = self.parse_from_annotations(fencepost_annotations[start:end,:], sentences[i], golds[i])
+                p_i, p_j, p_label, p_augment, g_i, g_j, g_label = self.parse_from_annotations(fencepost_annotations_start[start:end,:], fencepost_annotations_end[start:end,:], sentences[i], golds[i])
                 paugment_total += p_augment
                 num_p += p_i.shape[0]
                 pis.append(p_i + start)
@@ -1030,7 +1058,7 @@ class NKChartParser(nn.Module):
         cells_j = from_numpy(np.concatenate(pjs + gjs))
         cells_label = from_numpy(np.concatenate(plabels + glabels))
 
-        cells_label_scores = self.f_label(fencepost_annotations[cells_j] - fencepost_annotations[cells_i])
+        cells_label_scores = self.f_label(fencepost_annotations_end[cells_j] - fencepost_annotations_start[cells_i])
         cells_label_scores = torch.cat([
                     cells_label_scores.new_zeros((cells_label_scores.size(0), 1)),
                     cells_label_scores
@@ -1039,11 +1067,11 @@ class NKChartParser(nn.Module):
         loss = cells_scores[:num_p].sum() - cells_scores[num_p:].sum() + paugment_total
         return None, loss
 
-    def label_scores_from_annotations(self, fencepost_annotations):
+    def label_scores_from_annotations(self, fencepost_annotations_start, fencepost_annotations_end):
         # Note that the bias added to the final layer norm is useless because
         # this subtraction gets rid of it
-        span_features = (torch.unsqueeze(fencepost_annotations, 0)
-                         - torch.unsqueeze(fencepost_annotations, 1))
+        span_features = (torch.unsqueeze(fencepost_annotations_end, 0)
+                         - torch.unsqueeze(fencepost_annotations_start, 1))
 
         label_scores_chart = self.f_label(span_features)
         label_scores_chart = torch.cat([
@@ -1052,9 +1080,9 @@ class NKChartParser(nn.Module):
             ], 2)
         return label_scores_chart
 
-    def parse_from_annotations(self, fencepost_annotations, sentence, gold=None):
+    def parse_from_annotations(self, fencepost_annotations_start, fencepost_annotations_end, sentence, gold=None):
         is_train = gold is not None
-        label_scores_chart = self.label_scores_from_annotations(fencepost_annotations)
+        label_scores_chart = self.label_scores_from_annotations(fencepost_annotations_start, fencepost_annotations_end)
         label_scores_chart_np = label_scores_chart.cpu().data.numpy()
 
         if is_train:

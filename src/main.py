@@ -66,6 +66,7 @@ def make_hparams():
         use_chars_lstm=False,
         use_elmo=False,
         use_bert=False,
+        use_bert_only=False,
 
         d_char_emb=32, # A larger value may be better for use_chars_lstm
 
