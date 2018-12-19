@@ -557,9 +557,9 @@ def get_bert(bert_model, bert_do_lower_case):
     # Avoid a hard dependency on BERT by only importing it if it's being used
     from pytorch_pretrained_bert import BertTokenizer, BertModel
     if bert_model.endswith('.tar.gz'):
-        tokenizer = BertTokenizer.from_pretrained(bert_model.replace('.tar.gz', '-vocab.txt'), bert_do_lower_case)
+        tokenizer = BertTokenizer.from_pretrained(bert_model.replace('.tar.gz', '-vocab.txt'), do_lower_case=bert_do_lower_case)
     else:
-        tokenizer = BertTokenizer.from_pretrained(bert_model, bert_do_lower_case)
+        tokenizer = BertTokenizer.from_pretrained(bert_model, do_lower_case=bert_do_lower_case)
     bert = BertModel.from_pretrained(bert_model)
     return tokenizer, bert
 
@@ -731,23 +731,28 @@ class NKChartParser(nn.Module):
                 residual_dropout=hparams.residual_dropout,
                 attention_dropout=hparams.attention_dropout,
             )
-
-            self.f_label = nn.Sequential(
-                nn.Linear(hparams.d_model, hparams.d_label_hidden),
-                LayerNormalization(hparams.d_label_hidden),
-                nn.ReLU(),
-                nn.Linear(hparams.d_label_hidden, label_vocab.size - 1),
-                )
         else:
             self.embedding = None
             self.encoder = None
 
-            self.f_label = nn.Sequential(
-                nn.Linear(hparams.d_model, hparams.d_label_hidden),
-                LayerNormalization(hparams.d_label_hidden),
+        self.f_label = nn.Sequential(
+            nn.Linear(hparams.d_model, hparams.d_label_hidden),
+            LayerNormalization(hparams.d_label_hidden),
+            nn.ReLU(),
+            nn.Linear(hparams.d_label_hidden, label_vocab.size - 1),
+            )
+
+        if hparams.predict_tags:
+            assert not hparams.use_tags, "use_tags and predict_tags are mutually exclusive"
+            self.f_tag = nn.Sequential(
+                nn.Linear(hparams.d_model, hparams.d_tag_hidden),
+                LayerNormalization(hparams.d_tag_hidden),
                 nn.ReLU(),
-                nn.Linear(hparams.d_label_hidden, label_vocab.size - 1),
+                nn.Linear(hparams.d_tag_hidden, tag_vocab.size),
                 )
+            self.tag_loss_scale = hparams.tag_loss_scale
+        else:
+            self.f_tag = None
 
         if use_cuda:
             self.cuda()
@@ -772,6 +777,8 @@ class NKChartParser(nn.Module):
             hparams['use_bert'] = False
         if 'use_bert_only' not in hparams:
             hparams['use_bert_only'] = False
+        if 'predict_tags' not in hparams:
+            hparams['predict_tags'] = False
 
         spec['hparams'] = nkutil.HParams(**hparams)
         res = cls(**spec)
@@ -824,7 +831,7 @@ class NKChartParser(nn.Module):
         batch_idxs = np.zeros(packed_len, dtype=int)
         for snum, sentence in enumerate(sentences):
             for (tag, word) in [(START, START)] + sentence + [(STOP, STOP)]:
-                tag_idxs[i] = 0 if not self.use_tags else self.tag_vocab.index_or_unk(tag, TAG_UNK)
+                tag_idxs[i] = 0 if (not self.use_tags and self.f_tag is None) else self.tag_vocab.index_or_unk(tag, TAG_UNK)
                 if word not in (START, STOP):
                     count = self.word_vocab.count(word)
                     if not count or (is_train and np.random.rand() < 1 / (1 + count)):
@@ -844,6 +851,9 @@ class NKChartParser(nn.Module):
             from_numpy(emb_idxs_map[emb_type])
             for emb_type in self.emb_types
             ]
+
+        if is_train and self.f_tag is not None:
+            gold_tag_idxs = from_numpy(emb_idxs_map['tags'])
 
         extra_content_annotations = None
         if self.char_encoder is not None:
@@ -991,6 +1001,9 @@ class NKChartParser(nn.Module):
                     annotations[:, 1::2],
                 ], 1)
 
+            if self.f_tag is not None:
+                tag_annotations = annotations
+
             fencepost_annotations = torch.cat([
                 annotations[:-1, :self.d_model//2],
                 annotations[1:, self.d_model//2:],
@@ -1002,6 +1015,13 @@ class NKChartParser(nn.Module):
             features = self.project_bert(features)
             fencepost_annotations_start = features.masked_select(all_word_start_mask.to(torch.uint8).unsqueeze(-1)).reshape(-1, features.shape[-1])
             fencepost_annotations_end = features.masked_select(all_word_end_mask.to(torch.uint8).unsqueeze(-1)).reshape(-1, features.shape[-1])
+            if self.f_tag is not None:
+                tag_annotations = fencepost_annotations_end
+
+        if self.f_tag is not None:
+            tag_logits = self.f_tag(tag_annotations)
+            if is_train:
+                tag_loss = self.tag_loss_scale * nn.functional.cross_entropy(tag_logits, gold_tag_idxs, reduction='sum')
 
         # Note that the subtraction above creates fenceposts at sentence
         # boundaries, which are not used by our parser. Hence subtract 1
@@ -1020,8 +1040,17 @@ class NKChartParser(nn.Module):
         if not is_train:
             trees = []
             scores = []
+            if self.f_tag is not None:
+                # Note that tag_logits includes tag predictions for start/stop tokens
+                tag_idxs = torch.argmax(tag_logits, -1).cpu()
+                per_sentence_tag_idxs = torch.split_with_sizes(tag_idxs, [len(sentence) + 2 for sentence in sentences])
+                per_sentence_tags = [[self.tag_vocab.value(idx) for idx in idxs[1:-1]] for idxs in per_sentence_tag_idxs]
+
             for i, (start, end) in enumerate(zip(fp_startpoints, fp_endpoints)):
-                tree, score = self.parse_from_annotations(fencepost_annotations_start[start:end,:], fencepost_annotations_end[start:end,:], sentences[i], golds[i])
+                sentence = sentences[i]
+                if self.f_tag is not None:
+                    sentence = list(zip(per_sentence_tags[i], [x[1] for x in sentence]))
+                tree, score = self.parse_from_annotations(fencepost_annotations_start[start:end,:], fencepost_annotations_end[start:end,:], sentence, golds[i])
                 trees.append(tree)
                 scores.append(score)
             return trees, scores
@@ -1065,7 +1094,11 @@ class NKChartParser(nn.Module):
                     ], 1)
         cells_scores = torch.gather(cells_label_scores, 1, cells_label[:, None])
         loss = cells_scores[:num_p].sum() - cells_scores[num_p:].sum() + paugment_total
-        return None, loss
+
+        if self.f_tag is not None:
+            return None, (loss, tag_loss)
+        else:
+            return None, loss
 
     def label_scores_from_annotations(self, fencepost_annotations_start, fencepost_annotations_end):
         # Note that the bias added to the final layer norm is useless because

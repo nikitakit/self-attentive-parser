@@ -55,6 +55,8 @@ def make_hparams():
         d_kv=64,
         d_ff=2048,
         d_label_hidden=250,
+        d_tag_hidden=250,
+        tag_loss_scale=5.0,
 
         attention_dropout=0.2,
         embedding_dropout=0.0,
@@ -67,6 +69,7 @@ def make_hparams():
         use_elmo=False,
         use_bert=False,
         use_bert_only=False,
+        predict_tags=False,
 
         d_char_emb=32, # A larger value may be better for use_chars_lstm
 
@@ -101,6 +104,10 @@ def run_train(args, hparams):
     hparams.print()
 
     print("Loading training trees from {}...".format(args.train_path))
+    if hparams.predict_tags and args.train_path.endswith('10way.clean'):
+        print("WARNING: The data distributed with this repository contains "
+              "predicted part-of-speech tags only (not gold tags!) We do not "
+              "recommend enabling predict_tags in this configuration.")
     train_treebank = trees.load_trees(args.train_path)
     if hparams.max_len_train > 0:
         train_treebank = [tree for tree in train_treebank if len(list(tree.leaves())) <= hparams.max_len_train]
@@ -298,11 +305,15 @@ def run_train(args, hparams):
             batch_loss_value = 0.0
             batch_trees = train_parse[start_index:start_index + args.batch_size]
             batch_sentences = [[(leaf.tag, leaf.word) for leaf in tree.leaves()] for tree in batch_trees]
+            batch_num_tokens = sum(len(sentence) for sentence in batch_sentences)
 
             for subbatch_sentences, subbatch_trees in parser.split_batch(batch_sentences, batch_trees, args.subbatch_max_tokens):
                 _, loss = parser.parse_batch(subbatch_sentences, subbatch_trees)
 
-                loss = loss / len(batch_trees)
+                if hparams.predict_tags:
+                    loss = loss[0] / len(batch_trees) + loss[1] / batch_num_tokens
+                else:
+                    loss = loss / len(batch_trees)
                 loss_value = float(loss.data.cpu().numpy())
                 batch_loss_value += loss_value
                 if loss_value > 0:
@@ -463,7 +474,7 @@ def run_parse(args):
         sentences = input_file.readlines()
     sentences = [sentence.split() for sentence in sentences]
 
-    # Parser does not do tagging, so use a dummy tag when parsing from raw text
+    # Tags are not available when parsing from raw text, so use a dummy tag
     if 'UNK' in parser.tag_vocab.indices:
         dummy_tag = 'UNK'
     else:
