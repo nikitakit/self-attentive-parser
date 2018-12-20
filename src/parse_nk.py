@@ -1001,8 +1001,6 @@ class NKChartParser(nn.Module):
             all_encoder_layers, _ = self.bert(all_input_ids, attention_mask=all_input_mask)
             del _
             features = all_encoder_layers[-1]
-            assert features.sum().item() != 0.0, "Sanity check for bug"
-            assert not is_train or features.requires_grad
 
             if self.encoder is not None:
                 features_packed = features.masked_select(all_word_end_mask.to(torch.uint8).unsqueeze(-1)).reshape(-1, features.shape[-1])
