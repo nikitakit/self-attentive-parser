@@ -36,7 +36,7 @@ CHAR_START_WORD = "\2"
 CHAR_STOP_WORD = "\3"
 CHAR_STOP_SENTENCE = "\4"
 
-PTB_TOKEN_UNESCAPE = {
+BERT_TOKEN_MAPPING = {
     "-LRB-": "(",
     "-RRB-": ")",
     "-LCB-": "{",
@@ -46,6 +46,15 @@ PTB_TOKEN_UNESCAPE = {
     "``": '"',
     "''": '"',
     "`": "'",
+    '«': '"',
+    '»': '"',
+    '‘': "'",
+    '’': "'",
+    '“': '"',
+    '”': '"',
+    '„': '"',
+    '‹': "'",
+    '›': "'",
     }
 
 # %%
@@ -698,6 +707,11 @@ class NKChartParser(nn.Module):
             self.project_elmo = nn.Linear(d_elmo_annotations, self.d_content, bias=False)
         elif hparams.use_bert or hparams.use_bert_only:
             self.bert_tokenizer, self.bert = get_bert(hparams.bert_model, hparams.bert_do_lower_case)
+            if hparams.bert_transliterate:
+                from transliterate import TRANSLITERATIONS
+                self.bert_transliterate = TRANSLITERATIONS[hparams.bert_transliterate]
+            else:
+                self.bert_transliterate = None
 
             d_bert_annotations = self.bert.pooler.dense.in_features
             self.bert_max_len = self.bert.embeddings.position_embeddings.num_embeddings
@@ -779,6 +793,8 @@ class NKChartParser(nn.Module):
             hparams['use_bert_only'] = False
         if 'predict_tags' not in hparams:
             hparams['predict_tags'] = False
+        if 'bert_transliterate' not in hparams:
+            hparams['bert_transliterate'] = ""
 
         spec['hparams'] = nkutil.HParams(**hparams)
         res = cls(**spec)
@@ -940,13 +956,18 @@ class NKChartParser(nn.Module):
                 word_start_mask.append(1)
                 word_end_mask.append(1)
 
-                cleaned_words = []
-                for _, word in sentence:
-                    word = PTB_TOKEN_UNESCAPE.get(word, word)
-                    if word == "n't" and cleaned_words:
-                        cleaned_words[-1] = cleaned_words[-1] + "n"
-                        word = "'t"
-                    cleaned_words.append(word)
+                if self.bert_transliterate is None:
+                    cleaned_words = []
+                    for _, word in sentence:
+                        word = BERT_TOKEN_MAPPING.get(word, word)
+                        if word == "n't" and cleaned_words:
+                            cleaned_words[-1] = cleaned_words[-1] + "n"
+                            word = "'t"
+                        cleaned_words.append(word)
+                else:
+                    # When transliterating, assume that the token mapping is
+                    # taken care of elsewhere
+                    cleaned_words = [self.bert_transliterate(word) for _, word in sentence]
 
                 for word in cleaned_words:
                     word_tokens = self.bert_tokenizer.tokenize(word)
