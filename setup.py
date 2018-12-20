@@ -23,7 +23,7 @@ for ext_module in extensions:
 
 setuptools.setup(
     name="benepar",
-    version="0.0.3",
+    version="0.1.0.dev1",
     author="Nikita Kitaev",
     author_email="kitaev@cs.berkeley.edu",
     description="Berkeley Neural Parser",
@@ -36,7 +36,7 @@ setuptools.setup(
     classifiers=(
         'Programming Language :: Python :: 2.7',
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
         "Topic :: Text Processing :: Linguistic",
@@ -44,8 +44,8 @@ setuptools.setup(
     setup_requires = ["cython", "numpy"],
     install_requires = ["cython", "numpy", "nltk>=3.2"],
     extras_require={
-        "cpu": ["tensorflow>=1.8.0"],
-        "gpu": ["tensorflow-gpu>=1.8.0"],
+        "cpu": ["tensorflow>=1.11.0"],
+        "gpu": ["tensorflow-gpu>=1.11.0"],
         "spacy": ["spacy>=2.0.9"],
     },
 )

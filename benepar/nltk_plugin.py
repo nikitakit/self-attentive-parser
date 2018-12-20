@@ -1,7 +1,15 @@
 import nltk
 from nltk import Tree
 
-from .base_parser import BaseParser
+from .base_parser import BaseParser, PTB_TOKEN_ESCAPE
+
+TOKENIZER_LOOKUP = {
+    'en': 'english',
+    'de': 'german',
+    'fr': 'french',
+    'pl': 'polish',
+    'sv': 'swedish',
+}
 
 class Parser(BaseParser):
     """
@@ -26,12 +34,12 @@ class Parser(BaseParser):
         batch_size (int): Maximum number of sentences to process per batch
         """
         super(Parser, self).__init__(name, batch_size)
+        self._tokenizer_lang = TOKENIZER_LOOKUP.get(self._language_code, None)
 
-    def _make_nltk_tree(self, sentence, score, p_i, p_j, p_label):
+    def _make_nltk_tree(self, sentence, tags, score, p_i, p_j, p_label):
         # The optimized cython decoder implementation doesn't actually
         # generate trees, only scores and span indices. When converting to a
         # tree, we assume that the indices follow a preorder traversal.
-        label_vocab = self._label_vocab
         last_splits = []
 
         # Python 2 doesn't support "nonlocal", so wrap idx in a list
@@ -40,9 +48,15 @@ class Parser(BaseParser):
             idx_cell[0] += 1
             idx = idx_cell[0]
             i, j, label_idx = p_i[idx], p_j[idx], p_label[idx]
-            label = label_vocab[label_idx]
+            label = self._label_vocab[label_idx]
             if (i + 1) >= j:
-                word, tag = sentence[i]
+                if self._provides_tags:
+                    word = sentence[i]
+                    tag = self._tag_vocab[tags[i]]
+                else:
+                    word, tag = sentence[i]
+                tag = PTB_TOKEN_ESCAPE.get(tag, tag)
+                word = PTB_TOKEN_ESCAPE.get(word, word)
                 tree = Tree(tag, [word])
                 for sublabel in label[::-1]:
                     tree = Tree(sublabel, [tree])
@@ -67,12 +81,18 @@ class Parser(BaseParser):
     def _nltk_process_sents(self, sents):
         for sentence in sents:
             if isinstance(sentence, str):
-                sentence = nltk.word_tokenize(sentence)
-                sentence = nltk.pos_tag(sentence)
-            else:
-                sentence = nltk.pos_tag(sentence)
+                if self._tokenizer_lang is None:
+                    raise ValueError(
+                        "No word tokenizer available for this language. "
+                        "Please tokenize before calling the parser."
+                        )
+                sentence = nltk.word_tokenize(sentence, self._tokenizer_lang)
 
-            yield [word for word, tag in sentence], sentence
+            if not self._provides_tags:
+                sentence = nltk.pos_tag(sentence)
+                yield [word for word, tag in sentence], sentence
+            else:
+                yield sentence, sentence
 
     def parse(self, sentence):
         """
@@ -100,7 +120,13 @@ class Parser(BaseParser):
         Returns: Iter[nltk.Tree]
         """
         if isinstance(sents, str):
-            sents = nltk.sent_tokenize(sents)
+            if self._tokenizer_lang is None:
+                raise ValueError(
+                    "No tokenizer available for this language. "
+                    "Please split into individual sentences and tokens "
+                    "before calling the parser."
+                    )
+            sents = nltk.sent_tokenize(sents, self._tokenizer_lang)
 
-        for parse_raw, sentence in self._batched_parsed_raw(self._nltk_process_sents(sents)):
-            yield self._make_nltk_tree(sentence, *parse_raw)
+        for parse_raw, tags_raw, sentence in self._batched_parsed_raw(self._nltk_process_sents(sents)):
+            yield self._make_nltk_tree(sentence, tags_raw, *parse_raw)
