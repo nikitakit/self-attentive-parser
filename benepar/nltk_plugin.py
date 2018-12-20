@@ -1,7 +1,7 @@
 import nltk
 from nltk import Tree
 
-from .base_parser import BaseParser, PTB_TOKEN_ESCAPE
+from .base_parser import BaseParser, IS_PY2, STRING_TYPES, PTB_TOKEN_ESCAPE
 
 TOKENIZER_LOOKUP = {
     'en': 'english',
@@ -80,13 +80,19 @@ class Parser(BaseParser):
 
     def _nltk_process_sents(self, sents):
         for sentence in sents:
-            if isinstance(sentence, str):
+            if isinstance(sentence, STRING_TYPES):
                 if self._tokenizer_lang is None:
                     raise ValueError(
                         "No word tokenizer available for this language. "
                         "Please tokenize before calling the parser."
                         )
                 sentence = nltk.word_tokenize(sentence, self._tokenizer_lang)
+
+            if IS_PY2:
+                sentence = [
+                    word.encode('utf-8', 'ignore') if isinstance(word, str) else word
+                    for word in sentence
+                    ]
 
             if not self._provides_tags:
                 sentence = nltk.pos_tag(sentence)
@@ -119,7 +125,7 @@ class Parser(BaseParser):
 
         Returns: Iter[nltk.Tree]
         """
-        if isinstance(sents, str):
+        if isinstance(sents, STRING_TYPES):
             if self._tokenizer_lang is None:
                 raise ValueError(
                     "No tokenizer available for this language. "

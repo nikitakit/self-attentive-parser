@@ -13,37 +13,42 @@ from .bert_tokenization import BertTokenizer
 
 IS_PY2 = sys.version_info < (3,0)
 
+if IS_PY2:
+    STRING_TYPES = (str, unicode)
+else:
+    STRING_TYPES = (str,)
+
 ELMO_START_SENTENCE = 256
 ELMO_STOP_SENTENCE = 257
 ELMO_START_WORD = 258
 ELMO_STOP_WORD = 259
 ELMO_CHAR_PAD = 260
 
-PTB_TOKEN_ESCAPE = {"(": "-LRB-",
-    ")": "-RRB-",
-    "{": "-LCB-",
-    "}": "-RCB-",
-    "[": "-LSB-",
-    "]": "-RSB-"}
+PTB_TOKEN_ESCAPE = {u"(": u"-LRB-",
+    u")": u"-RRB-",
+    u"{": u"-LCB-",
+    u"}": u"-RCB-",
+    u"[": u"-LSB-",
+    u"]": u"-RSB-"}
 
-BERT_TOKEN_MAPPING = {"-LRB-": "(",
-    "-RRB-": ")",
-    "-LCB-": "{",
-    "-RCB-": "}",
-    "-LSB-": "[",
-    "-RSB-": "]",
-    "``": '"',
-    "''": '"',
-    "`": "'",
-    "“": '"',
-    "”": '"',
-    "‘": "'",
-    "’": "'",
-    "«": '"',
-    "»": '"',
-    "„": '"',
-    "‹": "'",
-    "›": "'",
+BERT_TOKEN_MAPPING = {u"-LRB-": u"(",
+    u"-RRB-": u")",
+    u"-LCB-": u"{",
+    u"-RCB-": u"}",
+    u"-LSB-": u"[",
+    u"-RSB-": u"]",
+    u"``": u'"',
+    u"''": u'"',
+    u"`": u"'",
+    u"\u201c": u'"',
+    u"\u201d": u'"',
+    u"\u2018": u"'",
+    u"\u2019": u"'",
+    u"\xab": u'"',
+    u"\xbb": u'"',
+    u"\u201e": u'"',
+    u"\u2039": u"'",
+    u"\u203a": u"'",
     }
 
 # Label vocab is made immutable because it is potentially exposed to users
@@ -171,7 +176,7 @@ class BaseParser(object):
         self._graph = tf.Graph()
 
         with self._graph.as_default():
-            if isinstance(name, str) and '/' not in name:
+            if isinstance(name, STRING_TYPES) and '/' not in name:
                 model = load_model(name)
             elif not os.path.exists(name):
                 raise Exception("Argument is neither a valid module name nor a path to an existing file/folder: {}".format(name))
@@ -267,7 +272,7 @@ class BaseParser(object):
             tokens = []
             word_end_mask = []
 
-            tokens.append("[CLS]")
+            tokens.append(u"[CLS]")
             word_end_mask.append(1)
 
             cleaned_words = []
@@ -275,9 +280,9 @@ class BaseParser(object):
                 word = BERT_TOKEN_MAPPING.get(word, word)
                 # BERT is pre-trained with a tokenizer that doesn't split off
                 # n't as its own token
-                if word == "n't" and cleaned_words:
-                    cleaned_words[-1] = cleaned_words[-1] + "n"
-                    word = "'t"
+                if word == u"n't" and cleaned_words:
+                    cleaned_words[-1] = cleaned_words[-1] + u"n"
+                    word = u"'t"
                 cleaned_words.append(word)
 
             for word in cleaned_words:
@@ -286,7 +291,7 @@ class BaseParser(object):
                     word_end_mask.append(0)
                 word_end_mask[-1] = 1
                 tokens.extend(word_tokens)
-            tokens.append("[SEP]")
+            tokens.append(u"[SEP]")
             word_end_mask.append(1)
 
             input_ids = self._bert_tokenizer.convert_tokens_to_ids(tokens)

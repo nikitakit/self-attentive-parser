@@ -51,7 +51,7 @@ class BeneparComponent(BaseParser):
     Sample usage:
     >>> nlp = spacy.load('en')
     >>> nlp.add_pipe(BeneparComponent("benepar_en"))
-    >>> doc = nlp("The quick brown fox jumps over the lazy dog.")
+    >>> doc = nlp(u"The quick brown fox jumps over the lazy dog.")
     >>> sent = list(doc.sents)[0]
     >>> print(sent._.parse_string)
 
@@ -147,7 +147,7 @@ def parse_string(span):
         label = label_vocab[label_idx]
         if (i + 1) >= j:
             token = doc[i]
-            s = "({} {})".format(token.tag_, PTB_TOKEN_ESCAPE.get(token.text, token.text))
+            s = u"({} {})".format(token.tag_, PTB_TOKEN_ESCAPE.get(token.text, token.text))
         else:
             children = []
             while ((idx_cell[0] + 1) < len(constituent_data.starts)
@@ -155,10 +155,10 @@ def parse_string(span):
                 and constituent_data.ends[idx_cell[0] + 1] <= j):
                 children.append(make_str())
 
-            s = " ".join(children)
+            s = u" ".join(children)
 
         for sublabel in reversed(label):
-            s = "({} {})".format(sublabel, s)
+            s = u"({} {})".format(sublabel, s)
         return s
 
     return make_str()
