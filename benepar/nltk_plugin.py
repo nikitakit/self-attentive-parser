@@ -90,7 +90,7 @@ class Parser(BaseParser):
 
             if IS_PY2:
                 sentence = [
-                    word.encode('utf-8', 'ignore') if isinstance(word, str) else word
+                    word.decode('utf-8', 'ignore') if isinstance(word, str) else word
                     for word in sentence
                     ]
 
