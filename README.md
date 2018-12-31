@@ -1,14 +1,15 @@
 # Berkeley Neural Parser
 
-This is a Python implementation of the parsers described in "Constituency Parsing with a Self-Attentive Encoder" from ACL 2018.
+A high-accuracy parser with models for 11 languages, implemented in Python. Based on "Constituency Parsing with a Self-Attentive Encoder" from ACL 2018.
 
 ## Contents
 1. [Installation](#installation)
-1. [Usage](#usage)
-2. [Training](#training)
-3. [Reproducing Experiments](#reproducing-experiments)
-4. [Citation](#citation)
-5. [Credits](#credits)
+2. [Usage](#usage)
+3. [Available Models](#available-models)
+4. [Training](#training)
+5. [Reproducing Experiments](#reproducing-experiments)
+6. [Citation](#citation)
+7. [Credits](#credits)
 
 If you are primarily interested in training your own parsing models, skip to the [Training](#training) section of this README.
 
@@ -22,39 +23,33 @@ $ pip install benepar[cpu]
 
 Cython and numpy should be installed separately prior to installing benepar. Note that `pip install benepar[cpu]` has a dependency on the `tensorflow` pip package, which is a CPU-only version of tensorflow. Use `pip install benepar[gpu]` to instead introduce a dependency on `tensorflow-gpu`. Installing a GPU-enabled version of TensorFlow will likely require additional steps; see the [official TensorFlow installation instructions](https://www.tensorflow.org/install/) for details.
 
-Parsing models need to be downloaded separately, using the commands:
-```python
->>> import benepar
->>> benepar.download('benepar_en')
-```
+Benepar integrates with one of two NLP libraries for Python: [NLTK](http://www.nltk.org/) or [spaCy](https://spacy.io/).
 
-The following English parsing models are available:
-* `benepar_en` (95.07 F1 on test, 91.2 MB on disk): default English model, uses the original ELMo embeddings
-* `benepar_en_small` (94.65 F1 on test, 25.4 MB on disk): A smaller model that is 3-4x faster than the original when running on CPU. Uses the same self-attentive architecture as the original, but small ELMo embeddings.
-* `benepar_en_ensemble` (95.43 F1 on test, 214 MB on disk): An ensemble of two parsers: one that uses the original ELMo embeddings and one that uses the 5.5B ELMo embeddings. A GPU is highly recommended for running the ensemble.
-
-### Additional Required Models
-
-Benepar is designed to add parsing capabilities to an existing NLP pipeline that has support for tokenization and part-of-speech tagging. To do this, it should be used in conjunction with one of two NLP libraries for Python: [NLTK](http://www.nltk.org/) or [spaCy](https://spacy.io/).
-
-If using NLTK, the commands to install additional models are:
+If using NLTK, you should install the NLTK sentence and word tokenizers:
 ```python
 >>> import nltk
 >>> nltk.download('punkt')
->>> nltk.download('averaged_perceptron_tagger')
 ```
 
-For spaCy, the command to install models for English is:
+If using spaCy, you should install a spaCy model for your language. For English, the installation command is:
 ```sh
 $ python -m spacy download en
 ```
+
+Parsing models need to be downloaded separately, using the commands:
+```python
+>>> import benepar
+>>> benepar.download('benepar_en2')
+```
+
+See the [Available Models](#available-models) section below for a full list of models.
 
 ## Usage
 ### Usage with NLTK
 
 ```python
 >>> import benepar
->>> parser = benepar.Parser("benepar_en")
+>>> parser = benepar.Parser("benepar_en2")
 >>> tree = parser.parse("Short cuts make long delays.")
 >>> print(tree)
 (S
@@ -65,7 +60,7 @@ $ python -m spacy download en
 
 Speed note: the first call to `parse` will take much longer that subsequent calls, as caches are being warmed up.
 
-The parser can also parse pre-tokenized text:
+The parser can also parse pre-tokenized text. For some languages (including Chinese), this is required due to the lack of a built-in tokenizer.
 ```python
 >>> parser.parse(['Short', 'cuts', 'make', 'long', 'delays', '.'])
 ```
@@ -74,6 +69,7 @@ Use `parse_sents` to parse multiple sentences. It accepts an entire document as 
 ```python
 >>> parser.parse_sents("The time for action is now. It's never too late to do something.")
 >>> parser.parse_sents(["The time for action is now.", "It's never too late to do something."])
+>>> parser.parse_sents([['The', 'time', 'for', 'action', 'is', 'now', '.'], ['It', "'s", 'never', 'too', 'late', 'to', 'do', 'something', '.']])
 ```
 
 All parse trees returned are represented using `nltk.Tree` objects.
@@ -85,7 +81,7 @@ Benepar also ships with a component that integrates with spaCy:
 >>> import spacy
 >>> from benepar.spacy_plugin import BeneparComponent
 >>> nlp = spacy.load('en')
->>> nlp.add_pipe(BeneparComponent("benepar_en"))
+>>> nlp.add_pipe(BeneparComponent("benepar_en2"))
 >>> doc = nlp(u"The time for action is now. It's never too late to do something.")
 >>> sent = list(doc.sents)[0]
 >>> print(sent._.parse_string)
@@ -108,6 +104,29 @@ The following extension properties are available:
 
 These methods will raise an exception when called on a span that is not a constituent in the parse tree. Such errors can be avoided by traversing the parse tree starting at either sentence level (by iterating over `doc.sents`) or with an individual `Token` object.
 
+## Available Models
+
+The following trained parser models are available:
+
+Model       | Language | Info
+----------- | -------- | ----
+`benepar_en2` | English | 95.17 F1 on WSJ test set, 94 MB on disk.
+`benepar_en2_large` | English | 95.52 F1 on WSJ test set, 274 MB on disk. This model is up to 3x slower than `benepar_en2` when running on CPU; we recommend running it on a GPU instead.
+`benepar_zh` | Chinese | 91.69 F1 on CTB 5.1 test set. Usage with NLTK requires tokenized sentences (untokenized raw text is not supported.) Use a package such as [jieba](https://github.com/fxsjy/jieba) for tokenization. Usage with spaCy first requires implementing Chinese support in spaCy. There is no official Chinese support in spaCy at the time of writing, but unofficial packages such as [this one](https://github.com/howl-anderson/Chinese_models_for_SpaCy) may work.
+`benepar_ar` | Arabic | Usage with NLTK requires tokenized sentences (untokenized raw text is not supported.) Usage with spaCy first requires implementing Arabic support in spaCy. Accepts Unicode as input, but was trained on transliterated text (see `src/transliterate.py`); please let us know if there are any bugs.
+`benepar_de` | German | Full support for NLTK and spaCy; use `python -m spacy download de` to download spaCy model for German.
+`benepar_eu` | Basque | Usage with NLTK requires tokenized sentences (untokenized raw text is not supported.) Usage with spaCy first requires implementing Basque support in spaCy.
+`benepar_fr` | French | Full support for NLTK and spaCy; use `python -m spacy download fr` to download spaCy model for French.
+`benepar_he` | Hebrew | Usage with NLTK requires tokenized sentences (untokenized raw text is not supported.) Usage with spaCy first requires implementing Hebrew support in spaCy. Accepts Unicode as input, but was trained on transliterated text (see `src/transliterate.py`); please let us know if there are any bugs.
+`benepar_hu` | Hungarian | Usage with NLTK requires tokenized sentences (untokenized raw text is not supported.) Usage with spaCy first requires implementing Hungarian support in spaCy.
+`benepar_ko` | Korean | Usage with NLTK requires tokenized sentences (untokenized raw text is not supported.) Usage with spaCy first requires implementing Korean support in spaCy.
+`benepar_pl` | Polish | Full support for NLTK (including parsing from raw text.) Usage with spaCy first requires implementing Polish support in spaCy.
+`benepar_sv` | Swedish | Full support for NLTK (including parsing from raw text.) Usage with spaCy first requires implementing Swedish support in spaCy.
+`benepar_en` | English | **No part-of-speech tagging capabilities**: we recommend using `benepar_en2` instead. When using this model, part-of-speech tags will be inherited from either NLTK (requires `nltk.download('averaged_perceptron_tagger')`) or spaCy; however, we've found that our own tagger in models such as `benepar_en2` gives better results. This model was released to accompany our ACL 2018 paper, and is retained for compatibility. 95.07 F1 on WSJ test set.
+`benepar_en_small` | English | **No part-of-speech tagging capabilities**: we recommend using `benepar_en2` instead. This model was released to accompany our ACL 2018 paper, and is retained for compatibility. A smaller model that is 3-4x faster than the `benepar_en` when running on CPU because it uses a smaller version of ELMo. 94.65 F1 on WSJ test set.
+`benepar_en_ensemble` | English | **No part-of-speech tagging capabilities**: we recommend using `benepar_en2_large` instead. This model was released to accompany our ACL 2018 paper, and is retained for compatibility. An ensemble of two parsers: one that uses the original ELMo embeddings and one that uses the 5.5B ELMo embeddings. A GPU is highly recommended for running the ensemble. 95.43 F1 on WSJ test set.
+
+
 ## Training
 
 The code used to train our parsing models is currently different from the code used to parse sentences in the release version described above, though both are stored in this repository. The training code uses PyTorch and can be obtained by cloning this repository from GitHub. The release version uses TensorFlow instead, because it allows serializing the parsing model into a single file on disk in a way that minimizes software dependencies and reduces file size on disk.
@@ -115,15 +134,16 @@ The code used to train our parsing models is currently different from the code u
 #### Software Requirements for Training
 * Python 3.6 or higher.
 * Cython 0.25.2 or any compatible version.
-* [PyTorch](http://pytorch.org/) 0.3.x. This code has not been tested with newer releases of PyTorch.
+* [PyTorch](http://pytorch.org/) 0.4.1. This code has not been tested with PyTorch 1.0, but it should work.
 * [EVALB](http://nlp.cs.nyu.edu/evalb/). Before starting, run `make` inside the `EVALB/` directory to compile an `evalb` executable. This will be called from Python for evaluation. If training on the SPMRL datasets, you will need to run `make` inside the `EVALB_SPMRL/` directory instead.
-* [AllenNLP](http://allennlp.org/) 0.4.0 or any compatible version (only required when using ELMo word representations)
+* [AllenNLP](http://allennlp.org/) 0.7.0 or any compatible version (only required when using ELMo word representations)
+* [pytorch-pretrained-bert](https://github.com/huggingface/pytorch-pretrained-BERT) 0.4.0 or any compatible version (only required when using BERT word representations)
 
 #### Pre-trained Models (PyTorch)
 
 The following pre-trained parser models are available for download:
 * [`en_charlstm_dev.93.61.pt`](https://github.com/nikitakit/self-attentive-parser/releases/download/models/en_charlstm_dev.93.61.pt): Our best English single-system parser that does not rely on external word representations
-* [`en_elmo_dev.95.21.pt`](https://github.com/nikitakit/self-attentive-parser/releases/download/models/en_elmo_dev.95.21.pt): Our best English single-system parser. Using this parser requires ELMo weights, which must be downloaded separately.
+* [`en_elmo_dev.95.21.pt`](https://github.com/nikitakit/self-attentive-parser/releases/download/models/en_elmo_dev.95.21.pt): The best English single-system parser from our ACL 2018 paper. Using this parser requires ELMo weights, which must be downloaded separately.
 
 To use ELMo embeddings, download the following files into the `data/` folder (preserving their names):
 
@@ -132,9 +152,11 @@ To use ELMo embeddings, download the following files into the `data/` folder (pr
 
 There is currently no command-line option for configuring the locations/names of the ELMo files.
 
+Pre-trained BERT weights will be automatically downloaded as needed by the `pytorch-pretrained-bert` package.
+
 ### Training Instructions
 
-A new model can be trained using the command `python3 src/main.py train ...`. Some of the available arguments are:
+A new model can be trained using the command `python src/main.py train ...`. Some of the available arguments are:
 
 Argument | Description | Default
 --- | --- | ---
@@ -143,19 +165,22 @@ Argument | Description | Default
 `--train-path` | Path to training trees | `data/02-21.10way.clean`
 `--dev-path` | Path to development trees | `data/22.auto.clean`
 `--batch-size` | Number of examples per training update | 250
-`--epochs` | Number of training epochs | No limit
 `--checks-per-epoch` | Number of development evaluations per epoch | 4
 `--subbatch-max-tokens` | Maximum number of words to process in parallel while training (a full batch may not fit in GPU memory) | 2000
 `--eval-batch-size` | Number of examples to process in parallel when evaluating on the development set | 100
-`--print-vocabs` | Print the vocabularies before training | Do not print the vocabularies
 `--numpy-seed` | NumPy random seed | Random
 `--use-words` | Use learned word embeddings | Do not use word embeddings
+`--use-tags` | Use predicted part-of-speech tags as input | Do not use predicted tags
 `--use-chars-lstm` | Use learned CharLSTM word representations | Do not use CharLSTM
 `--use-elmo` | Use pre-trained ELMo word representations | Do not use ELMo
+`--use-bert` | Use pre-trained BERT word representations | Do not use BERT
+`--bert-model` | Pre-trained BERT model to use if `--use-bert` is passed | `bert-base-uncased`
+`--no-bert-do-lower-case` | Instructs the BERT tokenizer to retain case information (setting should match the BERT model in use) | Perform lowercasing
+`--predict-tags` | Adds a part-of-speech tagging component and auxiliary loss to the parser | Do not predict tags
 
-Additional arguments are available for other hyperparameters; see `make_hparams()` in `src/main.py`. These can be specified on the command line, such as `--d-char-emb 64` (for numerical paramters), `--use-tags` (for boolean parameters that default to False), or `--no-partitioned` (for boolean parameters that default to True).
+Additional arguments are available for other hyperparameters; see `make_hparams()` in `src/main.py`. These can be specified on the command line, such as `--num-layers 2` (for numerical parameters), `--use-tags` (for boolean parameters that default to False), or `--no-partitioned` (for boolean parameters that default to True).
 
-The training and development trees are assumed to have predicted part-of-speech tags, but they only affect final parser output if the `--use-tags` option is passed.
+If `--use-tags` is passed, the training and development trees are assumed to have predicted part-of-speech tags. If `--predict-tags` is passed, the data is assumed to have ground-truth tags instead. As a result, these two options can't be used simultaneously. Note that the files we provide in the `data/` folder have predicted tags, and that data with gold tags must be obtained separately.
 
 For each development evaluation, the F-score on the development set is computed and compared to the previous best. If the current model is better, the previous model will be deleted and the current model will be saved. The new filename will be derived from the provided model path base and the development F-score.
 
@@ -171,11 +196,15 @@ To train an English parser that uses ELMo embeddings, the command is:
 python src/main.py train --use-elmo --model-path-base models/en_elmo --num-layers 4
 ```
 
-The above commands were used to train our two best English parsers; the `EXPERIMENTS.md` file contains additional notes about the experiments reported in our paper.
+To train an English parser that uses BERT, the command is:
+
+```
+python src/main.py train --use-bert --model-path-base models/en_bert --bert-model "bert-large-uncased" --num-layers 2 --learning-rate 0.0005 --batch-size 32 --eval-batch-size 16 --subbatch-max-tokens 500
+```
 
 ### Evaluation Instructions
 
-A saved model can be evaluated on a test corpus using the command `python3 src/main.py test ...` with the following arguments:
+A saved model can be evaluated on a test corpus using the command `python src/main.py test ...` with the following arguments:
 
 Argument | Description | Default
 --- | --- | ---
@@ -185,7 +214,7 @@ Argument | Description | Default
 `--test-path-raw` | Alternative path to test trees that is used for evalb only (used to double-check that evaluation against pre-processed trees does not contain any bugs) | Compare to trees from `--test-path`
 `--eval-batch-size` | Number of examples to process in parallel when evaluating on the test set | 100
 
-The test trees are assumed to have predicted part-of-speech tags.
+If the parser was trained to have predicted part-of-speech tags as input (via the `--use-tags` flag) the test trees are assumed to have predicted part-of-speech tags. Otherwise, the tags in the test trees are not used as input to the parser.
 
 As an example, after extracting the pre-trained model, you can evaluate it on the test set using the following command:
 
@@ -197,13 +226,15 @@ The pre-trained model with CharLSTM embeddings obtains F-scores of 93.61 on the 
 
 ### Using the Trained Models
 
-See the `run_test` function in `src/main.py` for an example of how a parser can be loaded from disk and used to parse sentences using the PyTorch codebase.
+See the `run_parse` function in `src/main.py` for an example of how a parser can be loaded from disk and used to parse sentences using the PyTorch codebase.
 
-The `export/export.py` file contains the code we used to convert our best parser to a TensorFlow graph (for use in the release version of the parser). This exporting code hard-codes certain hyperparameter choices, so you will likely need to tweak it to export your own models. Exporting the model to TensorFlow allows it to be stored in a single file, including all ELMo weights. We also use TensorFlow's graph transforms to shrink the model size on disk with only a tiny impact on parsing accuracy: the compressed model obtains an F1-score of 95.07 on the test set, compared to 95.13 for the uncompressed model.
+The `export/export.py` file contains the code we used to convert our ELMo-based parser to a TensorFlow graph (for use in the release version of the parser). For our BERT-based parsers, consult `export/export_bert.py` instead. This exporting code hard-codes certain hyperparameter choices, so you will likely need to tweak it to export your own models. Exporting the model to TensorFlow allows it to be stored in a single file, including all ELMo/BERT weights. We also use TensorFlow's graph transforms to shrink the model size on disk with only a tiny impact on parsing accuracy: the compressed ELMo model obtains an F1-score of 95.07 on the test set, compared to 95.13 for the uncompressed model.
 
 ## Reproducing Experiments
 
-The `EXPERIMENTS.md` file contains additional notes about the command-line arguments we used to perform the experiments reported in our paper. The current version of the code is sufficient to run all the commands listed in `EXPERIMENTS.md`.
+The code used for our ACL 2018 paper is tagged `acl2018` in git. The `EXPERIMENTS.md` file in that version of the code contains additional notes about the command-line arguments we used to perform the experiments reported in our ACL 2018 paper.
+
+The version of the code currently in this repository has added new features (such as BERT support and part-of-speech tag prediction), eliminated some of the less-performant parser variations (e.g. the CharConcat word representation), and has updated to a newer version of PyTorch. The `EXPERIMENTS.md` file now describes the commands used to train our best-performing single-system parser for each language that we evaluate on.
 
 ## Citation
 

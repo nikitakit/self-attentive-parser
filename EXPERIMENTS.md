@@ -1,81 +1,35 @@
 # Experiments
 
-This file contains commands used for the different experiments reported in our paper.
+This file contains commands used for the best parsers reported in our arXiv submission.
 
-Note that none of these commands specify a termination criterion for training (we handled termination at the job-scheduling level). In practice it is pretty clear when training has finished because the learning rate is decayed and eventually all new iterates produce indistinguishable results on the development set.
+## English models
 
-## Unfactored base model (Section 2.4)
-
-To train the base parser with factoring disabled, run
-
-```bash
-python src/main.py train \
-    --use-tags --use-words \
-    --model-path-base models/nk_base6_nopartition --no-partitioned
-```
-
-## Disabling content-based attention
-
-This experiment is briefly mentioned in Section 3 to motivate factoring of the model.
-```bash
-python src/main.py train \
-    --use-tags --use-words \
-    --model-path-base models/nk_base6_pos8 --no-partitioned --num-layers-position-only 8
-```
-
-## Factored model variations (Table 4)
-
-Using learned word embeddings and an external tagger:
-```bash
-python src/main.py train \
-    --use-tags --use-words \
-    --model-path-base models/nk_base6_wordstags
-```
-
-Using learned word embeddings only:
-```bash
-python src/main.py train \
-    --use-words \
-    --model-path-base models/nk_base6_words
-```
-
-Using learned word embeddings, and a character LSTM:
-```bash
-python src/main.py train \
-    --use-words --use-chars-lstm \
-    --model-path-base models/nk_base6_wordslstm --d-char-emb 64
-```
-
-Using a character LSTM only:
+Without pre-training:
 ```bash
 python src/main.py train \
     --use-chars-lstm \
     --model-path-base models/nk_base6_lstm --d-char-emb 64
 ```
 
-Using learned word embeddings, and CharConcat:
-```bash
-python src/main.py train \
-    --use-words --use-chars-concat \
-    --model-path-base models/nk_base6_wordsconcat
-```
-
-Using CharConcat only:
-```bash
-python src/main.py train \
-    --use-chars-concat \
-    --model-path-base models/nk_base6_concat
-```
-
-## Factored model with ELMo embeddings (Section 5.2)
-
+With ELMo:
 ```bash
 python src/main.py train \
     --use-elmo \
     --model-path-base models/nk_base6_elmo1_layers=4_trainproj_nogamma_fixtoks --num-layers 4
 ```
 
-## SPMRL models (Section 6.2)
+With BERT (single model, large, uncased):
+```bash
+python src/main.py train \
+    --use-bert --predict-tags \
+    --model-path-base models/nk_base9_large --bert-model "bert-large-uncased" \
+    --train-path data/02-21.goldtags --dev-path data/22.goldtags \
+    --learning-rate 0.0005 --num-layers 2 --batch-size 32 --eval-batch-size 16 --subbatch-max-tokens 500
+```
+
+Note that the last model enables part-of-speech tag prediction, which requires using a version of the WSJ data that contains gold tags. This data format is not provided in our repository and must be obtained separately. Disabling part-of-speech tag prediction and training on the data provided in this repository should give comparable parsing accuracies (but it's potentially less helpful for downstream use).
+
+## SPMRL models
 
 Below is our code for training and evaluating models on the SPMRL dataset. Note that the data itself must be obtained separately.
 
@@ -87,29 +41,39 @@ SPMRL_BASE_PATH="your path here" # ours is a folder named READY_TO_SHIP_FINAL/
 SPMRL_LANG=Arabic
 echo "Language: ${SPMRL_LANG}"
 
-SPMRL_PATH=${SPMRL_BASE_PATH}/${SPMRL_LANG^^}_SPMRL/pred/ptb
-TRAIN_PATH=${SPMRL_PATH}/train/train.${SPMRL_LANG}.pred.ptb
-DEV_PATH=${SPMRL_PATH}/dev/dev.${SPMRL_LANG}.pred.ptb
+SPMRL_PATH=${SPMRL_BASE_PATH}/${SPMRL_LANG^^}_SPMRL/gold/ptb
+TRAIN_PATH=${SPMRL_PATH}/train/train.${SPMRL_LANG}.gold.ptb
+DEV_PATH=${SPMRL_PATH}/dev/dev.${SPMRL_LANG}.gold.ptb
 
 if [ ! -e "${TRAIN_PATH}" ]; then
     echo "Only train5k data condition is available for this language"
-    TRAIN_PATH=${SPMRL_PATH}/train5k/train5k.${SPMRL_LANG}.pred.ptb
+    TRAIN_PATH=${SPMRL_PATH}/train5k/train5k.${SPMRL_LANG}.gold.ptb
+fi
+
+EXTRA_ARGS=
+if [ "$SPMRL_LANG" = "Arabic" ]; then
+    # There are sentences in the train and dev sets that are too long for BERT.
+    # Fortunately, there are no such long sentences in the test set
+    EXTRA_ARGS="--bert-transliterate arabic --max-len-train 266 --max-len-dev 494 --sentence-max-len 512"
+fi
+if [ "$SPMRL_LANG" = "Hebrew" ]; then
+    EXTRA_ARGS="--bert-transliterate hebrew"
+fi
+if [ "$SPMRL_LANG" = "Hungarian" ]; then
+    # Prevents out-of-memory issues on a K80 GPU
+    EXTRA_ARGS="--subbatch-max-tokens 500"
 fi
 
 python src/main.py train \
     --train-path ${TRAIN_PATH} \
     --dev-path ${DEV_PATH} \
     --evalb-dir EVALB_SPMRL \
-    --use-chars-lstm --d-char-emb 64 \
-    --model-path-base models/${SPMRL_LANG}_nk_base6_lstm
+    --use-bert --predict-tags \
+    --model-path-base models/${SPMRL_LANG}_nk_base9 \
+    --bert-model "bert-base-multilingual-cased" --no-bert-do-lower-case \
+    --learning-rate 0.00005 --num-layers 2 --batch-size 32 --eval-batch-size 32 \
+    $EXTRA_ARGS
 ```
-
-We used the following additional parameters for individual experiments:
-* To use word embeddings, add `--use-words` (do not remove `--use-chars-lstm`!)
-* For Arabic, add `--sentence-max-len 1000`
-* For Hebrew, add `--learning-rate 0.002`
-* For Polish, add `--learning-rate 0.0015`
-* For Swedish, add `--learning-rate 0.002`
 
 Code for evaluation:
 ```bash
@@ -120,8 +84,21 @@ echo "Language: ${SPMRL_LANG}"
 SPMRL_PATH=${SPMRL_BASE_PATH}/${SPMRL_LANG^^}_SPMRL/pred/ptb
 TEST_PATH=${SPMRL_PATH}/test/test.${SPMRL_LANG}.pred.ptb
 
-python src/main.py test --test-path ${TEST_PATH} --evalb-dir EVALB_SPMRL --model-path-base models/${SPMRL_LANG}_nk_base6_lstm
+python src/main.py test --test-path ${TEST_PATH} --evalb-dir EVALB_SPMRL --model-path-base --model-path-base models/${SPMRL_LANG}_nk_base9_*.pt
 ```
 
-## Other experiments (Tables 1,2,3)
-Unfortunately, the code for these experiments is not included in the public release.
+## Chinese models
+
+Below is our code for training models on the Chinese Treebank 5.1. Note that the data itself must be obtained separately, and that it must be converted to the format accepted by our parser.
+
+```bash
+CTB_DIR="your path here"
+
+python src/main.py train \
+    --train-path ${CTB_DIR}/train.gold.stripped \
+    --dev-path ${CTB_DIR}/dev.gold.stripped \
+    --use-bert --predict-tags \
+    --model-path-base models/Chinese_nk_base9 \
+    --bert-model "bert-base-chinese" \
+    --learning-rate 0.00005 --num-layers 2 --batch-size 32 --eval-batch-size 32
+```
