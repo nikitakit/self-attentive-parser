@@ -23,7 +23,7 @@ for ext_module in extensions:
 
 setuptools.setup(
     name="benepar",
-    version="0.1.0.dev1",
+    version="0.1.0",
     author="Nikita Kitaev",
     author_email="kitaev@cs.berkeley.edu",
     description="Berkeley Neural Parser",
