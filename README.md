@@ -1,6 +1,6 @@
 # Berkeley Neural Parser
 
-A high-accuracy parser with models for 11 languages, implemented in Python. Based on "Constituency Parsing with a Self-Attentive Encoder" from ACL 2018.
+A high-accuracy parser with models for 11 languages, implemented in Python. Based on [Constituency Parsing with a Self-Attentive Encoder](https://arxiv.org/abs/1805.01052) from ACL 2018, with additional changes described in [Multilingual Constituency Parsing with Self-Attention and Pre-Training](https://arxiv.org/abs/1812.11760).
 
 ## Contents
 1. [Installation](#installation)
