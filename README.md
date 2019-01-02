@@ -199,7 +199,7 @@ python src/main.py train --use-elmo --model-path-base models/en_elmo --num-layer
 To train an English parser that uses BERT, the command is:
 
 ```
-python src/main.py train --use-bert --model-path-base models/en_bert --bert-model "bert-large-uncased" --num-layers 2 --learning-rate 0.0005 --batch-size 32 --eval-batch-size 16 --subbatch-max-tokens 500
+python src/main.py train --use-bert --model-path-base models/en_bert --bert-model "bert-large-uncased" --num-layers 2 --learning-rate 0.00005 --batch-size 32 --eval-batch-size 16 --subbatch-max-tokens 500
 ```
 
 ### Evaluation Instructions

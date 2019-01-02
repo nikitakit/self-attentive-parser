@@ -24,7 +24,7 @@ python src/main.py train \
     --use-bert --predict-tags \
     --model-path-base models/nk_base9_large --bert-model "bert-large-uncased" \
     --train-path data/02-21.goldtags --dev-path data/22.goldtags \
-    --learning-rate 0.0005 --num-layers 2 --batch-size 32 --eval-batch-size 16 --subbatch-max-tokens 500
+    --learning-rate 0.00005 --num-layers 2 --batch-size 32 --eval-batch-size 16 --subbatch-max-tokens 500
 ```
 
 Note that the last model enables part-of-speech tag prediction, which requires using a version of the WSJ data that contains gold tags. This data format is not provided in our repository and must be obtained separately. Disabling part-of-speech tag prediction and training on the data provided in this repository should give comparable parsing accuracies (but it's potentially less helpful for downstream use).
