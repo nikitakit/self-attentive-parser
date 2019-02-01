@@ -287,6 +287,15 @@ class BaseParser(object):
 
             for word in cleaned_words:
                 word_tokens = self._bert_tokenizer.tokenize(word)
+                if not word_tokens:
+                    # The tokenizer used in conjunction with the parser may not
+                    # align with BERT; in particular spaCy will create separate
+                    # tokens for whitespace when there is more than one space in
+                    # a row, and will sometimes separate out characters of
+                    # unicode category Mn (which BERT strips when do_lower_case
+                    # is enabled). Substituting UNK is not strictly correct, but
+                    # it's better than failing to return a valid parse.
+                    word_tokens = ["[UNK]"]
                 for _ in range(len(word_tokens)):
                     word_end_mask.append(0)
                 word_end_mask[-1] = 1
