@@ -118,7 +118,7 @@ Model       | Language | Info
 `benepar_eu` | Basque | Usage with NLTK requires tokenized sentences (untokenized raw text is not supported.) Usage with spaCy first requires implementing Basque support in spaCy.
 `benepar_fr` | French | Full support for NLTK and spaCy; use `python -m spacy download fr` to download spaCy model for French.
 `benepar_he` | Hebrew | Usage with NLTK requires tokenized sentences (untokenized raw text is not supported.) Usage with spaCy first requires implementing Hebrew support in spaCy. Accepts Unicode as input, but was trained on transliterated text (see `src/transliterate.py`); please let us know if there are any bugs.
-`benepar_hu` | Hungarian | Usage with NLTK requires tokenized sentences (untokenized raw text is not supported.) Usage with spaCy first requires implementing Hungarian support in spaCy.
+`benepar_hu` | Hungarian | Usage with NLTK requires tokenized sentences (untokenized raw text is not supported.) Usage with spaCy requires a [Hungarian model for spaCy](https://github.com/oroszgy/spacy-hungarian-models).
 `benepar_ko` | Korean | Usage with NLTK requires tokenized sentences (untokenized raw text is not supported.) Usage with spaCy first requires implementing Korean support in spaCy.
 `benepar_pl` | Polish | Full support for NLTK (including parsing from raw text.) Usage with spaCy first requires implementing Polish support in spaCy.
 `benepar_sv` | Swedish | Full support for NLTK (including parsing from raw text.) Usage with spaCy first requires implementing Swedish support in spaCy.
