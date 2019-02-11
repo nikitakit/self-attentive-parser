@@ -49,6 +49,8 @@ BERT_TOKEN_MAPPING = {u"-LRB-": u"(",
     u"\u201e": u'"',
     u"\u2039": u"'",
     u"\u203a": u"'",
+    u"\u2013": u"--", # en dash
+    u"\u2014": u"--", # em dash
     }
 
 # Label vocab is made immutable because it is potentially exposed to users
