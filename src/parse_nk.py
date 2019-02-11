@@ -962,6 +962,13 @@ class NKChartParser(nn.Module):
                     cleaned_words = []
                     for _, word in sentence:
                         word = BERT_TOKEN_MAPPING.get(word, word)
+                        # This un-escaping for / and * was not yet added for the
+                        # parser version in https://arxiv.org/abs/1812.11760v1
+                        # and related model releases (e.g. benepar_en2)
+                        word = word.replace('\\/', '/').replace('\\*', '*')
+                        # Mid-token punctuation occurs in biomedical text
+                        word = word.replace('-LSB-', '[').replace('-RSB-', ']')
+                        word = word.replace('-LRB-', '(').replace('-RRB-', ')')
                         if word == "n't" and cleaned_words:
                             cleaned_words[-1] = cleaned_words[-1] + "n"
                             word = "'t"
