@@ -813,7 +813,13 @@ class NKChartParser(nn.Module):
         return res
 
     def split_batch(self, sentences, golds, subbatch_max_tokens=3000):
-        lens = [len(sentence) + 2 for sentence in sentences]
+        if self.bert is not None:
+            lens = [
+                len(self.bert_tokenizer.tokenize(' '.join([word for (_, word) in sentence]))) + 2
+                for sentence in sentences
+            ]
+        else:
+            lens = [len(sentence) + 2 for sentence in sentences]
 
         lens = np.asarray(lens, dtype=int)
         lens_argsort = np.argsort(lens).tolist()
