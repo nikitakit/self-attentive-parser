@@ -78,7 +78,7 @@ class BatchIndices:
 
 # %%
 
-class FeatureDropoutFunction(nn.functional._functions.dropout.InplaceFunction):
+class FeatureDropoutFunction(nn.functional._functions.thnn.InplaceFunction):
     @classmethod
     def forward(cls, ctx, input, batch_idxs, p=0.5, train=False, inplace=False):
         if p < 0 or p > 1:
