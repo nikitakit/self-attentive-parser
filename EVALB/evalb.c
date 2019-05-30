@@ -57,21 +57,21 @@
 /* constant macro */
 /******************/
 
-#define MAX_SENT_LEN           5000
-#define MAX_WORD_IN_SENT        200
-#define MAX_BRACKET_IN_SENT     200
-#define MAX_WORD_LEN            100
-#define MAX_LABEL_LEN            30
-#define MAX_QUOTE_TERM           20
+#define MAX_SENT_LEN           50000
+#define MAX_WORD_IN_SENT        2000
+#define MAX_BRACKET_IN_SENT     2000
+#define MAX_WORD_LEN            1000
+#define MAX_LABEL_LEN            300
+#define MAX_QUOTE_TERM           200
 
-#define MAX_DELETE_LABEL        100
-#define MAX_EQ_LABEL            100
-#define MAX_EQ_WORD             100
+#define MAX_DELETE_LABEL        1000
+#define MAX_EQ_LABEL            1000
+#define MAX_EQ_WORD             1000
 
-#define MAX_LINE_LEN            500
+#define MAX_LINE_LEN            5000
 
-#define DEFAULT_MAX_ERROR        10
-#define DEFAULT_CUT_LEN          40
+#define DEFAULT_MAX_ERROR        100
+#define DEFAULT_CUT_LEN          400
 
 /*************/
 /* structure */

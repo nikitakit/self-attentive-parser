@@ -131,7 +131,7 @@ class LeafParseNode(ParseNode):
     def convert(self):
         return LeafTreebankNode(self.tag, self.word)
 
-def load_trees(path, strip_top=True, strip_spmrl_features=True):
+def load_trees(path, strip_top=True, strip_spmrl_features=False, insert_dummy_root=True):
     with open(path) as infile:
         treebank = infile.read()
 
@@ -177,7 +177,7 @@ def load_trees(path, strip_top=True, strip_spmrl_features=True):
     assert index == len(tokens)
 
     # XXX(nikita): this behavior should really be controlled by an argument
-    if 'German' in path:
+    if insert_dummy_root:
         # Utterances where the root is a terminal symbol break our parser's
         # assumptions, so insert a dummy root node.
         for i, tree in enumerate(trees):

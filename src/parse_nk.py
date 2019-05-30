@@ -78,7 +78,7 @@ class BatchIndices:
 
 # %%
 
-class FeatureDropoutFunction(nn.functional._functions.dropout.InplaceFunction):
+class FeatureDropoutFunction(torch.autograd.function.InplaceFunction):
     @classmethod
     def forward(cls, ctx, input, batch_idxs, p=0.5, train=False, inplace=False):
         if p < 0 or p > 1:
@@ -596,8 +596,8 @@ class Encoder(nn.Module):
             else:
                 ff = PartitionedPositionwiseFeedForward(d_model, d_ff, d_positional, relu_dropout=relu_dropout, residual_dropout=residual_dropout)
 
-            self.add_module(f"attn_{i}", attn)
-            self.add_module(f"ff_{i}", ff)
+            self.add_module("attn_{}".format(i), attn)
+            self.add_module("ff_{}".format(i), ff)
             self.stacks.append((attn, ff))
 
         self.num_layers_position_only = num_layers_position_only
@@ -974,7 +974,13 @@ class NKChartParser(nn.Module):
                     for _ in range(len(word_tokens)):
                         word_start_mask.append(0)
                         word_end_mask.append(0)
-                    word_start_mask[len(tokens)] = 1
+                    try:
+                        word_start_mask[len(tokens)] = 1
+                    except:
+                        word_start_mask.append(1)
+                        word_end_mask.append(0)
+                        tokens.append('?')
+                        print('!!!error', cleaned_words)
                     word_end_mask[-1] = 1
                     tokens.extend(word_tokens)
                 tokens.append("[SEP]")

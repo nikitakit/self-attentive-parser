@@ -196,7 +196,7 @@ def run_train(args, hparams):
 
     load_path = None
     if load_path is not None:
-        print(f"Loading parameters from {load_path}")
+        print("Loading parameters from {}".format(load_path))
         info = torch_load(load_path)
         parser = parse_nk.NKChartParser.from_spec(info['spec'], info['state_dict'])
     else:
@@ -523,7 +523,7 @@ def run_viz(args):
     orig_multihead_forward = parse_nk.MultiHeadAttention.forward
     def wrapped_multihead_forward(self, inp, batch_idxs, **kwargs):
         res, attns = orig_multihead_forward(self, inp, batch_idxs, **kwargs)
-        stowed_values[f'attns{stowed_values["stack"]}'] = attns.cpu().data.numpy()
+        stowed_values['attns{}'.format(stowed_values["stack"])] = attns.cpu().data.numpy()
         stowed_values['stack'] += 1
         return res, attns
 
@@ -550,7 +550,7 @@ def run_viz(args):
             sentence_words = [tokens.START] + [x[1] for x in sentence] + [tokens.STOP]
 
             for stacknum in range(stowed_values['stack']):
-                attns_padded = stowed_values[f'attns{stacknum}']
+                attns_padded = stowed_values['attns{}'.format(stacknum)]
                 attns = attns_padded[snum::len(subbatch_sentences), :len(sentence_words), :len(sentence_words)]
                 viz_attention(sentence_words, attns)
 
