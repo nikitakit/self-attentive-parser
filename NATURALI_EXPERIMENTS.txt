@@ -1,0 +1,13 @@
+data:
+/mnt/cephfs/dataset/ctb9.0/data/bracketed_cleaned/*.clean
+(
+ train.clean: ctb9 trainset;
+ train5.clean: ctb5 trainset;
+ train5with9.clean: ctb5 trainset + (ctb9 - ctb5);
+)
+
+pytorch-pretrained-bert:
+/mnt/cephfs/groundwork/models/bert-base-chinese/
+
+command:
+python -u src/main.py train --predict-tags --use-bert --model-path-base ./save/ctb5_3layer --bert-model /mnt/cephfs/groundwork/models/bert-base-chinese/ --num-layers 3 --learning-rate 0.00005 --batch-size 128 --eval-batch-size 32 --subbatch-max-tokens 500 --train-path=/mnt/cephfs/dataset/ctb9.0/data/bracketed_cleaned/train5.clean --dev-path=/mnt/cephfs/dataset/ctb9.0/data/bracketed_cleaned/dev5.clean
