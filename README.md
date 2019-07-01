@@ -134,7 +134,7 @@ The code used to train our parsing models is currently different from the code u
 #### Software Requirements for Training
 * Python 3.6 or higher.
 * Cython 0.25.2 or any compatible version.
-* [PyTorch](http://pytorch.org/) 0.4.1. This code has not been tested with PyTorch 1.0, but it should work.
+* [PyTorch](http://pytorch.org/) 0.4.1, 1.0/1.1, or any compatible version.
 * [EVALB](http://nlp.cs.nyu.edu/evalb/). Before starting, run `make` inside the `EVALB/` directory to compile an `evalb` executable. This will be called from Python for evaluation. If training on the SPMRL datasets, you will need to run `make` inside the `EVALB_SPMRL/` directory instead.
 * [AllenNLP](http://allennlp.org/) 0.7.0 or any compatible version (only required when using ELMo word representations)
 * [pytorch-pretrained-bert](https://github.com/huggingface/pytorch-pretrained-BERT) 0.4.0 or any compatible version (only required when using BERT word representations)
