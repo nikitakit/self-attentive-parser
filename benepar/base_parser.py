@@ -4,6 +4,10 @@ import os
 import sys
 import json
 import codecs
+try:
+    from tensorflow import GraphDef, Session
+except ImportError:
+    from tensorflow.compat.v1 import GraphDef, Session
 
 from . import chart_decoder
 from .downloader import load_model
@@ -196,12 +200,12 @@ class BaseParser(object):
                         model['vocab'] = f.read()
 
             if isinstance(model, dict):
-                graph_def = tf.compat.v1.GraphDef.FromString(model['model'])
+                graph_def = GraphDef.FromString(model['model'])
             else:
-                graph_def = tf.compat.v1.GraphDef.FromString(model)
+                graph_def = GraphDef.FromString(model)
             tf.import_graph_def(graph_def, name='')
 
-        self._sess = tf.compat.v1.Session(graph=self._graph)
+        self._sess = Session(graph=self._graph)
         if not isinstance(model, dict):
             # Older model format (for ELMo-based models)
             self._chars = self._graph.get_tensor_by_name('chars:0')
