@@ -33,6 +33,7 @@ def format_elapsed(start_time):
 
 def make_hparams():
     return nkutil.HParams(
+        lang='zh',
         max_len_train=0, # no length limit
         max_len_dev=0, # no length limit
 
@@ -69,6 +70,8 @@ def make_hparams():
         use_elmo=False,
         use_bert=False,
         use_bert_only=False,
+        use_xlm=False,
+        use_xlm_only=False,
         predict_tags=False,
 
         d_char_emb=32, # A larger value may be better for use_chars_lstm
@@ -83,6 +86,8 @@ def make_hparams():
         bert_model="bert-base-uncased",
         bert_do_lower_case=True,
         bert_transliterate="",
+
+        xlm_model="xlm-mlm-17-1280",
         )
 
 def run_train(args, hparams):
