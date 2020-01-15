@@ -10,7 +10,7 @@ use_cuda = torch.cuda.is_available()
 if use_cuda:
     torch_t = torch.cuda
     def from_numpy(ndarray):
-        return torch.from_numpy(ndarray).pin_memory().cuda(async=True)
+        return torch.from_numpy(ndarray).pin_memory().cuda(non_blocking=True)
 else:
     print("Not using CUDA!")
     torch_t = torch
@@ -36,7 +36,7 @@ CHAR_START_WORD = "\2"
 CHAR_STOP_WORD = "\3"
 CHAR_STOP_SENTENCE = "\4"
 
-BERT_TOKEN_MAPPING = {
+PRELM_TOKEN_MAPPING = {
     "-LRB-": "(",
     "-RRB-": ")",
     "-LCB-": "{",
@@ -575,7 +575,16 @@ def get_bert(bert_model, bert_do_lower_case):
     return tokenizer, bert
 
 # %%
+def get_xlm(xlm_model):
+    from pytorch_transformers import XLMModel, XLMTokenizer
+    if xlm_model.endswith('.tar.gz'):
+        tokenizer = XLMTokenizer.from_pretrained(xlm_model.replace('.tar.gz', '-vocab.txt'))
+    else:
+        tokenizer = XLMTokenizer.from_pretrained(xlm_model)
+    xlm = XLMModel.from_pretrained(xlm_model)
+    return tokenizer, xlm
 
+# %%
 class Encoder(nn.Module):
     def __init__(self, embedding,
                     num_layers=1, num_heads=2, d_kv = 32, d_ff=1024,
@@ -639,6 +648,8 @@ class NKChartParser(nn.Module):
         self.spec.pop("__class__")
         self.spec['hparams'] = hparams.to_dict()
 
+        self.lang = hparams.lang
+
         self.tag_vocab = tag_vocab
         self.word_vocab = word_vocab
         self.label_vocab = label_vocab
@@ -668,18 +679,21 @@ class NKChartParser(nn.Module):
         self.use_tags = hparams.use_tags
 
         self.morpho_emb_dropout = None
-        if hparams.use_chars_lstm or hparams.use_elmo or hparams.use_bert or hparams.use_bert_only:
+        if hparams.use_chars_lstm or hparams.use_elmo or hparams.use_bert or hparams.use_bert_only or hparams.use_xlm or hparams.use_xlm_only:
             self.morpho_emb_dropout = hparams.morpho_emb_dropout
         else:
-            assert self.emb_types, "Need at least one of: use_tags, use_words, use_chars_lstm, use_elmo, use_bert, use_bert_only"
+            assert self.emb_types, "Need at least one of: use_tags, use_words, use_chars_lstm, use_elmo, use_bert, use_bert_only, use_xlm, use_xlm_only"
 
         self.char_encoder = None
         self.elmo = None
         self.bert = None
+        self.xlm = None
         if hparams.use_chars_lstm:
             assert not hparams.use_elmo, "use_chars_lstm and use_elmo are mutually exclusive"
             assert not hparams.use_bert, "use_chars_lstm and use_bert are mutually exclusive"
             assert not hparams.use_bert_only, "use_chars_lstm and use_bert_only are mutually exclusive"
+            assert not hparams.use_xlm, "use_chars_lstm and use_xlm are mutually exclusive"
+            assert not hparams.use_xlm_only, "use_chars_lstm and use_xlm_only are mutually exclusive"
             self.char_encoder = CharacterLSTM(
                 num_embeddings_map['chars'],
                 hparams.d_char_emb,
@@ -689,6 +703,8 @@ class NKChartParser(nn.Module):
         elif hparams.use_elmo:
             assert not hparams.use_bert, "use_elmo and use_bert are mutually exclusive"
             assert not hparams.use_bert_only, "use_elmo and use_bert_only are mutually exclusive"
+            assert not hparams.use_xlm, "use_elmo and use_xlm are mutually exclusive"
+            assert not hparams.use_xlm_only, "use_elmo and use_xlm_only are mutually exclusive"
             self.elmo = get_elmo_class()(
                 options_file="data/elmo_2x4096_512_2048cnn_2xhighway_options.json",
                 weight_file="data/elmo_2x4096_512_2048cnn_2xhighway_weights.hdf5",
@@ -708,6 +724,8 @@ class NKChartParser(nn.Module):
             # the projection trainable appears to improve parsing accuracy
             self.project_elmo = nn.Linear(d_elmo_annotations, self.d_content, bias=False)
         elif hparams.use_bert or hparams.use_bert_only:
+            assert not hparams.use_xlm, "use_bert and use_xlm are mutually exclusive"
+            assert not hparams.use_xlm_only, "use_bert and use_xlm_only are mutually exclusive"
             self.bert_tokenizer, self.bert = get_bert(hparams.bert_model, hparams.bert_do_lower_case)
             if hparams.bert_transliterate:
                 from transliterate import TRANSLITERATIONS
@@ -722,8 +740,19 @@ class NKChartParser(nn.Module):
                 self.project_bert = nn.Linear(d_bert_annotations, hparams.d_model, bias=False)
             else:
                 self.project_bert = nn.Linear(d_bert_annotations, self.d_content, bias=False)
+        elif hparams.use_xlm or hparams.use_xlm_only:
+            self.xlm_tokenizer, self.xlm = get_xlm(hparams.xlm_model)
+            self.xlm_transliterate = None
 
-        if not hparams.use_bert_only:
+            d_xlm_annotations = self.xlm.dim
+            self.xlm_max_len = self.xlm.config.max_position_embeddings
+
+            if hparams.use_xlm_only:
+                self.project_xlm = nn.Linear(d_xlm_annotations, hparams.d_model, bias=False)
+            else:
+                self.project_xlm = nn.Linear(d_xlm_annotations, self.d_content, bias=False)
+
+        if not hparams.use_bert_only and not hparams.use_xlm_only:
             self.embedding = MultiLevelEmbedding(
                 [num_embeddings_map[emb_type] for emb_type in self.emb_types],
                 hparams.d_model,
@@ -793,6 +822,10 @@ class NKChartParser(nn.Module):
             hparams['use_bert'] = False
         if 'use_bert_only' not in hparams:
             hparams['use_bert_only'] = False
+        if 'use_xlm' not in hparams:
+            hparams['use_xlm'] = False
+        if 'use_xlm_only' not in hparams:
+            hparams['use_xlm_only'] = False
         if 'predict_tags' not in hparams:
             hparams['predict_tags'] = False
         if 'bert_transliterate' not in hparams:
@@ -816,6 +849,11 @@ class NKChartParser(nn.Module):
         if self.bert is not None:
             lens = [
                 len(self.bert_tokenizer.tokenize(' '.join([word for (_, word) in sentence]))) + 2
+                for sentence in sentences
+            ]
+        elif self.xlm is not None:
+            lens = [
+                len(self.xlm_tokenizer.tokenize(' '.join([word for (_, word) in sentence]), lang=self.lang)) + 2
                 for sentence in sentences
             ]
         else:
@@ -967,7 +1005,7 @@ class NKChartParser(nn.Module):
                 if self.bert_transliterate is None:
                     cleaned_words = []
                     for _, word in sentence:
-                        word = BERT_TOKEN_MAPPING.get(word, word)
+                        word = PRELM_TOKEN_MAPPING.get(word, word)
                         # This un-escaping for / and * was not yet added for the
                         # parser version in https://arxiv.org/abs/1812.11760v1
                         # and related model releases (e.g. benepar_en2)
@@ -997,6 +1035,9 @@ class NKChartParser(nn.Module):
                 word_end_mask.append(1)
 
                 input_ids = self.bert_tokenizer.convert_tokens_to_ids(tokens)
+                #print(tokens)
+                #print(input_ids)
+                #print('======')
 
                 # The mask has 1 for real tokens and 0 for padding tokens. Only real
                 # tokens are attended to.
@@ -1023,6 +1064,83 @@ class NKChartParser(nn.Module):
                 # For now, just project the features from the last word piece in each word
                 extra_content_annotations = self.project_bert(features_packed)
 
+        elif self.xlm is not None:
+            all_input_ids = np.zeros((len(sentences), self.xlm_max_len), dtype=int)
+            all_input_mask = np.zeros((len(sentences), self.xlm_max_len), dtype=int)
+            all_word_start_mask = np.zeros((len(sentences), self.xlm_max_len), dtype=int)
+            all_word_end_mask = np.zeros((len(sentences), self.xlm_max_len), dtype=int)
+
+            subword_max_len = 0
+            for snum, sentence in enumerate(sentences):
+                tokens = []
+                word_start_mask = []
+                word_end_mask = []
+
+                tokens.append(self.xlm_tokenizer._cls_token)
+                word_start_mask.append(1)
+                word_end_mask.append(1)
+
+                if self.xlm_transliterate is None:
+                    cleaned_words = []
+                    for _, word in sentence:
+                        word = PRELM_TOKEN_MAPPING.get(word, word)
+                        # This un-escaping for / and * was not yet added for the
+                        # parser version in https://arxiv.org/abs/1812.11760v1
+                        # and related model releases (e.g. benepar_en2)
+                        word = word.replace('\\/', '/').replace('\\*', '*')
+                        # Mid-token punctuation occurs in biomedical text
+                        word = word.replace('-LSB-', '[').replace('-RSB-', ']')
+                        word = word.replace('-LRB-', '(').replace('-RRB-', ')')
+                        if word == "n't" and cleaned_words:
+                            cleaned_words[-1] = cleaned_words[-1] + "n"
+                            word = "'t"
+                        cleaned_words.append(word)
+                else:
+                    # When transliterating, assume that the token mapping is
+                    # taken care of elsewhere
+                    assert False, 'XLM not support this'
+
+                for word in cleaned_words:
+                    word_tokens = self.xlm_tokenizer.tokenize(word, lang=self.lang)
+                    for _ in range(len(word_tokens)):
+                        word_start_mask.append(0)
+                        word_end_mask.append(0)
+                    word_start_mask[len(tokens)] = 1
+                    word_end_mask[-1] = 1
+                    tokens.extend(word_tokens)
+
+                tokens.append(self.xlm_tokenizer._sep_token)
+                word_start_mask.append(1)
+                word_end_mask.append(1)
+
+                input_ids = self.xlm_tokenizer.convert_tokens_to_ids(tokens)
+                #print(tokens)
+                #print(input_ids)
+                #print('======')
+
+                # The mask has 1 for real tokens and 0 for padding tokens. Only real
+                # tokens are attended to.
+                input_mask = [1] * len(input_ids)
+
+                subword_max_len = max(subword_max_len, len(input_ids))
+
+                all_input_ids[snum, :len(input_ids)] = input_ids
+                all_input_mask[snum, :len(input_mask)] = input_mask
+                all_word_start_mask[snum, :len(word_start_mask)] = word_start_mask
+                all_word_end_mask[snum, :len(word_end_mask)] = word_end_mask
+
+            all_input_ids = from_numpy(np.ascontiguousarray(all_input_ids[:, :subword_max_len]))
+            all_input_mask = from_numpy(np.ascontiguousarray(all_input_mask[:, :subword_max_len]))
+            all_word_start_mask = from_numpy(np.ascontiguousarray(all_word_start_mask[:, :subword_max_len]))
+            all_word_end_mask = from_numpy(np.ascontiguousarray(all_word_end_mask[:, :subword_max_len]))
+            all_encoder_layers = self.xlm(all_input_ids, attention_mask=all_input_mask)
+            features = all_encoder_layers[0]
+
+            if self.encoder is not None:
+                features_packed = features.masked_select(all_word_end_mask.to(torch.uint8).unsqueeze(-1)).reshape(-1, features.shape[-1])
+
+                # For now, just project the features from the last word piece in each word
+                extra_content_annotations = self.project_xlm(features_packed)
         if self.encoder is not None:
             annotations, _ = self.encoder(emb_idxs, batch_idxs, extra_content_annotations=extra_content_annotations)
 
