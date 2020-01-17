@@ -582,6 +582,7 @@ def main():
 
     subparser = subparsers.add_parser("test")
     subparser.set_defaults(callback=run_test)
+    subparser.add_argument("--lang", default="zh")
     subparser.add_argument("--model-path-base", required=True)
     subparser.add_argument("--evalb-dir", default="EVALB/")
     subparser.add_argument("--test-path", default="data/23.auto.clean")
