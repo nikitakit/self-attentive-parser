@@ -1,0 +1,7147 @@
+(NP
+  (NP (NR 中) (NR 美))
+  (VP
+    (PP (P 在) (NP (NR 沪)))
+    (VP
+      (VV 签订)
+      (NP (NP (NP (ADJP (JJ 高)) (NP (NN 科技))) (NN 合作)) (NN 协议)))))
+(FRAG
+  (NR 新华社)
+  (NR 上海)
+  (NT 八月)
+  (NT 三十一日)
+  (NN 电)
+  (PU （)
+  (NN 记者)
+  (NR 白国良)
+  (PU 、)
+  (VV 夏儒阁)
+  (PU ）))
+(NP
+  (NP
+    (NR “)
+    (NR 中)
+    (NR 美)
+    (NP (NP (NN 合作)) (NP (NP (JJ 高)) (NN 科技)))
+    (NP (NN 项目))
+    (NP (NN 签字) (NN 仪式))
+    (PU ”))
+  (NT 今天)
+  (PP (P 在) (NP (NR 上海)))
+  (VP (VV 举行))
+  (PU 。))
+(IP
+  (IP (VP (NP (NT 上午)) (PP (P 在) (NP (PN 这里))) (VV 签字)))
+  (DEC 的)
+  (VP
+    (VC 是)
+    (NP
+      (NP
+        (NN 知识)
+        (NN 信息)
+        (NN 网络)
+        (NN 通讯)
+        (NN 技术)
+        (CC 和)
+        (NN 脱氧核糖核酸)
+        (NN 生物)
+        (NN 技术))
+      (QP (CD 两) (CLP (M 个)))
+      (NP (NN 项目))))
+  (PU ，)
+  (AD 同时)
+  (ADVP (AD 还))
+  (VP
+    (VV 签订)
+    (VP (AS 了) (NP (NP (NN 语言) (NN 教学) (NN 交流) (NN 合作)) (NN 协议))))
+  (PU 。))
+(FRAG
+  (NP (NN 这) (DT 三) (CLP (M 个)) (NP (NN 项目)))
+  (VC 是)
+  (NN 分别)
+  (P 由)
+  (NR 国务院)
+  (NN 发展)
+  (NN 研究)
+  (NN 中心)
+  (NN 国际)
+  (NN 技术)
+  (NN 经济)
+  (NN 研究所)
+  (NP (NR 上海) (NN 分所))
+  (CC 和)
+  (NP
+    (NP (NP (NR 上海市) (NR 浦东) (NN 继续) (NN 教育) (NN 中心)) (NR ，))
+    (PP
+      (P 与)
+      (NP
+        (NR 美国)
+        (NN 知识)
+        (NN 信息)
+        (NN 网络)
+        (NN 公司)
+        (PU 、)
+        (NN 世界)
+        (NN 学习)
+        (NN 组织)
+        (PU 、)
+        (NN 海赛克)
+        (NN 公司))))
+  (VP (VP (VV 签订)) (DEC 的))
+  (PU 。))
+(FRAG
+  (NP
+    (NP (NP (NN 知识) (NN 信息) (NN 网络) (NN 公司)) (NP (NN 主席)))
+    (NP (NR ＣＥ麦奈特)))
+  (PP (P 在) (LCP (NP (NN 签字) (NN 仪式)) (LC 上)))
+  (NP
+    (VV 说)
+    (PU ，)
+    (NP
+      (DNP
+        (NP
+          (NP (NR 中) (NR 美))
+          (NP (VV 合作))
+          (NP (NP (ADJP (JJ 高)) (NP (NN 科技))) (NP (NN 项目))))
+        (DEG 的))
+      (NP (NN 签订))))
+  (PU ，)
+  (VV 具有)
+  (NP (NP (CP (CP (IP (VP (VA 重要))) (DEC 的))) (NP (NN 意义))) (PU 。)))
+(IP
+  (NP (PN 他))
+  (VP
+    (ADVP (AD 还))
+    (VP
+      (VV 期望)
+      (IP
+        (IP
+          (LCP (NP (NR 美) (NR 中)) (LC 之间))
+          (VP
+            (VV 建立)
+            (NP
+              (NP (NN 电子))
+              (NP (ADJP (JJ 高速)) (NP (NN 信息)))
+              (NP (NN 公路)))))
+        (PU ，)
+        (VP
+          (NP
+            (VV 使)
+            (NP
+              (NR 纽约)
+              (NN 股票)
+              (NN 交易所)
+              (CC 与)
+              (NR 上海)
+              (NN 证券)
+              (NN 交易所)))
+          (VP
+            (VV 能)
+            (VP
+              (ADVP (AD 早日))
+              (VP (VV 实现) (NP (NN 交易) (CC 及) (NN 信息) (NN 交流)))))))))
+  (PU 。))
+(IP
+  (NP (NP (NN 世界) (NN 学习) (NN 组织)) (NP (NN 董事长)) (NP (NR 朱迪・梅罗)))
+  (VP
+    (VV 希望)
+    (IP
+      (VP
+        (PP
+          (PP (P 在) (LCP (NP (NT 今年)) (LC 底)))
+          (PP (P 与) (NP (NR 上海))))
+        (VP
+          (VV 建立)
+          (NP
+            (QP (CD 一) (CLP (M 个)))
+            (CP (CP (ADJP (JJ 合资)) (DEC 的)))
+            (NP (NN 教育) (NN 机构)))))))
+  (PU 。))
+(LCP
+  (LCP
+    (PP (PP (P 据)) (IP (NP (NN 美方) (NN 人员)) (VP (VV 说))))
+    (NR ，)
+    (NP
+      (CP (CP (IP (VP (NP (NT 今天)) (VP (VV 签订)))) (DEC 的)))
+      (QP (CD 三) (CLP (M 个)))
+      (NP (NN 项目)))
+    (PU ，)
+    (VV 得到)
+    (NP
+      (DNP
+        (NP
+          (CP
+            (CP
+              (CP (IP (VP (CP (IP (VP (VV 前来)))) (NR 上海))))
+              (DEC 的)))
+          (NP (NP (NR 美国)) (NP (NN 商务) (NN 部长)))
+          (NP (NR 布朗)))
+        (DEG 的))
+      (NP (NN 关心) (CC 与) (NN 支持)))
+    (PU 。)))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP
+  (NP (NR 中国))
+  (VP
+    (ADVP (AD 将))
+    (P 于)
+    (NP (NT 十二月))
+    (VP (VV 举办) (NP (PU “) (NR 华夏) (NN 艺术节) (PU ”)))))
+(FRAG
+  (NR 新华社)
+  (NR 北京)
+  (NT 九月)
+  (NT 一日)
+  (NN 电)
+  (PU （)
+  (NN 记者)
+  (NR 高建新)
+  (PU ）))
+(FRAG
+  (PP
+    (P 为)
+    (IP
+      (VP
+        (VV 加强)
+        (NP
+          (DNP (NP (NN 海内外) (NN 炎黄子孙)) (DEG 的))
+          (NP (NN 文化))
+          (NP (NN 交流) (CC 和) (NN 联系))))))
+  (PU ，)
+  (NP (NR 中国))
+  (ADVP (AD 将))
+  (PP
+    (PP
+      (P 于)
+      (NP (NP (NT 今年) (NN 十二月)) (NP (NN 八日) (CC 到) (NR 十八日))))
+    (PP
+      (P 在)
+      (NP (NP (NR 北京) (CC 和) (NR 深圳)) (QP (CD 两)) (NP (NN 地)))))
+  (ADVP (AD 同时))
+  (VP (VP (VV 举办)) (NP (PU “) (NR 华夏) (NN 艺术节) (PU ”)))
+  (PU 。))
+(IP
+  (NP (PN 这))
+  (VP
+    (VC 是)
+    (QP (CD 一) (CLP (M 次)))
+    (CP
+      (CP
+        (IP
+          (VP
+            (PP
+              (P 由)
+              (NP
+                (NN 人民)
+                (NN 团体)
+                (PU 、)
+                (NN 政府)
+                (NN 文化)
+                (NN 部门)
+                (CC 和)
+                (NN 企业)))
+            (VP (VP (VV 联手)) (VP (VV 举办)))))
+        (DEC 的)))
+    (NP (NN 艺术) (NN 盛会)))
+  (PU 。))
+(FRAG
+  (NP (NP (NR 其)) (NP (NN 宗旨)))
+  (VC 是)
+  (PU ，)
+  (VP
+    (PP (P 以) (NP (NP (NR 中华)) (NP (NN 民族) (NN 传统) (NP (NN 文化)))))
+    (VP (VV 为) (NP (NN 纽带))))
+  (PU ，)
+  (VP (VP (VV 联系)) (CC 和) (VP (VV 团结) (NP (NN 海内外) (NN 同胞))))
+  (PU ，)
+  (VP (VV 弘扬) (NP (NN 民族) (NN 文化)))
+  (PU ，)
+  (IP
+    (VP
+      (VV 展示)
+      (NP
+        (NP (NN 祖国) (ADJP (JJ 优秀)) (NP (NN 艺术)))
+        (DEG 的)
+        (NP (NN 魅力)))))
+  (PU ，)
+  (VP
+    (VV 展示)
+    (NP
+      (DNP
+        (NP (NN 华侨) (PU 、) (NN 华人) (NN 艺术家))
+        (DNP
+          (PP
+            (P 在)
+            (LCP
+              (NP (NN 艺术) (NN 领域) (CC 和) (NN 世界) (NN 文化) (NN 交流))
+              (LC 中)))
+          (DEG 的)))
+      (NP (NN 成就) (CC 和) (NN 风采))))
+  (PU 。))
+(FRAG
+  (NP (NP (DNP (NP (NN 艺术节)) (DEG 的)) (NP (NN 内容))) (ADVP (AD 主要)))
+  (VV 包括)
+  (NP
+    (CP
+      (CP
+        (IP
+          (VP
+            (CP (CP (IP (VP (VA 隆重))) (DEC 的)))
+            (IP
+              (VP
+                (NP (NN 开幕式) (CC 和) (NN 闭幕式))
+                (IP
+                  (VP
+                    (PU ，)
+                    (IP (VP (NN 各) (VP (VV 具) (NP (NN 特色)))))))))))
+        (DEC 的)))
+    (ADJP (JJ 大型))
+    (NP
+      (NN 文艺)
+      (NN 表演)
+      (CC 以及)
+      (NP (NN 美术) (PU 、) (NN 摄影))
+      (NP (NN 展览))))
+  (PU 。))
+(FRAG
+  (PP (P 据))
+  (NN 介绍)
+  (NR ，)
+  (CP
+    (CP
+      (VP
+        (NP (NT 十二月) (NT 八日))
+        (PP (P 在) (NP (NR 深圳) (NN 体育馆)))
+        (VP (VV 开幕)))
+      (DEC 的)))
+  (NP (NN 艺术节))
+  (PU ，)
+  (VP
+    (VP
+      (ADVP (AD 将))
+      (VP
+        (NP (NN 集中))
+        (VP
+          (VV 展示)
+          (IP (NP (NR 二十) (NP (NN 世纪))) (ADVP (AD 广为)) (VP (VV 流传))))))
+    (DEC 的)
+    (NP (NP (NR 中华)) (NN 民族) (NN 艺术))
+    (NN 精品))
+  (PU 。))
+(IP
+  (IP (VP (PP (P 从) (NP (NN 十二月) (NN 九日))) (VP (VV 开始))))
+  (PU ，)
+  (NP (DP (DT 每)) (NP (NN 晚)))
+  (ADVP (AD 都))
+  (ADVP (AD 将))
+  (P 在)
+  (NP (NR 深圳) (JJ 大) (NN 剧院) (CC 或) (NP (NR 深圳) (NN 体育馆)))
+  (VP (NN 演出))
+  (NP
+    (CD 一)
+    (NP (NP (NN 台)) (NP (ADJP (JJ 高)) (NP (NN 水平))))
+    (DEG 的)
+    (NN 节目))
+  (PU ，)
+  (CP
+    (CP
+      (NN 分别)
+      (NN 上演)
+      (CP
+        (CP
+          (NP
+            (NN 芭蕾舞)
+            (PU 、)
+            (NN 相声)
+            (NN 小品)
+            (PU 、)
+            (NN 京剧)
+            (NN 折子戏))
+          (CC 和)
+          (CP
+            (CP
+              (IP
+                (NP (NN 海外) (NN 华人) (NN 艺术家) (PU 、) (NN 艺术团))
+                (VP (VV 表演)))
+              (DEC 的)))))))
+  (NP (NN 节目))
+  (ETC 等)
+  (PU 。))
+(FRAG
+  (NP (NP (NN 艺术节)) (NN 期间))
+  (PU ，)
+  (ADVP (AD 将))
+  (P 在)
+  (NP (NR 北京))
+  (VP
+    (VP (VSB (VV 举办)))
+    (NP
+      (NP (NP (NN 传统) (NN 绘画)) (NN 临摹) (NN 大奖赛))
+      (CC 及)
+      (NP (NN 作品) (NN 展览))
+      (CC 和)
+      (NP
+        (NP (NR 《) (DNP (NR 华夏) (DEG 之)) (NP (NN 光)) (PU 》))
+        (NP (NN 世界) (NN 华侨) (NN 华人) (NN 摄影) (NN 艺术) (NP (NN 展览))))))
+  (PU 。))
+(IP
+  (NP (DP (DT 这) (CLP (M 次))) (NP (NN 艺术节)))
+  (P 由)
+  (NP (NR 中华))
+  (NR 全)
+  (NN 国)
+  (ADJP (NN 归国))
+  (NN 华侨)
+  (NN 联合会)
+  (PU 与)
+  (NP (NN 文化部))
+  (PU 、)
+  (NP (NN 中央) (NN 电视台))
+  (PU 、)
+  (NP
+    (NP (NP (NR 深圳市)) (NP (NN 文化局)))
+    (CC 及)
+    (NR 中国)
+    (NN 华侨)
+    (NN 国际)
+    (NN 文化)
+    (NN 交流)
+    (NN 促进会))
+  (ETC 等)
+  (NP (NN 单位))
+  (ADVP (AD 联合))
+  (VP (VV 主办))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP
+  (NP (NP (NR 江泽民)) (NR 李鹏))
+  (VP (VP (VV 电唁)) (NP (NR 尼克松)) (VP (VV 逝世))))
+(FRAG (NN 新华社) (NR 北京) (NT ４月) (NT ２３日) (NN 电))
+(FRAG
+  (NP (NP (NR 中华) (NN 人民) (NN 共和国)) (NP (NN 主席)) (NR 江泽民))
+  (CC 和)
+  (NN 国务院)
+  (NN 总理)
+  (NR 李鹏)
+  (NR ２３日)
+  (NN 电唁)
+  (NP (NP (NP (NR 美国)) (NR 前)) (NP (NN 总统)) (NP (NR 理查德・尼克松)))
+  (VP (NR 逝世))
+  (PU 。))
+(FRAG
+  (NP (NP (NN 电文)) (DP (DT 全)) (NP (NN 文)))
+  (VP (VP (VV 如下)) (VV ：)))
+(IP
+  (IP
+    (VP
+      (VV 惊悉)
+      (IP
+        (NP (NP (NR 理查德・尼克松)) (NP (NN 先生)))
+        (VP (ADVP (AD 不幸)) (VP (VV 病逝))))))
+  (PU ，)
+  (NN 谨)
+  (VP (VV 表示) (NP (CP (CP (IP (VP (VA 深切))) (DEC 的))) (NP (NN 哀悼))))
+  (PU 。))
+(IP
+  (NP (NR 尼克松) (NN 先生))
+  (VC 是)
+  (QP (CD 一) (CLP (M 位)))
+  (CP
+    (CP
+      (IP (VP (VV 具有) (NP (NN 战略) (NN 远见) (CC 和) (NN 政治) (NN 勇气))))
+      (DEC 的)))
+  (NN 政治家)
+  (PU 。))
+(IP
+  (NP
+    (NP (PN 他))
+    (PP
+      (P 在)
+      (NP
+        (CP (IP (VP (VP (VV 担任) (NP (NP (NR 美国)) (NP (NN 总统)))))))
+        (NP (NN 期间)))))
+  (PU ，)
+  (PP
+    (P 同)
+    (NP
+      (NP (ADJP (JJ 已故)) (DEG 的) (NP (NR 毛泽东) (NN 主席)))
+      (CC 和)
+      (NP (NR 周恩来) (NN 总理))))
+  (ADVP (AD 一起))
+  (VP
+    (VP
+      (VV 打开)
+      (AS 了)
+      (NP
+        (NP
+          (DNP (NP (NP (NR 中) (NR 美)) (NP (NN 关系))) (DEG 的))
+          (ADJP (JJ 大)))
+        (NP (NN 门))))
+    (PU ，)
+    (VP
+      (VV 开辟)
+      (AS 了)
+      (NP
+        (DNP (NP (NP (QP (NR 两)) (NP (NN 国))) (NP (NN 关系))) (DEG 的))
+        (ADJP (JJ 新))
+        (NP (NN 局面)))))
+  (PU 。))
+(IP
+  (CP (IP (VP (LCP (IP (VP (VV 卸任))) (LC 后)) (NT ，))))
+  (NP (NR 尼克松) (NN 先生))
+  (VP (VV 继续) (VP (VV 关心) (NP (NP (NR 中) (NR 美)) (NP (NN 关系)))))
+  (PU ，)
+  (PP
+    (P 为)
+    (IP
+      (VP
+        (VP (VV 维护))
+        (CC 和)
+        (VP (VV 发展) (NP (NP (QP (CD 两)) (NP (NN 国))) (NP (NN 关系)))))))
+  (VP (VV 作出) (AS 了) (ADJP (JJ 重要)) (NN 贡献))
+  (PU 。))
+(IP
+  (NP (PN 我们))
+  (VP
+    (VV 深信)
+    (PU ，)
+    (IP
+      (PP
+        (P 在)
+        (LCP
+          (NP
+            (DNP (NP (NP (NR 中) (NR 美)) (NP (PN 双方))) (DEG 的))
+            (ADJP (JJ 共同))
+            (NP (NN 努力)))
+          (LC 下)))
+      (PU ，)
+      (NP
+        (CP
+          (CP
+            (IP
+              (NP (NR 尼克松) (NN 先生))
+              (NP (NT 生前))
+              (MSP 所)
+              (VP (NN 关心)))
+            (DEC 的)))
+        (NP (NP (NR 中) (NR 美)) (NP (NN 关系))))
+      (VP
+        (ADVP (AD 一定))
+        (VP
+          (VV 会)
+          (VP
+            (VV 得到)
+            (NP (ADJP (JJ 进一步)) (NP (NN 改善) (CC 和) (NN 发展))))))))
+  (PU 。))
+(VP
+  (VP
+    (ADVP (AD 谨))
+    (P 向)
+    (NP (DNP (NP (NR 尼克松) (NN 先生)) (DEG 的)) (NP (NN 家属)))
+    (VP
+      (VV 致以)
+      (NP (CP (CP (IP (VP (VA 亲切))) (DEC 的))) (NP (NN 慰问)))))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(CP (IP (NP (NR 费孝通)) (VP (SB 被) (VP (VV 授予) (NN 麦格赛赛) (NN 奖)))))
+(FRAG
+  (NR 新华社)
+  (NR 马尼拉)
+  (NT ８月)
+  (NT ３１日)
+  (NN 电)
+  (PU （)
+  (NN 记者)
+  (NR 熊昌义)
+  (PU ）))
+(FRAG
+  (NP (NR 中国))
+  (ADJP (JJ 著名))
+  (NP (NN 社会学家))
+  (NR 、)
+  (NP (NP (NP (DP (DT 全)) (NP (NN 国))) (NP (NN 人大))) (NP (NN 常委会)))
+  (NP (NP (NN 副委员长)) (NP (NP (NP (NR 费孝通)) (NN 博士)) (NT 今天) (NT 下午)))
+  (P 在)
+  (NP
+    (NP (NP (NP (PN 这里)) (IP (VP (SB 被))) (NR 授予)) (NP (NT １９９４年)))
+    (NN 麦格赛赛))
+  (NR “)
+  (NN 社区)
+  (NN 领袖)
+  (ETC ”)
+  (NP (NN 奖))
+  (NR 。))
+(IP
+  (NP (NN 颁奖) (NN 仪式))
+  (VP
+    (PP (P 在) (NP (NR 菲律宾) (NN 文化) (NN 中心)))
+    (ADVP (AD 隆重))
+    (VP (VV 举行)))
+  (PU 。))
+(IP
+  (NP (NP (NP (NR 菲律宾)) (NP (NN 总统))) (NP (NR 拉莫斯)))
+  (VP (VV 出席) (AS 了) (NP (NN 颁奖) (NN 仪式)))
+  (CC 并)
+  (VP
+    (P 向)
+    (NP
+      (NP
+        (CP
+          (CP
+            (IP
+              (VP
+                (VV 荣获)
+                (NP (NP (NT 今年)) (NP (NN 麦格赛赛)) (NP (NN 奖)))))
+            (DEC 的)))
+        (QP (CD ６) (CLP (M 名)))
+        (NP (ADJP (JJ 杰出)) (NP (NN 人士))))
+      (VP (VV 颁发) (AS 了) (NP (NN 奖章) (PU 、) (NN 奖金) (CC 和) (NN 证书)))))
+  (PU 。))
+(FRAG
+  (UCP
+    (NP (NR 费孝通))
+    (PP (P 在) (LCP (IP (VP (VV 致) (VP (NN 答谢辞)))) (LC 时))))
+  (VV 说)
+  (VV ，)
+  (PU “)
+  (IP
+    (NP (PN 我))
+    (VP
+      (VP
+        (VP
+          (ADVP (VV 决))
+          (ADVP (AD 不))
+          (VP
+            (VV 辜负)
+            (NP
+              (NP (ADJP (JJ 友好)) (NP (NN 邻邦)))
+              (VP (VV 给) (NP (PN 我))))))
+        (DEC 的)
+        (NP (NN 鼓励)))
+      (PU ，)
+      (IP
+        (ADVP (CS 不论))
+        (IP
+          (NP (NT 今后))
+          (IP
+            (NP (PN 我))
+            (VP
+              (ADVP (AD 还))
+              (VP
+                (VV 能)
+                (VP
+                  (VP (VE 有) (NP (QP (CD 多少)) (NN 年月)))
+                  (VP
+                    (VV 可以)
+                    (VP (VV 供) (IP (NP (PN 我)) (VP (VV 支配)))))))))))))
+  (PU ，)
+  (NP (PN 我))
+  (VP
+    (VP
+      (VP (ADVP (AD 一定)) (VP (VV 要) (VP (VA 兢兢业业))))
+      (DEV 地)
+      (VP
+        (VP
+          (VP (VV 利用))
+          (NP (DP (DT 每) (QP (CD 一) (CLP (M 刻)))) (NP (NN 时间))))
+        (PU ，)
+        (VP
+          (ADVP (AD 尽力))
+          (VP
+            (VP (VV 做) (QP (M 一些)))
+            (IP
+              (VP
+                (P 对)
+                (NP
+                  (NP (NP (NR 亚洲)) (NP (NN 人民)))
+                  (PU ，)
+                  (NP
+                    (CC 乃至)
+                    (NP
+                      (NP (DT 全) (NN 世界))
+                      (NP
+                        (CP
+                          (CP
+                            (NP (NN 人民))
+                            (CP (CP (VP (VV 有益)) (DEC 的)))))
+                        (ADJP (JJ 好))
+                        (NP (NP (NN 事)) (VV ，) (VV 使) (NP (NN 人类)))))))
+                (VP (MSP 所) (VP (VV 积累)))))))))
+    (NP
+      (DEC 的)
+      (NP
+        (NP (NN 知识))
+        (VP
+          (VV 能)
+          (VP
+            (VV 发生)
+            (NP
+              (CP
+                (CP
+                  (IP
+                    (VP
+                      (VV 推动)
+                      (NP
+                        (NP (NN 社会))
+                        (P 向)
+                        (NP
+                          (CP
+                            (CP
+                              (IP (VP (ADVP (AD 更)) (VP (VA 美好))))
+                              (DEC 的)))
+                          (NP (NN 社会))))
+                      (VP (VV 发展))))
+                  (DEC 的)))
+              (NP (NN 作用))))))))
+  (VV ”)
+  (VV 。))
+(FRAG
+  (CP
+    (CP
+      (IP
+        (VP
+          (PP
+            (P 以)
+            (NP (NP (NP (NP (NR 菲律宾)) (NR 前)) (NN 总统)) (NP (NN 名字))))
+          (VP (VV 命名))))
+      (DEC 的)))
+  (NP (NN 拉蒙・麦格赛赛))
+  (NP (NN 奖))
+  (VP
+    (VV 被)
+    (VP
+      (VV 称为)
+      (NP (DNP (NP (NR 亚洲)) (DEG 的)) (NP (NR 诺贝尔)) (NP (NR 奖)))))
+  (PU 。))
+(IP
+  (IP
+    (NP (DP (DT 该)) (NP (NN 奖)))
+    (ADVP (AD 共))
+    (VV 设)
+    (NP (QP (CD 五) (CLP (M 项))) (NP (NN 奖))))
+  (PU ，)
+  (IP
+    (VP
+      (VP
+        (DT 每)
+        (CLP (NN 年))
+        (VP (VP (VV 颁发)) (VP (QP (CD 一) (CLP (M 次))))))
+      (PU ，)
+      (IP
+        (VP
+          (ADVP (AD 分别))
+          (VV 授予)
+          (IP
+            (VP
+              (PP
+                (P 在)
+                (NP
+                  (NP
+                    (NP (NN 政府) (NN 服务))
+                    (CC 、)
+                    (NP
+                      (NP (ADJP (JJ 公共)) (NP (NN 服务)))
+                      (PU 、)
+                      (NP (NP (NN 社区) (NN 领袖)) (PU 、) (NP (NN 新闻))))
+                    (PU 、)
+                    (NP
+                      (NP
+                        (NP (NN 文学))
+                        (CC 和)
+                        (NP (NN 创造性) (NN 交流) (NN 艺术)))
+                      (CC 以及)
+                      (NP (NN 国际) (NN 谅解)))
+                    (ETC 等))
+                  (NP (NN 领域))))
+              (VP (VV 作出) (NP (ADJP (JJ 突出)) (NP (NN 贡献))))))))))
+  (DEC 的)
+  (NP (NN 个人) (CC 和) (NN 机构))
+  (PU 。))
+(IP
+  (NP (DP (DT 该)) (NP (NN 奖)))
+  (VP
+    (PP
+      (P 自)
+      (LCP
+        (IP (VP (NP (NT １９５８年)) (VP (VV 开始) (VP (VV 颁发)))))
+        (LC 以来)))
+    (PU ，)
+    (ADVP (AD 已))
+    (VP
+      (VE 有)
+      (IP
+        (NP
+          (QP (CD １７２) (CLP (JJ 位)))
+          (NP
+            (NP (NN 个人))
+            (CC 和)
+            (NP (QP (CD １４) (CLP (M 个))) (NP (NN 机构)))))
+        (VP (NP (NN 获奖))))))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP
+  (NP (NR 天津))
+  (NP (NP (PP (P 对) (NP (NR 台))) (NN 合作)) (NP (NN 前景)))
+  (VP (VA 广阔)))
+(FRAG
+  (NR 新华社)
+  (NR 天津)
+  (NT 九月)
+  (NT 一日)
+  (NN 电)
+  (PU （)
+  (NN 记者)
+  (NN 刘庆禄)
+  (PU 、)
+  (NR 窦合义)
+  (PU ）))
+(FRAG
+  (NP (NP (NP (NR 天津市)) (NP (NN 市长))) (NP (NR 张立昌)))
+  (PP
+    (P 在)
+    (LCP
+      (NP
+        (CP (CP (IP (VP (NP (NT 最近)) (VP (VV 召开)))) (DEC 的)))
+        (NP (NP (NR 天津市)) (PP (P 对) (NP (NR 台))))
+        (NP (NN 经济) (NN 工作) (NN 会议)))
+      (LC 上)))
+  (VP
+    (VP (VV 说))
+    (PU ，)
+    (IP
+      (IP
+        (NP (NR 天津) (NR 与) (NR 台湾))
+        (IP (NP (NN 产业) (NN 结构)) (VP (VA 相似))))
+      (PU ，)
+      (IP (VP (NP (NN 技术)) (VP (VV 相近))))
+      (PU ，)
+      (NP (NR 相互))
+      (NN 间)
+      (VP
+        (VP
+          (VP
+            (VP
+              (VE 有)
+              (VP
+                (CP (CP (IP (VP (ADVP (AD 很)) (VP (VA 强)))) (DEC 的)))
+                (NP (NN 互补性))))
+            (PU ，))
+          (IP
+            (NP (NP (PN 双方)) (NP (NN 合作) (NP (NN 前景))))
+            (VP (VA 广阔))))
+        (DEC ，)
+        (IP (VP (VV 大有可为))))))
+  (PU 。))
+(FRAG
+  (PP (PP (P 据)) (NN 统计))
+  (VV ，)
+  (PP (P 到) (LCP (NP (NR 今年) (NR 七月)) (LC 底)))
+  (NP (PU ，))
+  (NP (NR 天津市))
+  (VP
+    (ADVP (AD 共))
+    (VP
+      (VV 批准)
+      (NP (NN 台商) (NN 投资) (NN 企业))
+      (QP (CD 八百七十一) (CLP (M 家)))))
+  (PU ，)
+  (NP (NN 协议) (NN 投资额))
+  (QP
+    (NP (VP (QP (CD 九亿多) (CLP (M 美元)))) (PU ，) (NP (NN 其中)))
+    (NP (NN 台资)))
+  (VP (VP (VV 占) (QP (CD 百分之七十三点八))) (PU 。)))
+(IP
+  (NP (NN 台资) (NN 企业数) (CC 和) (NN 协议) (NN 投资额))
+  (ADVP (AD 分别))
+  (VP
+    (VP (VV 列))
+    (NP (DT 全) (NP (NN 市)))
+    (NP (NP (NN 外商) (NN 投资) (NN 企业)) (VV 的))
+    (QP (QP (OD 第三) (CLP (M 位))) (CC 和) (QP (CD 第四) (CLP (M 位)))))
+  (PU 。))
+(LCP
+  (LCP
+    (NP
+      (QP (CD 一) (CLP (M 批)))
+      (CP
+        (CP
+          (IP
+            (IP (NP (NN 投资额)) (VP (ADVP (AD 较)) (VP (VA 大))))
+            (PU 、)
+            (IP (NP (NN 技术)) (VP (ADVP (AD 较)) (VP (VA 高)))))
+          (DEC 的)))
+      (NP (NN 台资) (NN 企业)))
+    (VP (PP (P 在) (NP (NR 天津))) (VP (VV 落户)))
+    (PU 。)))
+(FRAG
+  (PP
+    (P 在)
+    (LCP
+      (NP
+        (CP (CP (IP (VP (ADVP (AD 已)) (VP (VV 开业)))) (DEC 的)))
+        (NP (NN 台资) (NN 企业)))
+      (LC 中)))
+  (NT ，)
+  (LCP (QP (CD 九成)) (LC 以上))
+  (NP (NN 盈利))
+  (PU 。))
+(IP
+  (NP (NR 张立昌))
+  (VP
+    (VV 说)
+    (PU ，)
+    (IP
+      (NP (NT 今后))
+      (NP (NR 天津市))
+      (VP
+        (ADVP (AD 将))
+        (VP
+          (VP (VV 继续) (VP (VV 努力)))
+          (VP
+            (PP (P 为) (NP (NN 台商)))
+            (VP
+              (VV 创造)
+              (NP
+                (QP (CD 一) (CLP (M 个)))
+                (CP
+                  (CP
+                    (IP (VP (VP (VV 有利可图)) (PU ，) (VP (VV 有钱可赚))))
+                    (DEC 的)))
+                (NP (NN 投资) (NN 环境)))))))))
+  (PU 。))
+(IP
+  (NP (P 根据))
+  (NP
+    (DNP
+      (IP
+        (PU “)
+        (VP (NN 同等) (VV 优先))
+        (PU 、)
+        (ADVP (AD 适当))
+        (VP (VV 放宽))
+        (PU ”))
+      (DEG 的))
+    (NP (NN 原则)))
+  (PU ，)
+  (NP (NR 天津市))
+  (VP
+    (ADVP (AD 将))
+    (VP
+      (VV 调整)
+      (ADJP (JJ 有关))
+      (NP
+        (NP (NN 政策))
+        (VP
+          (PU ，)
+          (VP
+            (MSP 以)
+            (VP
+              (VV 增强)
+              (NP
+                (DNP (PP (P 对) (NP (NN 台商))) (DEG 的))
+                (NP (NN 吸引力)))))))))
+  (PU 。))
+(IP
+  (NP (PN 他))
+  (VP
+    (VV 要求)
+    (NP (ADJP (JJ 有关)) (NP (NN 部门)))
+    (IP
+      (VP
+        (PP (P 在) (NP (DP (DT 这)) (NP (NN 方面))))
+        (ADVP (AD 尽快))
+        (VP (VRD (VV 制订) (VV 出)) (NP (NN 实施) (NN 方案))))))
+  (PU 。))
+(IP
+  (PP
+    (PP (P 据) (NP (NP (NN 会议)) (VP (VV 透露))))
+    (PU ，)
+    (PP (P 在) (LCP (NP (NN 投资) (NN 方向)) (LC 上))))
+  (PU ，)
+  (NP (NR 天津))
+  (VV 鼓励)
+  (NP (NN 台商))
+  (VV 投向)
+  (NP
+    (NN 基础)
+    (NN 设施)
+    (PU 、)
+    (NN 基础)
+    (NN 产业)
+    (PU 、)
+    (NN 资金)
+    (NN 技术)
+    (NN 密集型)
+    (NN 产业)
+    (NR 、)
+    (NP (NP (ADJP (JJ 高)) (NP (NN 科技))) (NP (NN 项目))))
+  (PU ，)
+  (NP
+    (NP
+      (VV 参与)
+      (NP (ADJP (ADJP (JJ 国有)) (ADJP (JJ 大中型))) (NP (NN 企业))))
+    (NP
+      (NP (NN 技术) (NN 改造))
+      (PU ，)
+      (VP
+        (VV 投资)
+        (NP (NP (QP (OD 第三)) (NP (NN 产业))) (NP (NN 试点) (NN 项目))))))
+  (PU ，)
+  (CC 并)
+  (VV 欢迎)
+  (NP (NP (NR 台湾)) (NP (NN 金融) (NN 资本) (CC 和) (NN 产业) (NN 资本)))
+  (VV 来)
+  (NP (VP (NR 津) (VV 设立)) (NP (NN 金融) (NN 机构)))
+  (PU 。))
+(IP
+  (NP (NP (NR 张立昌)) (VP (VV 说)))
+  (PU ，)
+  (PP
+    (P 为了)
+    (IP
+      (VP
+        (VV 给)
+        (NP
+          (CP
+            (CP
+              (IP (VP (NP (VV 来) (NP (NR 天津))) (VP (VV 投资))))
+              (DEC 的)))
+          (NP (NN 台商)))
+        (VP
+          (VV 提供)
+          (NP
+            (CP (CP (IP (VP (ADVP (AD 更)) (VP (VA 好)))) (DEC 的)))
+            (NP (NN 投资) (NN 环境)))))))
+  (PU ，)
+  (NP (NR 天津市))
+  (ADVP (AD 将))
+  (VP
+    (VV 强化)
+    (DNP
+      (PU “)
+      (NP (NR 天津市))
+      (NP (NP (NR 台湾)) (NP (NN 同胞)))
+      (NN 投资)
+      (NN 服务)
+      (NN 中心)
+      (PU ”)
+      (ADJP (DEG 的)))
+    (NN 职能))
+  (PU ，)
+  (VP
+    (VV 做好)
+    (NP
+      (DNP
+        (NP (NP (NN 项目) (NN 审批)) (CC 和) (NP (NN 台资) (NN 企业)))
+        (DEG 的))
+      (NP (NN 管理))))
+  (PU ，)
+  (VP
+    (ADVP (AD 努力))
+    (VV 办好)
+    (NP (NP (NR 津) (NR 台)) (NP (NN 贸易) (NN 合作) (NN 中心))))
+  (PU ，)
+  (VP
+    (PP (P 为) (NP (NN 台资) (NN 企业)))
+    (VP (VV 提供) (NP (NN 经济) (NN 信息) (CC 和) (NN 法律) (NN 咨询))))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP (NP (NR 朱（容加金旁）基)) (VP (NP (VV 电唁)) (NP (NR 尼克松)) (VP (VV 逝世))))
+(FRAG (NN 新华社) (NR 北京) (NT ４月) (NT ２３日) (NN 电))
+(FRAG
+  (NP (NR 中华) (NN 人民) (NN 共和国))
+  (NN 国务院)
+  (NN 副总理)
+  (NR 朱（容加金旁）基)
+  (NP (NR ２３日) (NN 电唁))
+  (NP (NR 美国))
+  (NN 前)
+  (NN 总统)
+  (NP (NR 理查德・尼克松))
+  (VV 逝世)
+  (PU 。))
+(FRAG
+  (NP (NP (NN 电文)) (DP (DT 全)) (NP (NN 文)))
+  (VP (VP (VV 如下)) (VV ：)))
+(IP
+  (NP (NR 尼克松) (NN 先生))
+  (VC 是)
+  (QP (CD 一) (CLP (M 位)))
+  (CP (CP (IP (VP (VV 具有) (NP (VV 远见) (NP (NN 卓识))))) (DEC 的)))
+  (NP
+    (NP (NP (NN 政治家)) (PU ，))
+    (VP
+      (NP (NN 生前))
+      (ADVP (AD 一直))
+      (VP (VV 关心) (NP (NP (NR 中) (NR 美)) (NP (NN 关系))))))
+  (PU ，)
+  (VP
+    (VP
+      (ADVP (AD 先后))
+      (AD 曾)
+      (VP (QP (CD 七) (CLP (M 次))) (VP (VV 访) (NP (NR 华)))))
+    (PU ，)
+    (VP
+      (PP
+        (P 为)
+        (NP
+          (DNP
+            (NP (NP (QP (CD 两)) (NP (NN 国))) (NP (NN 关系)))
+            (DEG 的))
+          (NP (NN 改善) (CC 和) (NN 发展))))
+      (VP
+        (VP (VV 做出) (AS 了) (NP (ADJP (JJ 重要)) (NP (NN 贡献))))
+        (PU ，)
+        (VP
+          (VV 赢得)
+          (AS 了)
+          (NP
+            (DNP (NP (NP (NR 中国)) (NP (NN 人民))) (DEG 的))
+            (NP (NN 尊敬)))))))
+  (PU 。))
+(IP
+  (PP (P 对) (NP (DNP (NP (PN 他)) (DEG 的)) (JJ 不幸) (NN 逝世)))
+  (PU ，)
+  (NP (PN 我))
+  (VP
+    (VP (ADVP (AD 谨)) (VP (VV 表示) (NP (ADJP (JJ 深切)) (NP (NN 哀悼)))))
+    (PU ，)
+    (CC 并)
+    (VP
+      (PP
+        (P 向)
+        (NP (DNP (NP (NR 尼克松) (NN 先生)) (DEG 的)) (NP (NN 家属))))
+      (VP
+        (VV 致以)
+        (NP (CP (CP (IP (VP (VA 诚挚))) (DEC 的))) (NP (NN 慰问))))))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP
+  (NP (NR 澳))
+  (VP
+    (PP (P 向) (NP (NR 中国)))
+    (VP (VV 提供) (NP (QP (CD 一) (CLP (M 笔))) (NP (NN 贷款))))))
+(FRAG (NR 新华社) (NR 堪培拉) (NT ８月) (NT ３１日) (NN 电))
+(IP
+  (NP
+    (NP
+      (NP (NP (NR 中国)) (NP (NN 政府)))
+      (CC 和)
+      (NP (NP (NR 澳大利亚)) (NP (NN 政府))))
+    (NP (NT 今天)))
+  (VP (VV 签署) (AS 了) (NP (QP (CD 一) (CLP (M 项))) (NP (NN 协议))))
+  (PU ，)
+  (IP
+    (NP (NN 澳方))
+    (VP
+      (ADVP (AD 将))
+      (PP (P 向) (NP (NR 中国)))
+      (VP
+        (VV 提供)
+        (NP (QP (CD １．５亿) (CLP (M 澳元))) (NP (NN 优惠) (NN 财政) (NN 贷款))))))
+  (PU 。))
+(IP
+  (P 根据)
+  (NP (NP (NN 协议)) (PU ，) (NP (DP (DT 这) (CLP (M 笔))) (NP (NN 贷款))))
+  (VP
+    (ADVP (VV 将))
+    (ADVP (AD 主要))
+    (VP
+      (P 用于)
+      (NP
+        (NP
+          (NP
+            (NN 电信)
+            (PU 、)
+            (NN 城市)
+            (NN 供水)
+            (PU 、)
+            (NN 污水)
+            (NN 处理)
+            (ETC 等))
+          (NN 基础)
+          (NN 设施))
+        (NP (NN 项目)))))
+  (PU 。))
+(FRAG
+  (NP
+    (CP (CP (VV 为期) (CD 两) (CLP (M 天)) (DEC 的)))
+    (NP (NP (NR 中国)) (NP (NN 政府)))
+    (CC 同)
+    (NP (NP (NR 澳大利亚)) (NP (NN 政府)))
+    (NN １９９４年)
+    (NN 发展)
+    (NN 援助)
+    (NN 合作)
+    (NN 年会))
+  (VP (NP (NT 今天)) (PP (P 在) (NP (NR 墨尔本))) (VP (VV 结束)))
+  (PU 。))
+(IP
+  (CP
+    (CP
+      (IP
+        (VP
+          (P 以)
+          (NP (NN 外经贸部))
+          (VP
+            (NN 部长)
+            (NN 助理)
+            (VP (NP (NR 龙永图)) (VP (VV 为) (NP (NN 团长)))))))
+      (DEC 的)))
+  (NP (NR 中国))
+  (NP (NN 代表团))
+  (CC 与)
+  (NP
+    (CP
+      (CP
+        (IP
+          (VP
+            (P 以)
+            (NP (NR 澳大利亚))
+            (NN 国际)
+            (NN 发展局)
+            (VP
+              (NP (NP (NN 援助局)) (NP (NN 总局长)))
+              (VP (NP (NR 弗拉德)) (VP (VV 为) (NP (NN 团长)))))))
+        (DEC 的)))
+    (NP (NR 澳大利亚))
+    (NP (NN 代表团)))
+  (VV 出席)
+  (AS 了)
+  (NP (NN 年会))
+  (PU 。))
+(IP
+  (LCP (IP (NP (NN 会谈)) (VP (VV 结束))) (LC 后))
+  (PU ，)
+  (NP (PN 双方))
+  (VP (VV 签署) (AS 了) (NP (NN 会谈) (NN 纪要)))
+  (PU 。))
+(IP
+  (NP (P 与) (NP (NP (PN 此)) (NP (NN 同时))) (PU ，) (NP (NN 澳方)))
+  (VP
+    (ADVP (AD 还))
+    (ADVP (AD 将))
+    (VP
+      (PP (P 向) (NP (NR 中国)))
+      (VP
+        (VP
+          (VV 提供)
+          (NP
+            (DNP (QP (CD ２０００万) (CLP (M 澳元))) (DEG 的))
+            (NP (NP (NN 技术) (NN 合作)) (NP (NN 赠款)))))
+        (PU ，)
+        (VP
+          (ADVP (AD 主要))
+          (VP
+            (P 用于)
+            (NP
+              (NP
+                (NN 人员)
+                (NN 培训)
+                (PU 、)
+                (NN 扶贫)
+                (CC 及)
+                (NN 医疗)
+                (NN 卫生)
+                (ETC 等))
+              (NP (NN 项目))))))))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP (NP (NR 乔石)) (VP (VV 会见) (NP (NR 俄罗斯)) (NP (NN 议员团))))
+(FRAG (NR 新华社) (NR 北京) (NT 九月) (NT 一日) (NN 电))
+(FRAG
+  (NP
+    (NP
+      (NP
+        (NP
+          (NP
+            (NP (NP (DT 全) (NP (NR 国))) (NP (NN 人大)))
+            (NP (NN 常委会)))
+          (NP (NN 委员长)))
+        (NP (NR 乔石)))
+      (NN 今天)
+      (NN 下午))
+    (PP (P 在) (NP (NN 人民) (NN 大会堂)))
+    (VV 会见))
+  (VV 了)
+  (CP
+    (CP
+      (IP
+        (VP
+          (NP
+            (P 由)
+            (NP
+              (NP (NP (NN 国家) (NR 杜马)) (NN 副主席))
+              (NP
+                (NP (NR 文格罗夫斯基))
+                (CC 和)
+                (NP
+                  (NP
+                    (NP (NR 俄罗斯) (NN 联邦) (NN 委员会))
+                    (NP (NN 经济) (NN 改革) (NN 委员会)))
+                  (NP (NN 副主席))
+                  (NP (NR 谢尔盖恩科夫))))))
+          (VP (VV 率领))))
+      (DEC 的)))
+  (NP (NR 俄罗斯))
+  (NP (NN 议员团))
+  (PU 。))
+(IP
+  (NN 代表团)
+  (VV 应)
+  (NP
+    (NP (NP (NN 外交) (NN 学会)) (NP (NN 邀请)))
+    (PP (P 于) (NP (NT 八月) (NT 三十日))))
+  (VV 来)
+  (NP
+    (NP (NR 华))
+    (NP (VP (VV 访问)) (PU ，) (NP (NN 旨)))
+    (VV 在)
+    (VV 了解)
+    (NP (NR 中国)))
+  (NP
+    (NP (NP (NN 经济) (NN 改革)) (NP (NN 情况)))
+    (PU ，)
+    (NP (NN 经济) (NN 立法)))
+  (DNP
+    (PP
+      (P 在)
+      (LCP (NP (NN 建立) (NP (NN 市场) (NN 经济) (NN 体制)) (NN 过程)) (LC 中)))
+    (DEG 的))
+  (NP
+    (NP (NN 保障) (NP (NN 作用)))
+    (PU ，)
+    (ADVP (AD 特别是))
+    (NP
+      (DNP
+        (PP (P 在) (NP (NP (NN 经济) (NN 特区) (NN 建设)) (NN 方面)))
+        (DEG 的))
+      (ADJP (JJ 成功))
+      (NP (NN 经验))))
+  (PU 。))
+(IP
+  (NP (NR 晚上))
+  (NT ，)
+  (NP (NP (NN 外交) (NN 学会)) (NP (NN 会长)) (NP (NR 刘述卿)))
+  (VP
+    (VP (VV 会见))
+    (CC 并)
+    (VP (VV 宴请) (AS 了) (NP (NP (NR 俄罗斯)) (NP (NN 客人)))))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(NP
+  (NP (NR 钱其琛))
+  (VP
+    (ADVP (AD 分别))
+    (VP (VV 会见) (NP (NP (NR 法国) (PU 、) (NR 乌拉圭)) (NP (NN 客人))))))
+(FRAG (NR 新华社) (NR 北京) (NT 八月) (NT 三十一日) (NN 电))
+(FRAG
+  (NN 国务院)
+  (NN 副总理)
+  (CC 兼)
+  (NP (NN 外长))
+  (NP
+    (NP (NP (NR 钱其琛)) (NP (NT 今天) (NN 下午)))
+    (PP (P 在) (NP (PN 这里)))
+    (NP (NR 分别)))
+  (VP
+    (VV 会见)
+    (AS 了)
+    (NP
+      (NP (NP (NR 法国) (NN 前) (NN 总理)) (NP (NR 雷蒙・巴尔)))
+      (CC 和)
+      (NP
+        (NP (NP (NP (NR 乌拉圭)) (NN 东岸) (NN 共和国)) (NP (NN 副外长)))
+        (NP (NR 何塞・马利亚・加米奥)))))
+  (PU 。))
+(FRAG
+  (NP
+    (NP (NP (NR 钱其琛)) (PP (P 对) (NP (NP (NR 法国)) (NP (NN 客人)))))
+    (VV 说))
+  (VV ，)
+  (IP
+    (NP (NR 法国))
+    (VP
+      (VC 是)
+      (QP (OD 第一) (CLP (M 个)))
+      (CP
+        (CP (IP (VP (PP (P 同) (NP (NR 中国))) (VP (VV 建交)))) (DEC 的)))
+      (NP (NP (NN 西方)) (ADJP (JJ 大)) (NP (NN 国)))))
+  (PU ，)
+  (IP
+    (IP
+      (NP (NR 中) (NR 法))
+      (VP (VP (VV 建交)) (QP (CD 三十) (CLP (M 年)))))
+    (LC 来))
+  (PU ，)
+  (IP
+    (VP
+      (ADVP (CS 尽管))
+      (VP
+        (VP (VE 有) (NP (QP (CD 一些)) (NP (NN 曲折))))
+        (NR ，)
+        (ADVP (AD 但))
+        (IP (VP (VV 总的来说))))))
+  (NP
+    (PU ，)
+    (NP (DNP (NP (ADJP (JJ 双边)) (NP (NN 关系))) (DEG 的)) (NP (NN 发展))))
+  (VP (VP (VC 是) (NP (CP (CP (IP (VP (VV 令人满意))) (DEC 的))))) (PU 。)))
+(IP
+  (NP (PN 他))
+  (VV 指出)
+  (PU ，)
+  (IP
+    (IP
+      (ADVP (CS 不管))
+      (IP
+        (NP (NN 国际) (NN 形势))
+        (VP
+          (VV 发生)
+          (NP
+            (DP (DT 什么))
+            (NP (CP (CP (IP (VP (VA 大))) (DEC 的))) (NP (NN 变化)))))))
+    (AS ，)
+    (IP
+      (NP (NP (NR 中) (NR 法)) (QP (CD 两)) (NP (NN 国)))
+      (VP (VV 保持) (NP (ADJP (JJ 友好)) (NP (NN 关系)))))
+    (VP
+      (PP
+        (P 对)
+        (NP
+          (DNP (NP (NN 世界)) (DEG 的))
+          (NP (NN 和平) (PU 、) (NN 稳定) (CC 与) (NN 发展))))
+      (ADVP (AD 始终))
+      (VP (VP (VC 是) (IP (VP (VA 重要)))) (DEC 的))))
+  (PU 。))
+(IP
+  (NP (PN 双方))
+  (VP
+    (ADVP (AD 还))
+    (PP
+      (P 就)
+      (NP
+        (NP
+          (NP
+            (DNP (NP (NR 亚洲)) (DEG 的))
+            (NP (NN 安全) (NN 形势) (CC 和) (NN 经济) (NN 发展)))
+          (CC 以及)
+          (NP (NP (DNP (NP (NR 欧洲)) (DEG 的)) (NP (NN 一体化))) (ETC 等)))
+        (ADJP (JJ 有关))
+        (NP (NN 问题))))
+    (VP (VV 交换) (AS 了) (NP (NN 看法))))
+  (PU 。))
+(IP
+  (NP (NR 巴尔))
+  (VP
+    (VP
+      (VV 希望)
+      (IP
+        (NP (NP (NR 法) (NR 中)) (NP (NN 关系)))
+        (VP
+          (VV 能够)
+          (VP
+            (VV 得到)
+            (NP (ADJP (JJ 进一步)) (NP (NN 发展) (CC 和) (NN 加强)))))))
+    (PU ，)
+    (CC 并)
+    (VP
+      (NP (VV 表示) (NP (NR 法国)))
+      (VP
+        (VV 愿)
+        (VP
+          (PP (P 以) (NP (DNP (NP (PN 自己)) (DEG 的)) (NP (NN 优势))))
+          (DVP (VP (ADVP (AD 更加)) (VP (VA 积极))) (DEV 地))
+          (VP
+            (VV 参与)
+            (NP (DNP (NP (NR 中国)) (DEG 的)) (NP (NN 经济) (NN 建设))))))))
+  (PU 。))
+(NP
+  (NP (NP (NP (NN 外交) (NR 学会)) (NP (NN 会长))) (NP (NR 刘述卿)))
+  (VP (LCP (IP (VP (VV 会见))) (LC 时)) (VP (VV 在座)))
+  (PU 。))
+(IP
+  (IP
+    (NP (NP (NR 巴尔)) (NP (NN 一行)))
+    (VP
+      (VP (VV 应) (NP (NP (NN 外交) (NN 学会)) (NP (NN 邀请))))
+      (PP (P 于) (NP (NT 三十日)))
+      (VP (VV 抵) (NP (NR 京)))))
+  (PU ，)
+  (IP
+    (NP (PN 他们))
+    (VP
+      (ADVP (AD 还))
+      (ADVP (AD 将))
+      (VP (VP (VV 前往) (NP (NR 上海))) (VP (VV 访问)))))
+  (PU 。))
+(IP
+  (PP
+    (P 在)
+    (LCP (IP (VP (VV 会见) (NP (NP (NR 乌拉圭)) (NP (NN 客人))))) (LC 时)))
+  (P ，)
+  (NP (NR 钱其琛))
+  (PP
+    (P 对)
+    (IP
+      (NP (NR 加米奥) (NN 副外长))
+      (VP (VP (VV 来访)) (CC 和) (VP (VV 进行) (NP (NN 政治) (NN 磋商))))))
+  (VP (VV 表示) (NR 欢迎))
+  (PU 。))
+(IP
+  (NP (PN 他))
+  (VP
+    (VV 说)
+    (PU ，)
+    (IP
+      (LCP
+        (IP
+          (NP (NR 中) (NR 乌))
+          (VP (VP (VV 建交)) (QP (CD 六) (CLP (CLP (M 年)) (QP (CD 多))))))
+        (LC 来))
+      (PU ，)
+      (NP
+        (NP (QP (CD 两)) (NP (NN 国)))
+        (NP (ADJP (JJ 友好)) (NP (NN 合作)))
+        (NP (NN 关系)))
+      (VP (VP (VV 持续)) (VP (ADVP (AD 稳步)) (VP (VV 发展))))))
+  (PU 。))
+(FRAG
+  (NP (NP (NR 乌拉圭)) (VC 是) (NP (NP (NR 拉美)) (NP (NN 地区))))
+  (PP (P 同) (NP (NR 中国)))
+  (VP (VV 开展) (NP (NN 贸易)))
+  (VP (VP (ADVP (AD 最)) (VP (VA 早))) (DEC 的) (NP (NN 国家)) (NN 之一))
+  (PU ，)
+  (IP
+    (NP (NP (ADJP (JJ 双边)) (NP (NN 贸易))) (NP (NN 发展)))
+    (VP (ADVP (AD 较)) (VP (VA 快))))
+  (PU 。))
+(NP
+  (NP (NP (NT 目前)) (PU ，) (NP (NR 中国)))
+  (VP
+    (VC 是)
+    (NP
+      (DNP (NP (NP (NR 乌拉圭)) (NP (NN 羊毛))) (DEG 的))
+      (ADJP (JJ 最大))
+      (NP (NN 买主))))
+  (PU 。))
+(IP
+  (NP (PN 他))
+  (VP
+    (VV 希望)
+    (IP
+      (NP
+        (NP (NT 今后))
+        (DNP (NP (QP (CD 两)) (NP (NN 国))) (DEG 的))
+        (NP (NN 经贸) (NN 科技) (NN 合作) (CC 与) (NN 交流)))
+      (VP (ADVP (AD 进一步)) (VP (VV 扩大) (CC 和) (VV 发展)))))
+  (PU 。))
+(FRAG
+  (NP (NR 钱其琛))
+  (VP
+    (PP
+      (P 对)
+      (IP
+        (NP (NR 乌拉圭))
+        (PP
+          (PP (P 在) (LCP (NP (NN 国际) (NN 事务)) (LC 中)))
+          (VP
+            (VV 给予)
+            (NP (CP (CP (NP (NR 中国)) (DEC 的))) (NP (NN 支持)))))))
+    (VP (VV 表示) (NP (NR 感谢))))
+  (PU ，)
+  (PP
+    (P 对)
+    (IP
+      (NP (NP (NR 乌拉圭)) (NP (NN 政府)))
+      (VP
+        (VV 坚持)
+        (NP
+          (DNP (NP (QP (CD 一) (CLP (M 个))) (NP (NR 中国))) (DEG 的))
+          (NP (NN 立场))))))
+  (VP (VP (VV 表示) (NP (NR 赞赏))) (NR 。)))
+(IP
+  (NP (NR 他))
+  (VP
+    (VV 说)
+    (PU ，)
+    (IP
+      (NP (NR 拉美))
+      (VP
+        (VP
+          (VC 是)
+          (NP
+            (QP (CD 一) (CLP (M 个)))
+            (CP (CP (IP (VP (VV 充满) (NP (NN 希望)))) (DEC 的)))
+            (NP (NN 大陆))))
+        (PU ，)
+        (VP
+          (VV 具有)
+          (NP
+            (CP (CP (IP (VP (VA 巨大))) (DEC 的)))
+            (NP (NN 发展) (NN 潜力)))))))
+  (PU 。))
+(IP
+  (IP
+    (LCP (QP (ADVP (AD 近)) (QP (CD 几) (CLP (M 年)))) (LC 来))
+    (VV ，)
+    (NP (NP (NR 拉美)) (NP (NN 经济)))
+    (VP (ADVP (AD 稳定)) (VP (VV 增长))))
+  (PU ，)
+  (NP (PN 这))
+  (VP
+    (PP
+      (P 为)
+      (IP
+        (VP
+          (ADVP (AD 进一步))
+          (VP (VV 加强) (NP (NP (NR 中) (NR 拉)) (NP (NN 经贸) (NN 合作)))))))
+    (VP
+      (VV 提供)
+      (AS 了)
+      (NP (CP (CP (IP (VP (VA 良好))) (DEC 的))) (NP (NN 条件)))))
+  (PU 。))
+(IP
+  (NP (NR 他))
+  (VP
+    (VV 说)
+    (VV ，)
+    (IP
+      (NP (NR 中国))
+      (VP
+        (VV 重视)
+        (IP
+          (VP
+            (IP
+              (VP
+                (VV 加强)
+                (IP
+                  (VP
+                    (VV 同)
+                    (IP (VP (VV 包括) (LCP (NP (NR 乌拉圭)) (LC 在内))))))))
+            (DEC 的)
+            (NP (NN 南方) (ADJP (JJ 共同)) (NN 市场) (NP (NN 国家)))
+            (CC 和)
+            (NP
+              (ADJP
+                (NP
+                  (NP (DP (DT 其他)) (NP (NR 拉美)) (NP (NN 国家)))
+                  (DEG 的))
+                (ADJP (JJ 友好)))
+              (NP (NP (NN 合作)) (NN 关系))))))))
+  (PU 。))
+(IP
+  (NP (NR 加米奥))
+  (VP
+    (VV 表示)
+    (PU ，)
+    (IP
+      (NP (NR 乌拉圭))
+      (VP
+        (VV 重视)
+        (NP
+          (PP
+            (PP (P 同) (NP (NR 中国)))
+            (VP
+              (VV 发展)
+              (NP
+                (NP
+                  (NN 经济)
+                  (NN 贸易)
+                  (PU 、)
+                  (NN 科学)
+                  (NN 技术)
+                  (CC 和)
+                  (NN 文化)
+                  (ETC 等))
+                (DP (DT 各) (CLP (M 个)))
+                (NP (NN 领域)))))
+          (DEG 的)
+          (NP (NN 关系))))))
+  (PU 。))
+(IP
+  (NP (PN 他))
+  (VP
+    (VV 说)
+    (PU ，)
+    (IP
+      (IP
+        (LCP (NP (NN 七十年代)) (LC 初))
+        (NP (NR 中国))
+        (VP
+          (VV 恢复)
+          (AS 了)
+          (NP
+            (DNP (PP (P 在) (NP (NR 联合国))) (DEG 的))
+            (ADJP (JJ 合法))
+            (NP (NN 席位)))))
+      (PU ，)
+      (NP (PN 这))
+      (VP
+        (VC 是)
+        (NP
+          (DNP (LCP (NP (NP (NR 联合国)) (NP (NN 事务))) (LC 中)) (DEG 的))
+          (QP (CD 一) (CLP (M 个)))
+          (ADJP (JJ 重大))
+          (NP (NN 进展))))))
+  (PU 。))
+(IP
+  (NP (NR 乌拉圭))
+  (VP
+    (ADVP (AD 高度))
+    (VV 赞赏)
+    (NP
+      (NP (NR 中国))
+      (VP
+        (VP
+          (PP (VV 在) (LCP (NP (NN 国际) (NN 事务)) (LC 中)))
+          (VP (VV 发挥) (VP (ADVP (AD 越来越)) (VP (VA 重要)))))
+        (DEC 的)
+        (NP (NN 作用))))
+    (PU ，)
+    (VP
+      (VP
+        (ADVP (AD 特别是))
+        (VP
+          (PP
+            (P 在)
+            (LCP
+              (NP
+                (VV 建立)
+                (NP
+                  (NP (NN 国际) (NN 政治) (NN 经济))
+                  (ADJP (JJ 新))
+                  (NP (NN 秩序))))
+              (LC 中)))
+          (VP (MSP 所) (VP (VV 起)))))
+      (NP (DEC 的) (ADJP (JJ 积极)) (NP (NN 作用)))))
+  (PU 。))
+(IP
+  (IP
+    (NP (NR 乌拉圭))
+    (VP
+      (ADVP (AD 坚决))
+      (VP
+        (VV 支持)
+        (IP
+          (VP
+            (VV 恢复)
+            (NP (NR 中国))
+            (DNP
+              (PP
+                (P 在)
+                (LCP (NP (ADJP (JJ 关贸)) (NP (NN 总协定))) (LC 中)))
+              (DEG 的))
+            (NP (NN 缔约国) (NN 地位)))))))
+  (PU ，)
+  (CC 并)
+  (VP
+    (VV 相信)
+    (IP
+      (NP (PN 它))
+      (VP
+        (PP
+          (P 在)
+          (LCP
+            (NP
+              (DNP (NP (NT 未来)) (DEG 的))
+              (NP (NN 世界) (NN 贸易) (NN 组织)))
+            (LC 中)))
+        (VP
+          (VV 作出)
+          (NP (CP (CP (IP (VP (VA 积极))) (DEC 的))) (NP (NN 贡献)))))))
+  (PU 。))
+(IP
+  (NP
+    (NP (NT 今天) (NR 上午))
+    (NR ，)
+    (NP (NR 加米奥))
+    (NP (VV 代表) (NP (NP (NR 乌拉圭)) (NP (NN 政府)))))
+  (PP (VV 向) (NP (NR 中国) (NN 纺织) (NN 总会)))
+  (VV 赠送)
+  (AS 了)
+  (QP (CD 十七) (CLP (M 吨)))
+  (NP
+    (NP (NN 羊毛))
+    (PU ，)
+    (VV 供)
+    (NP
+      (NP (NR 中国))
+      (ADJP (JJ 有关))
+      (NP
+        (NP (NN 部门))
+        (PU 、)
+        (NP (NN 科研) (NN 机构) (CC 和) (NP (ADJP (JJ 高等)) (NP (NN 院校)))))))
+  (VV 作为)
+  (NP (NP (NP (NN 科研) (NN 所)) (VP (VV 用))) (PU 。)))
+(IP
+  (NP
+    (NP (NP (NP (NR 外交部)) (NP (NN 副部长))) (NP (NR 刘华秋)))
+    (NP (NR 二十九日)))
+  (P 在)
+  (NP (NP (PN 这里)) (P 同) (NP (NR 加米奥)))
+  (VP (VV 举行) (AS 了) (NP (NN 工作) (NN 会谈)))
+  (PU ，)
+  (NP (PN 双方))
+  (PP
+    (P 就)
+    (NP
+      (CP
+        (CP
+          (IP
+            (VP
+              (ADVP (AD 进一步))
+              (VP
+                (VP (VV 发展) (NP (ADJP (JJ 双边)) (NP (NN 关系))))
+                (CC 和)
+                (IP (VP (ADVP (AD 共同)) (VP (VV 关心)))))))
+          (DEC 的)))
+      (NP (NP (NN 国际) (PU 、) (NN 地区)) (NP (NN 问题)))))
+  (DVP (VP (VV 深入)) (DEV 地))
+  (VP (VV 交换) (AS 了) (NP (NN 意见)))
+  (PU ，)
+  (VP
+    (VP
+      (VV 取得)
+      (AS 了)
+      (NP (CP (CP (IP (VP (VA 广泛))) (DEC 的))) (NP (NN 一致))))
+    (PU 。)))
+(FRAG
+  (NP
+    (NP (NP (NP (NR 加米奥)) (NP (NN 一行))) (NN 是))
+    (VP (VV 应) (NP (NP (NN 外交部)) (NP (NN 邀请)))))
+  (VP
+    (PP (P 于) (NP (NT 八月) (NT 二十九日)))
+    (VP (VP (VV 来) (NP (NR 华))) (VP (VV 访问))))
+  (CC 和)
+  (VP
+    (VP
+      (VV 进行)
+      (NP
+        (LCP (NP (QP (CD 两)) (NP (NP (NN 国)) (NP (NN 外交部)))) (LC 间))
+        (NP (NN 政治) (NN 磋商))))
+    (DEC 的))
+  (PU 。))
+(IP
+  (NP (PN 他们))
+  (VP
+    (ADVP (AD 还))
+    (ADVP (AD 将))
+    (VP (VP (VV 赴) (NP (NR 杭州))) (VP (VV 访问))))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(FRAG
+  (NP (NR 江泽民))
+  (NP (VV 会见))
+  (NR 中国)
+  (NR 红十字会)
+  (QP (OD 第六) (CLP (M 次)))
+  (NP (NP (DT 全)) (NP (NN 国)))
+  (NP (NP (NP (NN 会员) (NN 代表)) (NN 大会)) (NP (NN 代表))))
+(FRAG (NN 新华社) (NR 北京) (NT 四月) (NT 二十三日) (NN 电))
+(FRAG
+  (NR 中共)
+  (NR 中央)
+  (NP (NN 总书记))
+  (PU 、)
+  (NP (NN 国家) (NN 主席))
+  (PU 、)
+  (NP
+    (NP (NR 中国) (NR 红十字会))
+    (NP (ADJP (JJ 名誉)) (NP (NN 会长)))
+    (NP (NP (NP (NR 江泽民)) (NP (NT 今天))) (PP (P 在) (NP (NR 中南海)))))
+  (VP (NR 会见))
+  (AS 了)
+  (NP (NR 中国) (NN 红十字会))
+  (QP (OD 第六) (CLP (M 次)))
+  (NP
+    (NP (NP (DT 全)) (NP (NN 国)))
+    (NP (NP (NP (NN 会员)) (NN 代表)) (NP (NN 大会))))
+  (NP (NN 代表))
+  (PU ，)
+  (NP
+    (CC 并)
+    (NP
+      (ADVP (VV 代表))
+      (NP (NP (NR 中共)) (NN 中央) (PU 、) (NP (NN 国务院)))))
+  (P 向)
+  (NP
+    (CP (CP (IP (VP (NN 辛勤) (VP (NN 工作)))) (DEC 的)))
+    (M 二千万)
+    (NP (NN 会员)))
+  (VV ，)
+  (VP
+    (VP
+      (VV 表示)
+      (NP (CP (CP (IP (VP (VCD (VA 亲切)))) (DEC 的))) (NP (NN 问候))))
+    (PU 。)))
+(IP
+  (NP (NP (NR 江泽民)) (VV 说) (PU ，) (NP (NR 中国) (NN 红十字会)))
+  (P 为)
+  (ADJP (JJ 国际性))
+  (NP (DEG 的))
+  (CP (CP (IP (VP (VV 从事) (NP (NN 人道主义) (NP (NN 工作))))) (DEC 的)))
+  (NP
+    (NP (NN 社会) (NN 救助) (NN 团体))
+    (PU ，)
+    (PP
+      (P 按照)
+      (NP
+        (NP (NN 国际))
+        (NR 红十字)
+        (CC 与)
+        (NP
+          (NP (NR 红新月))
+          (NP (DNP (NP (NN 运动)) (DEG 的)) (NP (NR 基本) (NP (NN 原则))))))))
+  (PU ，)
+  (LCP (QP (CD 九十) (CLP (NN 年))) (LC 来))
+  (VP
+    (PP (P 为) (NP (NN 人民)))
+    (VP
+      (VP (VV 做) (AS 了) (NP (QP (CD 大量)) (NP (NN 好事))))
+      (PU ，)
+      (VP
+        (PP (P 为) (NP (DNP (NP (NN 国家)) (DEG 的)) (NP (NN 发展))))
+        (VP (VV 做出) (AS 了) (NP (QP (OD 不少)) (NP (NN 贡献)))))))
+  (CC ，)
+  (VP
+    (PP (P 以) (NP (ADJP (JJ 实际)) (NP (NN 行动))))
+    (VP
+      (VV 赢得)
+      (AS 了)
+      (NP
+        (DNP (NP (ADJP (JJ 广大)) (NP (NN 群众))) (DEG 的))
+        (NP (NN 尊敬) (CC 和) (NN 支持)))))
+  (PU 。))
+(IP
+  (NP (NR 江泽民))
+  (VP
+    (VV 说)
+    (PU ，)
+    (IP
+      (NP (NR 红十字) (NP (NN 事业)))
+      (VP
+        (VP
+          (VC 是)
+          (NP
+            (QP (CD 一) (CLP (M 项)))
+            (CP (CP (IP (VP (VA 崇高))) (DEC 的)))
+            (NP (NN 社会) (NN 事业))))
+        (PU ，)
+        (VP
+          (PP
+            (P 对)
+            (IP
+              (VP
+                (VV 建设)
+                (NP (NN 社会主义) (NN 物质) (NN 文明) (CC 和) (NN 精神) (NN 文明)))))
+          (VP
+            (VE 有)
+            (NP
+              (VV 着)
+              (NP
+                (CP (CP (IP (VP (VA 积极))) (DEC 的)))
+                (NP (NN 促进) (NN 作用)))))))))
+  (PU 。))
+(IP
+  (NP
+    (LCP (NP (NN 改革) (NN 开放)) (LC 以来))
+    (NR ，)
+    (NP (NR 中国) (NN 红十字会)))
+  (PP
+    (P 根据)
+    (NP (CP (CP (IP (VP (VA 新))) (DEC 的))) (NP (NN 实践) (NN 要求))))
+  (PU ，)
+  (VP
+    (VP
+      (VV 开展)
+      (AS 了)
+      (NP
+        (CP (CP (CP (IP (VP (VV 卓有) (NP (NN 成效))))) (DEC 的)))
+        (NN 人道主义)
+        (NN 工作)))
+    (PU ，)
+    (VP
+      (PP (P 在) (LCP (NP (NN 社会)) (LC 上)))
+      (VP
+        (VV 产生)
+        (AS 了)
+        (NP
+          (CP (CP (IP (VP (VA 广泛) (CC 而) (VA 良好))) (DEC 的)))
+          (NP (NN 影响)))))
+    (PU ，)
+    (VP
+      (VV 走出)
+      (AS 了)
+      (NP
+        (CP
+          (CP
+            (NP (VE 有) (NP (NP (NR 中国)) (NP (NN 特色))))
+            (JJ 的)
+            (CP (CP (VV 发展) (NP (NP (NR 红十字)) (NP (NN 事业))) (DEC 的)))))
+        (NP (NN 新路)))))
+  (PU 。))
+(IP
+  (NP
+    (NP (NN 国家) (NN 副主席))
+    (NP
+      (NR 荣毅仁)
+      (NR 和)
+      (NR 钱其琛)
+      (PU 、)
+      (NN 彭（佩去亻加王旁）云)
+      (PU 、)
+      (NR 钱正英)
+      (ETC 等)))
+  (VV 参加)
+  (AS 了)
+  (NN 会见)
+  (PU 。))
+(IP
+  (NP
+    (CP
+      (CP
+        (IP (VP (ADVP (AD 正)) (P 在) (NP (NN 国外)) (VP (VV 访问))))
+        (DEC 的)))
+    (NP (NP (NN 国务院) (NN 总理)) (NP (NR 李鹏))))
+  (VP (PP (P 给) (NP (NN 大会))) (VP (VV 发来) (AS 了) (NP (NN 贺信))))
+  (PU 。))
+(FRAG
+  (NP (NR 李鹏))
+  (PP (P 在) (LCP (NP (NN 贺信)) (LC 中)))
+  (VP
+    (VV 说)
+    (PU ，)
+    (NP
+      (NP (NR 中国) (NN 红十字会))
+      (VP
+        (VC 是)
+        (NP
+          (QP (CD 一) (CLP (M 个)))
+          (CP (CP (IP (VP (ADVP (AD 很)) (VP (VA 重要)))) (DEC 的)))
+          (NN 人道主义)
+          (NN 组织)))))
+  (PU ，)
+  (LCP (QP (OD 九十) (M 年)) (LC 来))
+  (NR ，)
+  (ADVP (AD 特别是))
+  (LCP
+    (LCP (IP (NP (ADJP (JJ 新)) (NP (NR 中国))) (VP (VV 成立))) (LC 以来))
+    (NR ，)
+    (PP
+      (P 在)
+      (LCP
+        (NP
+          (NP (NR 中国))
+          (NP
+            (NP (NN 人民))
+            (VP (CC 与) (IP (NN 世界) (NN 人民) (NP (NN 交往))))))
+        (LC 中))))
+  (VP (VV 发挥) (NP (CP (CP (IP (VP (VA 重要))) (DEC 的))) (NP (NN 作用))))
+  (PU 。))
+(IP
+  (IP
+    (NP (PN 他))
+    (VP
+      (VV 希望)
+      (IP
+        (NP (DNP (NP (NR 中国)) (DEG 的)) (NP (NN 红十字) (NP (NN 事业))))
+        (VP (ADVP (AD 更加)) (ADVP (AD 蓬勃)) (VP (VV 发展))))))
+  (PU ，)
+  (IP
+    (NP (PN 他))
+    (VP
+      (VV 希望)
+      (IP
+        (NP
+          (NP (DP (DT 全)) (NP (NN 社会)))
+          (CC 和)
+          (NP (DP (DT 各) (CLP (M 级))) (NP (NN 政府))))
+        (VP
+          (ADVP (AD 都))
+          (VP
+            (VV 来)
+            (VP
+              (VP (VV 关心))
+              (PU 、)
+              (VP
+                (VV 支持)
+                (NP
+                  (DP (DT 这) (CLP (M 项)))
+                  (CP (CP (IP (VP (VA 崇高))) (DEC 的)))
+                  (NP (NN 事业))))))))))
+  (PU 。))
+(FRAG
+  (NP (NR 江泽民) (PU 、) (NR 李鹏) (PU 、) (NR 乔石) (PU 、) (NR 刘华清) (NR 等))
+  (AD 还)
+  (P 为)
+  (NP (NR 中国) (NN 红十字会))
+  (NP (NN 成立))
+  (QP (NR 九十) (QP (NP (NN 周年)) (CC 暨) (QP (OD 第六) (CLP (M 次)))))
+  (NP (DT 全) (NP (NR 国)))
+  (NP (NP (NN 代表)) (NN 大会) (NP (NN 题)))
+  (NR 了)
+  (NP (NP (NN 词)) (PU 。)))
+(FRAG (PU （) (VV 完) (PU ）))
+(FRAG
+  (NP (NR 李鹏) (NN 总理))
+  (VP
+    (VP
+      (NP (NR 为))
+      (NP (NN 国际) (NN 人口) (CC 与) (NN 发展) (NN 大会))
+      (VP (ADVP (AD 即将)) (VP (VV 召开))))
+    (VP (VV 发表) (NP (ADJP (JJ 书面)) (NP (NN 讲话))))))
+(FRAG (NR 新华社) (NR 北京) (NT 八月) (NT 三十一日) (NN 电))
+(IP
+  (NP (NR 李鹏) (NN 总理))
+  (VP
+    (PP
+      (P 为)
+      (IP (VP (VV 迎接) (NP (NN 国际) (NN 人口) (CC 与) (NN 发展) (NN 大会)))))
+    (VP (VV 发表) (ADJP (JJ 书面)) (NN 讲话)))
+  (PU 。))
+(IP
+  (QP (IP (NP (PN 他)) (VV 认为)) (PU ，))
+  (IP
+    (IP
+      (NP (NP (NR 中国)) (NP (NN 政府)))
+      (IP
+        (VP
+          (BA 把)
+          (IP
+            (NN 人口)
+            (NN 问题)
+            (VP
+              (NR 与)
+              (IP
+                (NN 社会)
+                (NN 经济)
+                (VP
+                  (NN 问题)
+                  (VP
+                    (VP (ADVP (AD 一同)) (VP (VV 规划)))
+                    (PU 、)
+                    (VP
+                      (VP (ADVP (AD 一同)) (VP (VV 决策)))
+                      (PU 、)
+                      (VP (ADVP (AD 一同)) (VP (VV 实施))))))))))))
+    (DEC 的)
+    (NP (NN 方针))
+    (VP
+      (ADVP (VC 是))
+      (NP
+        (CP
+          (CP
+            (NP (CP (CP (IP (VP (VA 正确))) (DEC 的))))
+            (PU ，)
+            (VP
+              (VP (VC 是) (NP (CP (CP (IP (VP (VA 行之有效))) (DEC 的)))))
+              (PU ，)
+              (VP (VC 是) (NP (CP (CP (IP (VP (VA 成功))) (DEC 的)))))))))))
+  (PU 。))
+(FRAG
+  (NP (NR 李鹏))
+  (VV 说)
+  (PU ，)
+  (IP
+    (NP (NN 今年) (NR 九月) (LC 初) (VP (PU ，)) (NP (NR 联合国)))
+    (VP
+      (ADVP (AD 将))
+      (VP
+        (PP (P 在) (NP (NR 开罗)))
+        (VP (VV 召开) (NP (NN 国际) (NN 人口) (CC 与) (NN 发展) (NP (NN 大会))))))
+    (PU ，)
+    (CC 并)
+    (VP
+      (PP
+        (P 以)
+        (NP
+          (DT “)
+          (NP
+            (DNP (NP (NN 人口)) (PU 、) (DNP (ADJP (NN 持续)) (DEG 的)))
+            (NP (NN 经济) (NN 增长)))
+          (CC 和)
+          (NP
+            (NP (CP (CP (VV 可) (JJ 持续) (DEG 的))) (NP (NN 发展)))
+            (PU ”))))
+      (VP (VV 为) (NP (NN 主题)))))
+  (PU 。))
+(IP
+  (NP (PN 这))
+  (VP
+    (VV 表明)
+    (IP
+      (IP
+        (NP (NN 国际) (NN 社会))
+        (VP
+          (DVP (VP (ADVP (AD 日益)) (VP (VA 清醒))) (DEV 地))
+          (VP
+            (VRD (VV 认识) (VE 到))
+            (IP (NP (NN 人口) (CC 与) (NN 发展)) (VP (VV 密不可分))))))
+      (PU ，)
+      (CC 并)
+      (VP (VV 准备) (IP (VP (VV 采取) (NP (ADJP (JJ 共同)) (NP (NN 行动))))))))
+  (PU 。))
+(IP
+  (IP
+    (NP (PN 他))
+    (VP
+      (VV 认为)
+      (IP
+        (NP (PN 这))
+        (VP
+          (VC 是)
+          (NP
+            (QP (CD 一) (CLP (M 次)))
+            (CP
+              (CP
+                (IP (VP (VV 具有) (NP (ADJP (JJ 重要)) (NP (NN 意义)))))
+                (DEC 的)))
+            (NP (NN 会议)))))))
+  (PU ，)
+  (IP
+    (NP (NP (NR 中国)) (NP (NN 政府)))
+    (IP
+      (VP
+        (IP (VP (VV 予以) (NP (ADJP (JJ 高度)) (NP (NN 重视)))))
+        (PU ，)
+        (IP
+          (VP
+            (ADVP (AD 将))
+            (VP (VV 派) (NP (NN 代表团)) (VP (VV 出席) (NP (NN 会议)))))))))
+  (PU 。))
+(IP
+  (NP (NP (NP (NR 李鹏)) (VV 说)) (PU ，) (NP (NR 中国)))
+  (VP
+    (VC 是)
+    (NP
+      (CP
+        (CP
+          (IP
+            (LCP (NP (NN 世界)) (LC 上))
+            (NP (NN 人口))
+            (VP (ADVP (AD 最)) (VP (VA 多))))
+          (DEC 的)))
+      (ADJP (JJ 发展中))
+      (NP (NN 国家))))
+  (PU 。))
+(IP
+  (IP
+    (NP (NP (NR 中国)) (NP (NN 政府)))
+    (VP
+      (BA 将)
+      (IP
+        (NP (NN 人口) (NN 问题))
+        (VP
+          (VV 纳入)
+          (LCP
+            (NP
+              (DNP
+                (NP (NN 国民) (NN 经济) (CC 与) (NN 社会) (NN 发展))
+                (DEG 的))
+              (NP (NN 总体) (NN 规划)))
+            (VP (LC 中)))))))
+  (PU ，)
+  (ADVP (AD 始终))
+  (VP
+    (VV 强调)
+    (IP
+      (NP (DNP (NP (NN 人口)) (DEG 的)) (NP (NN 增长)))
+      (VP
+        (VV 要)
+        (VP
+          (VP
+            (PP
+              (P 与)
+              (NP
+                (DNP (NP (NN 社会) (CC 和) (NN 经济)) (DEG 的))
+                (NP (NN 发展))))
+            (ADVP (AD 相))
+            (VP (VV 适应)))
+          (PU ，)
+          (VP
+            (PP (P 与) (NP (NN 资源) (NN 利用) (CC 和) (NN 环境) (NN 保护)))
+            (ADVP (AD 相))
+            (VP (VV 协调)))))))
+  (PU 。))
+(IP
+  (IP
+    (VP
+      (PP
+        (P 从)
+        (NP (NP (NR 中国)) (DEG 的) (NP (NP (NN 基本)) (NP (NN 国情)))))
+      (VP (VV 出发))))
+  (NR ，)
+  (NP (NP (NR 中国)) (NP (NN 政府)))
+  (VP
+    (VV 确定)
+    (NP
+      (NP (NN 计划) (NN 生育) (CC 和) (NN 环境) (NN 保护))
+      (VP
+        (VV 为)
+        (NP (QP (CD 两) (CLP (M 项))) (ADJP (JJ 基本)) (NP (NN 国策))))))
+  (PU ，)
+  (VP
+    (VV 实施)
+    (AS 了)
+    (NP
+      (CP
+        (CP (IP (VP (VV 符合) (NP (NP (NR 中国)) (NP (NN 实际))))) (DEC 的)))
+      (NP (NN 人口) (NN 政策) (CC 和) (NN 计划) (NN 生育) (NN 方案))))
+  (PU 。))
+(IP
+  (ADVP (AD 同时))
+  (NR ，)
+  (NP (NR 中国))
+  (NP (NN 政府))
+  (ADVP (AD 还))
+  (VV 制定)
+  (AS 了)
+  (NP
+    (QP (CD 一) (CLP (M 系列)))
+    (CP (CP (IP (VP (VA 重大))) (DEC 的)))
+    (NP (NN 决策) (CC 和) (NN 措施)))
+  (PU ，)
+  (ADVP (NN 如))
+  (IP
+    (VP
+      (VP (VV 保护) (NP (NP (NN 妇女)) (ADJP (JJ 合法)) (NP (NN 权益))))
+      (PU ，)
+      (VP
+        (VP (VV 促进) (NP (NP (NN 男女)) (VP (NN 平等))))
+        (PU ，)
+        (VP
+          (ADVP (AD 大力))
+          (VP (VV 发展) (NP (NN 妇幼) (NN 保健) (VP (NN 事业))))))
+      (PU ，)
+      (VP (ADVP (AD 努力)) (VP (VV 消除) (NP (NN 贫困))))
+      (PU ，)
+      (VP
+        (VP (VV 保护) (NP (NN 生态) (NN 环境)))
+        (VP
+          (PU ，)
+          (VP (VV 以) (VP (VV 实现) (NP (ADJP (JJ 可持续)) (NP (NN 发展)))))))))
+  (PU 。))
+(FRAG
+  (CP
+    (IP
+      (NP (NT 当前))
+      (PU ，)
+      (IP (NP (NR 中国)) (IP (NP (NN 经济)) (VP (VV 持续) (VP (VV 增长)))))))
+  (CC ，)
+  (IP
+    (IP (NP (NN 社会) (NN 安定)) (VP (VV 团结)))
+    (PU ，)
+    (IP (NP (NN 人民) (NN 生活)) (VP (ADVP (AD 不断)) (VP (VV 改善)))))
+  (PU ，)
+  (IP
+    (NP (NN 人口) (NN 出生率) (NN 和) (NN 人口) (NN 自然) (NN 增长率))
+    (VP
+      (VRD (VV 下降) (VV 到))
+      (NP
+        (CP (CP (IP (VP (NN 较) (VP (VA 低)))) (DEC 的)))
+        (NP (NN 水平)))))
+  (PU 。))
+(NP
+  (NP (NP (NP (NR 李鹏)) (VV 说)) (PU ，) (NP (NN 人口) (NN 问题)))
+  (VP
+    (VC 是)
+    (NP
+      (CP
+        (CP
+          (IP (NP (NT 当今) (NP (NN 国际) (NN 社会))) (VP (VV 面临)))
+          (DEC 的)))
+      (ADJP (JJ 重大))
+      (NP (NN 问题))))
+  (PU 。))
+(IP
+  (PP
+    (P 由于)
+    (IP
+      (IP (NP (NN 国情)) (VP (VA 不同)))
+      (CC ，)
+      (IP
+        (NP
+          (NN 经济)
+          (NN 发展)
+          (NN 水平)
+          (PU 、)
+          (NN 文化)
+          (NN 背景)
+          (PU 、)
+          (NN 历史)
+          (NN 传统)
+          (PU 、)
+          (NN 社会)
+          (NN 制度))
+        (VP (ADVP (AD 各)) (VP (VA 异))))))
+  (PU ，)
+  (NP (DT 各) (NP (NN 国)))
+  (VP
+    (VV 应该)
+    (VP
+      (PP
+        (P 根据)
+        (NP
+          (DNP (NP (DP (DT 本)) (NP (NN 国))) (DEG 的))
+          (ADJP (JJ 实际))
+          (NP (NN 情况))))
+      (PU ，)
+      (VP
+        (VV 制订)
+        (NP
+          (CP
+            (CP
+              (CP (CP (IP (VP (VA 适宜))) (DEC 的)))
+              (PU 、)
+              (CP (CP (VA 有效) (DEC 的)))))
+          (NP (NN 人口) (NN 政策))))))
+  (PU 。))
+(IP
+  (NP (PN 这))
+  (VP
+    (VP
+      (VC 是)
+      (NP (DNP (NP (DP (DT 各)) (NP (NN 国))) (DEG 的)) (NP (NN 主权))))
+    (PU ，)
+    (VP (VV 应当) (VP (VV 受到) (NP (ADJP (JJ 充分)) (NP (NN 尊重))))))
+  (PU 。))
+(IP
+  (NP (PN 他))
+  (VP
+    (VV 说)
+    (PU ，)
+    (NP (NR 中国))
+    (ADVP (AD 正))
+    (VV 处)
+    (P 在)
+    (CP
+      (CP
+        (NP
+          (CP
+            (CP
+              (NP
+                (VV 建立)
+                (NP
+                  (NP (NN 社会主义) (NN 市场) (NN 经济) (NN 体制))
+                  (PU ，)
+                  (VP (VV 加快) (NP (NN 现代化) (NN 建设)))))
+              (DEC 的)))
+          (NP (NN 关键) (NN 时期)))
+        (PU ，)
+        (CP (CP (IP (VP (VA 庞大))) (DEC 的)))))
+    (NP (NP (NN 人口)) (NP (ADJP (JJ 绝对)) (NP (NN 增长量))))
+    (VP
+      (ADVP (AD 仍然))
+      (VP
+        (VP
+          (VV 制约)
+          (AS 着)
+          (NP (DNP (NP (NN 社会) (CC 与) (NN 经济)) (DEG 的)) (NP (NN 发展))))
+        (PU ，)
+        (VP
+          (VV 影响)
+          (AS 着)
+          (NP
+            (NP (NN 人民) (NN 生活) (NN 水平))
+            (VP (ADVP (AD 进一步)) (VP (VV 提高)))))))
+    (PU ，)
+    (VP
+      (ADVP (AD 也))
+      (PP (P 给) (NP (NN 自然) (NN 资源) (CC 和) (NN 生态) (NN 环境)))
+      (VP
+        (VV 带来)
+        (NP (CP (CP (IP (VP (VA 沉重))) (DEC 的))) (NP (NN 压力))))))
+  (PU 。))
+(IP
+  (ADVP (AD 因此))
+  (PU ，)
+  (PP
+    (P 在)
+    (LCP
+      (NP
+        (CP (CP (IP (VP (ADVP (AD 相当)) (VP (VA 长)))) (DEC 的)))
+        (QP (CD 一) (CLP (M 个)))
+        (NP (NN 时期)))
+      (LC 内)))
+  (PU ，)
+  (NP (NR 中国))
+  (VP
+    (ADVP (AD 将))
+    (VP
+      (PP
+        (PP
+          (P 在)
+          (NP
+            (CP
+              (CP
+                (IP (VP (ADVP (AD 大力)) (VP (VV 发展) (NP (NN 经济)))))
+                (DEC 的)))
+            (NP (NN 同时))))
+        (PU ，)
+        (VP
+          (VV 继续)
+          (VP (VSB (VV 抓紧) (VV 做好)) (NP (NN 计划) (NN 生育) (NN 工作)))))))
+  (PU 。))
+(IP
+  (NP (NP (NR 中国)) (NP (NN 政府)))
+  (VV 坚信)
+  (PU ，)
+  (IP
+    (IP
+      (VP
+        (VRD (VV 解决) (VV 好))
+        (NP (DNP (NP (NR 中国)) (DEG 的)) (NP (NN 人口) (NN 问题)))))
+    (PU ，)
+    (VP
+      (VV 不仅)
+      (VP
+        (VP
+          (VC 是)
+          (NP
+            (P 对)
+            (NP
+              (NP
+                (NP (NP (NR 中华)) (NP (NN 民族)))
+                (DEG 的)
+                (NP (NN 繁荣) (NN 昌盛)))
+              (CC 和)
+              (NP
+                (NP (DNP (NP (NN 子孙) (NN 后代)) (DEG 的)) (NN 幸福))
+                (NN 负责)))))
+        (PU ，)
+        (VP
+          (CC 也)
+          (VP
+            (VC 是)
+            (NP
+              (CP
+                (CP
+                  (IP
+                    (VP
+                      (PP
+                        (P 为)
+                        (IP (VP (VV 稳定) (NP (NN 全球) (NN 人口)))))
+                      (VP (VV 作出))))
+                  (DEC 的)))
+              (ADJP (JJ 重要))
+              (NP (NN 贡献))))))))
+  (PU 。))
+(IP
+  (VP
+    (PP (CP (IP (VP (PP (P 为) (NP (PN 此))) (PU ，)))) (NP (NR 中国)))
+    (VP
+      (NP (NN 政府))
+      (VP
+        (ADVP (AD 十分))
+        (VP
+          (VP (VV 重视))
+          (CC 并)
+          (VP
+            (ADVP (AD 积极))
+            (VP (VV 参与) (NP (NN 国际) (NN 人口) (NN 活动))))))))
+  (PU ，)
+  (CC 并)
+  (NN 衷心)
+  (VP
+    (VV 希望)
+    (IP
+      (NP (NN 国际) (NN 社会))
+      (VP
+        (P 从)
+        (NP
+          (CP
+            (CP
+              (IP
+                (VP
+                  (ADVP (AD 切实))
+                  (VP
+                    (VV 解决)
+                    (NP (NP (NN 人口) (CC 与) (NN 发展)) (NP (NN 问题))))))
+              (DEC 的)))
+          (NP (NN 立场)))
+        (VP
+          (VP (VV 出发))
+          (PU ，)
+          (VP
+            (VP (VV 求同存异))
+            (PU ，)
+            (VP
+              (VP (VV 通力合作))
+              (PU ，)
+              (VP
+                (AD 共同)
+                (VP
+                  (P 为)
+                  (VP
+                    (IP
+                      (VP
+                        (VP (VV 稳定) (NP (NN 全球) (NN 人口)))
+                        (PU 、)
+                        (VP (VV 创造) (NP (ADJP (JJ 美好)) (NP (NN 未来))))))
+                    (VP (MSP 而) (VP (VV 努力) (VV 奋斗))))))))))))
+  (PU ！))
+(IP
+  (NP (NR 李鹏))
+  (VP
+    (VV 强调)
+    (IP (VP (VV 要) (VP (VV 加快) (VV 推行) (NP (NN 公务员) (NN 制度)))))))
+(FRAG (NR 新华社) (NR 北京) (NT 九月) (NT 一日) (NN 电))
+(IP
+  (NP (NP (NP (NP (NR 国务院)) (NP (NN 总理))) (NP (NR 李鹏))) (NP (NN 今天)))
+  (P 在)
+  (NP
+    (NP (NP (NR 中南海) (NR 紫光阁)) (NP (VV 会见)) (NP (NR 中国)))
+    (NP (VV 推行) (NP (NN 公务员) (NN 制度)))
+    (NP (NN 经验) (NN 交流) (NP (NN 会)))
+    (ADJP (JJ 全体))
+    (NP
+      (NP (NN 代表))
+      (LC 时)
+      (NP
+        (VP (VV 指出))
+        (NP (VV ，) (NP (VV 推行) (NP (NN 公务员) (NN 制度)))))))
+  (VC 是)
+  (NP
+    (NP
+      (DNP (NP (NP (NR 中国)) (NP (NN 政治) (NN 体制) (NN 改革))) (DEG 的))
+      (QP (CD 一) (CLP (M 项)))
+      (ADJP (JJ 重要))
+      (NP (NN 内容)))
+    (PU ，)
+    (VP
+      (VC 是)
+      (NP
+        (DNP (NP (NN 干部) (NN 人事) (NN 制度)) (DEG 的))
+        (ADJP (JJ 重大))
+        (NP (NN 改革)))))
+  (PU ，)
+  (VP
+    (VP
+      (VC 是)
+      (NP
+        (DNP
+          (NP (VV 建立) (NP (NN 社会主义) (NN 市场) (NN 经济) (NN 体制)))
+          (DEC 的))
+        (ADJP (JJ 客观))
+        (NP (NN 需要))))
+    (PU ，)
+    (VP
+      (VV 要)
+      (VP
+        (VP (VE 有) (NP (NN 领导)))
+        (PU 、)
+        (VP
+          (VP (VE 有) (NP (NN 步骤)))
+          (DEV 地)
+          (VP (VV 加快) (NP (VV 推行) (NP (NN 步伐))))))))
+  (PU 。))
+(FRAG
+  (IP
+    (VP
+      (NP
+        (DP (DT 这) (CLP (M 次)))
+        (CP (IP (VP (VV 推行) (NP (NN 公务员) (NN 制度)))))
+        (NP (NN 经验) (NN 交流) (NN 会)))
+      (VP (VC 是) (IP (NP (NT 昨天)) (VP (VV 开始) (VP (VV 召开)))))))
+  (VV 的)
+  (PU ，)
+  (DT 各)
+  (NN 省)
+  (PU 、)
+  (NN 自治区)
+  (PU 、)
+  (NN 直辖市)
+  (NP
+    (NN 人事厅)
+    (NP
+      (NP (NN 局长))
+      (NP
+        (PU 、)
+        (NP
+          (NP (NN 国务院))
+          (NP
+            (DP (DT 各))
+            (NN 部委)
+            (NP (NN 、) (NP (NP (NN 直属)) (NP (NN 机构)))))))))
+  (NP
+    (NP (NP (DNP (NP (NN 人事) (NN 部门)) (DEG 的)) (NN 负责人)) (NN 共))
+    (NN 一百二十多)
+    (NP (NN 人)))
+  (VP (VV 出席) (NP (VV 了) (NP (NN 会议))))
+  (PU 。))
+(IP
+  (NP (NR 李鹏))
+  (VP
+    (VV 肯定)
+    (AS 了)
+    (NP
+      (CP
+        (CP
+          (IP
+            (NP
+              (LCP (QP (CD 一) (CLP (M 年))) (LC 来))
+              (NP (NP (NN 国家) (NN 公务员) (NN 制度)) (VP (VV 推行)))
+              (NP (NN 工作)))
+            (VP (VV 取得)))
+          (DEC 的)))
+      (NP (NN 成效))))
+  (PU 。))
+(IP
+  (NP (NP (NP (NR 他)) (VV 说)) (PU ，) (NP (PN 我们)))
+  (VP
+    (VP
+      (VV 要)
+      (VP
+        (ADVP (AD 认真))
+        (VP
+          (VP (VV 总结))
+          (CC 和)
+          (VP
+            (VV 推广)
+            (NP
+              (DP (PN 这些))
+              (CP (CP (IP (VP (VA 好))) (DEC 的)))
+              (NP (NN 经验)))))))
+    (PU ，)
+    (VP
+      (VRD (VV 建立) (VV 起))
+      (NP
+        (NP (VV 激励) (VP (NP (NN 竞争))) (CC 和) (NN 勤政) (NN 廉政))
+        (NP (NN 机制))))
+    (PU ，)
+    (VP
+      (VP
+        (VV 建立)
+        (NP
+          (QP (CD 一) (CLP (NN 支)))
+          (CP
+            (CP
+              (IP
+                (VP
+                  (PP
+                    (P 以)
+                    (IP (VP (VV 为) (NP (NN 人民)) (VP (VV 服务)))))
+                  (VP
+                    (VP (VV 为) (NP (NN 宗旨)))
+                    (PU 、)
+                    (VP
+                      (VP
+                        (VP
+                          (VP
+                            (ADVP (AD 密切))
+                            (VP (VV 联系) (NP (NN 群众))))
+                          (PU 、)
+                          (VP (VCD (VV 精干) (VV 高效))))
+                        (PU 、)
+                        (CP (IP (VV 廉洁) (VV 奉公))))
+                      (PU 、)
+                      (VP (VV 忠于) (IP (VP (VV 职守))))))))
+              (DEC 的)))
+          (NN 国家)
+          (NN 公务员)
+          (NN 队伍)))
+      (VV ，)
+      (VP
+        (VV 增强)
+        (NP
+          (DNP (NP (NN 政府) (NN 机关)) (DEC 的))
+          (NP (NN 生机) (CC 和) (NN 活力))))))
+  (PU 。))
+(IP
+  (NP (NR 李鹏))
+  (VV 提出)
+  (PU ，)
+  (IP (VP (VV 推行) (NP (NN 公务员) (NN 制度))))
+  (NN ，)
+  (VP
+    (VV 要)
+    (VP
+      (PP
+        (PP
+          (P 按照)
+          (NP
+            (PU 《)
+            (NP (NN 国家) (NN 公务员))
+            (ADJP (JJ 暂行))
+            (NP (NN 条例))
+            (PU 》)))
+        (ADVP (NN 依法)))
+      (VP (VV 办事))))
+  (PU ，)
+  (VP (ADVP (AD 不)) (VP (VV 能) (VP (VE 有) (NP (NN 随意性)))))
+  (PU 。))
+(IP
+  (IP
+    (VV 要)
+    (VP
+      (BA 把)
+      (IP
+        (NP (DT 这) (CLP (NN 项)) (NN 工作))
+        (VP
+          (VV 作为)
+          (NP
+            (DNP (NP (NN 政治) (NN 体制) (NN 改革)) (DEG 的))
+            (QP (CD 一) (CLP (M 件)))
+            (ADJP (JJ 大))
+            (NP (NN 事)))
+          (VP (MSP 来) (VP (VV 抓)))))))
+  (PU ，)
+  (VP
+    (VP (VV 结合) (NP (NN 改革)))
+    (PU 、)
+    (VP
+      (VP (VV 精简) (NP (NN 机构)))
+      (VP (MSP 来) (VP (VV 推行) (NP (NN 公务员) (NN 制度))))))
+  (PU ；)
+  (VP
+    (VV 要)
+    (VP
+      (VV 形成)
+      (NP
+        (NP
+          (NP
+            (NP (DNP (NP (NN 公务员)) (DEG 的)) (NN 新陈代谢) (NP (NN 机制)))
+            (VV ，))
+          (VV 使)
+          (NP (NN 青年) (NN 人才)))
+        (VP
+          (NP
+            (DVP (VP (VV 不断)) (DEV 地))
+            (VP
+              (VRD (VV 进入) (VV 到))
+              (NP (NP (NN 公务员) (NN 队伍)) (NP (NN 当中)))))))))
+  (<STOP> 。))
+(IP
+  (NP (NP (NN 国务) (NN 委员)) (NP (NR 李贵鲜) (PU 、) (NR 罗干)))
+  (VP (VV 参加) (AS 了) (NP (NN 会见)))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP
+  (NP (NP (NR 马来西亚)) (NP (NN 副总理)))
+  (VP (VV 结束) (IP (VP (VV 访) (NP (NR 华))))))
+(FRAG
+  (NR 新华社)
+  (NR 上海)
+  (NT 八月)
+  (NT 三十一日)
+  (NN 电)
+  (PU （)
+  (NN 记者)
+  (NR 周解蓉)
+  (PU ）))
+(IP
+  (NP (NP (NP (NR 马来西亚)) (NP (NN 副总理))) (NP (NR 安瓦尔)))
+  (VP
+    (NP (NT 今天) (NT 下午))
+    (VP
+      (VP
+        (VV 结束)
+        (AS 了)
+        (NP (DNP (PP (P 对) (NP (NR 中国))) (DEG 的)) (NP (NN 访问))))
+      (PU ，)
+      (VP (VP (VV 离开) (NP (NR 上海))) (VP (VV 前往) (NP (NR 东京))))))
+  (PU 。))
+(IP
+  (NP (NR 安瓦尔))
+  (VP
+    (PP (P 于) (NP (NT 昨天) (NT 下午)))
+    (PP (P 自) (NP (NR 南京)))
+    (VP (VV 抵达) (NP (NR 上海))))
+  (PU 。))
+(IP
+  (NP (NT 昨晚))
+  (NR ，)
+  (NP (NP (NR 上海市)) (NP (NP (NN 副市长)) (NP (NR 赵启正))))
+  (VP
+    (VP (VP (VP (VV 代表)) (NP (NP (NR 黄菊)) (NN 市长))) (VP (VV 会见)))
+    (CC 并)
+    (VP (VV 宴请) (AS 了) (NP (NP (NR 安瓦尔)) (NP (NN 一行)))))
+  (PU 。))
+(IP
+  (NP (NP (NT 今天) (NN 上午)) (PU ，) (NP (NR 安瓦尔)))
+  (VP
+    (VP
+      (VV 出席)
+      (AS 了)
+      (NP
+        (NP (NR 闵行))
+        (NR 中)
+        (NR 马)
+        (ADJP (VV 合资))
+        (NP (NN 企业))
+        (NP (NN 奠基) (NN 仪式))))
+    (PU ，)
+    (VP
+      (NN 随后)
+      (VP
+        (VV 参观)
+        (AS 了)
+        (NP (NP (NR 浦东) (NR 金桥)) (NP (NN 出口) (NN 加工区))))))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(NP
+  (NP (NR 李鹏))
+  (VP (VV 会见) (NP (NP (NP (NR 澳门)) (NP (NN 总督))) (NR 韦奇立))))
+(FRAG (NR 新华社) (NR 北京) (NT 九月) (NT 一日) (NN 电))
+(FRAG
+  (NP (NP (NP (NP (NR 国务院)) (NP (NN 总理))) (NP (NR 李鹏))) (NP (NR 今天)))
+  (PP (P 在) (NP (NR 这里)))
+  (VV 会见)
+  (DNP
+    (NP
+      (NP
+        (NP (NP (NR 澳门)) (NP (NN 总督)))
+        (NP
+          (NP (NR 韦奇立))
+          (NP (NR 时) (VP (VV 说)) (VV ，) (NP (NR 中国)))))
+      (NP (NN 政府)))
+    (DNP (PP (P 对) (NP (NR 澳门))) (DEG 的)))
+  (NP (NN 政策))
+  (VP
+    (VC 是)
+    (NP
+      (CP
+        (CP
+          (UCP
+            (NP (CP (CP (IP (VP (VA 一贯))) (LC 的))))
+            (PU 、)
+            (VP (VA 坚定不移)))
+          (VV 的)))))
+  (PU ，)
+  (ADVP (CC 并) (ADVP (AD 将)))
+  (PP
+    (P 根据)
+    (NP
+      (DNP
+        (NP
+          (NR “)
+          (QP (NP (QP (CD 一)) (NP (NN 国))) (QP (CD 两)))
+          (NP (NN 制))
+          (NR ”))
+        (DEG 的))
+      (NP (NN 方针))))
+  (PU ，)
+  (ADVP (AD 严格))
+  (PP
+    (P 按照)
+    (NP
+      (DNP
+        (NP
+          (NP
+            (DNP
+              (NP (NP (NR 中) (NR 葡)) (ADJP (JJ 联合)) (NP (NN 声明)))
+              (CC 和))
+            (NP (NR 澳门)))
+          (NP (NN 基本法)))
+        (DEG 的))
+      (NP (NN 规定))))
+  (NR ，)
+  (VP
+    (VV 保持)
+    (NP
+      (NP (DNP (NP (NR 澳门)) (DEG 的)) (NP (NN 稳定) (CC 和) (NN 发展)))
+      (PU 。))))
+(IP
+  (NP (NR 李鹏))
+  (VP
+    (PP (P 对) (IP (NP (NR 韦奇立)) (VP (ADVP (AD 再次)) (VP (VV 来访)))))
+    (VP (VV 表示) (NP (NN 欢迎))))
+  (PU 。))
+(FRAG
+  (NP (NP (NR 他)) (VV 说))
+  (PU ：)
+  (PU “)
+  (LCP (NP (NR 近年)) (LC 来))
+  (NP
+    (NP (NP (NR 中) (NR 葡)) (QP (CD 两)) (NP (NN 国)))
+    (DNP
+      (PP (P 在) (NP (DP (DT 各) (CLP (M 个))) (NP (NN 领域))))
+      (DEG 的))
+    (ADJP (JJ 友好))
+    (NP (NN 合作) (NP (NN 关系))))
+  (VP
+    (VP (ADVP (AD 不断)) (VP (VV 发展)))
+    (NT ，)
+    (IP
+      (NP
+        (NP (QP (CD 两)) (NP (NN 国)))
+        (NP (NP (NN 高层)) (NN 领导人) (NP (NN 互访))))
+      (VP (VV 增多))))
+  (PU 。))
+(FRAG
+  (NP
+    (NP (NP (NR 江泽民) (NN 主席)) (PU 、) (NP (NR 荣毅仁) (NN 副主席)))
+    (CC 和)
+    (NP (PN 我) (PN 本人)))
+  (VP (ADVP (AD 都)) (VP (VV 访问) (VV 了) (NP (NR 葡萄牙))))
+  (PU ，)
+  (IP
+    (NP (NP (NR 席尔瓦) (NN 总理)) (NP (NT 今年) (NT 四月)))
+    (VP
+      (VP (VV 访问) (AS 了) (NP (NP (PN 我)) (NR 国)))
+      (PU 。)
+      (NP (NR ”)))))
+(IP
+  (NP
+    (NP (NR 他))
+    (VV 说)
+    (PU ，)
+    (NP
+      (DNP
+        (NP (NP (NR 中) (NR 葡)) (ADJP (JJ 双边)) (NP (NN 关系)))
+        (DEG 的))
+      (ADJP (JJ 顺利))
+      (NP (NN 发展))))
+  (VP
+    (P 为)
+    (NP
+      (NP
+        (NP (PN 双方))
+        (DNP
+          (PP (P 在) (LCP (NP (NP (NR 澳门)) (NP (NN 问题))) (LC 上)))
+          (DEG 的))
+        (NP (NN 合作)))
+      (VP (VV 奠定) (AS 了) (NP (NN 基础)))))
+  (PU 。))
+(NP
+  (NP
+    (NP (NP (NR 李鹏)) (VP (VV 指出)))
+    (PU ，)
+    (NP (NP (NR 澳门)) (NP (NN 问题))))
+  (VC 是)
+  (NP
+    (DNP
+      (LCP
+        (NP (NP (NR 中) (NR 葡)) (ADJP (JJ 双边)) (NP (NN 关系)))
+        (LC 中))
+      (DEG 的))
+    (QP (CD 一) (CLP (M 个)))
+    (ADJP (JJ 重要))
+    (NP (NN 组成) (NN 部分)))
+  (NR 。))
+(IP
+  (LCP
+    (LCP (NP (NP (NR 中) (NR 葡)) (QP (CD 两)) (NP (NN 国))) (LC 之间))
+    (PU 、)
+    (LCP (NP (NP (NN 内地)) (CC 与) (NP (NR 澳门))) (LC 之间)))
+  (VP (VP (VV 保持)) (NP (ADJP (JJ 良好)) (NP (NN 关系))))
+  (PU ，)
+  (NP (PN 这))
+  (VV 有利于)
+  (NP
+    (DNP (NP (NR 澳门)) (DEG 的))
+    (NP (NN 社会) (NN 稳定) (NN 和) (NN 经济) (NN 发展)))
+  (PU 。))
+(IP
+  (NP (NR 李鹏))
+  (VP
+    (VV 说)
+    (PU ，)
+    (IP
+      (PP
+        (P 自)
+        (LCP
+          (IP
+            (NP (NP (NR 中) (NR 葡)) (ADJP (JJ 联合)) (NP (NN 声明)))
+            (VP (VV 生效)))
+          (LC 以来)))
+      (PU ，)
+      (NP (PN 双方))
+      (VP
+        (PP
+          (P 为)
+          (IP
+            (VP
+              (VCD (VV 贯彻) (VV 执行))
+              (NP (ADJP (JJ 联合)) (NP (NN 声明))))))
+        (VP (VV 做) (AS 了) (NP (QP (CD 不少)) (NP (NN 工作)))))))
+  (PU ，)
+  (IP
+    (NP (NN 合作))
+    (VP (VC 是) (NP (CP (CP (IP (VP (VE 有) (NP (NN 成效)))) (DEC 的))))))
+  (PU 。))
+(FRAG
+  (LCP (NP (NR 近年)) (LC 来))
+  (NR ，)
+  (PP
+    (P 在)
+    (LCP
+      (NP (DNP (NP (PN 双方)) (DEG 的)) (ADJP (JJ 共同)) (NP (NN 努力)))
+      (LC 下)))
+  (PU ，)
+  (VP
+    (VP
+      (VV 解决)
+      (AS 了)
+      (NP
+        (QP (CD 不少))
+        (CP
+          (CP
+            (IP (NP (PN 双方)) (VP (ADVP (AD 共同)) (VP (VV 关心))))
+            (DEC 的)))
+        (NP (NN 问题))))
+    (PU ，)
+    (VP
+      (PP
+        (P 在)
+        (LCP
+          (NP
+            (NP (NR 澳门))
+            (NP (NN 过渡) (NN 时期))
+            (DEG 的)
+            (NP (NN 语文) (PU 、) (NN 公务员) (PU 、) (NN 法律))
+            (QP (CD 三))
+            (ADJP (JJ 大))
+            (NP (NN 问题)))
+          (LC 上)))
+      (ADVP (AD 也))
+      (VP
+        (VV 取得)
+        (NP
+          (AS 了)
+          (NP
+            (DNP (NP (ADJP (JJ 不同)) (NP (NN 程度))) (DEG 的))
+            (NP (NN 进展)))))))
+  (PU 。))
+(IP
+  (NP (PN 他))
+  (VP
+    (VV 说)
+    (VV ：)
+    (IP
+      (PU “)
+      (NP (PN 我们))
+      (VP
+        (VV 希望)
+        (IP
+          (NP (NP (NR 澳门)) (NP (NN 政府)))
+          (VP
+            (VP
+              (PP
+                (P 对于)
+                (NP (DP (DT 这) (QP (CD 三) (CLP (M 个)))) (NP (NN 问题))))
+              (VP (VV 继续) (VP (VV 给予) (NP (NN 关注)))))
+            (PU ，)
+            (VP
+              (VV 以)
+              (VP
+                (VV 求得)
+                (NP
+                  (DNP (ADJP (JJ 最后)) (DEG 的))
+                  (ADJP (JJ 妥善))
+                  (NP (NN 解决))))))))))
+  (PU 。)
+  (VV ”))
+(FRAG
+  (NP (NR 李鹏))
+  (VP
+    (VV 说)
+    (PU ，)
+    (IP
+      (PU “)
+      (IP
+        (NP (NR 韦奇立) (NP (NN 总督)))
+        (VP
+          (PP
+            (P 为)
+            (NP
+              (DNP (NP (NP (NR 澳门)) (NP (NN 问题))) (DEG 的))
+              (ADJP (JJ 顺利))
+              (NP (NN 解决))))
+          (VP
+            (VV 做)
+            (VP
+              (VV 了)
+              (NP
+                (QP (CD 许多))
+                (CP (CP (IP (VP (VA 有益))) (DEC 的)))
+                (NP (NN 工作)))))))))
+  (PU ，)
+  (PP (P 对) (NP (PN 此)))
+  (NP (PN 我们))
+  (VP (VP (VV 表示) (NP (NR 赞赏))) (PU 。) (NP (VV ”))))
+(FRAG
+  (NP (NR 李鹏))
+  (ADVP (AD 还))
+  (VV 强调)
+  (PU ，)
+  (PP
+    (P 随着)
+    (NP (DNP (NP (NT １９９９年)) (DEG 的)) (ADJP (JJ 日益)) (NP (NN 临近))))
+  (PU ，)
+  (NP (NP (NR 中) (NR 葡)) (NP (PN 双方)))
+  (VP
+    (PP (P 在) (LCP (NP (NP (NR 澳门)) (NP (NN 问题))) (LC 上)))
+    (ADVP (AD 还))
+    (VP
+      (VE 有)
+      (IP
+        (NP (DNP (QP (CD 大量)) (DEG 的)) (NP (NN 工作)))
+        (VP (VV 要) (VP (VV 做))))))
+  (PU ，)
+  (IP (NP (NN 任务)) (VP (ADVP (AD 很)) (VP (VA 重))))
+  (PU 。))
+(IP
+  (NP (PN 双方))
+  (VP
+    (VV 应)
+    (VP
+      (VV 本着)
+      (NP
+        (CP (IP (VP (ADVP (AD 友好)) (VP (VV 协商)))) (DEC 的))
+        (NP (NN 精神)))
+      (PU ，)
+      (VP
+        (VV 解决)
+        (NP
+          (CP
+            (CP
+              (IP (VP (ADVP (AD 尚)) (VP (VV 待) (VP (VV 解决)))))
+              (DEC 的)))
+          (NP (NN 问题))))))
+  (PU 。))
+(IP
+  (NP (PN 他))
+  (VP
+    (VV 希望)
+    (NP (NP (NR 澳门)) (NP (NN 政府)))
+    (PP
+      (P 就)
+      (NP
+        (CP
+          (CP
+            (IP
+              (VP
+                (VV 涉及)
+                (IP
+                  (NP (NR 澳门))
+                  (VP
+                    (NP
+                      (VP (ADJP (AD 平稳)) (VP (VV 过渡)))
+                      (CC 和)
+                      (NP (NN 政权)))
+                    (VP (ADVP (AD 顺利)) (VP (VV 交接)))))))
+            (DEC 的)))
+        (ADJP (JJ 重大))
+        (NP (NN 问题))))
+    (ADVP (AD 进一步))
+    (VP
+      (VP
+        (VV 加强)
+        (NP
+          (DNP (NP (P 同) (NP (NN 中方))) (DEG 的))
+          (NP (NN 磋商) (CC 与) (NN 合作))))
+      (PU ，)
+      (VP
+        (NP (MSP 以))
+        (VP
+          (VV 利于)
+          (NP (DNP (NP (NR 澳门)) (DEG 的)) (NP (NN 稳定) (CC 和) (NN 发展)))))))
+  (PU 。))
+(IP
+  (NP (NR 李鹏))
+  (VP
+    (VV 说)
+    (PU ：)
+    (IP
+      (PU “)
+      (NP (NR 我们))
+      (VP
+        (VV 相信)
+        (PU ，)
+        (IP
+          (P 通过)
+          (NP
+            (NP
+              (DNP (NP (NP (NR 中) (NR 葡)) (NP (PN 双方))) (DEG 的))
+              (NP
+                (ADJP (JJ 友好))
+                (NP
+                  (NP (NN 合作))
+                  (CC 和)
+                  (NP (ADJP (JJ 共同)) (NP (NN 努力))))))
+            (PU ，)
+            (ADVP (AD 一定))
+            (VP
+              (VV 能)
+              (VP
+                (VV 实现)
+                (NP
+                  (NP
+                    (DNP (NP (NR 澳门)) (DEG 的))
+                    (NP (ADJP (JJ 平稳)) (NP (NN 过渡))))
+                  (CC 和)
+                  (NP
+                    (DNP (NP (NN 政权)) (DEG 的))
+                    (ADJP (JJ 顺利))
+                    (NP (NN 交接)))))))))))
+  (PU 。))
+(IP
+  (NP
+    (NP (NP (NR 韦奇立)) (DVP (VP (VA 愉快)) (DEV 地)))
+    (VP
+      (VV 回忆)
+      (AS 了)
+      (NP
+        (CP
+          (CP
+            (IP
+              (NR 他)
+              (NR １９９１年)
+              (CC 和)
+              (NR １９９２年)
+              (P 同)
+              (NP (NP (NR 李鹏)) (NP (NN 总理)))
+              (QP (CD 两) (CLP (M 次)))
+              (VP (VV 会见)))
+            (DEC 的)))
+        (NP (NN 情景)))))
+  (VV ，)
+  (CC 并)
+  (VP
+    (ADVP (AD 高度))
+    (VP
+      (VV 评价)
+      (AS 了)
+      (NP
+        (CP
+          (CP
+            (NP
+              (NP
+                (NP (NP (NR 中国)) (NP (NN 政府)))
+                (CC 和)
+                (NP
+                  (NP (NP (NR 李鹏) (NN 总理)) (NN 本人))
+                  (PP
+                    (P 为)
+                    (NP
+                      (NP
+                        (DNP
+                          (NP (NP (NR 葡) (NR 中)) (NP (NN 关系)))
+                          (DEG 的))
+                        (NP (NN 发展)))
+                      (CC 和)
+                      (NP
+                        (DNP (NP (NP (NR 澳门)) (NP (NN 问题))) (DEG 的))
+                        (NP (NN 解决)))))))
+              (VP (MSP 所) (VP (VV 做))))
+            (DEC 的)))
+        (ADJP (JJ 重要))
+        (NP (NN 贡献)))))
+  (PU 。))
+(IP
+  (NP (NP (NR 韦奇立)) (VV 说))
+  (VV ，)
+  (IP
+    (IP
+      (NP (PN 他))
+      (VP
+        (DVP (VP (VA 高兴)) (DEV 地))
+        (VP
+          (VV 看到)
+          (IP
+            (NP (NR 中国))
+            (VP
+              (PP
+                (P 在)
+                (NP (NP (NN 经济) (CC 和) (NN 社会)) (NN 生活) (NP (NN 方面))))
+              (VP
+                (VV 取得)
+                (NP (AS 了) (NP (ADJP (JJ 重大)) (NP (NN 进展))))))))))
+    (PU ，)
+    (CC 并)
+    (VP
+      (VV 表示)
+      (IP
+        (VP
+          (ADVP (AD 完全))
+          (VP
+            (VV 理解)
+            (IP
+              (NP (DNP (NP (NR 中国)) (DEG 的)) (NP (NN 现代化) (NN 建设)))
+              (VP
+                (VV 需要)
+                (VP
+                  (PP
+                    (P 在)
+                    (LCP
+                      (NP
+                        (CP (CP (IP (VP (VA 稳定))) (DEC 的)))
+                        (NP (NN 情况)))
+                      (LC 下)))
+                  (VP (VV 进行))))))))))
+  (PU 。))
+(IP
+  (IP
+    (NP (NR 他))
+    (VP
+      (VV 说)
+      (PU ，)
+      (IP
+        (NP (DNP (NP (NR 中国)) (DEG 的)) (NP (NN 稳定) (CC 和) (NN 发展)))
+        (VP
+          (VV 有利于)
+          (NP (DNP (NP (NN 世界)) (DEG 的)) (NP (NN 和平) (CC 与) (NN 发展)))))))
+  (PU ，)
+  (IP
+    (NP (DNP (NP (NR 中国)) (DEG 的)) (NP (NN 繁荣) (CC 与) (NN 稳定)))
+    (VP
+      (VC 是)
+      (NP
+        (NP (NP (NP (NR 澳门)) (NP (NN 繁荣) (CC 与) (NN 稳定))) (DEG 的))
+        (NP (NN 根本) (NN 保证)))))
+  (PU 。))
+(IP
+  (NP (NP (NP (NR 葡萄牙)) (NP (NN 政府))) (CC 和) (NP (PN 他) (PN 本人)))
+  (VP
+    (ADVP (AD 将))
+    (PP
+      (P 为)
+      (NP
+        (NP
+          (DNP
+            (NP (NP (QP (CD 两)) (NP (NN 国))) (NP (NN 关系)))
+            (DEG 的))
+          (VV 继续)
+          (NP (NN 发展)))
+        (CC 和)
+        (NP
+          (DNP (NP (NP (NR 澳门)) (NP (NN 问题))) (DEG 的))
+          (ADJP (JJ 顺利))
+          (NP (NN 解决)))))
+    (VP (VV 继续) (VP (VV 作出) (NP (NN 努力)))))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP
+  (NP (NP (NR 德)) (NP (NN 外长)))
+  (VV 欢迎)
+  (NP
+    (NP (NR 北约))
+    (DNP (PP (P 对) (NP (NN 塞族))) (DEG 的))
+    (ADJP (JJ 最后))
+    (NP (NN 通牒))))
+(FRAG (NR 新华社) (NR 波恩) (NT ４月) (NT ２３日) (NN 电))
+(IP
+  (NP (NP (NP (NR 德国)) (NP (NN 外长))) (NP (NR 金克尔)))
+  (NP (NT ２３日))
+  (VP
+    (VV 说)
+    (VV ，)
+    (IP
+      (CP
+        (CP
+          (IP
+            (NP (NP (PN 他)) (VV 欢迎) (NP (NR 北约)))
+            (VP
+              (PP (P 对) (NP (NP (NR 波黑)) (NP (NN 塞族))))
+              (VP (VV 发出))))
+          (DEC 的)))
+      (ADJP (JJ 最后))
+      (NP (NN 通牒))))
+  (PU 。))
+(IP
+  (NP (PN 他))
+  (ADVP (AD 同时))
+  (ADVP (AD 也))
+  (VP
+    (VP
+      (VV 要求)
+      (VP
+        (VV 举行)
+        (NP (CP (CP (IP (VP (VA 新))) (DEC 的))) (NP (NN 谈判)))))
+    (VP (MSP 以) (VP (VV 结束) (NP (NP (NR 波黑)) (NP (NN 内战))))))
+  (PU 。))
+(IP
+  (NP (NR 金克尔))
+  (VP
+    (VV 说)
+    (PU ，)
+    (IP
+      (NP (DNP (NP (NR 北约)) (DEG 的)) (NP (NN 决定)))
+      (VP
+        (VC 是)
+        (PU “)
+        (CP (CP (IP (VP (VA 正确))) (DEC 的)))
+        (JJ 和)
+        (VA 必要)
+        (DEC 的)
+        (PU ”))))
+  (PU 。))
+(IP
+  (ADVP (AD 但))
+  (P 作为)
+  (NP (DNP (NP (NN 军事) (NN 措施)) (DEG 的)) (NP (NN 辅助) (NN 手段)))
+  (PU ，)
+  (IP (VP (VV 重开) (NP (NN 谈判))))
+  (VP
+    (ADVP (AD 同样))
+    (VP (VC 是) (NP (CP (CP (IP (VP (VA 必要))) (DEC 的))))))
+  (PU 。))
+(IP
+  (NP (PN 他))
+  (VV 要求)
+  (NP (NR 联合国) (PU 、) (NR 欧洲) (NN 联盟) (PU 、) (NR 美国) (CC 和) (NR 俄罗斯))
+  (ADVP (AD 共同))
+  (VP (VV 提出) (NP (CP (CP (IP (VP (VA 新))) (DEC 的))) (NN 倡议)))
+  (PU ，)
+  (VP
+    (VV 以)
+    (VP
+      (VV 使)
+      (NP
+        (NP
+          (NP (NP (NR 波黑)) (NP (NN 交战)))
+          (NP (DP (DT 各)) (NP (NN 方))))
+        (VV 回到)
+        (NP (NN 谈判桌)))
+      (LC 旁)))
+  (PU 。))
+(FRAG
+  (NP (NP (NP (NR 北约)) (CD １６) (NP (NN 国))) (NP (NR ２２日)))
+  (VV 要求)
+  (NP (NP (NR 波黑)) (NP (NN 塞族) (NN 武装)))
+  (PP
+    (P 在)
+    (LCP
+      (NP
+        (NP (NP (NR 格林尼治)) (NP (NN 时间)))
+        (NP (NT ４月) (NR ２４日) (NP (NR 零点))))
+      (LC 之前)))
+  (VP
+    (VV 撤离)
+    (NP (NP (NR 戈拉日代)) (NP (NN 市中心)))
+    (QP (CD ３) (CLP (M 公里)))
+    (LC 之外))
+  (PU ，)
+  (IP
+    (NP (MSP 并))
+    (VP
+      (VV 保证)
+      (IP
+        (NP (DNP (NP (NR 联合国)) (DEG 的)) (NP (NN 人道主义) (NN 援助)))
+        (VP (VV 畅通无阻)))))
+  (PU ，)
+  (ADVP (AD 否则))
+  (NP (NR 北约))
+  (ADVP (AD 将))
+  (PP (P 对) (NP (NN 塞族) (NN 武装)))
+  (VP (VP (VV 实行) (NP (NN 空中) (NN 打击))) (PU 。)))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP
+  (NP (NP (NR 中国)) (NP (NN 化学) (NN 工业)))
+  (VP (VV 加快) (NP (ADJP (NN 对外)) (NP (NN 开放))) (NP (NN 步伐))))
+(FRAG
+  (NR 新华社)
+  (NR 北京)
+  (NT 八月)
+  (NT 三十一日)
+  (NN 电)
+  (PU （)
+  (NN 记者)
+  (NR 孙杰)
+  (PU ）))
+(NP
+  (NP (NP (NR 中国)) (NP (NN 化学) (NN 工业)))
+  (VP (VV 加快) (NP (ADJP (JJ 对外)) (NP (NN 开放))) (NP (NN 步伐)))
+  (PU ，)
+  (VP (ADVP (AD 大步)) (VP (VP (VV 走向) (NP (NN 世界))) (PU 。))))
+(FRAG
+  (PP (PP (P 据)) (IP (NP (NN 化工部)) (VP (VV 介绍))))
+  (VV ，)
+  (IP
+    (NP
+      (NP (NP (NT 一九七八年)) (PU ，) (NP (NR 中国)))
+      (NP (NN 化工) (NN 进出口) (NP (NN 总额))))
+    (VP
+      (VP (AD 不) (VP (VP (VV 到)) (QP (CD 三亿) (CLP (M 美元)))))
+      (PU ，)
+      (VP
+        (NP (NT 去年))
+        (VP
+          (VP (VV 达到) (QP (CD 七十五亿) (CLP (M 美元))))
+          (LC ，)
+          (IP
+            (NP (NN 出口) (NN 创汇))
+            (VP (VV 超过) (QP (CD 一千万) (CLP (M 美元)))))))))
+  (DEC 的)
+  (NP (NN 化工) (NN 企业))
+  (ADVP (AD 已))
+  (VP (VP (VE 有) (QP (CD 三十) (CLP (M 家)))) (VV 。)))
+(FRAG
+  (NP
+    (NP (NR 中国))
+    (NP (NN 化工))
+    (ADJP (JJ 成套))
+    (NP (NP (NN 设备)) (NP (NN 出口))))
+  (VP (VV 实现) (AS 了) (NP (DNP (QP (CD 零)) (DEG 的)) (NP (NN 突破))))
+  (PU ，)
+  (IP
+    (VP
+      (VP
+        (IP (VP (ADVP (AD 先后)) (PP (P 向) (NP (NR 印尼)))))
+        (VP
+          (VV 出口)
+          (QP (CD 两) (CLP (M 套)))
+          (CP
+            (IP
+              (VP
+                (ADVP (AD 年))
+                (VP (VP (VV 产)) (QP (CD 四万) (CLP (M 吨)))))))
+          (NP (NN 离子膜))
+          (NN 烧碱)
+          (NN 装置)))
+      (PU ，)
+      (VP
+        (PP (P 向) (NP (NR 伊朗)))
+        (VP
+          (VP (VV 出口))
+          (VV 年)
+          (VV 产)
+          (NP
+            (QP (CD 二十万) (CLP (M 吨)))
+            (ADJP (NP (ADJP (JJ 纯)) (NP (NN 碱))) (ADJP (JJ 成套)))
+            (NP (NN 设备)))))))
+  (PU 。))
+(IP
+  (NP (NN 技术) (NN 出口))
+  (VP
+    (ADVP (AD 也))
+    (VP
+      (VE 有)
+      (AS 了)
+      (NP (CP (CP (IP (VP (VA 新))) (DEC 的))) (NP (NN 进展)))))
+  (PU 。))
+(IP
+  (NP (NT 目前))
+  (LC ，)
+  (NP
+    (IP (NP (NR 中国)) (IP (VP (VV 可) (VP (VV 供) (VP (VV 出口))))))
+    (DEC 的)
+    (NP (NN 技术)))
+  (VP (VV 达) (QP (CD 五十二) (CLP (M 项))))
+  (PU 。))
+(FRAG
+  (PP (P 据))
+  (NP (ADJP (JJ 不完全)) (NP (NN 统计)))
+  (PU ，)
+  (NP (NR 中国))
+  (NP (QP (CD 三) (CLP (M 年))) (VV 来))
+  (NP (NN 出口) (NP (NN 蒽醌法)))
+  (NN 双氧水)
+  (PU 、)
+  (NN 变压)
+  (NN 吸附)
+  (ETC 等)
+  (NP (NN 技术))
+  (QP (CD 二十余) (CLP (M 项)))
+  (PU 。))
+(FRAG
+  (PP (P 到) (NP (NT 今年) (NN 上半年)))
+  (PU ，)
+  (NP (NR 中国) (NN 化工部))
+  (VV 与)
+  (NP
+    (QP (CD 十五) (CLP (M 家)))
+    (NP (NN 国际))
+    (ADJP (JJ 大型))
+    (NP (NN 化工) (NN 公司)))
+  (NP (VV 签订))
+  (NP (NN 合作) (NN 协议))
+  (PU 。))
+(IP
+  (CP
+    (IP
+      (LCP (QP (CD 十) (CLP (M 年))) (LC 来))
+      (VV ，)
+      (CP
+        (IP
+          (NP (NP (NR 中国)) (NP (NN 化工) (NN 行业)))
+          (VP (VV 累计) (VP (VV 吸收)))))))
+  (NP (NN 外资))
+  (VV 达)
+  (QP (CD 八十五亿) (CLP (M 美元)))
+  (PU ，)
+  (VP
+    (VV 用于)
+    (NP
+      (DNP (NP (NN 化肥) (PU 、) (NN 石化)) (DEG 的))
+      (NP (NN 建设) (CC 和) (NN 技术) (NN 改造))))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP
+  (NP (NR 中国))
+  (VP
+    (VV 建立)
+    (NP (NP (NN 彗星)) (VP (VP (VV 撞击)) (NP (NN 木星))) (NP (NN 观测网)))))
+(FRAG
+  (NR 新华社)
+  (NR 南京)
+  (NT 四月)
+  (NT 二十三日)
+  (NN 电)
+  (PU （)
+  (NN 记者)
+  (NR 杨福田)
+  (PU ）))
+(FRAG
+  (NP (NR 中国) (NN 科学院) (NR 紫金山) (NN 天文台))
+  (NP (NT 今天))
+  (VV 宣布)
+  (PU ，)
+  (IP
+    (IP
+      (NP (NR 中国))
+      (VP
+        (ADVP (AD 已经))
+        (VP
+          (VV 建立)
+          (NP
+            (CP
+              (CP
+                (ADJP (JJ 全国性))
+                (CP
+                  (CP
+                    (IP
+                      (VP
+                        (VV 观测)
+                        (IP
+                          (NP
+                            (NP (NR 苏梅克) (NR ―) (NR 列维))
+                            (NP (QP (NT ９) (CLP (M 号))) (NP (NN 彗星))))
+                          (VP (VV 撞击) (NP (NR 木星))))))
+                    (DEC 的)))))
+            (NP (NN 网络))))))
+    (PU ，)
+    (CC 并)
+    (VP
+      (VV 制订)
+      (AS 了)
+      (NP
+        (CP (CP (IP (NP (NN 规模)) (VP (VA 宏大))) (DEC 的)))
+        (NP (NN 天文) (NN 监测) (NN 计划)))))
+  (PU 。))
+(FRAG
+  (PP (PP (P 据) (IP (NP (NN 专家)) (VP (VV 介绍)))) (PU ，))
+  (NP (NN 木星))
+  (VP
+    (VP
+      (IP
+        (VP
+          (VC 是)
+          (IP
+            (VP (LCP (NP (NN 太阳系)) (LC 中)) (ADVP (AD 最)) (VP (VA 大))))))
+      (DEC 的)
+      (QP (CD 一) (CLP (M 颗)))
+      (NP (NN 行星)))
+    (PU ，)
+    (VP
+      (PP (P 与) (NP (NN 地球)))
+      (VP (VP (VA 一样)) (VP (VV 环绕) (NP (NN 太阳)) (VP (VV 运转))))))
+  (PU 。))
+(IP
+  (IP
+    (DP (DT 这) (CLP (M 次)))
+    (VP
+      (VV 观测)
+      (NP (NN 彗星))
+      (VP
+        (VP (VV 撞击) (NP (NR 木星)))
+        (PP
+          (P 对于)
+          (IP
+            (VP
+              (VP (VV 研究))
+              (CC 和)
+              (VP
+                (VV 预测)
+                (IP (NP (NN 彗星)) (VP (VV 撞击) (NP (NN 地球)))))))))))
+  (VP
+    (VV 具有)
+    (NP
+      (CP (CP (IP (VP (ADVP (AD 十分)) (VP (VA 重要)))) (DEC 的)))
+      (NP (NN 意义))))
+  (PU 。))
+(IP
+  (NP (NP (NR 中国)) (NP (NN 天文学界)))
+  (VP
+    (VP
+      (PP
+        (P 对)
+        (NP
+          (DP (DT 这) (CLP (M 次)))
+          (NP (NN 彗星))
+          (VP (VP (VV 撞击) (NP (NR 木星))) (NP (NN 现象)))))
+      (ADVP (AD 也))
+      (ADVP (AD 十分))
+      (VP (VV 重视)))
+    (PU ，)
+    (CC 并)
+    (VP
+      (ADVP (AD 密切))
+      (VP (VV 关注) (NP (NP (PN 其)) (NP (NN 发展) (NN 变化))))))
+  (PU 。))
+(FRAG
+  (NP (NP (NR 近日)) (PU ，))
+  (PP
+    (P 在)
+    (LCP
+      (NP
+        (DNP
+          (NP
+            (NR 中国)
+            (NN 科学院)
+            (CC 和)
+            (NP (NN 国家) (NN 自然) (NN 科学) (NN 基金会)))
+          (DEG 的))
+        (NP (NN 支持)))
+      (LC 下)))
+  (CP
+    (CP
+      (PU ，)
+      (CP
+        (CP
+          (VV 来自)
+          (NP (NP (DT 全) (NN 国)) (DP (DT 各)) (NP (NN 地)))
+          (DEC 的)))))
+  (QP (CD 四十多) (CLP (M 位)))
+  (NP (NP (NN 天文学家)) (P 在) (NP (NR 南京)))
+  (VP
+    (VV 召开)
+    (AS 了)
+    (NP
+      (NR 苏梅克)
+      (NR ―)
+      (NR 列维)
+      (NR ９)
+      (CLP (M 号))
+      (NP (NN 彗星))
+      (VV 撞击)
+      (NP (NN 木星))
+      (NP (NN 监视) (NN 计划) (NP (NN 讨论会)))))
+  (PU 。))
+(IP
+  (NP (NN 专家们))
+  (VV 认为)
+  (VV ，)
+  (DP (DT 这) (CLP (M 次)))
+  (CP (CP (IP (VP (VA 罕见))) (DEC 的)))
+  (ADJP (JJ 重大))
+  (NP
+    (NP (NN 天文) (NN 现象))
+    (VP
+      (VV 需要)
+      (NP (NP (NN 全球)) (VP (VV 作) (NP (ADJP (JJ 连续)) (NP (NN 监测)))))))
+  (PU ，)
+  (NP (NR 中国))
+  (VV 处于)
+  (DNP (LCP (NP (NR 日本) (CC 和) (NR 欧洲)) (LC 之间)) (DEG 的))
+  (QP (CD 一) (CLP (M 个)))
+  (CP (CP (IP (VP (VCD (VA 重要)))) (DEC 的)))
+  (NP
+    (NP (NN 经度) (NN 位置))
+    (NP (PU ，) (NP (DNP (NP (NR 中国)) (DEG 的)) (NP (NN 观测) (NN 资料)))))
+  (VP
+    (VC 是)
+    (NP
+      (CP
+        (CP
+          (LCP (NP (NN 国际) (NN 联测)) (LC 中))
+          (CP
+            (CP
+              (VP
+                (ADVP (AD 不))
+                (VP (VP (VV 可) (VV 缺少)) (CC 或) (VV 替代)))
+              (DEC 的)))))
+      (NP (NN 组成) (NN 部分))))
+  (PU 。))
+(FRAG
+  (IP
+    (LCP (ADVP (AD 届时)) (NR ，))
+    (NP (NR 中国))
+    (ADVP (AD 将))
+    (VP
+      (VP
+        (VV 投入)
+        (NP
+          (DNP (NP (DT 所有)) (DEG 的))
+          (ADJP (JJ 先进))
+          (NP (NN 天文) (NN 设备))))
+      (VP (VV 进行) (NP (NN 观测)))))
+  (PU ，)
+  (NP (NN 其中))
+  (VV 包括)
+  (NP
+    (DNP (NP (QP (CD 二点一六) (CLP (M 米))) (NP (NN 口径))) (DEG 的))
+    (NP (NN 反光) (NN 望远镜))
+    (PU 、)
+    (NP
+      (DNP (NP (QP (CD 一点二六) (CLP (M 米))) (NP (NN 口径))) (DEG 的))
+      (NP (ADJP (JJ 红外)) (NP (NN 望远镜))))
+    (VV 、)
+    (NP (ADJP (JJ 射电)) (NP (NN 望远镜))))
+  (PU 。))
+(FRAG
+  (DNP (NP (QP (CD 二十五) (CLP (M 米))) (NP (NN 口径))) (DEG 的))
+  (ADJP (ADJP (JJ 分米)) (PU 、) (CLP (JJ 厘米)))
+  (NP (NN 波段))
+  (NP (NN 望远镜))
+  (PU 、)
+  (NP (NP (QP (CD 十) (CLP (M 米))) (NP (NN 波段))) (NP (NN 望远镜)))
+  (CC 以及)
+  (CP (CP (IP (VP (VA 先进))) (DEC 的)))
+  (NN 光学)
+  (NN 望远镜)
+  (NN 终端)
+  (NN 设备)
+  (PU 。))
+(FRAG
+  (NP (NR 南京) (NR 紫金山) (NN 天文台))
+  (VE 有)
+  (QP (CD 四十多) (CLP (M 年)))
+  (PP
+    (P 关于)
+    (NP
+      (NP (NN 彗星))
+      (PU 、)
+      (NP
+        (VP (NP (NP (ADJP (JJ 小)) (NP (NN 行星))) (DEG 的)))
+        (NP
+          (NP (NP (NN 观测) (NN 研究) (NP (NN 经验))) (PU 、))
+          (NP
+            (NP (PN 该) (CLP (NN 台)))
+            (NN 行星)
+            (NN 研究室)
+            (VC 是)
+            (NP (NR 中国)))))))
+  (NP (JJ 唯一))
+  (NP (DEG 的))
+  (CP
+    (CP
+      (IP
+        (VP
+          (ADVP (AD 长期))
+          (VP
+            (VV 从事)
+            (NP
+              (NP (NN 彗星) (PU 、) (NP (ADJP (JJ 小)) (NP (NN 行星))))
+              (NP (NN 研究))))))
+      (DEC 的)))
+  (NP (NN 科研) (NN 机构))
+  (PU ，)
+  (VP
+    (PP
+      (PP (P 自) (NP (NT 一九八八年)) (VP (LC 起)))
+      (ADVP (AD 又))
+      (VP
+        (VV 开始)
+        (VP (VV 研究) (NP (NN 太阳系) (NN 天体) (NN 碰撞) (NP (NN 问题)))))))
+  (PU 。))
+(FRAG
+  (NP (NP (DT 该) (NN 台)) (NN 行星) (NN 专家))
+  (ADVP (VV 还))
+  (QP (CD 多) (CLP (M 次)))
+  (VV 参加)
+  (DNP
+    (PP
+      (P 关于)
+      (NP
+        (NP (NP (NN 彗星)) (PU 、) (NP (ADJP (JJ 小)) (NP (NN 行星))))
+        (VP (VV 撞击) (NP (NN 地球) (NN 危险性)))))
+    (DEG 的))
+  (NP (NN 国际) (NN 学术) (NN 讨论会))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP
+  (NP (NP (NN 国际) (NN 红十字会)) (NP (NN 专家)))
+  (VP (VV 结束) (VP (VV 访) (NP (NR 华)))))
+(FRAG (NN 新华社) (NR 北京) (NT 四月) (NT 二十三日) (NN 电))
+(FRAG
+  (NP (NP (NR 外交部)) (NP (NN 发言人)))
+  (NP (NT 今天))
+  (VV 说)
+  (PU ，)
+  (NP (VV 应) (NP (NP (NR 中国) (NR 红十字会)) (NP (NN 邀请))))
+  (PU ，)
+  (NP (NR 红十字) (NN 国际) (NN 委员会))
+  (NP (NP (NN 处长)) (NP (NP (NR 格丁纳格)) (NP (NN 一行))))
+  (NP (QP (CD 四)) (NP (NN 人)))
+  (VV ，)
+  (VP
+    (PP (P 于) (NP (NR 四月) (NR 十八日) (CC 至) (NR 二十三日)))
+    (VP (VV 访问) (NP (NR 中国))))
+  (PU 。))
+(IP
+  (NP (NP (NN 发言人)) (VV 说) (PU ，) (NP (PN 双方)))
+  (VP
+    (PP
+      (P 就)
+      (NP
+        (CP
+          (IP
+            (VP
+              (ADVP (AD 进一步))
+              (VP (VV 开展) (NP (NN 交流) (CC 与) (NN 合作))))))
+        (NP (NN 问题))))
+    (VP
+      (VV 举行)
+      (AS 了)
+      (NP
+        (CP
+          (CP
+            (IP (VP (AD 友好) (PU 、) (AD 坦诚) (PU 、) (NN 求实)))
+            (DEC 的)))
+        (ADJP (JJ 专家级))
+        (NP (NN 工作) (NN 会谈)))))
+  (PU 。))
+(IP
+  (NP
+    (NP (NN 会谈))
+    (PP
+      (P 就)
+      (NP
+        (QP (CD 一些))
+        (NP (NP (NN 原则)) (CC 和) (NP (ADJP (JJ 具体)) (NP (NN 问题)))))))
+  (VP
+    (VP (VV 进行) (AS 了) (ADJP (JJ 深入)) (NP (NN 讨论)))
+    (PU ，)
+    (VP (VV 达成) (AS 了) (NP (QP (CD 一些)) (NP (NN 谅解)))))
+  (PU 。))
+(IP
+  (NP (PN 双方))
+  (VP
+    (ADVP (AD 一致))
+    (VP
+      (VV 认为)
+      (IP (NP (NN 会谈)) (VP (VV 具有) (NP (ADJP (JJ 积极)) (NP (NN 成果)))))))
+  (PU 。))
+(IP
+  (NP (PN 双方))
+  (VP
+    (ADVP (AD 将))
+    (VP
+      (VV 继续)
+      (VP
+        (PP
+          (P 以)
+          (NP (CP (CP (IP (VP (VA 务实))) (DEC 的))) (NP (NN 精神))))
+        (ADVP (AD 共同))
+        (VP (VP (VV 努力)) (PU ，) (VP (VV 加强) (NP (NN 合作)))))))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP
+  (NP (NP (NR 中国) (NN 海关) (NN 总署)) (ADVP (AD 将)))
+  (VP
+    (VV 实施)
+    (NP
+      (DNP (PP (P 对) (NP (NN 知识) (NN 产权))) (DEG 的))
+      (NP (NN 保护) (NN 措施)))))
+(FRAG (NR 新华社) (NR 北京) (NT 八月) (NT 三十一日) (NN 电))
+(IP
+  (NP (NN 海关) (NN 总署))
+  (NP (NT 日前))
+  (VV 发出)
+  (NP (NN 公告))
+  (PU ，)
+  (PP
+    (P 根据)
+    (NP (NN 国家) (JJ 现行) (ADJP (JJ 有关)) (NP (NN 法律) (NN 规定))))
+  (CC 和)
+  (NP (NN 国务院))
+  (NR 《)
+  (PP
+    (P 关于)
+    (NP
+      (ADVP (AD 进一步))
+      (VV 加强)
+      (NP (NN 知识) (NN 产权) (NN 保护) (NP (NN 工作)))))
+  (VV 的)
+  (NP (NN 决定))
+  (PU 》)
+  (PU ，)
+  (NP (NN 海关))
+  (VP
+    (ADVP (AD 将))
+    (PP
+      (PP (P 从) (LCP (NP (NR 一九九四年) (NN 九月) (NN 十五日)) (LC 起)))
+      (PP (P 在) (NP (NN 进出境) (NN 环节))))
+    (VP
+      (VV 实施)
+      (NP
+        (DNP (PP (P 对) (NP (NN 知识) (NN 产权))) (DEG 的))
+        (NP (NN 保护) (NN 措施)))))
+  (PU 。))
+(FRAG
+  (NP (IP (NP (NP (NN 公告)) (ADVP (NN 明确))) (VP (VV 指出))) (VV ，))
+  (VV 侵犯)
+  (NP (NN 知识) (NN 产权))
+  (PU （)
+  (VV 包括)
+  (NP (NN 商标) (NN 专用权) (PU 、) (NN 著作权) (CC 和) (NN 专利权))
+  (PU ）)
+  (DEC 的)
+  (NP (NN 货物))
+  (ADVP (VV 不))
+  (VP (VV 准) (NP (NN 进口) (NN 或者) (NP (NN 出口))))
+  (NN ；)
+  (NP (NN 海关))
+  (VV 发现)
+  (CP
+    (CP
+      (IP (VP (VV 被) (VP (VV 举报) (VP (VV 涉嫌) (NP (NN 侵权))))))
+      (DEC 的)))
+  (NN 货物)
+  (CC 和)
+  (NP
+    (NP
+      (NP
+        (NP
+          (DP (DT 其他))
+          (CP
+            (CP
+              (VV 有)
+              (VV 侵犯)
+              (NP (NP (NP (NP (NN 知识)) (NN 产权)) (NN 嫌疑)) (DEC 的))))
+          (NP (NN 货物)))
+        (IP (NN 进出口)))
+      (LC 时))
+    (VV ，)
+    (NP (VV 有) (NN 权)))
+  (VV 要求)
+  (NP
+    (NP
+      (NP
+        (NP (NP (NP (NN 进出口)) (NN 货物)) (DEG 的) (NP (NN 货人)))
+        (IP
+          (VP
+            (NN 提供)
+            (NP (VV 使用) (NP (ADJP (NN 有关)) (NP (NN 知识) (NN 产权)))))))
+      (DEC 的))
+    (NN 合法)
+    (NP (NP (NN 证明)) (CC 及) (NP (P 对) (NP (NP (NN 其)) (NP (NN 货物))))))
+  (DEC 的)
+  (NP
+    (NN 知识)
+    (NN 产权)
+    (NN 状况)
+    (VP
+      (NP (VV 向))
+      (NP
+        (NP (NN 海关))
+        (VP
+          (VP (VV 作出))
+          (NP
+            (NP
+              (NP (NN 补充) (NN 申报))
+              (NP
+                (VV ，)
+                (PP
+                  (P 对)
+                  (NP
+                    (CP
+                      (CP
+                        (IP
+                          (VP
+                            (ADVP (NN 不))
+                            (VP (VV 能) (VP (VV 提供) (NN 合法) (NN 证明)))))
+                        (DEC 的)))
+                    (NP (NN 货物))))))
+            (VV ，)
+            (NP
+              (NP (NN 海关))
+              (VP (VE 有) (NP (NP (NN 权)) (VP (VV 予以) (NP (NN 退运)))))))))))
+  (LC ；)
+  (NN 进出口)
+  (NP (NN 激光) (NN 唱盘))
+  (PU 、)
+  (NN 激光)
+  (NN 视盘)
+  (CC 和)
+  (NP
+    (PP
+      (NP
+        (IP
+          (VP
+            (NP
+              (CP
+                (CP
+                  (IP
+                    (VP
+                      (PP
+                        (NP
+                          (CP
+                            (CP
+                              (NP
+                                (CP
+                                  (IP
+                                    (VP
+                                      (PP
+                                        (P 以)
+                                        (NP (NN 加工) (NN 贸易) (NN 方式)))
+                                      (NN 进口))))
+                                (NP
+                                  (NN 激光)
+                                  (NN 唱盘)
+                                  (NN 、)
+                                  (NP (NN 激光) (NN 视盘))))
+                              (DEC 的)))
+                          (NP
+                            (NP (NN 模版) (NN 及) (NN 料件))
+                            (NN ，)
+                            (NP (NN 收发货人))))
+                        (VV 应)
+                        (PP
+                          (P 按)
+                          (NP
+                            (NN 国家)
+                            (NN 有关)
+                            (NP
+                              (ADVP
+                                (NN 规定)
+                                (ADVP
+                                  (ADVP (VV ，) (VV 凭) (NN 音像))
+                                  (NN 归口)))
+                              (NN 管理)
+                              (NN 部门)))))
+                      (VV 出具)))
+                  (DEC 的)))
+              (NN 批准)
+              (NN 证明))
+            (VV 办理)))
+        (NP
+          (NP
+            (NP
+              (NP
+                (NP
+                  (NP
+                    (NP
+                      (NP
+                        (NP
+                          (NP (NP (NN 海关) (NN 手续)) (NN ；))
+                          (NN 进出口))
+                        (NN 货物))
+                      (NN 收发货人))
+                    (P 对)
+                    (NP
+                      (NP (NN 货物))
+                      (DEC 的)
+                      (NP (NN 知识) (NN 产权) (NN 状况))))
+                  (ADVP (NN 申报) (VV 不)))
+                (NN 实))
+              (CC 及)
+              (NP
+                (NN 逃避)
+                (NN 海关)
+                (NN 监管)
+                (NN 、)
+                (NN 走私)
+                (NN 侵权)
+                (NP (NN 货物))))
+            (DEC 的))
+          (CC ，)
+          (P 由)
+          (NP (NN 海关))))
+      (P 依照)
+      (ADJP (NN 有关))
+      (NN 规定))
+    (NP (NN 处理)))
+  (VV 。))
+(IP
+  (NP (NN 公告))
+  (VP
+    (ADVP (AD 还))
+    (PP
+      (P 对)
+      (NP
+        (DNP (NP (NN 知识) (NN 产权) (NN 所有人)) (DEG 的))
+        (NP (NN 权利) (PU 、) (NN 责任) (CC 及) (NN 义务))))
+    (VP (VV 作出) (NP (NN 规定))))
+  (PU 。))
+(IP
+  (CP
+    (CP
+      (IP (VP (VV 受) (NP (NP (NR 中国)) (NP (NN 法律) (NN 保护)))))
+      (DEC 的)))
+  (NN 知识)
+  (NN 产权)
+  (NN 所有人)
+  (VP
+    (VP (VV 发现))
+    (CP (CP (VV 侵犯) (NP (NP (PN 其)) (NP (NN 知识) (NN 产权))) (DEC 的)))
+    (NP (NN 货物))
+    (VP (ADVP (AD 将)) (VP (VV 要) (VP (VV 进出口)))))
+  (DEC 的)
+  (VV ，)
+  (VP
+    (VV 可以)
+    (VP
+      (P 凭)
+      (NP
+        (NP
+          (DNP (NP (NN 知识) (NN 产权)) (DEG 的))
+          (NP (NN 权利) (NN 证明))
+          (PU （)
+          (NP
+            (ADVP (AD 如))
+            (NP
+              (NP
+                (DNP
+                  (NP
+                    (NP
+                      (DNP (NP (NN 知识) (NN 产权)) (DEG 的))
+                      (NP (NN 登记) (NN 注册) (NN 证书)))
+                    (NP (NN 或) (NP (NN 著作权) (NN 作品))))
+                  (DEC 的))
+                (NP (NN 样本)))
+              (CC 及)
+              (NP
+                (CP
+                  (CP
+                    (IP
+                      (VP
+                        (VCD
+                          (VV 足以)
+                          (NP (VV 证明) (NP (NP (NN 其)) (NP (NN 权利)))))))
+                    (DEC 的)))
+                (ADJP (JJ 有关))
+                (NP (NN 材料))))))
+        (PU ）))
+      (VP
+        (PP (NP (P 向)) (NP (ADJP (NN 有关)) (NN 货物) (NN 进出口地) (NN 海关)))
+        (VP (VV 举报)))))
+  (VV ，)
+  (CC 并)
+  (VV 可以)
+  (NP (NN 请求) (NN 海关))
+  (P 在)
+  (LCP (NP (NP (NN 侵权) (NN 货物)) (NN 进出口)) (LC 时))
+  (VP (VP (VV 予以) (NN 查处)) (<STOP> 。)))
+(IP
+  (NP (NN 知识) (NN 产权) (NN 所有人))
+  (VV 请求)
+  (NP (NN 海关))
+  (VV 查处)
+  (NP
+    (NP (NP (NN 侵权) (NN 货物)) (LC 时))
+    (PP
+      (NN ，)
+      (PP
+        (VV 应)
+        (PP
+          (P 对)
+          (IP
+            (NP (NN 进出口) (NN 货物))
+            (VP (VV 构成) (NP (NN 侵权) (NN 行为))))))))
+  (VP
+    (VP
+      (VP (VV 承担) (NP (NN 举证) (NN 责任)))
+      (PU ，)
+      (VP
+        (VV 协助)
+        (NP (NN 海关))
+        (IP (VP (VV 开展) (NP (NN 查缉) (NN 工作))))))
+    (CC 并)
+    (VP
+      (VV 支付)
+      (NP
+        (DP
+          (DNP (NP (ADJP (JJ 有关)) (NP (NN 货物))) (DEG 的))
+          (NN 鉴定)
+          (PU 、)
+          (NN 调查)
+          (CC 以及)
+          (DP (DT 其他)))
+        (ADJP (JJ 相关))
+        (NP (NN 费用)))))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP
+  (NP (NR 江泽民))
+  (VP
+    (VV 强调)
+    (IP (VP (VV 要) (VP (VV 做好) (NP (NN 民兵) (NN 预备役) (NN 工作)))))))
+(FRAG
+  (NR 新华社)
+  (NR 北京)
+  (NT 九月)
+  (NT 一日)
+  (NN 电)
+  (PU （)
+  (NN 记者)
+  (NN 盖玉珉)
+  (PU ）))
+(FRAG
+  (NR 中共)
+  (NN 中央)
+  (NN 总书记)
+  (PU 、)
+  (NN 国家)
+  (NN 主席)
+  (PU 、)
+  (NP (NN 中央) (NN 军委))
+  (NP (NN 主席))
+  (NP
+    (NP (NP (NP (NR 江泽民)) (NR ，)) (NP (NT 今天)))
+    (P 在)
+    (NP (NR 中南海)))
+  (VP
+    (VP (NN 会见) (NN 出席))
+    (NN 全)
+    (NP (NN 国))
+    (CLP (M 部分))
+    (NP (NN 地区))
+    (NP (NN 民兵) (PU 、) (NN 预备役) (NN 工作) (NN 会议) (NP (NN 代表))))
+  (LC 时)
+  (VP (VV 强调))
+  (PU ，)
+  (NP
+    (DT 各)
+    (CLP (NN 级))
+    (NN 地方)
+    (NN 党委)
+    (PU 、)
+    (NN 政府)
+    (CC 和)
+    (NN 军事)
+    (NN 部门))
+  (VV ，)
+  (VP
+    (VV 要)
+    (ADVP (NN 着眼))
+    (NP (NN 全) (NN 党) (NP (NP (NN 全)) (NP (NN 国))))
+    (NP (NN 工作) (NN 大局) (CC 和) (NN 国家) (NN 长治久安))
+    (VV ，)
+    (VP
+      (VP
+        (VV 重视)
+        (IP (VP (VV 做好) (NP (NN 民兵) (PU 、) (NN 预备役) (NP (NN 工作))))))
+      (PU 。))))
+(IP
+  (NP (NR 江泽民))
+  (VV 指出)
+  (PU ，)
+  (NP (NN 民兵))
+  (CC 既)
+  (IP (VC 是) (NN 民) (CC 又) (NN 是) (NN 兵))
+  (PU ，)
+  (VV 不仅)
+  (VP
+    (VC 是)
+    (NP
+      (CP
+        (CP
+          (IP
+            (VP
+              (VP (VV 保卫) (NP (NN 国家) (NN 安全)))
+              (PU 、)
+              (VP (VV 维护) (NP (NN 祖国) (NN 统一)))))
+          (DEC 的)))
+      (QP (CD 一) (CLP (M 支)))
+      (ADJP (JJ 重要))
+      (NP (NN 力量)))
+    (PU ，)
+    (CC 也)
+    (VP
+      (VC 是)
+      (NP
+        (CP
+          (CP
+            (CP
+              (IP
+                (VP
+                  (VP (VV 保持) (NP (NN 社会) (NN 稳定)))
+                  (PU 、)
+                  (VP
+                    (VV 促进)
+                    (NP
+                      (NP (QP (CD 两) (CLP (M 个))) (NN 文明))
+                      (VP (NN 建设)))))))
+            (DEC 的)))
+        (QP (CD 一) (CLP (M 支)))
+        (ADJP (JJ 重要))
+        (NP (NN 力量)))))
+  (PU 。))
+(LCP
+  (LCP
+    (NP
+      (DP (DT 各) (CLP (M 级)))
+      (NN 地方)
+      (NN 党委)
+      (PU 、)
+      (NN 政府)
+      (CC 和)
+      (NN 军事)
+      (NN 部门))
+    (PU ，)
+    (VP
+      (VV 要)
+      (VP
+        (ADVP (AD 充分))
+        (VV 调动)
+        (DNP
+          (NP
+            (JJ 广大)
+            (NN 民兵)
+            (CC 和)
+            (NP (ADJP (JJ 预备役)) (NP (NN 部队)))
+            (NP (NN 官兵)))
+          (DEG 的))
+        (NP (NN 积极性) (PU 、) (NN 创造性))
+        (PU ，)
+        (VP
+          (PP
+            (P 为)
+            (IP
+              (VP
+                (VP
+                  (VP (VV 深化) (NP (NN 改革)))
+                  (PU 、)
+                  (VP (VV 促进) (NP (NN 发展))))
+                (PU 、)
+                (VP (VV 保持) (NP (NN 稳定))))))
+          (VP (VV 做出) (NP (NN 贡献))))))
+    (PU 。)))
+(IP
+  (NP (DP (DT 各)) (NP (NN 部队)))
+  (VP
+    (VV 要)
+    (VP
+      (PP (P 为) (NP (NN 改革) (PU 、) (NN 发展) (PU 、) (NN 稳定)))
+      (VP
+        (VV 提供)
+        (NP (CP (CP (IP (VP (VV 可靠))) (DEC 的))) (NN 安全) (NN 保障)))))
+  (PU ，)
+  (VP (CC 积极) (NN 参加) (NP (NN 地方) (NN 经济) (NN 建设)))
+  (PU ，)
+  (VP
+    (PP
+      (P 为)
+      (IP
+        (VP
+          (VV 促进)
+          (NP
+            (DNP (NP (DP (DT 各)) (NP (NN 民族))) (DEG 的))
+            (NP (NN 共同) (NP (NN 繁荣)))))))
+    (VP (MSP 而) (VP (NN 努力) (VP (NN 工作)))))
+  (PU 。))
+(IP
+  (VP
+    (VV 要)
+    (VP (VV 加强) (NP (NP (NN 军政) (PU 、) (NN 军民)) (VP (NN 团结)))))
+  (PU ，)
+  (VP
+    (ADVP (AD 真正))
+    (VP
+      (VV 做到)
+      (IP
+        (VP
+          (PP (P 与) (NP (NP (DP (DT 各)) (NP (NN 族))) (NN 人民)))
+          (VP
+            (VP (ADJP (JJ 同)) (VP (VV 呼吸)))
+            (PU 、)
+            (NN 共)
+            (NN 命运)
+            (PU 、)
+            (NN 心连心))))))
+  (PU 。))
+(IP
+  (NP
+    (NP (NP (NP (NR 中央) (NN 军委)) (NP (NN 副主席))) (NP (NR 刘华清)))
+    (PU ，)
+    (NP
+      (NP (NN 军委) (NN 委员))
+      (NR 张万年)
+      (PU 、)
+      (NR 于永波)
+      (PU 、)
+      (NR 傅全有)
+      (NR 和)
+      (NN 解放军)
+      (QP (CD 三))
+      (NN 总部)
+      (CC 和)
+      (NP (NN 军委) (NN 办公厅) (NP (NN 领导)))))
+  (VV 参加)
+  (VV 了)
+  (NN 会见)
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(NP
+  (NP (NN 国务院))
+  (VP
+    (VV 部署)
+    (NP (NP (NP (NR 淮河)) (NP (NN 流域))) (NP (NN 水污染) (NN 防治) (NN 工作)))))
+(FRAG
+  (NR 新华社)
+  (NR 北京)
+  (NT 八月)
+  (NT 三十一日)
+  (NN 电)
+  (PU （)
+  (NN 记者)
+  (NR 张建军)
+  (PU ）))
+(IP
+  (NP (NN 国务院))
+  (VP
+    (NP (NT 今天))
+    (VP
+      (VP (VV 召开) (NP (NN 会议)))
+      (PU ，)
+      (VP
+        (VV 部署)
+        (NP
+          (DNP
+            (NP (NP (NP (NR 淮河)) (NP (NN 流域))) (NP (NN 水污染)))
+            (DEG 的))
+          (NP (NP (NN 防治)) (NP (NN 工作)))))))
+  (PU 。))
+(FRAG
+  (NP
+    (NP (NN 国务) (NN 委员))
+    (PU 、)
+    (NN 国务院)
+    (NN 环境)
+    (NN 保护)
+    (NN 委员会)
+    (NN 主任)
+    (NP (NR 宋健)))
+  (VP (PP (P 在) (LCP (NP (NN 会)) (LC 上))) (VV 指出))
+  (PU ，)
+  (PP (P 从) (NP (NP (NR 现在)) (LC 起)))
+  (PU ，)
+  (VP
+    (VV 要)
+    (VP
+      (VV 用)
+      (NP (DNP (QP (CD 三) (NN 年) (QP (NN 多))) (DEG 的)) (NP (NN 时间)))
+      (PU ，)
+      (VP
+        (VP
+          (NP (VV 力争))
+          (VP
+            (VP
+              (VV 使)
+              (NP (NP (NR 淮河)) (NP (NN 水质)))
+              (VP (ADVP (AD 初步)) (VP (VV 变) (VP (VV 清)))))))
+        (PU ，)
+        (VP
+          (VV 造福)
+          (NP
+            (ADJP (JJ 当代))
+            (NP (NN 人民) (CC 和) (NP (NN 子孙) (NN 后代))))))))
+  (PU 。))
+(FRAG
+  (IP
+    (NP (NT 近年))
+    (LC 来)
+    (NT ，)
+    (NP (NP (NR 淮河)) (NP (NN 水污染)))
+    (VP (VA 严重)))
+  (PU ，)
+  (ADVP (AD 特别是))
+  (LCP (NP (NT 今年)) (NN 七月) (NN 中旬) (LC 以来))
+  (PU ，)
+  (NP (NP (NR 淮河)) (NP (NN 中) (PU 、) (NP (NN 下游))))
+  (VP
+    (ADVP (AD 又))
+    (VP
+      (VV 发生)
+      (NP
+        (NP (NP (ADJP (JJ 大)) (NP (NN 面积))) (VP (NN 水污染)))
+        (NP (NN 事故)))))
+  (PU ，)
+  (VP
+    (VV 使)
+    (NP
+      (DNP (NP (QP (CD 一些)) (NP (NN 地区))) (DEG 的))
+      (NP (NN 群众) (NN 饮水)))
+    (IP (VP (VV 发生) (NP (NN 困难)))))
+  (PU ，)
+  (DNP
+    (ADVP (ADVP (AD 直接)) (VV 危及) (AD 了))
+    (DNP (NP (NN 下游) (NN 人民)) (DEG 的)))
+  (NP (NP (NN 生活) (CC 和) (NN 生产)) (PU 。)))
+(FRAG
+  (IP
+    (VP
+      (P 为了)
+      (IP
+        (VP
+          (VV 防止)
+          (IP
+            (NP (NP (NR 淮河)) (NP (NN 流域)))
+            (ADVP (AD 再次))
+            (VP
+              (VV 发生)
+              (NP (NP (ADJP (JJ 重大)) (NP (NN 水污染))) (NP (NN 事故)))))))))
+  (PU ，)
+  (NN 国务院)
+  (NN 办公厅)
+  (PP (P 根据) (NP (NP (NN 国务院) (NN 领导)) (NP (NN 指示))))
+  (PU ，)
+  (ADVP (AD 已))
+  (PP
+    (PP (P 于) (NP (NR 昨天)))
+    (VP (VV 发出) (NP (ADJP (JJ 紧急)) (NP (NN 通知)))))
+  (VV 进行)
+  (NP (NP (NN 部署)) (PU 。)))
+(PP
+  (ADVP
+    (PP (DNP (P 在) (DNP (NP (NT 今天)) (DEG 的))) (NN 会议) (LC 上))
+    (NP (NR ，) (NP (NR 宋健)))
+    (VV 传达)
+    (AS 了)
+    (NP (NN 国务院) (NP (NN 领导)))
+    (P 关于)
+    (NP
+      (NP
+        (NP
+          (NP
+            (NP (NP (NR 淮河)) (NP (NN 流域)))
+            (NP (NN 水污染) (NN 防治) (NP (NN 工作))))
+          (DEG 的)
+          (NP (NN 指示)))
+        (NR ：)
+        (NP (NN 要求))
+        (NP (NR 淮河)))
+      (NP (NN 流域)))
+    (NP (NP (NP (NN 水污染)) (NN 防治)) (NN 工作))
+    (VP (DEG 的) (NP (NN 进度)) (VP (VV 要) (VP (VV 加快))))
+    (PU ，)
+    (VP
+      (PP
+        (VP
+          (PP (P 到) (NP (NR 一九九七年)))
+          (VP (VV 应) (VP (VV 取得) (NP (ADJP (JJ 突破性)) (NP (NN 进展))))))
+        (CC ，))
+      (VP
+        (VV 使)
+        (NP (NR 淮河))
+        (IP (VP (AD 初步) (VP (VV 变) (NP (NN 清)))))))
+    (PU 。)))
+(FRAG
+  (NP
+    (IP (VP (PP (PP (P 从) (NP (NT 现在))) (VV 起)) (VP (VV 用))))
+    (NP
+      (DNP (QP (QP (CD 三) (M 年)) (ADVP (NN 多))) (DEG 的))
+      (NP (NN 时间))))
+  (PU ，)
+  (NP (DNP (DP (DT 所有)) (DEG 的)) (NP (NN 企业)))
+  (ADVP (AD 都))
+  (VV 要)
+  (VP (VP (VP (VV 做到)) (NP (NN 达标) (NN 排放))) (PU 。)))
+(IP
+  (PP
+    (P 对)
+    (NP
+      (CP
+        (CP
+          (IP
+            (IP (NP (NN 污染)) (VP (VP (VV 严重)) (VV 治理)))
+            (VP (VV 无望)))
+          (DEC 的)))
+      (NP (NN 企业))))
+  (PU ，)
+  (NP (VV 包括) (NP (ADJP (JJ 大)) (NP (NN 企业))))
+  (PU ，)
+  (VP
+    (ADVP (AD 都))
+    (VP (VV 要) (VP (ADVP (NN 依法)) (VP (AD 坚决) (VP (VV 关停转))))))
+  (PU 。))
+(FRAG
+  (NP (NP (NP (NR 宋健)) (P 在)) (NR 听取))
+  (VV 了)
+  (NR 江苏)
+  (PU 、)
+  (NR 安徽)
+  (PU 、)
+  (NR 山东)
+  (PU 、)
+  (NR 河南)
+  (QP (CD 四))
+  (NP (NN 省))
+  (CC 及)
+  (NP
+    (DNP (NP (NP (NR 淮河)) (NP (NN 水利) (NN 委员会))) (DEG 的))
+    (NP (NN 负责人)))
+  (P 关于)
+  (NP
+    (NP
+      (NP (NP (NP (NR 淮河)) (NP (NN 流域))) (NP (NN 水污染)))
+      (NP (NN 情况) (NN 和) (NN 治理) (NN 措施)))
+    (PU ，)
+    (CC 以及)
+    (NP (NP (NN 国务院)) (NP (NN 调查组))))
+  (DNP
+    (P 关于)
+    (NP
+      (NP
+        (NP
+          (VV 赴)
+          (NP
+            (NP (NR 苏) (PU 、) (NR 皖) (NR 、) (NR 豫))
+            (QP (CD 三))
+            (NP (NN 省))))
+        (VV 调查)
+        (NP (NP (NN 水污染)) (NN 事故)))
+      (NP (NN 情况)))
+    (DEC 的))
+  (NN 的后)
+  (VV 指出)
+  (PU ，)
+  (NP (NT 当前))
+  (PU ，)
+  (NR 江苏)
+  (NR 、)
+  (NR 安徽)
+  (NR 、)
+  (NR 山东)
+  (NR 、)
+  (NR 河南)
+  (QP (QP (CD 四)) (CLP (NP (NN 省)) (CLP (DT 各) (CLP (M 级)))))
+  (NP (NN 人民) (NN 政府))
+  (VV ，)
+  (VP
+    (VP
+      (VV 应)
+      (VP
+        (ADVP (AD 进一步))
+        (VP (VP (VV 做好)) (NP (NN 抗污) (NN 救灾) (NN 工作)))))
+    (PU 。)))
+(IP
+  (ADVP (AD 首先))
+  (VP
+    (VV 要)
+    (VP
+      (VP
+        (VV 保障)
+        (NP (DNP (NP (NN 群众)) (DEG 的)) (NP (NN 生活) (NN 供水))))
+      (PU ，)
+      (VP
+        (VP (VV 采取) (NP (ADJP (JJ 综合)) (NP (NN 措施))))
+        (PU ，)
+        (VP
+          (VP (VV 稳定) (NP (NN 群众) (NN 情绪)))
+          (PU ，)
+          (VP (VV 保持) (NP (NN 社会) (NN 安定)))))))
+  (PU 。))
+(IP
+  (VP
+    (VV 要)
+    (VP
+      (VP (VV 采取) (NP (ADJP (JJ 果断)) (NP (NN 措施))))
+      (MSP ，)
+      (VP
+        (VV 防止)
+        (IP
+          (NP (NP (NR 淮河)) (NP (NN 流域)))
+          (ADVP (AD 再次))
+          (VP
+            (VV 发生)
+            (NP (ADJP (JJ 重大)) (NP (NP (NN 水污染)) (NP (NN 事故)))))))))
+  (PU 。))
+(IP
+  (NP (NR 宋健))
+  (VP
+    (VV 重申)
+    (PU ，)
+    (IP
+      (PP
+        (P 在)
+        (LCP (NP (NP (NP (NR 淮河)) (NP (NN 流域))) (NP (NN 范围))) (LC 内)))
+      (PU ，)
+      (VP
+        (VP
+          (VV 禁止)
+          (IP
+            (VP
+              (VV 新建)
+              (IP
+                (NP
+                  (NP
+                    (NP (ADJP (JJ 小)) (NP (NN 造纸)))
+                    (PU 、)
+                    (NP
+                      (NP
+                        (ADJP
+                          (NP (ADJP (JJ 小)) (NP (NN 化工)))
+                          (ADJP (PU 、) (ADJP (JJ 小))))
+                        (NP (NN 制革)))
+                      (ETC 等)))
+                  (NP (NN 污染)))
+                (VP (VA 严重))))))
+        (DEC 的)
+        (NP (NN 项目)))))
+  (PU 。))
+(IP
+  (PP
+    (P 对)
+    (NP
+      (DP (DT 所有))
+      (CP
+        (CP
+          (IP
+            (VP
+              (PP
+                (P 向)
+                (NP (NP (NP (NR 淮河)) (NP (NN 流域))) (NP (NN 河流))))
+              (VP (VV 排污))))
+          (DEC 的)))
+      (NP (NN 企业))))
+  (VV ，)
+  (VP
+    (VV 要)
+    (VP
+      (VP (VV 进行) (NP (NN 限期) (NN 治理)))
+      (PU ，)
+      (VP
+        (VV 最迟)
+        (IP
+          (VP
+            (PP (P 于) (LCP (NR 一九九七年) (LC 底)))
+            (VP
+              (VV 停止)
+              (IP (VP (PP (P 向) (NP (NN 河流))) (VP (VV 排污))))))))))
+  (PU 。))
+(IP
+  (NP (NR 宋健))
+  (VP
+    (VV 要求)
+    (VV 完善)
+    (NP
+      (DNP (NP (NP (NR 淮河)) (NP (NN 流域))) (DEG 的))
+      (NP (NN 法制) (NN 建设)))
+    (PU ，)
+    (VP (VV 加强) (NP (NN 环保) (NN 执法) (NN 力度))))
+  (PU 。))
+(IP
+  (IP
+    (VP
+      (PP
+        (IP
+          (VP
+            (PP
+              (P 对)
+              (VP
+                (CP (IP (VP (VV 违反))))
+                (NP (ADJP (JJ 有关)) (NP (NN 环保) (NN 法规)))))
+            (VP (VV 造成) (NP (ADJP (JJ 严重)) (NP (NN 环境) (NN 污染))))))
+        (DEC 的)
+        (NP (NN 责任者)))
+      (VP (VV 要) (VP (ADVP (VV 严加)) (VP (VV 惩处))))))
+  (PU ，)
+  (IP
+    (VP
+      (PP
+        (P 对)
+        (NP
+          (CP (CP (IP (VP (ADVP (AD 特别)) (VP (VA 恶劣)))) (DEC 的)))
+          (NP (NN 犯罪) (NN 行为))))
+      (VP (VV 要) (VP (NP (NN 依法)) (ADVP (AD 严厉)) (VP (VV 打击))))))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP
+  (NP (NR 胡锦涛))
+  (VP
+    (VV 强调)
+    (NP (DP (DT 各) (CLP (M 级))) (NP (NN 领导) (NN 干部)))
+    (VP (VV 要) (VP (VV 加强) (NP (NN 学习))))))
+(FRAG (NR 新华社) (NR 北京) (NT 九月) (NT 一日) (NN 电))
+(FRAG
+  (NP
+    (NP (NP (NR 中共) (NN 中央) (NN 政治局)) (NN 常委))
+    (PU 、)
+    (NN 书记处)
+    (NN 书记)
+    (VV 、)
+    (NP (NN 中央) (NN 党校))
+    (NP (NN 校长))
+    (NR 胡锦涛))
+  (NP (NN 今天))
+  (IP
+    (VP
+      (PP
+        (P 在)
+        (NP
+          (LCP
+            (NP (NP (NN 中央) (NN 党校)) (NP (NN 秋季) (NN 开学) (NN 典礼)))
+            (LC 上))
+          (VP (VP (VV 发表)) (NP (NN 讲话)))))
+      (VP (VV 强调))))
+  (PU ，)
+  (NP (DP (DP (DT 各)) (CLP (M 级))) (NN 领导) (NN 干部))
+  (VP
+    (VV 要)
+    (VP
+      (ADVP
+        (DVP (ADVP (ADVP (AD 更加)) (VP (VA 自觉))) (VA 地))
+        (ADVP (VV 深入)))
+      (VV 学习)
+      (NP (NR 邓小平))
+      (NP (VV 建设))
+      (VV 有)
+      (NP (NR 中国))
+      (NP (NN 特色))
+      (NN 社会主义)
+      (NN 理论)))
+  (PU ，)
+  (VP
+    (ADVP (AD 努力))
+    (VP (VV 掌握) (NP (CP (CP (IP (VP (VA 新))) (DEC 的))) (NP (NN 知识)))))
+  (PU ，)
+  (VP (ADVP (AD 不断)) (VP (VV 增强) (NP (NP (NN 党性)) (NN 锻炼))))
+  (PU ，)
+  (VP
+    (ADVP (AD 全面))
+    (VP
+      (VV 提高)
+      (NP (NP (NN 自身)) (NP (NN 素质) (NN 和) (NN 领导) (NN 水平)))))
+  (PU ，)
+  (VP
+    (VP
+      (AD 以便)
+      (DVP (VP (AD 更) (VP (VA 好))) (DEV 地))
+      (VP (VV 履行) (NP (DNP (NP (PN 自己)) (DEG 的)) (NP (NN 职责)))))
+    (PU 。)))
+(FRAG
+  (NP
+    (NP (NN 中央) (NN 党校))
+    (NP (NT 今年) (NT 秋季))
+    (ADJP (ADVP (AD 新)) (VP (VV 入) (NP (JJ 校))))
+    (NP (NN 学员)))
+  (NN 八百二十五)
+  (NP (NN 人))
+  (PU ，)
+  (NP
+    (VP (VV 包括))
+    (NP
+      (NP (NN 进修部) (PU 、) (NN 培训部) (PU 、) (NN 研究生部))
+      (DP (DT 各) (CLP (M 个)))
+      (NP (NN 班次))))
+  (DEC 的)
+  (NP (NN 学员))
+  (PU 。))
+(IP
+  (NP (NR 胡锦涛))
+  (VV 指出)
+  (PU ，)
+  (VP
+    (VV 要)
+    (VP (PP (P 从) (NP (NN 战略) (NN 高度))) (VP (VV 看待) (NP (NN 学习)))))
+  (PU ，)
+  (PP
+    (PP
+      (P 以)
+      (NP
+        (DNP (NP (NN 高度)) (DEG 的))
+        (NP (NN 历史) (NN 使命感) (CC 和) (NN 现实) (NN 紧迫感))))
+    (VP
+      (VP (VV 来) (VP (VV 强化) (NN 学习)))
+      (PU ，)
+      (VP
+        (AD 密切)
+        (VP
+          (VV 联系)
+          (NP
+            (NP
+              (NP (ADJP (JJ 新)) (NP (NN 形势)))
+              (NP (ADJP (JJ 新)) (NP (NN 任务))))
+            (ADJP (JJ 新))
+            (NP (NN 实践)))))))
+  (VP (MSP 来) (VP (VV 开展) (NP (NN 学习))))
+  (PU 。))
+(IP
+  (NP (NR 胡锦涛))
+  (VP
+    (VP (VV 说))
+    (PU ，)
+    (IP
+      (NP (NT 现在))
+      (NP
+        (CP (CP (NP (PN 我们)) (VP (VV 需要) (VP (VV 学习))) (DEC 的)))
+        (NP (NN 东西)))
+      (VP (ADVP (AD 很)) (VA 多))))
+  (PU ，)
+  (NP (NP (ADVP (AD 最)) (NN 根本)) (DEC 的))
+  (VP
+    (VC 是)
+    (VP (VV 学习))
+    (NP (NP (NR 邓小平)) (NP (NN 建设)))
+    (VP (VE 有) (NP (NR 中国)) (NP (NN 特色) (NP (NN 社会主义)) (NP (NN 理论))))
+    (PU ，)
+    (AD 还)
+    (VP
+      (VV 要)
+      (VP
+        (VV 学习)
+        (NP
+          (NP (NP (NN 社会主义) (NN 市场) (NN 经济)) (NP (NN 理论)))
+          (ADJP (CC 及) (ADJP (JJ 有关)))
+          (NP (NN 知识)))))
+    (PU ，)
+    (VP (VV 学习) (NP (ADJP (JJ 现代)) (NP (NN 科学) (NN 技术) (NN 知识)))))
+  (PU 。))
+(FRAG
+  (NP
+    (CP
+      (CP
+        (IP
+          (VP
+            (NP (NR 胡锦涛))
+            (IP
+              (VP
+                (VV 要求)
+                (VP (VV 到) (NP (NN 中央) (NN 党校)) (VP (VV 学习)))))))
+        (DEC 的)))
+    (NP (NN 学员)))
+  (VV ，)
+  (ADVP (VV 努力))
+  (PP (P 在) (NP (QP (CD 四) (CLP (M 个))) (NP (NN 方面))))
+  (ADVP
+    (VP (VP (VV 得到)) (NP (ADJP (JJ 明显)) (NP (NN 提高))))
+    (VV ：)
+    (ADVP (QP (NN 一)) (ADVP (VV 是) (ADVP (AD 努力)))))
+  (VP (VV 掌握) (NP (DNP (NP (NN 理论)) (DEG 的)) (NP (NN 科学) (NN 体系))))
+  (PU ，)
+  (VP
+    (ADVP (AD 进一步))
+    (VP
+      (VV 确立)
+      (NP
+        (DNP (NP (NN 马克思主义)) (DEG 的))
+        (NP (NN 世界观) (CC 和) (NN 方法论)))))
+  (PU ，)
+  (VP
+    (DVP (ADVP (AD 以便)) (DVP (VP (ADVP (AD 更)) (VP (VA 好))) (DEV 地)))
+    (VP
+      (VV 运用)
+      (NP
+        (NP (NN 理论))
+        (VP (VV 指导) (NP (CP (CP (VA 新) (DEC 的))) (NP (NN 实践)))))))
+  (NN ；)
+  (CD 二)
+  (ADVP
+    (VP
+      (ADVP (ADVP (NN 是) (ADVP (AD 进一步))) (AD 全面))
+      (VP
+        (VV 理解)
+        (NP (DNP (NP (NN 党)) (DEG 的)) (ADJP (JJ 基本)) (NP (NN 路线)))))
+    (NN ，)
+    (ADVP (AD 始终)))
+  (VP
+    (VV 注意)
+    (VV 把握)
+    (NP
+      (DNP
+        (NP
+          (NP (NN 全) (NN 党))
+          (NP (NP (NP (NN 全)) (NP (NN 国))) (NP (NN 工作))))
+        (DEG 的))
+      (NP (NN 大局))))
+  (VV ，)
+  (VP
+    (VV 增强)
+    (NP
+      (NP
+        (CP
+          (CP
+            (IP
+              (VP
+                (ADVP (AD 正确))
+                (VP
+                  (VP (VV 认识))
+                  (VV 和)
+                  (VP
+                    (VV 处理)
+                    (NP
+                      (NP (NN 改革) (PU 、) (NN 发展) (PU 、) (NN 稳定))
+                      (NP (QP (CD 三)) (NP (NN 者)))
+                      (NP (NN 关系)))))))
+            (DEC 的)))
+        (NP (NN 自觉性)))
+      (NN ；)
+      (NP
+        (NN 三)
+        (VP
+          (CP
+            (CP
+              (VP (VV 是))
+              (CP
+                (CP
+                  (ADVP (AD 认真))
+                  (CP
+                    (CP
+                      (VV 研究)
+                      (CP
+                        (CP
+                          (NP (ADJP (JJ 新)) (NP (NN 形势)))
+                          (CP
+                            (CP
+                              (LC 下)
+                              (CP
+                                (CP
+                                  (VP
+                                    (VP
+                                      (DNP
+                                        (IP
+                                          (VP
+                                            (VP (VV 加强))
+                                            (CC 和)
+                                            (VP
+                                              (VP (VV 改进))
+                                              (NP (NN 党)))))
+                                        (DEG 的))
+                                      (NP (NN 建设)))
+                                    (PU 、)
+                                    (VP
+                                      (ADVP (AD 充分))
+                                      (VP
+                                        (VV 发挥)
+                                        (NP
+                                          (DNP (NP (NN 党)) (NN 的))
+                                          (NN 核心)
+                                          (NN 领导)
+                                          (NN 作用)))))
+                                  (DEC 的)))))))))))))
+          (ADJP (JJ 重大))
+          (NP (NN 问题))))))
+  (VV ，)
+  (NP
+    (VP
+      (VP
+        (ADVP (AD 进一步))
+        (VP
+          (VP (VV 做好) (NP (NN 党建) (NN 工作)))
+          (NP
+            (NN ；)
+            (NP (NP (NN 四)) (VP (VV 是) (VP (VV 联系) (NP (NN 实际))))))))
+      (VV ，)
+      (VP
+        (VP
+          (VP
+            (VP
+              (VP (VV 增强) (NP (NP (NN 党性)) (NN 锻炼)))
+              (VV ，)
+              (ADVP (AD 严格)))
+            (P 按照)
+            (NP (NN 共产党员)))
+          (DEC 的)
+          (NP (NN 标准)))
+        (VP (VV 要求) (NP (NN 自己)))))
+    (DEC 。)))
+(NP
+  (NP
+    (NP (NN 中央) (NN 党校))
+    (ADJP (JJ 常务))
+    (NP (NN 副校长))
+    (PU 汪家（廖去广加金旁）))
+  (VP
+    (ADVP (AD 也))
+    (VP
+      (PP (PP (P 在) (LCP (NP (NN 开学) (NN 典礼)) (LC 上))) (VP (VV 讲话)))))
+  (PU 。))
+(IP
+  (NP
+    (NP (NN 中央))
+    (ADJP (JJ 有关))
+    (NP (NN 部门))
+    (NN 负责人)
+    (NP
+      (NR 吕枫)
+      (PU 、)
+      (NR 侯宗宾)
+      (PU 、)
+      (NN 郑科扬)
+      (PU 、)
+      (NR 翟泰丰)
+      (PU 、)
+      (NR 陈福今)
+      (ETC 等)))
+  (VP (VV 出席) (NN 开学) (NN 典礼))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(NP (NP (NR 钱其琛)) (VP (VV 会见) (NP (NR 朝鲜) (NN 政府) (NN 特使))))
+(FRAG (NR 新华社) (NR 北京) (NT 九月) (NT 一日) (NN 电))
+(FRAG
+  (NR 国务院)
+  (NN 副总理)
+  (CC 兼)
+  (NN 外交)
+  (NN 部长)
+  (NP (NP (NR 钱其琛)) (NP (NT 今天)))
+  (PP (P 在) (NP (NR 钓鱼台) (NN 国宾馆)))
+  (NR 会见)
+  (NR 朝鲜)
+  (NN 政府)
+  (NN 特使)
+  (PU 、)
+  (NP (NP (NR 外交部)) (NP (NN 副部长)))
+  (NP (NP (NR 宋浩京)) (PU 。)))
+(IP
+  (NP (NP (NR 宋浩京)) (VV 转达))
+  (AS 了)
+  (NP (NR 朝鲜) (NP (NN 领导人)))
+  (DNP (PP (P 对) (NP (NP (NR 中国)) (NP (NN 领导人)))) (DEG 的))
+  (ADJP (JJ 亲切))
+  (NP (NP (NP (NN 问候)) (PU ，)) (VV 代表) (NP (NN 朝方)))
+  (VP
+    (PP
+      (P 对)
+      (IP
+        (NP
+          (NP (NR 中国))
+          (NP
+            (NP (NN 党政) (NN 领导人) (CC 和) (NP (NN 人民)))
+            (VV 哀悼)
+            (NP (NR 金日成) (NN 主席))))
+        (VP (VV 逝世))))
+    (VP (VP (VV 表示)) (NP (ADJP (JJ 深切)) (NP (NN 谢意)))))
+  (PU 。))
+(IP
+  (IP
+    (NP (NR 钱其琛))
+    (VP
+      (VV 感谢)
+      (IP
+        (NP (NR 宋浩京))
+        (VP
+          (VV 转达)
+          (NP
+            (DNP (NP (NP (NR 朝鲜)) (NP (NN 领导人))) (DEG 的))
+            (NP (NN 问候)))))))
+  (PU ，)
+  (VP
+    (VV 表示)
+    (IP
+      (VP
+        (VV 相信)
+        (IP
+          (NP (NP (NR 朝鲜)) (NP (NN 人民)))
+          (VP
+            (VP
+              (ADVP (AD 将))
+              (ADVP (AD 紧密))
+              (VP
+                (VV 团结)
+                (P 在)
+                (NP
+                  (CP
+                    (CP
+                      (IP (VP (NP (P 以) (NP (NR 金正日))) (VP (VV 为首))))
+                      (DEC 的)))
+                  (NP (NR 朝鲜) (NR 劳动党))
+                  (NP (NN 中央) (NN 周围)))))
+            (PU ，)
+            (VP
+              (VV 继续)
+              (VP
+                (VV 完成)
+                (NP (DNP (NP (NR 金日成) (NN 主席)) (DEG 的)) (NP (NN 遗愿))))))))))
+  (PU 。))
+(IP
+  (NP (NR 钱其琛))
+  (VP
+    (VV 说)
+    (PU ，)
+    (IP
+      (LCP (NP (NT 不久)) (LC 前))
+      (NP (NP (NR 朝) (NR 美)) (NP (NN 会谈)))
+      (VP (VV 取得) (NP (VV 了) (NP (NN 成果))))))
+  (PU 。))
+(IP
+  (NP (NN 中方))
+  (VP
+    (VV 希望)
+    (NP (DP (DT 这) (QP (CD 一))) (NP (NN 会谈)))
+    (VP
+      (VV 能够)
+      (VP
+        (VP (VV 继续) (VP (VRD (VV 进行) (VV 下去))))
+        (CC 并)
+        (VP (ADVP (AD 不断)) (VP (VV 取得) (NP (NN 进展)))))))
+  (PU 。))
+(IP
+  (PP
+    (NP (P 在))
+    (LCP
+      (VV 谈到)
+      (PP (P 在) (NP (NR 朝鲜) (NR 半岛)))
+      (VP (VV 建立))
+      (LCP (NP (NP (NN 和平) (NN 保障) (NN 机制)) (NP (NN 问题))) (LC 时))))
+  (NT ，)
+  (NP (NR 钱其琛))
+  (VV 表示)
+  (PU ，)
+  (IP
+    (IP
+      (NP (NR 中国))
+      (VP
+        (ADVP (AD 真诚))
+        (VP
+          (VP (VV 希望))
+          (NP (NR 朝鲜) (NN 半岛))
+          (VP (VV 保持) (NP (NN 稳定) (CC 与) (NN 和平))))))
+    (PU ，)
+    (IP
+      (IP
+        (PP
+          (P 在)
+          (LCP
+            (IP
+              (NP
+                (CP (CP (IP (VP (VA 新))) (DEC 的)))
+                (NP (NN 和平) (NN 机制)))
+              (VP (VV 建立)))
+            (LC 之前)))
+        (PU ，)
+        (NP (NP (NR 朝鲜)) (NP (NN 停战) (NN 协定)))
+        (VP
+          (ADVP (AD 仍然))
+          (VP (VC 是) (NP (CP (CP (NP (CP (CP (VA 有效)))) (DEC 的)))))))
+      (DEC ，)
+      (IP
+        (NP (ADJP (JJ 有关)) (NP (DP (DT 各)) (NP (NN 方))))
+        (VP (ADVP (AD 都)) (VP (VV 应) (VP (VV 遵守)))))))
+  (VV 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP
+  (NP (NR 李鹏) (NN 总理))
+  (VP (NR 同) (NP (NR 朱马古洛夫) (NP (NN 总理))) (VP (VV 会谈))))
+(FRAG
+  (NN 新华社)
+  (NR 比什凯克)
+  (NT ４月)
+  (NN ２３日)
+  (NN 电)
+  (PU （)
+  (NN 记者)
+  (NR 周树春)
+  (PU 、)
+  (NR 俱孟军)
+  (PU ）))
+(FRAG
+  (NT 今天)
+  (NR 下午)
+  (NR ，)
+  (NP (NR 李鹏) (NN 总理))
+  (CC 同)
+  (NP (NP (NR 吉尔吉斯)) (NP (NP (NN 政府) (NN 总理)) (NP (NR 朱马古洛夫))))
+  (PP
+    (P 就)
+    (IP
+      (VP (IP (VP (VV 发展))) (NP (ADJP (JJ 双边)) (NP (NN 经贸) (NN 关系))))))
+  (VP
+    (VV 进行)
+    (AS 了)
+    (NP
+      (CP (CP (IP (VP (VA 广泛) (CC 而) (VA 深入))) (DEC 的)))
+      (NP (NN 会谈))))
+  (PU 。))
+(IP
+  (NP (NN 会谈))
+  (VP
+    (VC 是)
+    (NP
+      (CP
+        (CP
+          (IP
+            (VP
+              (PP
+                (P 在)
+                (LCP
+                  (NP
+                    (CP (CP (LCP (VA 务实) (VA 友好)) (DEC 的)))
+                    (NP (NN 气氛)))
+                  (LC 中)))
+              (VP (VV 进行))))
+          (DEC 的)))))
+  (PU 。))
+(IP
+  (NP (NR 朱马古洛夫))
+  (VP
+    (VV 说)
+    (PU ，)
+    (IP
+      (IP
+        (NP (NP (NR 吉) (NR 中)) (NP (QP (CD 两)) (NP (NN 国))))
+        (VP
+          (VE 有)
+          (VV 着)
+          (NP
+            (CP (CP (ADJP (JJ 传统)) (DEC 的)))
+            (ADJP (JJ 友好))
+            (NP (NN 关系)))))
+      (PU ，)
+      (IP
+        (NP (DP (DT 这) (CLP (M 种))) (NP (NN 关系)))
+        (VP
+          (ADVP (AD 正在))
+          (VP
+            (VP (ADVP (AD 日益)) (VP (VV 充实)))
+            (CC 和)
+            (VP (ADVP (AD 不断)) (VP (VV 发展))))))))
+  (PU 。))
+(IP
+  (NP (NP (PN 他)) (VV 说) (VV ，) (NP (NR 吉尔吉斯)))
+  (VP
+    (VP
+      (NP (NT 当前))
+      (ADVP (AD 正))
+      (VP (VV 处于) (NP (NN 经济) (NN 改革) (NN 阶段))))
+    (PU ，)
+    (VP
+      (ADVP (AD 十分))
+      (VP
+        (VV 重视)
+        (IP
+          (VP
+            (PP (P 同) (NP (NR 中国)))
+            (VP (VV 加强) (NP (NN 经济) (NN 联系))))))))
+  (PU ，)
+  (VP
+    (VP (VV 借鉴) (NP (DNP (NP (NR 中国)) (DEG 的)) (NP (NN 经验))))
+    (PU ，)
+    (VP
+      (VV 包括)
+      (NP
+        (NP (NR 中国))
+        (NP (NP (NN 农业) (NN 改革)) (DEG 的) (NP (NN 经验))))))
+  (PU 。))
+(IP
+  (NP (NR 他))
+  (VV 说)
+  (VV ，)
+  (NP
+    (NR 中国)
+    (NP (NR 新疆))
+    (NP (VV 以及) (NP (DP (DT 其他) (QP (CD 一些))) (NP (NN 地区)))))
+  (P 在)
+  (NP (NP (NR 吉尔吉斯)) (ADVP (AD 已)))
+  (VV 建立)
+  (VV 了)
+  (VV 包括)
+  (NP (NN 食品) (PU 、) (NN 皮毛) (ETC 等))
+  (QP (CD ７０多) (CLP (M 个)))
+  (JJ 合资)
+  (NP (NN 企业))
+  (VV ，)
+  (VV 而且)
+  (NP
+    (IP (NP (NN 经营) (NN 情况)) (VP (VA 良好)))
+    (PU ，)
+    (NP (NP (PN 双方)) (NP (NN 专家))))
+  (VP
+    (ADVP (AD 正在))
+    (PP
+      (P 对)
+      (NP
+        (NP (NN 造纸) (PU 、) (NN 卫生) (PU 、) (NN 医药) (ETC 等))
+        (NP (NN 合作) (NN 项目))))
+    (VP (VV 进行) (NP (NN 论证))))
+  (PU 。))
+(IP
+  (NP (NR 朱马古洛夫))
+  (VP
+    (ADVP (AD 还))
+    (PP (P 向) (NP (NR 李鹏)))
+    (VP (VV 介绍) (AS 了) (NP (NP (NR 吉尔吉斯)) (NP (NN 经济) (NN 形势)))))
+  (PU 。))
+(IP
+  (NP
+    (NP (NP (NR 李鹏)) (VV 说))
+    (PU ，)
+    (NP
+      (CP
+        (CP
+          (IP
+            (NP (NR 吉尔吉斯))
+            (VP (PP (P 在) (LCP (NP (NN 改革)) (LC 中))) (VP (VV 面临))))
+          (DEC 的)))
+      (NP (NN 经济) (NN 困难))))
+  (VP
+    (VP (VC 是) (DNP (ADJP (JJ 暂时)) (DEG 的)))
+    (PU ，)
+    (VP
+      (VP
+        (ADVP (CS 只要))
+        (VP
+          (PP (P 经过) (NP (NN 努力)))
+          (VP (VC 是) (VP (ADVP (AD 完全)) (VP (VV 能) (VP (VV 克服)))))))
+      (DEC 的)))
+  (PU 。))
+(IP
+  (NP (NR 李鹏))
+  (VP
+    (VV 说)
+    (PU ，)
+    (IP
+      (LCP (QP (QP (CD 两) (CLP (M 年))) (QP (CD 多))) (LC 来))
+      (NP (NP (QP (CD 两)) (NP (NN 国))) (NP (NN 经贸) (NN 合作)))
+      (VP
+        (VP (ADVP (AD 已)) (ADVP (AD 顺利)) (VP (VV 起步)))
+        (PU ，)
+        (CC 并)
+        (VP
+          (VV 取得)
+          (NP (CP (CP (IP (VP (VA 可观))) (DEC 的))) (NP (NN 进展)))))))
+  (PU 。))
+(IP
+  (IP
+    (NP (ADJP (JJ 双边)) (NP (NN 贸易)))
+    (VP (NP (NN 发展)) (VP (ADVP (AD 很)) (VP (VA 快)))))
+  (PU ，)
+  (VP (ADVP (AD 但)) (ADVP (AD 仍)) (VP (VE 有) (NP (NN 潜力))))
+  (PU 。))
+(IP
+  (NP
+    (NP (NP (NR 中国)) (NP (NN 政府)))
+    (PU ，)
+    (NP (ADVP (AD 特别是)) (NP (NR 新疆) (NR 维吾尔) (NN 自治区))))
+  (VP
+    (ADVP (AD 将))
+    (VP
+      (NN 努力)
+      (VP
+        (VV 发展)
+        (NP
+          (PP
+            (PP (P 同) (NP (NR 吉尔吉斯)))
+            (PP
+              (P 在)
+              (NP
+                (NP (NN 经贸) (ETC 等))
+                (DP (DT 各) (CLP (M 个)))
+                (NP (NN 领域)))))
+          (DEG 的)
+          (NP (NN 合作))))))
+  (PU 。))
+(LCP
+  (LCP
+    (NP (NP (NR 今后)) (NP (QP (CD 两)) (NN 国)))
+    (VP
+      (VV 要)
+      (VP
+        (DVP (VP (ADVP (AD 更)) (VP (VA 充分))) (DEV 地))
+        (VP
+          (VV 发掘)
+          (CC 和)
+          (VP
+            (VV 利用)
+            (NP
+              (DNP (NP (QP (CD 两)) (NP (NN 国))) (DEG 的))
+              (ADJP (JJ 有利))
+              (NP (NN 条件)))))))
+    (PU ，)
+    (PP (PP (P 按照) (NP (NN 经济) (NN 规律))) (VP (NN 办事)))
+    (PU ，)
+    (VP
+      (VP (VV 保障) (IP (NP (PN 双方)) (VP (VV 获益))))
+      (PU ，)
+      (VP (ADVP (AD 不断)) (VP (VV 丰富) (NP (NN 合作) (NN 形式)))))
+    (MSP ，)
+    (VP
+      (VP
+        (VV 提高)
+        (NP
+          (NP (QP (CD 两)) (NP (NN 国)))
+          (NP (NN 贸易) (NN 水平) (CC 和) (NN 档次))))
+      (PU 。))))
+(IP
+  (PP (P 为) (NP (PN 此)))
+  (NP (PN 双方))
+  (ADVP (AD 都))
+  (VP
+    (VP
+      (VP (VV 要) (VP (ADVP (AD 努力)) (VP (VV 创造) (NP (NN 条件)))))
+      (PU ，)
+      (IP
+        (VP
+          (VV 包括)
+          (IP
+            (VP
+              (VV 解决)
+              (IP
+                (VP
+                  (VV 妨碍)
+                  (NP (NP (NN 经贸) (NN 合作)) (IP (VP (VV 发展)))))))))))
+    (DEC 的)
+    (NP (NN 交通) (NN 运输) (NN 问题)))
+  (PU 。))
+(IP
+  (NP (NR 李鹏))
+  (VP
+    (ADVP (AD 还))
+    (VP
+      (VV 说)
+      (PU ，)
+      (IP
+        (PU “)
+        (IP
+          (NP
+            (CP
+              (CP
+                (IP
+                  (VP
+                    (DP (DT 这) (CLP (M 次)))
+                    (P 随)
+                    (NP (PN 我))
+                    (VP (VV 来访))))
+                (DEC 的))))
+          (VP (VE 有) (NP (QP (CD 一) (CLP (M 批))) (NP (NN 企业家))))))
+      (PU ，)
+      (NP (PN 双方))
+      (VP (VV 可以) (VP (VV 加强) (NP (NN 接触))))))
+  (PU 。))
+(FRAG
+  (NP (NP (NR 中国)) (NP (NN 政府)))
+  (VP
+    (VP (VV 鼓励))
+    (CC 和)
+    (VP
+      (VV 支持)
+      (NP (NP (NR 中国)) (NP (NN 企业界)))
+      (IP
+        (VP
+          (PP
+            (P 在)
+            (LCP
+              (NP (CP (UCP (VA 平等) (VV 互利)) (DEC 的)) (NP (NN 基础)))
+              (LC 上)))
+          (VP
+            (VV 参与)
+            (NP (DNP (NP (NR 吉尔吉斯)) (DEG 的)) (NP (NN 经济) (NN 建设))))))))
+  (PU 。)
+  (NP (VV ”)))
+(IP
+  (NP (NR 李鹏) (NN 总理))
+  (VP
+    (VV 邀请)
+    (NP (NR 朱马古洛夫) (NN 总理))
+    (IP
+      (VP
+        (PP
+          (P 在)
+          (NP (CP (CP (IP (VP (VA 方便))) (DEC 的))) (NP (NN 时候))))
+        (VP (VP (VV 访)) (NP (NR 华))))))
+  (PU 。))
+(IP
+  (NP (NR 朱马古洛夫))
+  (VP
+    (PP (P 对) (NP (PN 此)))
+    (VP
+      (VP (VP (VV 表示) (NP (NN 感谢))) (PU ，))
+      (CC 并)
+      (VP
+        (DVP (VP (VA 愉快)) (DEV 地))
+        (VP (VV 接受) (AS 了) (NP (NN 邀请))))))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP
+  (NP (NP (NR 伊朗)) (NP (NN 副总统)))
+  (VP
+    (PP (P 对) (NP (IP (VP (VV 访) (NP (NR 华)))) (NP (NN 成果))))
+    (VP (VV 表示) (NP (NN 满意)))))
+(FRAG
+  (NR 新华社)
+  (NR 德黑兰)
+  (NT ８月)
+  (NT ３１日)
+  (NN 电)
+  (PU （)
+  (NN 记者)
+  (NN 陈铭)
+  (PU ）))
+(FRAG
+  (NP (NP (NR 伊朗)) (NP (QP (OD 第一)) (NP (NN 副总统))) (NP (NR 哈桑・哈比比)))
+  (PP
+    (P 在)
+    (LCP
+      (IP
+        (VP
+          (VV 结束)
+          (NP
+            (IP
+              (VP
+                (PP (P 对) (NP (NR 中国)))
+                (IP (VP (VV 为期) (QP (CD ３) (CLP (M 天)))))))
+            (DEC 的)
+            (ADJP (JJ 友好))
+            (NP (NN 访问)))))
+      (LC 后)))
+  (PU ，)
+  (NP (NT 今天))
+  (VP (VV 回到) (NP (NR 德黑兰)))
+  (LC 时)
+  (VP
+    (VP
+      (VV 说)
+      (PU ，)
+      (IP
+        (NP (PN 他))
+        (VP
+          (PP
+            (P 对)
+            (NP (CP (IP (VP (VV 访) (NP (NR 华))))) (NP (NN 成果))))
+          (VP (VV 表示) (NP (NN 满意))))))
+    (NR 。)))
+(IP
+  (NP (NR 哈比比))
+  (VP
+    (PP (P 在) (NP (NN 机场)))
+    (PP (P 对) (NP (NN 记者)))
+    (VP
+      (VV 说)
+      (VV ，)
+      (IP
+        (NP (NR 他))
+        (VP
+          (PP
+            (PP (P 在) (LCP (NP (NN 访问)) (LC 中)))
+            (NP (P 与) (NP (NP (NR 中国)) (NP (NN 领导人)))))
+          (P 就)
+          (NP
+            (NP
+              (ADJP (JJ 双边))
+              (NP (NN 关系) (PU 、) (NP (NN 国际) (CC 和) (NN 地区))))
+            (NP (NN 问题)))
+          (VP (VV 交换) (AS 了) (NP (NN 意见)))))))
+  (PU 。))
+(IP
+  (NP (NR 他))
+  (VP
+    (VV 说)
+    (PU ，)
+    (IP
+      (IP
+        (NP
+          (DNP
+            (NP (NP (NR 伊) (NR 中)) (QP (CD 两)) (NP (NN 国)))
+            (DEG 的))
+          (NP (NN 经济) (NN 合作) (NN 项目)))
+        (VP (ADVP (AD 正在)) (VP (VV 展开))))
+      (PU ，)
+      (NP (QP (CD 两)) (NP (NN 国)))
+      (VP
+        (ADVP (AD 将))
+        (PP (P 在) (NP (NP (NR 中亚)) (NP (NN 地区))))
+        (ADVP (AD 联合))
+        (VP (VP (VV 投资)) (PU ，) (VP (VV 进行) (NP (NN 经济) (NN 合作)))))))
+  (PU 。))
+(IP
+  (NP
+    (NP (NP (NR 中国)) (PU 、) (NP (NR 伊朗)))
+    (CC 和)
+    (NP (QP (OD 第三)) (NP (NN 国))))
+  (VP
+    (ADVP (AD 还))
+    (ADVP (AD 将))
+    (VP
+      (VP
+        (VP (ADVP (AD 联合)) (VP (VV 投资)))
+        (PU ，)
+        (VP
+          (VV 改造)
+          (NP (DNP (NP (NR 中国)) (DEG 的)) (NP (NN 炼油厂) (NN 设备)))))
+      (PU ，)
+      (VP
+        (VV 扩大)
+        (NP
+          (CP
+            (CP
+              (IP (VP (VV 提炼) (NP (NP (NR 伊朗)) (NP (NN 石油)))))
+              (DEC 的)))
+          (NP (NN 能力))))))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(FRAG
+  (NP (NP (NP (NR 香港)) (NP (NN 舆论))) (VV 认为))
+  (PU ，)
+  (NP
+    (DNP
+      (NP
+        (NP (NP (DP (DT 全)) (NP (NN 国))) (NP (NN 人大)))
+        (NP (NN 常委会)))
+      (DEG 的))
+    (NP (NN 决定)))
+  (NP
+    (PP (PP (P 对) (NP (NR 香港))) (ADVP (ADVP (AD 平稳)) (VP (NN 过渡))))
+    (NP (NN 意义)))
+  (VP (VA 重大)))
+(FRAG (NN 新华社) (NR 香港) (NT 九月) (NT 一日) (NN 电))
+(FRAG
+  (NP
+    (NP
+      (NP
+        (QP (NR 八) (CLP (NR 届)))
+        (NP (DP (DT 全)) (NP (NN 国)))
+        (NP (NN 人大))
+        (NN 常委会))
+      (QP (OD 第九) (CLP (M 次)))
+      (NP (NN 会议)))
+    (NP (NT 昨天)))
+  (VV 通过)
+  (LCP
+    (NP
+      (CP
+        (CP
+          (IP
+            (NP (NR 中国))
+            (VP
+              (ADVP (AD 将))
+              (VP
+                (PP (P 在) (NP (NN 一九九七年)))
+                (VP
+                  (VP
+                    (VV 恢复)
+                    (IP
+                      (VP
+                        (PP (P 对) (NP (NR 香港)))
+                        (VP (VV 行使) (NP (NN 主权))))))
+                  (LC 时)
+                  (VP
+                    (VV 重组)
+                    (NP
+                      (NP (NR 香港))
+                      (NP (NN 立法) (NN 机关) (CC 和) (NN 区域) (NN 组织))))))))
+          (DEC 的)))
+      (NP (NN 决定)))
+    (LC 后))
+  (LC ，)
+  (NP
+    (NP (NP (NR 香港)) (NP (NN 舆论)))
+    (CC 和)
+    (NP
+      (NP (NN 各界) (NN 人士))
+      (ADVP (AD 纷纷))
+      (VV 表示)
+      (VV ，)
+      (NP (DP (DT 这) (CLP (M 个))) (NP (NN 决定)))))
+  (VP
+    (VV 体现)
+    (AS 了)
+    (NP
+      (NP (NN 主权) (CC 与) (NN 民意))
+      (VV ，)
+      (NP
+        (PP
+          (P 对)
+          (IP
+            (VP
+              (VV 保持)
+              (IP
+                (NP (NR 香港))
+                (VP (VV 平稳) (VP (VV 过渡) (CC 与) (NN 繁荣) (VA 稳定)))))))
+        (NP (NN 意义))))
+    (VP (VA 重大)))
+  (VV 。))
+(PRN
+  (IP
+    (NP
+      (DNP
+        (NP (NR 《) (NR 天天) (NN 日报) (NR 》))
+        (DNP (NP (NT 今天)) (DEG 的)))
+      (QP (CD 一) (CLP (M 篇)))
+      (NP (NN 社论)))
+    (VV 指出)
+    (VV ，)
+    (NP (DP (DT 这) (CLP (M 个))) (NP (NN 决定)))
+    (VP
+      (VV 获得)
+      (AS 了)
+      (CP
+        (IP
+          (VP
+            (VV 出席)
+            (NP
+              (NP (NP (DP (DT 全)) (NP (NN 国))) (NP (NN 人大)))
+              (NN 常委会)))))
+      (QP (CD 一百二十七) (CLP (M 位)))
+      (NP (NN 委员))
+      (ADJP (JJ 一致))
+      (VP (VV 通过)))
+    (PU ，)
+    (VP
+      (VV 意味)
+      (VV 着)
+      (IP
+        (IP
+          (NP (PN 大家))
+          (VP
+            (PP
+              (P 对)
+              (NP
+                (LCP
+                  (IP
+                    (VP
+                      (VV 恢复)
+                      (IP
+                        (VP (VV 行使) (NP (NP (NR 香港)) (NP (NN 主权)))))))
+                  (LC 后))
+                (DEG 的)
+                (NP (NP (NN 政治) (NN 架构)) (NP (NN 重建)))))
+            (PU ，)
+            (VP
+              (VV 有)
+              (AS 着)
+              (NP (DNP (ADJP (JJ 高度)) (DEC 的)) (NP (NN 共识))))))
+        (PU ，)
+        (IP (VP (IP (VP (VV 可以) (VP (VV 说)))) (VC 是) (NP (NN 人同此心))))))
+    (PU 。)))
+(IP
+  (NP
+    (NP
+      (CP
+        (CP
+          (CP
+            (IP
+              (NP (NR 《) (NR 文汇报) (NR 》))
+              (VP (NP (NT 今天)) (VP (VV 发表)))))
+          (DEC 的)))
+      (NP (NN 社论)))
+    (VV 指出)
+    (VV ，)
+    (NP
+      (NP (NN 人大) (NP (NN 常委会)))
+      (CP (CP (IP (VP (NP (VA 庄严)))) (DEC 的)))
+      (NP (NN 法律) (NN 决定))))
+  (PP (P 向) (NP (NN 世界)))
+  (VV 昭示)
+  (PU ，)
+  (NP
+    (IP
+      (NP (NR 中国))
+      (PP (P 在) (LCP (NP (NN 主权) (NN 问题)) (LC 上)))
+      (VP (VE 没有) (NP (NP (NN 退让)) (NP (NN 余地)))))
+    (DEC ，)
+    (NP (IP (NP (NR 中国)) (VP (VV 言出必行))) (VV ；) (NP (NN 决定))))
+  (VP
+    (VV 展示)
+    (AS 了)
+    (NP
+      (NP
+        (CP
+          (CP
+            (NP (NP (NR 中国)) (NP (NN 政府)))
+            (CP
+              (CP
+                (IP
+                  (VP
+                    (VV 维护)
+                    (NP (NN 国家) (NN 主权))
+                    (CC 和)
+                    (VP
+                      (VV 实现)
+                      (IP (NP (NR 香港)) (ADJP (JJ 平稳)) (NP (NN 过渡))))))
+                (DEC 的)))))
+        (ADJP (JJ 坚定))
+        (NP (NN 决心)))
+      (VV ，)
+      (VP
+        (ADVP (AD 也))
+        (VP
+          (VV 显示)
+          (AS 了)
+          (NP
+            (CP
+              (CP
+                (IP
+                  (NP (NR 中国))
+                  (VP
+                    (VP
+                      (VV 做好)
+                      (NP
+                        (NP (NR 香港))
+                        (NP (ADJP (JJ 平稳)) (NN 过渡))
+                        (NP (NN 工作))))
+                    (IP
+                      (VP
+                        (PU 、)
+                        (VP
+                          (VP (VV 维护) (NP (NR 香港)))
+                          (VA 繁荣)
+                          (VA 稳定))))))
+                (DEC 的)))
+            (NP (NN 决心)))))))
+  (VV 。))
+(IP
+  (NP (NP (NR 《) (NN 大公报) (PU 》)) (NP (NT 今天)))
+  (PP
+    (P 在)
+    (LCP
+      (NP
+        (CP
+          (CP
+            (IP
+              (NP (NN 题))
+              (VV 为)
+              (IP
+                (PU 《)
+                (NP (NN 人大) (NN 常委会))
+                (PP (P 为) (NP (NR 香港)))
+                (VP
+                  (VP (VP (VV 作出) (ADJP (JJ 重要))) (NP (NN 决定)))
+                  (PU 》))))
+            (DEC 的)))
+        (NP (NN 社评)))
+      (LC 中)))
+  (VV 认为)
+  (PU ，)
+  (NP (NN 决定))
+  (VV 使)
+  (NP (NN 港人))
+  (VV 拥有)
+  (AS 了)
+  (VV 确保)
+  (NP (AD 顺利))
+  (VV 产生)
+  (NP
+    (NP
+      (NP
+        (QP
+          (NP (ADJP (JJ 特别)) (NP (NN 行政区)))
+          (QP (OD 第一) (CLP (M 届))))
+        (NP (NN 立法会)))
+      (CC 和))
+    (NP
+      (NP
+        (NP (NP (NN 区域) (NN 组织)) (DEC 的) (NP (NN 法律) (NN 依据)))
+        (PU ，)
+        (JJ 广大))
+      (JJ 爱国)
+      (ADJP (JJ 爱港))
+      (NP
+        (NP (NN 同胞))
+        (VV 可以)
+        (PP (P 由) (NP (DP (DT 这) (CLP (M 个))) (NP (NN 决定)))))))
+  (VP
+    (VP
+      (VP (VV 得到) (NP (NN 鼓舞)))
+      (NN ，)
+      (VP
+        (PP (P 以) (NP (NN 主人翁) (NN 精神)))
+        (ADVP (AD 积极))
+        (VP (VV 参与) (NP (NN 社会) (NN 事务)))))
+    (VV ，)
+    (VP
+      (PP
+        (P 为)
+        (UCP
+          (IP (VP (NP (NN 未来)) (VV 实现)))
+          (NP
+            (NP (DT “) (NP (NN 港人)))
+            (VP (VV 治) (NP (NN 港)))
+            (PU ”))))
+      (VP (VV 做好) (NP (NN 准备)))))
+  (PU 。))
+(IP
+  (NP
+    (NP (NN 社评))
+    (VP (ADVP (AD 还)) (VV 指出))
+    (PU ，)
+    (PP
+      (P 对于)
+      (NP
+        (DP (DT 那些))
+        (CP
+          (CP
+            (VV 企图)
+            (IP
+              (VP
+                (PP
+                  (PP (P 在) (LCP (NP (NT 一九九七年)) (LC 前)))
+                  (VP (VV 制造))
+                  (NP (PU “) (NR 既成) (NN 事实) (PU ”)))
+                (VP (VV 延续) (NP (NP (NR 英国)) (NP (NN 政治) (NN 影响))))))
+            (DEC 的)))
+        (NP (NN 人)))))
+  (VP
+    (VP (VV 来) (VP (VV 说)))
+    (NN ，)
+    (NP (DNP (NP (NN 人大) (NP (NN 常委会))) (DEG 的)) (NP (NN 决定)))
+    (VP
+      (VV 宣告)
+      (AS 了)
+      (NP
+        (DNP (NP (NP (PN 他们)) (DEG 的) (NP (NN 迷梦))) (DEG 的))
+        (ADJP (JJ 彻底))
+        (NP (NN 破灭)))))
+  (PU 。))
+(IP
+  (NP
+    (IP
+      (NP (NR 《) (NR 香港) (NR 商报) (PU 》))
+      (IP
+        (NP (NN 题))
+        (VV 为)
+        (IP
+          (P 《)
+          (IP
+            (VP (VV 终止) (NP (NN 英制) (NN 架构)))
+            (VP (VP (VV 体现) (NP (NN 主权) (NN 民意))) (LC 》))))))
+    (DEC 的)
+    (NP (NN 社评)))
+  (VV 认为)
+  (PU ，)
+  (NP
+    (NP (DNP (NP (NN 人大) (NP (NN 常委会))) (DEG 的)) (NP (NN 决定)))
+    (PU ，)
+    (VP
+      (VV 挫败)
+      (AS 了)
+      (NP
+        (NP (NR 港) (NR 英))
+        (CP
+          (CP
+            (NP (NN 当局))
+            (CP
+              (CP
+                (IP
+                  (VP
+                    (PP (P 在) (LCP (NP (NN 政制) (NN 问题)) (LC 上)))
+                    (VP (VV 搞乱) (NP (NN 人心)))))
+                (DEC 的)))))
+        (NP (NN 企图)))))
+  (PU ，)
+  (VP
+    (ADVP (AD 也))
+    (VP
+      (VV 消除)
+      (AS 了)
+      (NP
+        (QP (CD 一些))
+        (NP (NN 人))
+        (CP
+          (CP
+            (IP
+              (VP
+                (VP
+                  (P 在)
+                  (NP (NP (NR 香港)) (NN 过渡) (NP (NN 问题)))
+                  (VP (LC 上) (VP (VV 存在))))
+                (DEC 的)
+                (IP (VP (VA 不切实际)))))
+            (DEC 的)))
+        (NP (NN 幻想)))))
+  (PU ，)
+  (VP
+    (VV 使)
+    (NP
+      (NP (NT 一九九七年))
+      (NP
+        (CP (CP (IP (NN 政权) (VP (VV 移交))) (DEC 的)))
+        (NP (NP (NN 方式)) (IP (VP (VV 明朗化))) (VV ，) (NP (PN 这)))))
+    (IP
+      (VP
+        (P 对)
+        (NP
+          (ADJP (JJ 广大))
+          (NP (JJ 爱国) (NP (VA 爱港)))
+          (DEC 的)
+          (NP (NN 人)))
+        (IP
+          (VP
+            (VP
+              (VC 是)
+              (NP (CP (CP (IP (VP (VA 巨大))) (DEC 的))) (NP (NN 鼓舞))))
+            (PU ，)
+            (VP
+              (VV 相信)
+              (IP
+                (IP
+                  (NP
+                    (CP
+                      (CP
+                        (IP
+                          (VP
+                            (VV 主张)
+                            (CC 和)
+                            (VP (VV 维护) (NP (JJ 平稳) (NN 过渡)))))
+                        (DEC 的)))
+                    (NP (NN 力量)))
+                  (VP (ADVP (AD 将)) (ADVP (AD 更加)) (VP (VV 增强))))
+                (DEC ，)
+                (VP
+                  (VP (VV 破坏) (NP (NN 平稳) (NN 过渡)))
+                  (VP (ADVP (AD 将)) (AD 更加) (VP (VV 不得人心)))))))))))
+  (PU 。))
+(FRAG
+  (NP
+    (NR 香港)
+    (NN 华人)
+    (NN 革新)
+    (NN 协会)
+    (QP (OD 第八) (CLP (M 届)))
+    (NP (NN 常委会)))
+  (NP (NN 昨晚))
+  (VP (VV 举行) (NP (NN 会议)))
+  (PU ，)
+  (NP (NN 全体) (NN 常委))
+  (VV 一致)
+  (VV 表示)
+  (VV 支持)
+  (NP
+    (NP
+      (NP
+        (NP
+          (NP (NP (DP (DT 全)) (NP (NN 国))) (NP (NN 人大)))
+          (NP (NN 常委会)))
+        (NP (NN 决定)))
+      (PU ，)
+      (VV 认为)
+      (NP (DP (DT 这) (CLP (M 个))) (NP (NN 决定))))
+    (VP
+      (VV 有助于)
+      (NP (DNP (NP (NR 香港)) (DEG 的)) (ADJP (JJ 平稳)) (NP (NN 过渡)))))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP
+  (NP (NR 中国))
+  (VP
+    (VP (VV 培训) (ADJP (JJ 跨国)) (VV 经营))
+    (ADJP (JJ 高级))
+    (NP (NN 管理) (NN 人才))))
+(FRAG
+  (NR 新华社)
+  (NR 上海)
+  (NT 九月)
+  (NT 一日)
+  (NN 电)
+  (PU （)
+  (NN 通讯员)
+  (NN 张徐顺)
+  (PU ）))
+(FRAG
+  (CP
+    (CP
+      (NP (NR 中国))
+      (ADJP (JJ 应急))
+      (VV 培训)
+      (ADJP (ADJP (JJ 高级)) (NP (NN 跨国)))
+      (NN 经营)
+      (NN 管理)
+      (NN 人才)
+      (DEC 的)))
+  (QP (CD 一) (CLP (M 项)))
+  (ADJP
+    (ADJP
+      (ADJP (JJ 重要))
+      (NP (NP (NN 举措)) (NP (NT 今天)))
+      (P 在)
+      (NP
+        (NP (NP (NR 上海)) (VP (NN 实施)) (PU ：) (NP (NR 中国)))
+        (ADJP (NN 跨国))))
+    (NN 企业)
+    (NN 经营)
+    (NN 管理)
+    (NN 实务)
+    (ADJP (JJ 高级)))
+  (NP (NN 研修班))
+  (PU ，)
+  (NP (NT 今天))
+  (PP (P 在) (NP (NR 上海) (NN 国际) (NP (NN 金融)) (NN 学院)))
+  (ADVP (AD 正式))
+  (NP (VV 举行) (NP (NN 开学) (NN 典礼)))
+  (PU 。))
+(IP
+  (NP
+    (CP
+      (CP
+        (VV 来自)
+        (NP
+          (NP (DT 全) (NP (NN 国)))
+          (QP (CD 八十余) (CLP (M 家)))
+          (ADJP (JJ 大型) (PU 、) (JJ 特大型))
+          (NP (NN 企业) (NN 集团) (CC 或) (NN 进出口) (NN 公司)))
+        (DEC 的)))
+    (NP (NN 总裁) (PU 、) (NN 副总裁) (ETC 等)))
+  (VV 报名)
+  (VV 参加)
+  (DNP (NP (DP (DT 这) (CLP (M 期))) (NP (NN 研修班))) (DEG 的))
+  (NN 学习)
+  (PU 。))
+(LCP
+  (LCP
+    (NP (DP (DT 这) (CLP (M 期))) (JJ 高级) (NN 研修班))
+    (P 由)
+    (NP (NP (NR 中国)) (NP (NN 对外) (NP (NN 贸易) (NN 经济) (NN 合作部))))
+    (PU 、)
+    (NP (NP (NR 联合国)) (NP (NP (NN 贸易) (NN 与) (NN 发展)) (NP (NN 会议))))
+    (PU 、)
+    (NP
+      (NP (NR 中国))
+      (NN 国际)
+      (NN 人力)
+      (NN 资源)
+      (NN 发展)
+      (NN 跨文化)
+      (NN 研究)
+      (NP (NN 协会)))
+    (CC 和)
+    (NP
+      (NP
+        (NP (NP (NR 上海) (NN 国际) (NN 金融) (NN 学院)) (ADVP (AD 联合)))
+        (VP (VV 举办))
+        (PU ，)
+        (NP (NR 其)))
+      (NN 宗旨))
+    (VV 为)
+    (VP
+      (VV 适应)
+      (NP
+        (CP
+          (CP
+            (NP (NR 中国))
+            (NP (NN 社会主义) (NN 市场) (NN 经济) (NP (NN 转变)))
+            (CC 及)
+            (NP (NP (NN 同) (NP (NN 国际))) (NN 接轨))
+            (DEC 的)))
+        (NP (NN 需要))))
+    (PU ，)
+    (VP
+      (VP
+        (VV 推动)
+        (NP
+          (DNP (NP (NP (NR 中国)) (NP (NN 企业))) (DEG 的))
+          (NP (NN 国际化) (PU 、) (NN 实业化) (CC 和) (NN 集团化))))
+      (PU ，)
+      (NN 应急)
+      (VV 培训)
+      (QP (CD 一) (NN 批))
+      (NP (NN 复合型) (PU 、) (JJ 国际型) (NN 的) (NP (NR 中国)))
+      (NP (NN 企业))
+      (ADJP (JJ 高级) (ADJP (JJ 跨国)))
+      (NP (NN 经营) (NN 管理) (NN 人才)))
+    (<STOP> 。)))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP
+  (NP (NR 俄罗斯))
+  (VP
+    (VV 完成)
+    (NP
+      (PP (P 从) (NP (NP (NR 波罗的海)) (QP (CD 三)) (NP (NN 国))))
+      (NP (NN 撤军))
+      (NP (NN 工作)))))
+(FRAG
+  (NR 新华社)
+  (NR 莫斯科)
+  (NT ８月)
+  (NT ３１日)
+  (NN 电)
+  (PU （)
+  (NN 记者)
+  (NR 谢荣)
+  (PU ）))
+(IP
+  (NP
+    (NP
+      (NP (NR 俄罗斯))
+      (VV 驻扎)
+      (P 在)
+      (NP
+        (NP (NP (NP (NR 波罗的海)) (QP (CD 三)) (NP (NN 国))) (DEC 的))
+        (NP (NN 西北) (NN 军队) (NP (NN 集群)))))
+    (VV 的)
+    (QP (ADJP (JJ 最后)) (QP (CD 一) (CLP (M 批))))
+    (CP (IP (VP (VV 应) (VP (VV 撤离)))))
+    (NP (NN 人员)))
+  (VP
+    (ADVP (AD 已))
+    (PP (P 于) (NP (NR ３１日)))
+    (ADVP (AD 全部))
+    (VP (VV 撤出) (NP (NR 拉脱维亚))))
+  (PU 。))
+(LCP
+  (LCP
+    (NP (NP (PN 至此)) (NT ，))
+    (NP (NR 俄罗斯))
+    (VP
+      (VV 完成)
+      (AS 了)
+      (NP
+        (DNP
+          (PP (P 从) (NP (NP (NR 波罗的海)) (QP (CD 三)) (NP (NN 国))))
+          (DEG 的))
+        (NP (NN 撤军) (NN 工作))))
+    (PU 。)))
+(FRAG
+  (PP (PP (PP (P 据)) (NN 此间) (NN 新闻) (NN 媒介)) (NP (NN 报道)))
+  (NR ，)
+  (NP (NR 俄罗斯))
+  (NN 西北)
+  (NN 军队)
+  (NN 集群)
+  (NN 司令部)
+  (NP (NP (NN 机构) (NN 人员)) (NP (NN ３１日)))
+  (VP
+    (BA 将)
+    (IP
+      (NP (ADJP (JJ 军用)) (NP (NN 设施)))
+      (VP
+        (VV 移交)
+        (VP (VV 给) (VP (AS 了) (NP (NN 当地) (NN 地方) (NN 政府)))))))
+  (PU ，)
+  (CC 并)
+  (VP
+    (PP (P 向) (NP (NP (NP (NR 拉脱维亚)) (NP (NN 总统))) (NP (NR 乌尔马尼斯))))
+    (VP
+      (VV 递交)
+      (AS 了)
+      (NP
+        (ADJP
+          (ADJP (JJ 有关))
+          (CP (CP (IP (VP (VV 完成) (NP (NN 撤军)))) (DEC 的))))
+        (NP (NN 报告)))))
+  (PU ，)
+  (IP
+    (VP
+      (ADVP (AD 随后))
+      (VP
+        (NP (NP (VV 乘) (NN 飞机)) (PP (P 从) (NP (NR 里加))))
+        (VP (VV 撤回) (NP (NR 莫斯科))))))
+  (PU 。))
+(FRAG
+  (IP
+    (NP
+      (CP (IP (NP (NR 俄罗斯)) (VV 驻)))
+      (NP (NP (NR 立陶宛)) (NP (NN 军队))))
+    (VP
+      (ADVP (AD 已))
+      (PP (P 于) (LCP (NP (NT １９９３年) (NT ８月) (NT ３１日)) (LC 之前)))
+      (VP (NP (NR 撤回国)))))
+  (PU ，)
+  (NP (CP (CP (IP (VP (VV 驻) (NP (NR 爱沙尼亚)))) (DEC 的))) (NP (NN 军队)))
+  (VP
+    (PP (P 于) (NP (NP (DT 本) (NP (NN 月))) (NT ２９日)))
+    (VP (VV 完成) (AS 了) (NP (NN 撤军) (NN 工作))))
+  (PU 。))
+(FRAG
+  (PP
+    (P 根据)
+    (NP
+      (CP
+        (CP
+          (IP
+            (NP
+              (NP (NR 俄) (CC 与) (NR 拉脱维亚) (CC 和) (NR 爱沙尼亚))
+              (NP (NN 政府)))
+            (VP (VV 达成)))
+          (DEC 的)))
+      (NP (NN 协议))))
+  (PU ，)
+  (NP (NR 目前))
+  (ADVP (AD 尚))
+  (VP
+    (VE 有)
+    (IP
+      (QP (CD 几百) (CLP (M 名)))
+      (NP (NR 俄))
+      (NP (NN 军队) (NN 专家))
+      (VP
+        (VV 留)
+        (PP
+          (P 在)
+          (NP
+            (NP (DNP (NP (NR 拉脱维亚)) (DEG 的)) (NP (NN 预警) (NN 雷达站)))
+            (CC 和)
+            (NP
+              (DNP (NP (NR 爱沙尼亚)) (DEG 的))
+              (NP (NR 俄) (NN 海军) (NN 教学) (NN 中心))))))))
+  (PU 。))
+(FRAG
+  (IP
+    (NP (NP (NR 俄罗斯)) (NP (NN 西北)) (NN 军队) (NN 集群))
+    (VP
+      (ADVP (AD 原))
+      (VP
+        (VC 为)
+        (NP
+          (DNP
+            (NP
+              (NP (NR 苏联))
+              (VV 驻)
+              (ADJP (JJ 上述))
+              (QP (CD 三))
+              (NP (NN 国)))
+            (DEC 的))
+          (NP (NN 军队))))))
+  (PU ，)
+  (IP (NP (NN 司令部)) (VP (VV 设) (PP (P 在) (NP (NR 拉脱维亚) (NN 共和国)))))
+  (PU 。))
+(FRAG
+  (IP
+    (NP (NP (JJ 原)) (NP (ADJP (JJ 总)) (NP (NN 兵力))))
+    (VP (VC 为) (NP (QP (CD １１・６万余)) (NP (NN 人)))))
+  (PU ，)
+  (NP (NN 其中))
+  (PP (P 在) (NP (NR 拉脱维亚)))
+  (VP (VP (VV 驻军)) (VP (ADVP (AD 最)) (VP (VA 多))))
+  (PU ，)
+  (VP (VC 为) (NP (QP (CD ５万余)) (NP (NN 人))))
+  (CC ，)
+  (NP
+    (NP (NR 立陶宛))
+    (VC 为)
+    (QP (CD ３・５万余))
+    (NP (NP (NN 人)) (CC ，) (NP (NR 爱沙尼亚))))
+  (VP (VP (VC 为) (NP (QP (CD ３万余)) (NP (NN 人)))) (PU 。)))
+(IP
+  (LCP (IP (NP (ADJP (JJ 原)) (NP (NR 苏联))) (VP (VV 解体))) (LC 后))
+  (PU ，)
+  (NP (NP (DP (DT 该)) (NN 军队)) (NN 集群))
+  (VP (VP (VV 转归) (NP (NR 俄罗斯))) (VP (VV 所) (VP (VE 有))))
+  (PU 。))
+(FRAG
+  (PP (P 据) (NP (NN 报道)))
+  (NR ，)
+  (CP
+    (CP
+      (IP
+        (VP
+          (P 从)
+          (NP (NP (NR 波罗的海)) (QP (CD 三)) (NP (NR 国)))
+          (VP (VV 撤回))))
+      (DEC 的)))
+  (NP (NR 俄罗斯))
+  (NP (NN 军队))
+  (VP
+    (ADVP (AD 将))
+    (ADVP (AD 分别))
+    (VP
+      (VV 驻扎)
+      (P 在)
+      (NP
+        (NP (NR 俄) (NR 加里宁格勒州) (PU 、) (NR 斯摩棱斯克州))
+        (CC 以及)
+        (NP
+          (IP
+            (VP (PP (VV 离) (NP (NR 莫斯科))) (QP (CD ３００) (CLP (M 公里)))))
+          (NP (DEC 的) (NP (NR 叶利尼亚市)))))))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP
+  (NP (NP (NP (NR 美国)) (NP (NN 商务部长))) (NP (NR 布朗)))
+  (VP (VV 访问) (NP (NR 上海))))
+(FRAG
+  (NR 新华社)
+  (NR 上海)
+  (NT 八月)
+  (NT 三十一日)
+  (NN 电)
+  (PU （)
+  (NN 记者)
+  (NR 周解蓉)
+  (PU ）))
+(IP
+  (NP
+    (CP
+      (CP (IP (VP (ADVP (AD 正在)) (VP (VV 访) (NP (NR 华))))) (DEC 的)))
+    (NP (NP (NP (NR 美国)) (NP (NN 商务部长))) (NP (NR 布朗))))
+  (NP (NT 今天))
+  (PP (P 在) (NP (PN 这里)))
+  (VP
+    (VV 说)
+    (PU ，)
+    (NP
+      (NP (NR 上海))
+      (VP
+        (VC 是)
+        (NP
+          (CP
+            (CP
+              (QP (CD 一) (CLP (M 个)))
+              (CP
+                (CP
+                  (IP
+                    (NP (NN 经济))
+                    (VP (ADVP (AD 正在)) (ADVP (AD 快速)) (VP (VV 发展))))
+                  (DEC 的)))))
+          (NP (NN 城市))))))
+  (PU 。))
+(IP
+  (NP (NP (NR 美国)) (NP (NN 商界)))
+  (VP
+    (PP
+      (P 对)
+      (IP
+        (VP
+          (PP (P 与) (NP (NR 上海)))
+          (VP (VV 建立) (NP (CP (CP (VA 良好) (DEC 的))) (NP (NN 关系)))))))
+    (ADVP (AD 很))
+    (VP (VV 感) (NP (NN 兴趣))))
+  (PU 。))
+(IP
+  (NP (NR 布朗))
+  (VP
+    (VP (VV 表示))
+    (PU ，)
+    (IP
+      (NP (PN 双方))
+      (VP
+        (VV 可以)
+        (VP
+          (PP
+            (P 在)
+            (NP
+              (NP
+                (NN 运输)
+                (PU 、)
+                (NN 电讯)
+                (PU 、)
+                (NN 发电)
+                (PU 、)
+                (NN 金融)
+                (NN 服务业)
+                (ETC 等))
+              (NP (NN 方面))))
+          (VP
+            (VV 取得)
+            (NP (DNP (ADJP (JJ 进一步)) (DEG 的)) (NP (NN 合作))))))))
+  (PU 。))
+(IP
+  (NP (NR 布朗))
+  (VP
+    (VC 是)
+    (VP
+      (NP (NT 昨天) (NN 深夜))
+      (PP (P 从) (NP (NR 北京)))
+      (VP (VP (VV 抵达) (NP (NR 上海))) (DEC 的))))
+  (PU 。))
+(FRAG
+  (NP (NT 今天))
+  (NP (NP (NR 布朗)) (NP (NN 分别)))
+  (VV 出席)
+  (AS 了)
+  (NN 世界)
+  (NN 著名)
+  (NN 电站)
+  (NN 设备)
+  (NN 制造)
+  (NN 公司)
+  (PRN
+    (PU ――)
+    (NP
+      (IP (IP (NR 美国) (NR 西屋) (NN 公司)) (VV 与))
+      (NP (NR 上海) (NN 电气) (NN 集团))))
+  (VV 签订)
+  (NP (CP (CP (VV 为期) (CD 二十) (CLP (M 年)) (DEC 的))) (NN 合资) (NN 协议))
+  (PU 、)
+  (NP (NR 美国) (NR 通用) (NN 电气) (NN 金融) (NN 公司))
+  (CC 和)
+  (CP
+    (IP (NP (NR 上海) (NN 电力) (NN 公司)) (CP (IP (NN 共同) (VP (VV 投资))))))
+  (VV 建立)
+  (NP (NP (NN 燃机) (NN 发电) (NN 合营) (NN 公司)) (DEC 的) (NN 签字))
+  (VV 。))
+(FRAG
+  (NP (NR 据悉))
+  (P ，)
+  (DNP
+    (NR 美国)
+    (NR 西屋)
+    (NN 公司)
+    (CC 与)
+    (DNP (NP (NR 上海) (NN 电气) (NN 集团)) (DEG 的)))
+  (NP
+    (NP
+      (NP (NN 合资) (NN 协议))
+      (VV 包括)
+      (NP (OD 三十万) (CLP (NR 千瓦)) (NN 火电) (NN 机组)))
+    (NN 关键)
+    (NN 部件))
+  (NN 合作)
+  (NN 生产)
+  (PU 、)
+  (NP (NP (NN 同时)) (VV 扩大) (NP (OD 六十万) (CLP (M 千瓦)) (NP (NN 机组))))
+  (DNP
+    (PP (P 在) (LCP (NP (DP (DT 各) (CLP (M 个))) (NP (NN 领域))) (LC 内)))
+    (DEG 的))
+  (NP
+    (NP
+      (NP (NN 合作))
+      (PU ；)
+      (NP
+        (DNP
+          (NP
+            (NP (NR 美国) (NN 通用) (NN 电气) (NN 金融) (NN 公司))
+            (CC 和)
+            (NP (NR 上海) (NN 电力) (NN 公司)))
+          (DEG 的))
+        (NP (NN 合作))))
+    (VV 包括)
+    (VP
+      (VCD (NN 投资) (VV 建设))
+      (NP
+        (NP (CD 四) (CLP (M 台)))
+        (OD 十万)
+        (NR 千瓦)
+        (NN 级)
+        (NP (DEG 的) (NP (NN 燃气轮) (NN 发电) (NN 机组))))))
+  (PU 。))
+(IP
+  (NP (NP (NP (NT 今天)) (NT 下午)) (NR ，) (NR 布朗))
+  (ADVP (AD 还))
+  (VV 参观)
+  (AS 了)
+  (CP
+    (CP
+      (LCP
+        (VV 位)
+        (VV 于)
+        (LCP
+          (NP
+            (NR 上海)
+            (NR 漕河泾)
+            (NP (ADJP (JJ 高)) (NP (NN 科技)))
+            (NP (NN 开发区)))
+          (LC 内)))
+      (DEC 的)))
+  (NP (NR 上海) (NN 电子) (NN 元件) (NN 公司))
+  (CC 和)
+  (NR 美国)
+  (NN ＡＭＰ)
+  (NR 中国)
+  (ADJP
+    (ADJP (JJ 有限))
+    (NP
+      (NP (NP (NN 公司)) (VV 合资))
+      (VP (VV 建立))
+      (DEC 的)
+      (NR 上海)
+      (NR 安普)
+      (NP (NN 连接器)))
+    (ADJP (JJ 有限)))
+  (NP
+    (NP (NN 公司))
+    (PU ，)
+    (CC 并)
+    (PP
+      (P 为)
+      (NP
+        (CP
+          (CP
+            (CP (IP (NP (NR 上海) (NN 航空) (NN 公司)) (VV 引进)))
+            (CP (CP (NP (NR 美国)) (DEC 的)))))
+        (QP (OD 第六) (CLP (M 架)))
+        (NR 波音)
+        (NP (NN 飞机)))))
+  (NP (NR 剪彩) (PU 。)))
+(FRAG
+  (NP (NR 中共) (NN 中央) (NN 政治局))
+  (NN 委员)
+  (PU 、)
+  (NP (NP (NR 上海)) (NP (NN 市委) (NP (NN 书记))))
+  (NP (NP (NR 吴邦国)) (NR 今天) (NR 下午))
+  (VP
+    (VV 会见)
+    (AS 了)
+    (NP
+      (NP (NR 布朗))
+      (PU ，)
+      (VP
+        (VV 介绍)
+        (AS 了)
+        (NP
+          (DNP (NP (NP (NR 上海)) (NP (NN 改革) (NN 开放))) (DEG 的))
+          (NP (NN 进程) (CC 和) (NN 发展) (NN 远景))))))
+  (PU 。))
+(IP
+  (NP (NP (NR 布朗)) (NP (NN 一行)))
+  (VP
+    (PP (P 于) (NP (NT 今晚)))
+    (VP (VP (VV 离) (NP (NR 沪))) (VP (VV 赴) (NP (NR 广州)))))
+  (PU 。))
+(FRAG
+  (NP
+    (NP (NR 上海))
+    (NP (NN 市长) (NN 代表))
+    (PU 、)
+    (NN 市)
+    (NN 外经贸委)
+    (NP (NN 主任))
+    (NP (NR 王祖康)))
+  (VP
+    (VP (VV 到) (NP (NN 机场)))
+    (VP (PP (NR 为) (NP (NP (NR 美国)) (NP (NN 客人)))) (VP (VV 送行))))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
+(IP
+  (NP (NP (NR 中国)) (NP (NN 政府)))
+  (VV 决定)
+  (IP
+    (VP
+      (IP
+        (VP
+          (VV 调回)
+          (LCP (NP (NR 朝鲜) (NN 军事) (NN 停战) (NN 委员会)) (LC 中))))
+      (DEG 的)
+      (NP (NR 中国))
+      (NN 人民)
+      (NN 志愿军)
+      (NN 代表团))))
+(FRAG (NR 新华社) (NR 北京) (NT 九月) (NT 一日) (NN 电))
+(FRAG
+  (NP (NR 八月) (NR 三十日))
+  (NR ，)
+  (NR 外交部)
+  (NP (NN 副部长))
+  (NP (NR 唐家璇))
+  (P 在)
+  (NP (NR 北京))
+  (PP
+    (P 同)
+    (NP
+      (NP
+        (NP (NR 朝鲜))
+        (NP (NN 政府))
+        (NP (NN 特使))
+        (PU 、)
+        (NP (NP (NN 外交部)) (NP (NN 副部长))))
+      (NP (NR 宋浩京))))
+  (VP (VP (VV 举行)) (NN 会谈))
+  (PU ，)
+  (PP
+    (P 就)
+    (NP
+      (ADJP (P 有关))
+      (NP
+        (PP (P 在) (NP (NR 朝鲜) (NR 半岛)))
+        (VP
+          (VV 建立)
+          (NP
+            (CP (CP (IP (VP (VV 巩固))) (DEC 的)))
+            (NN 和平)
+            (NN 保障)
+            (NN 机制))))
+      (NP (NN 问题))))
+  (VP (VV 交换) (AS 了) (NP (NN 意见)))
+  (PU 。))
+(IP
+  (NP (NP (LCP (NP (NR 会谈)) (LC 中)) (NR ，)) (NP (PN 双方)))
+  (VP
+    (P 对)
+    (NP (NP (NR 朝) (NR 中)) (QP (CD 两)) (NP (NN 国)))
+    (P 作为)
+    (NP (NP (NR 朝鲜)) (NN 停战) (NN 协定))
+    (NN 签字)
+    (CP
+      (CP
+        (NP (NP (NN 一方)) (NR ，))
+        (P 在)
+        (LCP (QP (NP (NR 过去)) (QP (CD 四十多) (CLP (M 年)))) (LC 间))
+        (CP
+          (CP
+            (P 为)
+            (CP
+              (CP
+                (PP (P 在) (NP (NR 朝鲜) (NN 半岛)))
+                (CP
+                  (CP
+                    (VP
+                      (VP
+                        (VP (VV 维持) (NP (NN 停战)))
+                        (PU 、)
+                        (VP (VV 保障) (NP (NN 和平) (CC 与) (NN 安全))))
+                      (VP (MSP 所) (VP (VV 作出))))
+                    (DEC 的)))))))))
+    (ADJP (JJ 共同))
+    (NP (NP (NN 努力)) (VP (VV 表示) (NP (NN 满意)))))
+  (PU 。))
+(IP
+  (NP (PN 双方))
+  (VV 认为)
+  (PU ，)
+  (IP
+    (VP
+      (IP
+        (VP
+          (PP
+            (P 从)
+            (NP
+              (NP
+                (NP (NT 目前))
+                (NP (DNP (NP (NN 国际) (NN 关系)) (DEG 的)) (NP (NN 变化))))
+              (CC 和)
+              (NP (NP (NR 朝鲜) (NN 半岛)) (NP (NN 形势)))))
+          (VP (VV 出发))))
+      (PU ，)
+      (VP
+        (VV 需要)
+        (VP
+          (PP (P 在) (NP (NN 半岛)))
+          (VP
+            (VV 建立)
+            (NP
+              (CP (CP (IP (VP (VA 新))) (DEC 的)))
+              (NN 和平)
+              (NN 保障)
+              (NP (NN 机制))))))))
+  (PU 。))
+(IP
+  (NP (NP (NR 朝方)) (VV 通报))
+  (VV 了)
+  (NP
+    (DNP
+      (PP
+        (P 关于)
+        (IP
+          (VP
+            (PP (P 在) (NP (NR 朝鲜) (NR 半岛)))
+            (VP
+              (VV 建立)
+              (NP
+                (CP (CP (IP (VP (VA 新))) (DEC 的)))
+                (NP (NP (NN 和平) (NN 保障)) (NN 机制)))))))
+      (DEG 的))
+    (NP (NN 协商) (NN 方案)))
+  (CC 以及)
+  (CP
+    (CP (IP (NP (NN 朝方)) (VP (ADVP (AD 已经)) (VP (VV 采取)))) (DEC 的)))
+  (VP
+    (VV 召回)
+    (NP
+      (NP
+        (NP (NR 朝鲜) (NN 军事) (NN 停战) (NN 委员会))
+        (NP (NN 朝方) (NN 代表团)))
+      (CC 以及)
+      (NP (VV 设立) (NP (NP (NR 朝鲜) (NN 人民军)) (NN 板门店) (NN 代表处)))))
+  (VP
+    (VV 作为)
+    (NP
+      (NP (NP (NN 协商) (NN 机构)) (ETC 等))
+      (ADJP (JJ 具体))
+      (NP (NN 措施))))
+  (PU 。))
+(IP
+  (NP (NP (NN 朝方)) (VV 强调))
+  (PU ，)
+  (IP
+    (NP (ADJP (JJ 上述)) (NP (NN 措施)))
+    (VP
+      (VC 是)
+      (NP
+        (QP (CD 一) (CLP (M 种)))
+        (DNP (ADJP (JJ 善意)) (DEG 的))
+        (NP (NN 行动)))))
+  (PU ，)
+  (VP
+    (VC 是)
+    (VP
+      (PP (P 为) (IP (VP (VV 建立) (NP (NN 和平) (NN 保障) (NN 机制)))))
+      (VP (VV 创造) (NP (NN 现实) (NN 条件)))))
+  (PU 。))
+(IP
+  (IP
+    (NP (NR 中方))
+    (VP
+      (VV 表示)
+      (VP
+        (VV 关注)
+        (NP
+          (DNP (NP (NP (NR 朝鲜) (NR 半岛)) (NP (NN 局势))) (DEG 的))
+          (NP (NN 发展))))))
+  (CC 并)
+  (VP
+    (NP (AD 真诚))
+    (VP
+      (VV 希望)
+      (IP
+        (NP (NP (NR 朝鲜) (NR 半岛)) (NP (NN 局势)))
+        (VP (VV 缓和) (PU 、) (VA 稳定)))))
+  (PU 。))
+(IP
+  (IP
+    (VP
+      (VV 维护)
+      (NP
+        (DNP (NP (NR 朝鲜) (NN 半岛)) (DEG 的))
+        (NP (NN 和平) (CC 与) (NN 稳定)))))
+  (VV 符合)
+  (NP
+    (NP
+      (DNP
+        (NP (NP (JJ 本) (NP (NN 地区))) (DP (DT 所有)) (NP (NN 国家)))
+        (DEG 的))
+      (NP (NN 利益)))
+    (PU ，)
+    (VP
+      (ADVP (AD 也))
+      (VP
+        (VV 有利于)
+        (NP
+          (DNP (NP (NR 亚洲) (CC 和) (NP (NN 世界))) (DEG 的))
+          (NP (NN 和平) (CC 与) (NN 安全))))))
+  (PU 。))
+(IP
+  (NP (NP (NR 中方)) (NP (VV 主张)))
+  (VV 应)
+  (VP
+    (PP
+      (P 通过)
+      (NP
+        (DNP
+          (NP (ADJP (JJ 有关)) (NP (NP (DT 各)) (NP (NN 方))))
+          (DEG 的))
+        (NP (NN 协商) (CC 和) (NN 对话))))
+    (VP
+      (VV 解决)
+      (NP
+        (DNP (NP (NR 朝鲜) (NR 半岛)) (DEG 的))
+        (ADJP (JJ 有关))
+        (NP (NN 问题)))))
+  (PU 。))
+(FRAG
+  (IP
+    (VP
+      (VRD (VV 考虑) (VV 到))
+      (NP (DNP (NP (NP (NR 朝鲜)) (NN 方面)) (DEG 的)) (NP (NN 要求)))))
+  (PU ，)
+  (PP
+    (P 根据)
+    (NP
+      (CP
+        (CP
+          (IP
+            (NP (NP (NR 朝鲜)) (NP (NN 方面)))
+            (VP
+              (ADVP (NR 已))
+              (VP
+                (VP
+                  (VV 召回)
+                  (NP
+                    (LCP (NP (NN 军停会)) (LC 中))
+                    (NP (DEG 的) (NP (NN 朝方) (NN 代表团)))))
+                (VP
+                  (CC 以及)
+                  (IP
+                    (NP (NN 军停会))
+                    (VP
+                      (LC 事实上)
+                      (ADVP (AD 已))
+                      (VP (VV 停止) (NP (VV 运转)))))))))
+          (DEC 的)))
+      (NP (NN 现状))))
+  (PU ，)
+  (NP (NP (NR 中国)) (NP (NN 政府)))
+  (VV 决定)
+  (IP
+    (VP
+      (VV 调回)
+      (NP
+        (NP (LCP (NP (NN 军停会)) (LC 中)) (NR 的))
+        (NP (NR 中国))
+        (NN 人民)
+        (NN 志愿军)
+        (NN 代表团))))
+  (NR 。))
+(IP
+  (NP
+    (NP (NN 中方))
+    (VV 希望)
+    (NP (ADJP (JJ 有关)) (NP (DP (DT 各)) (NP (NN 方)))))
+  (VP
+    (PP
+      (P 为)
+      (IP (VP (VV 缓和) (NP (NP (NR 朝鲜) (NR 半岛)) (NP (NN 局势))))))
+    (VP (VV 继续) (VP (VV 做出) (NP (NN 建设性) (NN 努力)))))
+  (PU 。))
+(FRAG (PU （) (VV 完) (PU ）))
