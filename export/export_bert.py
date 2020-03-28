@@ -10,11 +10,11 @@ BERT code for both tensorflow and pytorch is required:
 - https://github.com/google-research/bert/commit/f39e881b169b9d53bea03d2d341b31707a6c052b
 """
 
-%cd ~/dev/self-attentive-parser
+#cd ~/ws/exp.parsing/self-attentive-parser
 import sys
-sys.path.insert(0, "/Users/kitaev/dev/self-attentive-parser/src")
+sys.path.insert(0, "/data/home/lfsong/ws/exp.parsing/self-attentive-parser/src")
 
-sys.path.append("/Users/kitaev/dev/bert")
+sys.path.append("/data/home/lfsong")
 import bert
 import bert.modeling, bert.tokenization
 
@@ -54,8 +54,8 @@ def format_elapsed(start_time):
 # %%
 
 class args:
-    model_path_base="models/nk_base9_scale=5_dev=95.40.pt"
-    test_path="data/22.goldtags" # dev set with gold tag (not distributed in this repo)
+    model_path_base="models/cn_roberta_aux_dev=94.32.pt"
+    test_path="data/ctb51_test_berkeley.clean" # dev set with gold tag (not distributed in this repo)
     eval_batch_size=100
     evalb_dir="EVALB/"
 
@@ -282,6 +282,7 @@ def make_flabel_with_constants(input, constants):
     return mul2b
 
 def make_ftag(input):
+    print(sd.keys())
     constants = (
         tf.constant(sd['f_tag.0.weight'].numpy().transpose()),
         tf.constant(sd['f_tag.0.bias']),
@@ -360,7 +361,7 @@ def make_network():
 
 # %%
 
-from parse_nk import PTB_TOKEN_UNESCAPE
+#from parse_nk import PTB_TOKEN_UNESCAPE
 def bertify_batch(sentences):
     all_input_ids = np.zeros((len(sentences), parser.bert_max_len), dtype=int)
     all_word_end_mask = np.zeros((len(sentences), parser.bert_max_len), dtype=int)
@@ -375,12 +376,12 @@ def bertify_batch(sentences):
 
         cleaned_words = []
         for word in sentence:
-            word = PTB_TOKEN_UNESCAPE.get(word, word)
+            #word = PTB_TOKEN_UNESCAPE.get(word, word)
             if word == "n't" and cleaned_words:
                 cleaned_words[-1] = cleaned_words[-1] + "n"
                 word = "'t"
             cleaned_words.append(word)
-
+# %
         for word in cleaned_words:
             word_tokens = parser.bert_tokenizer.tokenize(word)
             for _ in range(len(word_tokens)):
@@ -466,11 +467,14 @@ graph_def = TransformGraph(graph_def, input_node_names, output_node_names, [
 
 #%%
 
-with open('export/model.pb', 'wb') as f:
-    f.write(graph_def.SerializeToString())
+#with open('export/model.pb', 'wb') as f:
+#    f.write(graph_def.SerializeToString())
+tf.io.write_graph(graph_def, 'export', 'model.pb', as_text=False)
 
-vocab_path = pytorch_pretrained_bert.file_utils.cached_path(
-    pytorch_pretrained_bert.tokenization.PRETRAINED_VOCAB_ARCHIVE_MAP[bert_model])
+print(pytorch_pretrained_bert.tokenization.PRETRAINED_VOCAB_ARCHIVE_MAP)
+#vocab_path = pytorch_pretrained_bert.file_utils.cached_path(
+#        pytorch_pretrained_bert.tokenization.PRETRAINED_VOCAB_ARCHIVE_MAP[bert_model])
+vocab_path = bert_model.replace('.tar.gz', '-vocab.txt')
 target_file = "export/vocab.txt"
 if not os.path.exists(target_file):
     shutil.copyfile(vocab_path, target_file)
