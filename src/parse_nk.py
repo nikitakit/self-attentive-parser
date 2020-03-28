@@ -648,6 +648,8 @@ class NKChartParser(nn.Module):
         self.spec.pop("__class__")
         self.spec['hparams'] = hparams.to_dict()
 
+        self.lang = hparams.lang
+
         self.tag_vocab = tag_vocab
         self.word_vocab = word_vocab
         self.label_vocab = label_vocab

@@ -2,6 +2,10 @@
 
 A high-accuracy parser with models for 11 languages, implemented in Python. Based on [Constituency Parsing with a Self-Attentive Encoder](https://arxiv.org/abs/1805.01052) from ACL 2018, with additional changes described in [Multilingual Constituency Parsing with Self-Attention and Pre-Training](https://arxiv.org/abs/1812.11760).
 
+## Linfeng's Updates
+
+Add support for the facebook [XLM](https://github.com/facebookresearch/XLM/) model managed by huggingface [Pytorch-Transformers v1.2.0](https://github.com/huggingface/transformers/tree/1.2.0).
+
 ## Contents
 1. [Installation](#installation)
 2. [Usage](#usage)
