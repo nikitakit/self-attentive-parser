@@ -9,11 +9,12 @@ with additional changes applied:
 0001-bilm-tf-changes-for-use-with-benepar.patch
 """
 
-%cd ~/dev/self-attentive-parser
+#%cd ~/dev/self-attentive-parser
 import sys
-sys.path.insert(0, "/Users/kitaev/dev/self-attentive-parser/src")
+sys.path.insert(0, "/data/home/lfsong/ws/exp.parsing/self-attentive-parser/src")
 
-from bilm import Batcher, BidirectionalLanguageModel, weight_layers
+sys.path.append("/data/home/lfsong")
+#from bilm import Batcher, BidirectionalLanguageModel, weight_layers
 
 import argparse
 import itertools
@@ -46,8 +47,8 @@ def format_elapsed(start_time):
 # %%
 
 class args:
-    model_path_base="models/en_elmo_dev=95.21.pt"
-    test_path="data/22.auto.clean" # dev set
+    model_path_base="models/en_genia_charlstm_aux_dev=91.45.pt"
+    test_path="data/ptb_test.trees" # dev set
     eval_batch_size=100
     evalb_dir="EVALB/"
 

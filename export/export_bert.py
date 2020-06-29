@@ -17,7 +17,6 @@ sys.path.insert(0, "/data/home/lfsong/ws/exp.parsing/self-attentive-parser/src")
 sys.path.append("/data/home/lfsong")
 import bert
 import bert.modeling, bert.tokenization
-
 import pytorch_pretrained_bert
 
 import argparse
@@ -54,8 +53,8 @@ def format_elapsed(start_time):
 # %%
 
 class args:
-    model_path_base="models/cn_roberta_aux_dev=94.32.pt"
-    test_path="data/ctb51_test_berkeley.clean" # dev set with gold tag (not distributed in this repo)
+    model_path_base="models/en_genia_bert_uncased_aux_dev=92.97.pt"
+    test_path="data/ptb_test.trees" # dev set with gold tag (not distributed in this repo)
     eval_batch_size=100
     evalb_dir="EVALB/"
 
@@ -471,12 +470,14 @@ graph_def = TransformGraph(graph_def, input_node_names, output_node_names, [
 #    f.write(graph_def.SerializeToString())
 tf.io.write_graph(graph_def, 'export', 'model.pb', as_text=False)
 
+print('=====pretrained_map=====')
 print(pytorch_pretrained_bert.tokenization.PRETRAINED_VOCAB_ARCHIVE_MAP)
-#vocab_path = pytorch_pretrained_bert.file_utils.cached_path(
-#        pytorch_pretrained_bert.tokenization.PRETRAINED_VOCAB_ARCHIVE_MAP[bert_model])
-vocab_path = bert_model.replace('.tar.gz', '-vocab.txt')
+vocab_path = pytorch_pretrained_bert.file_utils.cached_path(
+        pytorch_pretrained_bert.tokenization.PRETRAINED_VOCAB_ARCHIVE_MAP[bert_model])
+#vocab_path = bert_model.replace('.tar.gz', '-vocab.txt')
 target_file = "export/vocab.txt"
 if not os.path.exists(target_file):
+    print(target_file)
     shutil.copyfile(vocab_path, target_file)
 
 META = {
