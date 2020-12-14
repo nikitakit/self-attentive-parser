@@ -4,7 +4,8 @@ import re
 import subprocess
 import tempfile
 
-import trees
+import nltk
+
 
 class FScore(object):
     def __init__(self, recall, precision, fscore, complete_match, tagging_accuracy=100):
@@ -15,18 +16,26 @@ class FScore(object):
         self.tagging_accuracy = tagging_accuracy
 
     def __str__(self):
-        if self.tagging_accuracy < 100:
-            return "(Recall={:.2f}, Precision={:.2f}, FScore={:.2f}, CompleteMatch={:.2f}, TaggingAccuracy={:.2f})".format(
-                self.recall, self.precision, self.fscore, self.complete_match, self.tagging_accuracy)
-        else:
-            return "(Recall={:.2f}, Precision={:.2f}, FScore={:.2f}, CompleteMatch={:.2f})".format(
-                self.recall, self.precision, self.fscore, self.complete_match)
+        return (
+            f"("
+            f"Recall={self.recall:.2f}, "
+            f"Precision={self.precision:.2f}, "
+            f"FScore={self.fscore:.2f}, "
+            f"CompleteMatch={self.complete_match:.2f}"
+        ) + (
+            f", TaggingAccuracy={self.tagging_accuracy:.2f})"
+            if self.tagging_accuracy < 100
+            else ")"
+        )
+
 
 def evalb(evalb_dir, gold_trees, predicted_trees, ref_gold_path=None):
     assert os.path.exists(evalb_dir)
     evalb_program_path = os.path.join(evalb_dir, "evalb")
     evalb_spmrl_program_path = os.path.join(evalb_dir, "evalb_spmrl")
-    assert os.path.exists(evalb_program_path) or os.path.exists(evalb_spmrl_program_path)
+    assert os.path.exists(evalb_program_path) or os.path.exists(
+        evalb_spmrl_program_path
+    )
 
     if os.path.exists(evalb_program_path):
         evalb_param_path = os.path.join(evalb_dir, "nk.prm")
@@ -39,14 +48,15 @@ def evalb(evalb_dir, gold_trees, predicted_trees, ref_gold_path=None):
 
     assert len(gold_trees) == len(predicted_trees)
     for gold_tree, predicted_tree in zip(gold_trees, predicted_trees):
-        assert isinstance(gold_tree, trees.TreebankNode)
-        assert isinstance(predicted_tree, trees.TreebankNode)
+        assert isinstance(gold_tree, nltk.Tree)
+        assert isinstance(predicted_tree, nltk.Tree)
         gold_leaves = list(gold_tree.leaves())
         predicted_leaves = list(predicted_tree.leaves())
         assert len(gold_leaves) == len(predicted_leaves)
         assert all(
-            gold_leaf.word == predicted_leaf.word
-            for gold_leaf, predicted_leaf in zip(gold_leaves, predicted_leaves))
+            gold_word == predicted_word
+            for gold_word, predicted_word in zip(gold_leaves, predicted_leaves)
+        )
 
     temp_dir = tempfile.TemporaryDirectory(prefix="evalb-")
     gold_path = os.path.join(temp_dir.name, "gold.txt")
@@ -56,7 +66,7 @@ def evalb(evalb_dir, gold_trees, predicted_trees, ref_gold_path=None):
     with open(gold_path, "w") as outfile:
         if ref_gold_path is None:
             for tree in gold_trees:
-                outfile.write("{}\n".format(tree.linearize()))
+                outfile.write("{}\n".format(tree.pformat(margin=1e100)))
         else:
             # For the SPMRL dataset our data loader performs some modifications
             # (like stripping morphological features), so we compare to the
@@ -67,7 +77,7 @@ def evalb(evalb_dir, gold_trees, predicted_trees, ref_gold_path=None):
 
     with open(predicted_path, "w") as outfile:
         for tree in predicted_trees:
-            outfile.write("{}\n".format(tree.linearize()))
+            outfile.write("{}\n".format(tree.pformat(margin=1e100)))
 
     command = "{} -p {} {} {} > {}".format(
         evalb_program_path,
@@ -99,9 +109,8 @@ def evalb(evalb_dir, gold_trees, predicted_trees, ref_gold_path=None):
                 break
 
     success = (
-        not math.isnan(fscore.fscore) or
-        fscore.recall == 0.0 or
-        fscore.precision == 0.0)
+        not math.isnan(fscore.fscore) or fscore.recall == 0.0 or fscore.precision == 0.0
+    )
 
     if success:
         temp_dir.cleanup()
