@@ -12,8 +12,7 @@ def retokenize(
     tokenizer,
     words,
     space_after,
-    return_token_type_ids=False,
-    return_attention_mask=False,
+    return_attention_mask=True,
     return_offsets_mapping=False,
     return_tensors=None,
     **kwargs
@@ -41,7 +40,6 @@ def retokenize(
 
     tokenized = tokenizer(
         s,
-        return_token_type_ids=return_token_type_ids,
         return_attention_mask=return_attention_mask,
         return_offsets_mapping=True,
         return_tensors=return_tensors,
@@ -62,7 +60,7 @@ def retokenize(
         ]
     )
     token_idx, (token_start, token_end) = next(offset_mapping_iter)
-    words_from_tokens = [-1] * len(words)
+    words_from_tokens = [-100] * len(words)
     for word_idx, (word_start, word_end) in enumerate(
         zip(word_offset_starts, word_offset_ends)
     ):
@@ -92,23 +90,90 @@ class Retokenizer:
         self.tokenizer = transformers.AutoTokenizer.from_pretrained(
             pretrained_model_name_or_path, fast=True
         )
+        if not self.tokenizer.is_fast:
+            raise NotImplementedError(
+                "Converting from treebank tokenization to tokenization used by a "
+                "pre-trained model requires a 'fast' tokenizer, which appears to not "
+                "be available for this pre-trained model type."
+            )
         self.retain_start_stop = retain_start_stop
+        self.is_t5 = "T5Tokenizer" in str(type(self.tokenizer))
+
+        if self.retain_start_stop:
+            # When retain_start_stop is set, the next layer after the pre-trained model
+            # expects start and stop token embeddings. For BERT these can naturally be
+            # the feature vectors for CLS and SEP, but pre-trained models differ in the
+            # special tokens that they use. This code attempts to find special token
+            # positions for each pre-trained model.
+            dummy_ids = self.tokenizer.build_inputs_with_special_tokens([-100])
+            if self.is_t5:
+                # For T5 we use the output from the decoder, which accepts inputs that
+                # are shifted relative to the encoder.
+                dummy_ids = [self.tokenizer.pad_token_id] + dummy_ids
+            try:
+                input_idx = dummy_ids.index(-100)
+            except ValueError:
+                raise NotImplementedError(
+                    "Could not automatically infer how to extract start/stop tokens "
+                    "from this pre-trained model"
+                )
+            num_prefix_tokens = input_idx
+            num_suffix_tokens = len(dummy_ids) - input_idx - 1
+            self.start_token_idx = None
+            self.stop_token_idx = None
+            if num_prefix_tokens > 0:
+                self.start_token_idx = num_prefix_tokens - 1
+            if num_suffix_tokens > 0:
+                self.stop_token_idx = -num_suffix_tokens
+            if self.start_token_idx is None and num_suffix_tokens > 0:
+                self.start_token_idx = -1
+            if self.stop_token_idx is None and num_prefix_tokens > 0:
+                self.stop_token_idx = 0
+            if self.start_token_idx is None or self.stop_token_idx is None:
+                assert num_prefix_tokens == 0 and num_suffix_tokens == 0
+                raise NotImplementedError(
+                    "Could not automatically infer how to extract start/stop tokens "
+                    "from this pre-trained model because the associated tokenizer "
+                    "appears not to add any special start/stop/cls/sep/etc. tokens "
+                    "to the sequence."
+                )
 
     def __call__(self, words, space_after, **kwargs):
         example = retokenize(self.tokenizer, words, space_after, **kwargs)
+        if self.is_t5:
+            # decoder_input_ids (which are shifted wrt input_ids) will be created after
+            # padding, but we adjust words_from_tokens now, in anticipation.
+            if isinstance(example["words_from_tokens"], list):
+                example["words_from_tokens"] = [
+                    x + 1 for x in example["words_from_tokens"]
+                ]
+            else:
+                example["words_from_tokens"] += 1
         if self.retain_start_stop:
-            # Include CLS/SEP tokens
+            num_tokens = len(example["input_ids"])
+            if self.is_t5:
+                num_tokens += 1
+            start_token_idx = (
+                self.start_token_idx
+                if self.start_token_idx >= 0
+                else num_tokens + self.start_token_idx
+            )
+            stop_token_idx = (
+                self.stop_token_idx
+                if self.stop_token_idx >= 0
+                else num_tokens + self.stop_token_idx
+            )
             if kwargs.get("return_tensors") == "pt":
                 example["words_from_tokens"] = torch.cat(
                     [
-                        torch.tensor([0]),
+                        torch.tensor([start_token_idx]),
                         example["words_from_tokens"],
-                        torch.tensor([example["input_ids"].shape[-1] - 1]),
+                        torch.tensor([stop_token_idx]),
                     ]
                 )
             else:
                 example["words_from_tokens"] = (
-                    [0] + example["words_from_tokens"] + [len(example["input_ids"]) - 1]
+                    [start_token_idx] + example["words_from_tokens"] + [stop_token_idx]
                 )
         return example
 
@@ -123,10 +188,45 @@ class Retokenizer:
             return_tensors=return_tensors,
             **kwargs
         )
-        res["words_from_tokens"] = torch.nn.utils.rnn.pad_sequence(
-            [torch.tensor(example["words_from_tokens"]) for example in encoded_inputs],
-            batch_first=True,
-            padding_value=-1,
-        )
-        res["valid_token_mask"] = res["words_from_tokens"] != -1
+        if self.tokenizer.padding_side == "right":
+            res["words_from_tokens"] = torch.nn.utils.rnn.pad_sequence(
+                [
+                    torch.tensor(example["words_from_tokens"])
+                    for example in encoded_inputs
+                ],
+                batch_first=True,
+                padding_value=-100,
+            )
+        else:
+            # XLNet adds padding tokens on the left of the sequence, so
+            # words_from_tokens must be adjusted to skip the added padding tokens.
+            assert self.tokenizer.padding_side == "left"
+            res["words_from_tokens"] = torch.nn.utils.rnn.pad_sequence(
+                [
+                    torch.tensor(example["words_from_tokens"])
+                    + (res["input_ids"].shape[-1] - len(example["input_ids"]))
+                    for example in encoded_inputs
+                ],
+                batch_first=True,
+                padding_value=-100,
+            )
+
+        if self.is_t5:
+            res["decoder_input_ids"] = torch.cat(
+                [
+                    torch.full_like(
+                        res["input_ids"][:, :1], self.tokenizer.pad_token_id
+                    ),
+                    res["input_ids"],
+                ],
+                1,
+            )
+            res["decoder_attention_mask"] = torch.cat(
+                [
+                    torch.ones_like(res["attention_mask"][:, :1]),
+                    res["attention_mask"],
+                ],
+                1,
+            )
+        res["valid_token_mask"] = res["words_from_tokens"] != -100
         return res

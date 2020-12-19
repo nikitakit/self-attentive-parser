@@ -152,7 +152,7 @@ class ChartParser(nn.Module):
             )
             if self.f_tag is not None:
                 encoded["tag_labels"] = torch.tensor(
-                    [-1] + [self.tag_vocab[tag] for _, tag in example.pos()] + [-1]
+                    [-100] + [self.tag_vocab[tag] for _, tag in example.pos()] + [-100]
                 )
         return encoded
 
@@ -176,7 +176,7 @@ class ChartParser(nn.Module):
             batch["tag_labels"] = nn.utils.rnn.pad_sequence(
                 [example["tag_labels"] for example in encoded_batch],
                 batch_first=True,
-                padding_value=-1,
+                padding_value=-100,
             )
         return batch
 
@@ -209,11 +209,27 @@ class ChartParser(nn.Module):
         elif self.pretrained_model is not None:
             input_ids = batch["input_ids"].to(self.device)
             words_from_tokens = batch["words_from_tokens"].to(self.device)
-            pretrained_attention_mask = (input_ids != 0).to(dtype=torch.long)
-            pretrained_out = self.pretrained_model(input_ids, pretrained_attention_mask)
+            pretrained_attention_mask = batch["attention_mask"].to(self.device)
+
+            extra_kwargs = {}
+            if "token_type_ids" in batch:
+                extra_kwargs["token_type_ids"] = batch["token_type_ids"].to(self.device)
+            if "decoder_input_ids" in batch:
+                extra_kwargs["decoder_input_ids"] = batch["decoder_input_ids"].to(
+                    self.device
+                )
+                extra_kwargs["decoder_attention_mask"] = batch[
+                    "decoder_attention_mask"
+                ].to(self.device)
+
+            pretrained_out = self.pretrained_model(
+                input_ids, pretrained_attention_mask, **extra_kwargs
+            )
             features = pretrained_out.last_hidden_state
             features = features[
-                torch.arange(features.shape[0])[:, None], words_from_tokens
+                torch.arange(features.shape[0])[:, None],
+                # Note that words_from_tokens uses index -100 for invalid positions
+                F.relu(words_from_tokens),
             ]
             features.masked_fill_(~valid_token_mask[:, :, None], 0)
             if self.encoder is not None:
@@ -278,7 +294,7 @@ class ChartParser(nn.Module):
                 tag_scores.reshape((-1, tag_scores.shape[-1])),
                 tag_labels.reshape((-1,)),
                 reduction="sum",
-                ignore_index=-1,
+                ignore_index=-100,
             )
             tag_loss = tag_loss / batch["batch_num_tokens"]
             return span_loss + tag_loss
@@ -303,7 +319,8 @@ class ChartParser(nn.Module):
                     leaves = examples[i].pos()
                 else:
                     predicted_tags = [
-                        self.tag_from_index[i] for i in tag_ids_np[i, 1:example_len+1]
+                        self.tag_from_index[i]
+                        for i in tag_ids_np[i, 1 : example_len + 1]
                     ]
                     leaves = [
                         (word, predicted_tag)

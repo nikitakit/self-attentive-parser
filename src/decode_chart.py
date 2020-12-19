@@ -10,7 +10,7 @@ import torch.nn.functional as F
 import torch_struct
 
 
-def pad_charts(charts, padding_value=-1):
+def pad_charts(charts, padding_value=-100):
     """Pad a list of variable-length charts with `padding_value`."""
     batch_size = len(charts)
     max_len = max(chart.shape[0] for chart in charts)
@@ -118,9 +118,9 @@ class ChartDecoder:
     def chart_from_tree(self, tree):
         spans = get_labeled_spans(tree)
         num_words = len(tree.leaves())
-        chart = np.full((num_words, num_words), -1, dtype=int)
+        chart = np.full((num_words, num_words), -100, dtype=int)
         chart = np.tril(chart, -1)
-        # Now all invalid entries are filled with -1, and valid entries with 0
+        # Now all invalid entries are filled with -100, and valid entries with 0
         for start, end, label in spans:
             # Previously unseen unary chains can occur in the dev/test sets.
             # For now, we ignore them and don't mark the corresponding chart
@@ -213,7 +213,7 @@ class SpanClassificationMarginLoss(nn.Module):
         gold_event = F.one_hot(F.relu(labels), num_classes=logits.shape[-1])
 
         logits = logits - logits[..., :1]
-        lengths = (labels[:, 0, :] != -1).sum(-1)
+        lengths = (labels[:, 0, :] != -100).sum(-1)
         augment = (1 - gold_event).to(torch.float)
         if self.force_root_constituent:
             augment[torch.arange(augment.shape[0]), 0, lengths - 1, 0] -= 1e9
