@@ -114,19 +114,35 @@ class ChartParser(nn.Module):
         self.decoder = decode_chart.ChartDecoder(label_vocab=self.label_vocab)
         self.criterion = decode_chart.SpanClassificationMarginLoss(reduction="sum")
 
+        self.parallelized_devices = None
+
     @property
     def device(self):
-        return next(self.f_label.parameters()).device
+        if self.parallelized_devices is not None:
+            return self.parallelized_devices[0]
+        else:
+            return next(self.f_label.parameters()).device
+
+    @property
+    def output_device(self):
+        if self.parallelized_devices is not None:
+            return self.parallelized_devices[1]
+        else:
+            return next(self.f_label.parameters()).device
+
+    def parallelize(self, *args, **kwargs):
+        self.parallelized_devices = (torch.device("cuda", 0), torch.device("cuda", 1))
+        for child in self.children():
+            if child != self.pretrained_model:
+                child.to(self.output_device)
+        self.pretrained_model.parallelize(*args, **kwargs)
 
     @classmethod
     def from_trained(cls, model_path, config=None, state_dict=None):
         if model_path is not None:
-            if torch.cuda.is_available():
-                data = torch.load(model_path)
-            else:
-                data = torch.load(
-                    model_path, map_location=lambda storage, location: storage
-                )
+            data = torch.load(
+                model_path, map_location=lambda storage, location: storage
+            )
             if config is None:
                 config = data["config"]
             if state_dict is None:
@@ -201,14 +217,14 @@ class ChartParser(nn.Module):
         return res
 
     def forward(self, batch):
-        valid_token_mask = batch["valid_token_mask"].to(self.device)
+        valid_token_mask = batch["valid_token_mask"].to(self.output_device)
         if self.char_encoder is not None:
             assert isinstance(self.char_encoder, char_lstm.CharacterLSTM)
             char_ids = batch["char_ids"].to(self.device)
             extra_content_annotations = self.char_encoder(char_ids, valid_token_mask)
         elif self.pretrained_model is not None:
             input_ids = batch["input_ids"].to(self.device)
-            words_from_tokens = batch["words_from_tokens"].to(self.device)
+            words_from_tokens = batch["words_from_tokens"].to(self.output_device)
             pretrained_attention_mask = batch["attention_mask"].to(self.device)
 
             extra_kwargs = {}
@@ -225,7 +241,7 @@ class ChartParser(nn.Module):
             pretrained_out = self.pretrained_model(
                 input_ids, pretrained_attention_mask, **extra_kwargs
             )
-            features = pretrained_out.last_hidden_state
+            features = pretrained_out.last_hidden_state.to(self.output_device)
             features = features[
                 torch.arange(features.shape[0])[:, None],
                 # Note that words_from_tokens uses index -100 for invalid positions

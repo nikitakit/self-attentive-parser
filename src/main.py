@@ -122,7 +122,9 @@ def run_train(args, hparams):
         char_vocab=char_vocab,
         hparams=hparams,
     )
-    if torch.cuda.is_available():
+    if args.parallelize:
+        parser.parallelize()
+    elif torch.cuda.is_available():
         parser.cuda()
     else:
         print("Not using CUDA!")
@@ -288,7 +290,9 @@ def run_test(args):
     model_path = args.model_path[0]
     print("Loading model from {}...".format(model_path))
     parser = parse_chart.ChartParser.from_trained(model_path)
-    if torch.cuda.is_available():
+    if args.parallelize:
+        parser.parallelize()
+    elif torch.cuda.is_available():
         parser.cuda()
 
     print("Parsing test sentences...")
@@ -343,6 +347,7 @@ def main():
     subparser.add_argument("--dev-path", default="data/wsj/dev_22.LDC99T42")
     subparser.add_argument("--dev-path-text", default="data/wsj/dev_22.LDC99T42.text")
     subparser.add_argument("--subbatch-max-tokens", type=int, default=2000)
+    subparser.add_argument("--parallelize", action="store_true")
     subparser.add_argument("--print-vocabs", action="store_true")
 
     subparser = subparsers.add_parser("test")
@@ -353,6 +358,7 @@ def main():
     subparser.add_argument("--test-path-text", default="data/wsj/test_23.LDC99T42.text")
     subparser.add_argument("--test-path-raw", type=str)
     subparser.add_argument("--subbatch-max-tokens", type=int, default=500)
+    subparser.add_argument("--parallelize", action="store_true")
 
     args = parser.parse_args()
     args.callback(args)
