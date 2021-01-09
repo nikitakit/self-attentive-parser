@@ -239,7 +239,7 @@ class ChartParser(nn.Module):
                 ].to(self.device)
 
             pretrained_out = self.pretrained_model(
-                input_ids, pretrained_attention_mask, **extra_kwargs
+                input_ids, attention_mask=pretrained_attention_mask, **extra_kwargs
             )
             features = pretrained_out.last_hidden_state.to(self.output_device)
             features = features[

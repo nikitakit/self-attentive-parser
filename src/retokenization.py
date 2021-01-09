@@ -98,6 +98,11 @@ class Retokenizer:
             )
         self.retain_start_stop = retain_start_stop
         self.is_t5 = "T5Tokenizer" in str(type(self.tokenizer))
+        self.is_gpt2 = "GPT2Tokenizer" in str(type(self.tokenizer))
+
+        if self.is_gpt2:
+            # The provided GPT-2 tokenizer does not specify a padding token by default
+            self.tokenizer.pad_token = self.tokenizer.eos_token
 
         if self.retain_start_stop:
             # When retain_start_stop is set, the next layer after the pre-trained model
@@ -110,6 +115,9 @@ class Retokenizer:
                 # For T5 we use the output from the decoder, which accepts inputs that
                 # are shifted relative to the encoder.
                 dummy_ids = [self.tokenizer.pad_token_id] + dummy_ids
+            if self.is_gpt2:
+                # For GPT-2, we append an eos token if special tokens are needed
+                dummy_ids = dummy_ids + [self.tokenizer.eos_token_id]
             try:
                 input_idx = dummy_ids.index(-100)
             except ValueError:
@@ -153,6 +161,19 @@ class Retokenizer:
             num_tokens = len(example["input_ids"])
             if self.is_t5:
                 num_tokens += 1
+            if self.is_gpt2:
+                num_tokens += 1
+                if kwargs.get("return_tensors") == "pt":
+                    example["input_ids"] = torch.cat(
+                        example["input_ids"],
+                        torch.tensor([self.tokenizer.eos_token_id]),
+                    )
+                    example["attention_mask"] = torch.cat(
+                        example["attention_mask"], torch.tensor([1])
+                    )
+                else:
+                    example["input_ids"].append(self.tokenizer.eos_token_id)
+                    example["attention_mask"].append(1)
             start_token_idx = (
                 self.start_token_idx
                 if self.start_token_idx >= 0
