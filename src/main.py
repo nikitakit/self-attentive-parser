@@ -34,8 +34,8 @@ def make_hparams():
         max_len_train=0,  # no length limit
         max_len_dev=0,  # no length limit
         # Optimization
-        batch_size=250,
-        learning_rate=0.0008,
+        batch_size=32,
+        learning_rate=0.00005,
         learning_rate_warmup_steps=160,
         clip_grad_norm=0.0,  # no clipping
         checks_per_epoch=4,
