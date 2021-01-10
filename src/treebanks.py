@@ -3,6 +3,7 @@ from typing import List, Optional, Tuple
 
 import nltk
 from nltk.corpus.reader.bracket_parse import BracketParseCorpusReader
+import tokenizations
 import torch
 
 
@@ -79,7 +80,7 @@ def load_trees(const_path, text_path):
     accepted, but the parser also accepts similarly-formatted files with just
     three fields (ID, FORM, MISC) instead of the usual ten.
 
-    TODO(nikita): add support for multi-token fields
+    TODO(nikita): add support for empty nodes with indexes i.1, i.2, etc.
         per https://universaldependencies.org/format.html#untokenized-text
 
     Args:
@@ -97,21 +98,57 @@ def load_trees(const_path, text_path):
     reader = BracketParseCorpusReader("", [const_path])
     trees = reader.parsed_sents()
 
-    sent = []
     sents = []
+    sent = []
+    end_of_multiword = 0
+    multiword_combined = ""
+    multiword_separate = []
+    multiword_sp_after = False
     with open(text_path) as f:
         for line in f:
             if not line.strip() or line.startswith("#"):
                 if sent:
                     sents.append(([w for w, sp in sent], [sp for w, sp in sent]))
                     sent = []
+                    assert end_of_multiword == 0
                 continue
             fields = line.split("\t", 2)
-            num = int(fields[0])
-            assert num == len(sent) + 1
+            num_or_range = fields[0]
             w = fields[1]
-            sp = "SpaceAfter=No" not in fields[-1]
-            sent.append((w, sp))
+
+            if "-" in num_or_range:
+                end_of_multiword = int(num_or_range.split("-")[1])
+                multiword_combined = w
+                multiword_separate = []
+                multiword_sp_after = "SpaceAfter=No" not in fields[-1]
+                continue
+            elif int(num_or_range) <= end_of_multiword:
+                multiword_separate.append(w)
+                if int(num_or_range) == end_of_multiword:
+                    _, separate_to_combined = tokenizations.get_alignments(
+                        multiword_combined, multiword_separate
+                    )
+                    have_up_to = 0
+                    for i, char_idxs in enumerate(separate_to_combined):
+                        if i == len(multiword_separate) - 1:
+                            word = multiword_combined[have_up_to:]
+                            sent.append((word, multiword_sp_after))
+                        elif char_idxs:
+                            word = multiword_combined[have_up_to : max(char_idxs) + 1]
+                            sent.append((word, False))
+                            have_up_to = max(char_idxs) + 1
+                        else:
+                            sent.append(("", False))
+                    assert int(num_or_range) == len(sent)
+                    end_of_multiword = 0
+                    multiword_combined = ""
+                    multiword_separate = []
+                    multiword_sp_after = False
+                continue
+            else:
+                assert int(num_or_range) == len(sent) + 1
+                sp = "SpaceAfter=No" not in fields[-1]
+                sent.append((w, sp))
     assert len(trees) == len(sents)
     return Treebank(
         [
