@@ -37,7 +37,7 @@ def collapse_unary_strip_pos(tree, strip_top=True):
 
     collapsed_tree = strip_pos(tree)
     collapsed_tree.collapse_unary(collapsePOS=True)
-    if strip_top and collapsed_tree.label() == "TOP":
+    if strip_top and collapsed_tree.label() in ("TOP", "ROOT", "S1", "VROOT"):
         if len(collapsed_tree) == 1:
             collapsed_tree = collapsed_tree[0]
         else:
