@@ -36,12 +36,17 @@ def collapse_unary_strip_pos(tree, strip_top=True):
             return nltk.tree.Tree(tree.label(), [strip_pos(child) for child in tree])
 
     collapsed_tree = strip_pos(tree)
-    collapsed_tree.collapse_unary(collapsePOS=True)
-    if strip_top and collapsed_tree.label() in ("TOP", "ROOT", "S1", "VROOT"):
-        if len(collapsed_tree) == 1:
+    collapsed_tree.collapse_unary(collapsePOS=True, joinChar="::")
+    if collapsed_tree.label() in ("TOP", "ROOT", "S1", "VROOT"):
+        if strip_top:
+            if len(collapsed_tree) == 1:
+                collapsed_tree = collapsed_tree[0]
+            else:
+                collapsed_tree.set_label("")
+        elif len(collapsed_tree) == 1:
+            collapsed_tree[0].set_label(
+                collapsed_tree.label() + "::" + collapsed_tree[0].label())
             collapsed_tree = collapsed_tree[0]
-        else:
-            collapsed_tree.set_label("")
     return collapsed_tree
 
 
@@ -83,7 +88,7 @@ def uncollapse_unary(tree, ensure_top=False):
     if isinstance(tree, str):
         return tree
     else:
-        labels = tree.label().split("+")
+        labels = tree.label().split("::")
         if ensure_top and labels[0] != "TOP":
             labels = ["TOP"] + labels
         children = []
