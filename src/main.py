@@ -303,6 +303,14 @@ def run_test(args):
         subbatch_max_tokens=args.subbatch_max_tokens,
     )
 
+    if args.output_path == '-':
+        for tree in test_predicted:
+            print(tree.pformat(margin=1e100))
+    elif args.output_path:
+        with open(args.output_path, "w") as outfile:
+            for tree in test_predicted:
+                outfile.write("{}\n".format(tree.pformat(margin=1e100)))
+
     # The tree loader does some preprocessing to the trees (e.g. stripping TOP
     # symbols or SPMRL morphological features). We compare with the input file
     # directly to be extra careful about not corrupting the evaluation. We also
@@ -359,6 +367,7 @@ def main():
     subparser.add_argument("--test-path-raw", type=str)
     subparser.add_argument("--subbatch-max-tokens", type=int, default=500)
     subparser.add_argument("--parallelize", action="store_true")
+    subparser.add_argument("--output-path", default="")
 
     args = parser.parse_args()
     args.callback(args)
