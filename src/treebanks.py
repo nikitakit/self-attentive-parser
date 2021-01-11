@@ -150,9 +150,15 @@ def load_trees(const_path, text_path):
                 sp = "SpaceAfter=No" not in fields[-1]
                 sent.append((w, sp))
     assert len(trees) == len(sents)
-    return Treebank(
+    treebank = Treebank(
         [
             ParsingExample(tree=tree, words=words, space_after=space_after)
             for tree, (words, space_after) in zip(trees, sents)
         ]
     )
+    for example in treebank:
+        assert len(example.words) == len(example.leaves()), (
+            "Constituency tree has a different number of tokens than the CONLL-U or "
+            "other file used to specify reversible tokenization."
+        )
+    return treebank
