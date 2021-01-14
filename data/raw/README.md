@@ -13,5 +13,8 @@ Place official treebank releases in this folder (via copy or symlink).
 | KOREAN_SPMRL    | Korean data for the SPMRL 2013/2014 Shared Tasks    |
 | POLISH_SPMRL    | Polish data for the SPMRL 2013/2014 Shared Tasks    |
 | SWEDISH_SPMRL   | Swedish data for the SPMRL 2013/2014 Shared Tasks   |
+| atb1_v4_1       | [Arabic Treebank: Part 1 v4.1 (LDC2010T13)](https://catalog.ldc.upenn.edu/LDC2010T13) |
+| atb_2_3.1       | [Arabic Treebank: Part 2 v3.1 (LDC2011T09)](https://catalog.ldc.upenn.edu/LDC2011T09) |
+| atb3_v3_2       | [Arabic Treebank: Part 3 v3.2 (LDC2010T08)](https://catalog.ldc.upenn.edu/LDC2010T08) |
 | eng_news_txt_tbnk-ptb_revised | [Penn Treebank Revised (LDC2015T13)](https://catalog.ldc.upenn.edu/LDC2015T13) |
 | treebank_3      | [Penn Treebank (LDC99T42)](https://catalog.ldc.upenn.edu/LDC99T42) |
