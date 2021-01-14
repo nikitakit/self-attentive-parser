@@ -6,6 +6,9 @@ from nltk.corpus.reader.bracket_parse import BracketParseCorpusReader
 import tokenizations
 import torch
 
+import ptb_unescape
+import transliterate
+
 
 @dataclasses.dataclass
 class ParsingExample:
@@ -63,41 +66,7 @@ class Treebank(torch.utils.data.Dataset):
         return Treebank([x.without_gold_annotations() for x in self.examples])
 
 
-def load_trees(const_path, text_path):
-    """Load a treebank.
-
-    The standard tree format presents an abstracted view of the raw text: the
-    text is tokenized in a linguistically-motivated way, the tokenization does
-    not preserve whitespace, and various characters are escaped or (in some
-    languages) transliterated. This presents a mismatch for pre-trained
-    transformer models, which typically do their own tokenization starting with
-    raw unicode strings. A mismatch compared to pre-training often doesn't
-    affect performance if you just want to report F1 scores within the same
-    treebank, but it becomes a problem when releasing a parser for general use.
-    The `text_path` argument allows specifying an auxiliary file that can be
-    used to recover the original unicode string for the text. Files in the
-    CoNLL-U format (https://universaldependencies.org/format.html) are
-    accepted, but the parser also accepts similarly-formatted files with just
-    three fields (ID, FORM, MISC) instead of the usual ten.
-
-    TODO(nikita): add support for empty nodes with indexes i.1, i.2, etc.
-        per https://universaldependencies.org/format.html#untokenized-text
-
-    Args:
-        const_path: Path to the file with one tree per line.
-        text_path: Path to a file that provides the correct spelling for all
-            tokens (without any escaping, transliteration, or other mangling)
-            and information about whether there is whitespace after each token.
-
-    Returns:
-        A list of ParsingExample objects, which have the following attributes:
-            - `tree` is an instance of nltk.Tree
-            - `words` is a list of strings
-            - `space_after` is a list of booleans
-    """
-    reader = BracketParseCorpusReader("", [const_path])
-    trees = reader.parsed_sents()
-
+def read_text(text_path):
     sents = []
     sent = []
     end_of_multiword = 0
@@ -149,6 +118,97 @@ def load_trees(const_path, text_path):
                 assert int(num_or_range) == len(sent) + 1
                 sp = "SpaceAfter=No" not in fields[-1]
                 sent.append((w, sp))
+    return sents
+
+
+def load_trees(const_path, text_path=None, text_processing="default"):
+    """Load a treebank.
+
+    The standard tree format presents an abstracted view of the raw text, with the
+    assumption that a tokenizer and other early stages of the NLP pipeline have already
+    been run. These can include formatting changes like escaping certain characters
+    (e.g. -LRB-) or transliteration (see e.g. the Arabic and Hebrew SPMRL datasets).
+    Tokens are not always delimited by whitespace, and the raw whitespace in the source
+    text is thrown away in the PTB tree format. Moreover, in some treebanks the leaves
+    of the trees are lemmas/stems rather than word forms.
+
+    All of this is a mismatch for pre-trained transformer models, which typically do
+    their own tokenization starting with raw unicode strings. A mismatch compared to
+    pre-training often doesn't affect performance if you just want to report F1 scores
+    within the same treebank, but it raises some questions when it comes to releasing a
+    parser for general use: (1) Must the parser be integrated with a tokenizer that
+    matches the treebank convention? In fact, many modern NLP libraries like spaCy train
+    on dependency data that doesn't necessarily use the same tokenization convention as
+    constituency treebanks. (2) Can the parser's pre-trained model be merged with other
+    pre-trained system components (via methods like multi-task learning or adapters), or
+    must it remain its own system because of tokenization mismatches?
+
+    This tree-loading function aims to build a path towards parsing from raw text by
+    using the `text_path` argument to specify an auxiliary file that can be used to
+    recover the original unicode string for the text. Parser layers above the
+    pre-trained model may still use gold tokenization during training, but this will
+    possibly help make the parser more robust to tokenization mismatches.
+
+    On the other hand, some benchmarks involve evaluating with gold tokenization, and
+    naively switching to using raw text degrades performance substantially. This can
+    hopefully be addressed by making the parser layers on top of the pre-trained
+    transformers handle tokenization more intelligently, but this is still a work in
+    progress and the option remains to use the data from the tree files with minimal
+    processing controlled by the `text_processing` argument to clean up some escaping or
+    transliteration.
+
+    Args:
+        const_path: Path to the file with one tree per line.
+        text_path: (optional) Path to a file that provides the correct spelling for all
+            tokens (without any escaping, transliteration, or other mangling) and
+            information about whether there is whitespace after each token. Files in the
+            CoNLL-U format (https://universaldependencies.org/format.html) are accepted,
+            but the parser also accepts similarly-formatted files with just three fields
+            (ID, FORM, MISC) instead of the usual ten. Text is recovered from the FORM
+            field and any "SpaceAfter=No" annotations in the MISC field.
+        text_processing: Text processing to use if no text_path is specified:
+            - 'default': undo PTB-style escape sequences and attempt to guess whitespace
+                surrounding punctuation
+            - 'arabic': undo Buckwalter transliteration and guess that all tokens are
+                separated by spaces
+            - 'chinese': keep all tokens unchanged (i.e. do not attempt to find any
+                escape sequences), and assume no whitespace between tokens
+            - 'hebrew': undo transliteration (see Sima'an et al. 2002) and guess that
+                all tokens are separated by spaces
+
+    Returns:
+        A list of ParsingExample objects, which have the following attributes:
+            - `tree` is an instance of nltk.Tree
+            - `words` is a list of strings
+            - `space_after` is a list of booleans
+    """
+    reader = BracketParseCorpusReader("", [const_path])
+    trees = reader.parsed_sents()
+
+    if text_path is not None:
+        sents = read_text(text_path)
+    elif text_processing in ("arabic", "hebrew"):
+        translit = transliterate.TRANSLITERATIONS[text_processing]
+        sents = []
+        for tree in trees:
+            words = [translit(word) for word in tree.leaves()]
+            sp_after = [True for _ in words]
+            sents.append((words, sp_after))
+    elif text_processing == "chinese":
+        sents = []
+        for tree in trees:
+            words = tree.leaves()
+            sp_after = [False for _ in words]
+            sents.append((words, sp_after))
+    elif text_processing == "default":
+        sents = []
+        for tree in trees:
+            words = ptb_unescape.ptb_unescape(tree.leaves())
+            sp_after = ptb_unescape.guess_space_after(tree.leaves())
+            sents.append((words, sp_after))
+    else:
+        raise ValueError(f"Bad value for text_processing: {text_processing}")
+
     assert len(trees) == len(sents)
     treebank = Treebank(
         [

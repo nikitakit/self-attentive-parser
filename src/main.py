@@ -90,13 +90,17 @@ def run_train(args, hparams):
     hparams.print()
 
     print("Loading training trees from {}...".format(args.train_path))
-    train_treebank = treebanks.load_trees(args.train_path, args.train_path_text)
+    train_treebank = treebanks.load_trees(
+        args.train_path, args.train_path_text, args.text_processing
+    )
     if hparams.max_len_train > 0:
         train_treebank = train_treebank.filter_by_length(hparams.max_len_train)
     print("Loaded {:,} training examples.".format(len(train_treebank)))
 
     print("Loading development trees from {}...".format(args.dev_path))
-    dev_treebank = treebanks.load_trees(args.dev_path, args.dev_path_text)
+    dev_treebank = treebanks.load_trees(
+        args.dev_path, args.dev_path_text, args.text_processing
+    )
     if hparams.max_len_dev > 0:
         dev_treebank = dev_treebank.filter_by_length(hparams.max_len_dev)
     print("Loaded {:,} development examples.".format(len(dev_treebank)))
@@ -278,7 +282,9 @@ def run_train(args, hparams):
 
 def run_test(args):
     print("Loading test trees from {}...".format(args.test_path))
-    test_treebank = treebanks.load_trees(args.test_path, args.test_path_text)
+    test_treebank = treebanks.load_trees(
+        args.test_path, args.test_path_text, args.text_processing
+    )
     print("Loaded {:,} test examples.".format(len(test_treebank)))
 
     if len(args.model_path) != 1:
@@ -303,7 +309,7 @@ def run_test(args):
         subbatch_max_tokens=args.subbatch_max_tokens,
     )
 
-    if args.output_path == '-':
+    if args.output_path == "-":
         for tree in test_predicted:
             print(tree.pformat(margin=1e100))
     elif args.output_path:
@@ -349,11 +355,10 @@ def main():
     subparser.add_argument("--model-path-base", required=True)
     subparser.add_argument("--evalb-dir", default="EVALB/")
     subparser.add_argument("--train-path", default="data/wsj/train_02-21.LDC99T42")
-    subparser.add_argument(
-        "--train-path-text", default="data/wsj/train_02-21.LDC99T42.text"
-    )
+    subparser.add_argument("--train-path-text", type=str)
     subparser.add_argument("--dev-path", default="data/wsj/dev_22.LDC99T42")
-    subparser.add_argument("--dev-path-text", default="data/wsj/dev_22.LDC99T42.text")
+    subparser.add_argument("--dev-path-text", type=str)
+    subparser.add_argument("--text-processing", default="default")
     subparser.add_argument("--subbatch-max-tokens", type=int, default=2000)
     subparser.add_argument("--parallelize", action="store_true")
     subparser.add_argument("--print-vocabs", action="store_true")
@@ -363,8 +368,9 @@ def main():
     subparser.add_argument("--model-path", nargs="+", required=True)
     subparser.add_argument("--evalb-dir", default="EVALB/")
     subparser.add_argument("--test-path", default="data/wsj/test_23.LDC99T42")
-    subparser.add_argument("--test-path-text", default="data/wsj/test_23.LDC99T42.text")
+    subparser.add_argument("--test-path-text", type=str)
     subparser.add_argument("--test-path-raw", type=str)
+    subparser.add_argument("--text-processing", default="default")
     subparser.add_argument("--subbatch-max-tokens", type=int, default=500)
     subparser.add_argument("--parallelize", action="store_true")
     subparser.add_argument("--output-path", default="")
