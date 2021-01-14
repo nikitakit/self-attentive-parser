@@ -35,6 +35,27 @@ Processed trees are written to the following files:
 | `test_23.LDC99T42.retokenized`     | Syntatic annotations (labeled brackets) from the standard test split, overlaid on top of the revised tokenization. |
 
 
+## Chinese Treebank (CTB 5.1)
+
+This prepares the standard Chinese constituency parsing split, following recent papers such as [Liu and Zhang (2017)](https://www.aclweb.org/anthology/Q17-1004/).
+
+### Instructions
+
+1. Place a copy of the Chinese Treebank 5.1
+([LDC2005T01](https://catalog.ldc.upenn.edu/LDC2005T01)) in `data/raw/ctb5.1_507K`.
+2. Ensure that the active version of Python is Python 3 and has `nltk` installed.
+3. `cd data/ctb_5.1 && ./build_corpus.sh`
+
+Processed trees are written to the following files:
+
+
+| File in `data/ctb_5.1/` | Description                                         |
+| ----------------------- | --------------------------------------------------- |
+| `ctb.train`             | The standard training split for Chinese constituency parsing publications. |
+| `ctb.dev`               | The standard development split for Chinese constituency parsing publications. |
+| `ctb.test`              | The standard test split for Chinese constituency parsing publications. |
+
+
 ## Multilingual: SPMRL 2013/2014 Shared Task Data
 
 The SPMRL shared tasks used treebanks for the following languages: Arabic, Basque, French, German, Hebrew, Hungarian, Korean, Polish, Swedish.

@@ -1,0 +1,4 @@
+*.train
+*.dev
+*.test
+*.withtraces
