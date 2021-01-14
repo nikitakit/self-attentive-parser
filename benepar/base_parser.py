@@ -196,12 +196,12 @@ class BaseParser(object):
                         model['vocab'] = f.read()
 
             if isinstance(model, dict):
-                graph_def = tf.GraphDef.FromString(model['model'])
+                graph_def = tf.compat.v1.GraphDef.FromString(model['model'])
             else:
-                graph_def = tf.GraphDef.FromString(model)
+                graph_def = tf.compat.v1.GraphDef.FromString(model)
             tf.import_graph_def(graph_def, name='')
 
-        self._sess = tf.Session(graph=self._graph)
+        self._sess = tf.compat.v1.Session(graph=self._graph)
         if not isinstance(model, dict):
             # Older model format (for ELMo-based models)
             self._chars = self._graph.get_tensor_by_name('chars:0')
