@@ -31,9 +31,8 @@ def split(*data, costs, max_cost):
             subbatch_size * costs[costs_argsort[subbatch_size]] > max_cost
         ):
             subbatch_item_ids = costs_argsort[:subbatch_size]
-            yield subbatch_item_ids, *[
-                [items[i] for i in subbatch_item_ids] for items in data
-            ]
+            subbatch_data = [[items[i] for i in subbatch_item_ids] for items in data]
+            yield (subbatch_item_ids,) + tuple(subbatch_data)
             costs_argsort = costs_argsort[subbatch_size:]
             subbatch_size = 1
         else:

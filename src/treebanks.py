@@ -6,12 +6,13 @@ from nltk.corpus.reader.bracket_parse import BracketParseCorpusReader
 import tokenizations
 import torch
 
-import ptb_unescape
+from benepar import ptb_unescape
+from benepar.parse_base import BaseInputExample
 import transliterate
 
 
 @dataclasses.dataclass
-class ParsingExample:
+class ParsingExample(BaseInputExample):
     """A single parse tree and sentence."""
 
     words: List[str]

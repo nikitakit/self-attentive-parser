@@ -9,6 +9,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch_struct
 
+from .parse_base import CompressedParserOutput
+
 
 def pad_charts(charts, padding_value=-100):
     """Pad a list of variable-length charts with `padding_value`."""
@@ -135,14 +137,54 @@ class ChartDecoder:
                 chart[start, end] = self.label_vocab[label]
         return chart
 
+    def charts_from_pytorch_scores_batched(self, scores, lengths):
+        """Runs CKY to recover span labels from scores (e.g. logits).
+
+        This method uses pytorch-struct to speed up decoding compared to the
+        pure-Python implementation of CKY used by tree_from_scores().
+
+        Args:
+            scores: a pytorch tensor of shape (batch size, max length,
+                max length, label vocab size).
+            lengths: a pytorch tensor of shape (batch size,)
+
+        Returns:
+            A list of numpy arrays, each of shape (sentence length, sentence
+                length).
+        """
+        scores = scores.detach()
+        scores = scores - scores[..., :1]
+        if self.force_root_constituent:
+            scores[torch.arange(scores.shape[0]), 0, lengths - 1, 0] -= 1e9
+        dist = torch_struct.TreeCRF(scores, lengths=lengths)
+        amax = dist.argmax
+        amax[..., 0] += 1e-9
+        padded_charts = amax.argmax(-1)
+        padded_charts = padded_charts.detach().cpu().numpy()
+        return [
+            chart[:length, :length] for chart, length in zip(padded_charts, lengths)
+        ]
+
+    def compressed_output_from_chart(self, chart):
+        chart_with_filled_diagonal = chart.copy()
+        np.fill_diagonal(chart_with_filled_diagonal, 1)
+        starts, inclusive_ends = np.where(chart_with_filled_diagonal)
+        preorder_sort = np.lexsort((-inclusive_ends, starts))
+        starts = starts[preorder_sort]
+        inclusive_ends = inclusive_ends[preorder_sort]
+        labels = chart[starts, inclusive_ends]
+        ends = inclusive_ends + 1
+        return CompressedParserOutput(starts=starts, ends=ends, labels=labels)
+
     def tree_from_chart(self, chart, leaves):
-        # TODO(nikita): tree_from_chart function, so that CKY can be delegated
-        # to pytorch_struct, and then just run a much simpler algorithm to do
-        # tree-building.
-        raise NotImplementedError()
+        compressed_output = self.compressed_output_from_chart(chart)
+        return compressed_output.to_tree(leaves, self.label_from_index)
 
     def tree_from_scores(self, scores, leaves):
         """Runs CKY to decode a tree from scores (e.g. logits).
+
+        If speed is important, consider using charts_from_pytorch_scores_batched
+        followed by compressed_output_from_chart or tree_from_chart instead.
 
         Args:
             scores: a chart of scores (or logits) of shape

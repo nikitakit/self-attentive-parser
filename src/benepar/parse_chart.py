@@ -6,20 +6,21 @@ import torch.nn.functional as F
 
 from transformers import AutoModel
 
-import char_lstm
-import decode_chart
-import nkutil
-from partitioned_transformer import (
+from . import char_lstm
+from . import decode_chart
+from . import nkutil
+from .partitioned_transformer import (
     ConcatPositionalEncoding,
     FeatureDropout,
     PartitionedTransformerEncoder,
     PartitionedTransformerEncoderLayer,
 )
-import retokenization
-import subbatching
+from . import parse_base
+from . import retokenization
+from . import subbatching
 
 
-class ChartParser(nn.Module):
+class ChartParser(nn.Module, parse_base.BaseParser):
     def __init__(
         self,
         tag_vocab,
@@ -110,6 +111,7 @@ class ChartParser(nn.Module):
             self.tag_from_index = {i: label for label, i in tag_vocab.items()}
         else:
             self.f_tag = None
+            self.tag_from_index = None
 
         self.decoder = decode_chart.ChartDecoder(label_vocab=self.label_vocab)
         self.criterion = decode_chart.SpanClassificationMarginLoss(reduction="sum")
@@ -315,21 +317,34 @@ class ChartParser(nn.Module):
             tag_loss = tag_loss / batch["batch_num_tokens"]
             return span_loss + tag_loss
 
-    def _parse_encoded(self, examples, encoded, return_scores=False):
+    def _parse_encoded(
+        self, examples, encoded, return_compressed=False, return_scores=False
+    ):
         with torch.no_grad():
             batch = self.pad_encoded(encoded)
             span_scores, tag_scores = self.forward(batch)
-            span_scores_np = span_scores.cpu().numpy()
+            if return_scores:
+                span_scores_np = span_scores.cpu().numpy()
+            else:
+                # Start/stop tokens don't count, so subtract 2
+                lengths = batch["valid_token_mask"].sum(-1) - 2
+                charts_np = self.decoder.charts_from_pytorch_scores_batched(
+                    span_scores, lengths.to(span_scores.device)
+                )
             if tag_scores is not None:
                 tag_ids_np = tag_scores.argmax(-1).cpu().numpy()
             else:
                 tag_ids_np = None
 
-        for i in range(span_scores_np.shape[0]):
+        for i in range(len(encoded)):
             example_len = len(examples[i].words)
-            scores = span_scores_np[i, :example_len, :example_len]
             if return_scores:
-                yield scores
+                yield span_scores_np[i, :example_len, :example_len]
+            elif return_compressed:
+                output = self.decoder.compressed_output_from_chart(charts_np[i])
+                if tag_ids_np is not None:
+                    output = output.with_tags(tag_ids_np[i, 1 : example_len + 1])
+                yield output
             else:
                 if tag_scores is None:
                     leaves = examples[i].pos()
@@ -344,9 +359,15 @@ class ChartParser(nn.Module):
                             predicted_tags, examples[i].pos()
                         )
                     ]
-                yield self.decoder.tree_from_scores(scores, leaves=leaves)
+                yield self.decoder.tree_from_chart(charts_np[i], leaves=leaves)
 
-    def parse(self, examples, return_scores=False, subbatch_max_tokens=None):
+    def parse(
+        self,
+        examples,
+        return_compressed=False,
+        return_scores=False,
+        subbatch_max_tokens=None,
+    ):
         training = self.training
         self.eval()
         encoded = [self.encode(example) for example in examples]
@@ -357,9 +378,15 @@ class ChartParser(nn.Module):
                 encoded,
                 costs=self._get_lens(encoded),
                 max_cost=subbatch_max_tokens,
+                return_compressed=return_compressed,
                 return_scores=return_scores,
             )
         else:
-            res = self._parse_encoded(examples, encoded, return_scores=return_scores)
+            res = self._parse_encoded(
+                examples,
+                encoded,
+                return_compressed=return_compressed,
+                return_scores=return_scores,
+            )
         self.train(training)
         return list(res)

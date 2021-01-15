@@ -8,12 +8,12 @@ import torch
 
 import numpy as np
 
-import char_lstm
-import decode_chart
+from benepar import char_lstm
+from benepar import decode_chart
+from benepar import nkutil
+from benepar import parse_chart
 import evaluate
 import learning_rates
-import nkutil
-import parse_chart
 import treebanks
 
 
