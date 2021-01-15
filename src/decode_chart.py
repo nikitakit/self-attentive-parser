@@ -103,13 +103,14 @@ def uncollapse_unary(tree, ensure_top=False):
 class ChartDecoder:
     """A chart decoder for parsing formulated as span classification."""
 
-    def __init__(self, label_vocab):
+    def __init__(self, label_vocab, force_root_constituent=True):
         """Constructs a new ChartDecoder object.
         Args:
             label_vocab: A mapping from span labels to integer indices.
         """
         self.label_vocab = label_vocab
         self.label_from_index = {i: label for label, i in label_vocab.items()}
+        self.force_root_constituent = force_root_constituent
 
     @staticmethod
     def build_vocab(trees):
@@ -169,10 +170,9 @@ class ChartDecoder:
                 label_scores = scores[left, right - 1]
                 label_scores = label_scores - label_scores[0]
 
-                # TODO(nikita): add option to not label the root node
                 argmax_label_index = int(
                     label_scores.argmax()
-                    if length < len(leaves)
+                    if length < len(leaves) or not self.force_root_constituent
                     else label_scores[1:].argmax() + 1
                 )
                 argmax_label = self.label_from_index[argmax_label_index]
