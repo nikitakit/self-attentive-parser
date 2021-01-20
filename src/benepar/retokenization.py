@@ -174,6 +174,11 @@ class Retokenizer:
                 else:
                     example["input_ids"].append(self.tokenizer.eos_token_id)
                     example["attention_mask"].append(1)
+            if num_tokens > self.tokenizer.model_max_length:
+                raise ValueError(
+                    f"Sentence of length {num_tokens} (in sub-word tokens) exceeds the "
+                    f"maximum supported length of {self.tokenizer.model_max_length}"
+                )
             start_token_idx = (
                 self.start_token_idx
                 if self.start_token_idx >= 0

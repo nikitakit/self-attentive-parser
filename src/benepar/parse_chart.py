@@ -220,6 +220,19 @@ class ChartParser(nn.Module, parse_base.BaseParser):
 
     def forward(self, batch):
         valid_token_mask = batch["valid_token_mask"].to(self.output_device)
+
+        if (
+            self.encoder is not None
+            and valid_token_mask.shape[1] > self.add_timing.timing_table.shape[0]
+        ):
+            raise ValueError(
+                "Sentence of length {} exceeds the maximum supported length of "
+                "{}".format(
+                    valid_token_mask.shape[1] - 2,
+                    self.add_timing.timing_table.shape[0] - 2,
+                )
+            )
+
         if self.char_encoder is not None:
             assert isinstance(self.char_encoder, char_lstm.CharacterLSTM)
             char_ids = batch["char_ids"].to(self.device)
