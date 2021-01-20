@@ -119,9 +119,18 @@ class ChartDecoder:
         label_set = set()
         for tree in trees:
             for _, _, label in get_labeled_spans(tree):
-                label_set.add(label)
+                if label:
+                    label_set.add(label)
         label_set = [""] + sorted(label_set)
         return {label: i for i, label in enumerate(label_set)}
+    
+    @staticmethod
+    def infer_force_root_constituent(trees):
+        for tree in trees:
+            for _, _, label in get_labeled_spans(tree):
+                if not label:
+                    return False
+        return True
 
     def chart_from_tree(self, tree):
         spans = get_labeled_spans(tree)
@@ -168,6 +177,7 @@ class ChartDecoder:
     def compressed_output_from_chart(self, chart):
         chart_with_filled_diagonal = chart.copy()
         np.fill_diagonal(chart_with_filled_diagonal, 1)
+        chart_with_filled_diagonal[0, -1] = 1
         starts, inclusive_ends = np.where(chart_with_filled_diagonal)
         preorder_sort = np.lexsort((-inclusive_ends, starts))
         starts = starts[preorder_sort]

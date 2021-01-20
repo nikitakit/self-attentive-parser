@@ -113,8 +113,13 @@ class ChartParser(nn.Module, parse_base.BaseParser):
             self.f_tag = None
             self.tag_from_index = None
 
-        self.decoder = decode_chart.ChartDecoder(label_vocab=self.label_vocab)
-        self.criterion = decode_chart.SpanClassificationMarginLoss(reduction="sum")
+        self.decoder = decode_chart.ChartDecoder(
+            label_vocab=self.label_vocab,
+            force_root_constituent=hparams.force_root_constituent,
+        )
+        self.criterion = decode_chart.SpanClassificationMarginLoss(
+            reduction="sum", force_root_constituent=hparams.force_root_constituent
+        )
 
         self.parallelized_devices = None
 
@@ -152,6 +157,9 @@ class ChartParser(nn.Module, parse_base.BaseParser):
 
         config = config.copy()
         hparams = config["hparams"]
+
+        if "force_root_constituent" not in hparams:
+            hparams["force_root_constituent"] = True
 
         config["hparams"] = nkutil.HParams(**hparams)
         parser = cls(**config)

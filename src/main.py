@@ -63,6 +63,7 @@ def make_hparams():
         relu_dropout=0.1,
         residual_dropout=0.2,
         # Output heads and losses
+        force_root_constituent="auto",
         predict_tags=False,
         d_label_hidden=256,
         d_tag_hidden=256,
@@ -118,6 +119,16 @@ def run_train(args, hparams):
             tag_vocab.add(tag)
     tag_vocab = ["UNK"] + sorted(tag_vocab)
     tag_vocab = {label: i for i, label in enumerate(tag_vocab)}
+
+    if hparams.force_root_constituent.lower() in ("true", "yes", "1"):
+        hparams.force_root_constituent = True
+    elif hparams.force_root_constituent.lower() in ("false", "no", "0"):
+        hparams.force_root_constituent = False
+    elif hparams.force_root_constituent.lower() == "auto":
+        hparams.force_root_constituent = (
+            decode_chart.ChartDecoder.infer_force_root_constituent(train_treebank.trees)
+        )
+        print("Set hparams.force_root_constituent to", hparams.force_root_constituent)
 
     print("Initializing model...")
     parser = parse_chart.ChartParser(
