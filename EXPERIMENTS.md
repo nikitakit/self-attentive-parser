@@ -49,7 +49,7 @@ EXTRA_ARGS=
 if [ "$SPMRL_LANG" = "Arabic" ]; then
     # There are sentences in the train and dev sets that are too long for BERT.
     # Fortunately, there are no such long sentences in the test set
-    EXTRA_ARGS="--text-processing arabic --max-len-train 266 --max-len-dev 494"
+    EXTRA_ARGS="--text-processing arabic-translit --max-len-train 266 --max-len-dev 494"
 fi
 if [ "$SPMRL_LANG" = "Hebrew" ]; then
     EXTRA_ARGS="--text-processing hebrew"
@@ -73,7 +73,7 @@ echo "Language: ${SPMRL_LANG}"
 
 EXTRA_ARGS=
 if [ "$SPMRL_LANG" = "Arabic" ]; then
-    EXTRA_ARGS="--text-processing arabic"
+    EXTRA_ARGS="--text-processing arabic-translit"
 fi
 if [ "$SPMRL_LANG" = "Hebrew" ]; then
     EXTRA_ARGS="--text-processing hebrew"
@@ -85,6 +85,9 @@ python src/main.py test \
     --model-path models/${SPMRL_LANG}_bert_base_multilingual_cased_*.pt \
     $EXTRA_ARGS
 ```
+
+*Note*: the Hebrew data comes in two varieties: one that uses Hebrew characters, and one that uses transliterated characters. If your copy of the treebank uses transliterated characters, use `--text-processing hebrew-translit` instead of `--text-processing hebrew`.
+
 
 ## Chinese models
 

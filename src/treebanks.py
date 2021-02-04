@@ -170,12 +170,14 @@ def load_trees(const_path, text_path=None, text_processing="default"):
         text_processing: Text processing to use if no text_path is specified:
             - 'default': undo PTB-style escape sequences and attempt to guess whitespace
                 surrounding punctuation
-            - 'arabic': undo Buckwalter transliteration and guess that all tokens are
-                separated by spaces
+            - 'arabic': guess that all tokens are separated by spaces
+            - 'arabic-translit': undo Buckwalter transliteration and guess that all
+                tokens are separated by spaces
             - 'chinese': keep all tokens unchanged (i.e. do not attempt to find any
                 escape sequences), and assume no whitespace between tokens
-            - 'hebrew': undo transliteration (see Sima'an et al. 2002) and guess that
-                all tokens are separated by spaces
+            - 'hebrew': guess that all tokens are separated by spaces
+            - 'hebrew-translit': undo transliteration (see Sima'an et al. 2002) and
+                guess that all tokens are separated by spaces
 
     Returns:
         A list of ParsingExample objects, which have the following attributes:
@@ -188,11 +190,19 @@ def load_trees(const_path, text_path=None, text_processing="default"):
 
     if text_path is not None:
         sents = read_text(text_path)
-    elif text_processing in ("arabic", "hebrew"):
-        translit = transliterate.TRANSLITERATIONS[text_processing]
+    elif text_processing in ("arabic-translit", "hebrew-translit"):
+        translit = transliterate.TRANSLITERATIONS[
+            text_processing.replace("-translit", "")
+        ]
         sents = []
         for tree in trees:
             words = [translit(word) for word in tree.leaves()]
+            sp_after = [True for _ in words]
+            sents.append((words, sp_after))
+    elif text_processing in ("arabic", "hebrew"):
+        sents = []
+        for tree in trees:
+            words = tree.leaves()
             sp_after = [True for _ in words]
             sents.append((words, sp_after))
     elif text_processing == "chinese":
