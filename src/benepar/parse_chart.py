@@ -1,10 +1,12 @@
+import os
+
 import numpy as np
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from transformers import AutoModel
+from transformers import AutoConfig, AutoModel
 
 from . import char_lstm
 from . import decode_chart
@@ -27,11 +29,13 @@ class ChartParser(nn.Module, parse_base.BaseParser):
         label_vocab,
         char_vocab,
         hparams,
+        pretrained_model_path=None,
     ):
         super().__init__()
         self.config = locals()
         self.config.pop("self")
         self.config.pop("__class__")
+        self.config.pop("pretrained_model_path")
         self.config["hparams"] = hparams.to_dict()
 
         self.tag_vocab = tag_vocab
@@ -55,10 +59,20 @@ class ChartParser(nn.Module, parse_base.BaseParser):
                 char_dropout=hparams.char_lstm_input_dropout,
             )
         elif hparams.use_pretrained:
-            self.retokenizer = retokenization.Retokenizer(
-                hparams.pretrained_model, retain_start_stop=True
-            )
-            self.pretrained_model = AutoModel.from_pretrained(hparams.pretrained_model)
+            if pretrained_model_path is None:
+                self.retokenizer = retokenization.Retokenizer(
+                    hparams.pretrained_model, retain_start_stop=True
+                )
+                self.pretrained_model = AutoModel.from_pretrained(
+                    hparams.pretrained_model
+                )
+            else:
+                self.retokenizer = retokenization.Retokenizer(
+                    pretrained_model_path, retain_start_stop=True
+                )
+                self.pretrained_model = AutoModel.from_config(
+                    AutoConfig.from_pretrained(pretrained_model_path)
+                )
             d_pretrained = self.pretrained_model.config.hidden_size
 
             if hparams.use_encoder:
@@ -145,17 +159,23 @@ class ChartParser(nn.Module, parse_base.BaseParser):
         self.pretrained_model.parallelize(*args, **kwargs)
 
     @classmethod
-    def from_trained(cls, model_path, config=None, state_dict=None):
-        if model_path is not None:
-            data = torch.load(
-                model_path, map_location=lambda storage, location: storage
+    def from_trained(cls, model_path):
+        if os.path.isdir(model_path):
+            # Multi-file format used when exporting models for release.
+            # Unlike the checkpoints saved during training, these files include
+            # all tokenizer parameters and a copy of the pre-trained model
+            # config (rather than downloading these on-demand).
+            config = AutoConfig.from_pretrained(model_path).benepar
+            state_dict = torch.load(
+                os.path.join(model_path, "benepar_model.bin"), map_location="cpu"
             )
-            if config is None:
-                config = data["config"]
-            if state_dict is None:
-                state_dict = data["state_dict"]
+            config["pretrained_model_path"] = model_path
+        else:
+            # Single-file format used for saving checkpoints during training.
+            data = torch.load(model_path, map_location="cpu")
+            config = data["config"]
+            state_dict = data["state_dict"]
 
-        config = config.copy()
         hparams = config["hparams"]
 
         if "force_root_constituent" not in hparams:
@@ -409,5 +429,6 @@ class ChartParser(nn.Module, parse_base.BaseParser):
                 return_compressed=return_compressed,
                 return_scores=return_scores,
             )
+            res = list(res)
         self.train(training)
-        return list(res)
+        return res

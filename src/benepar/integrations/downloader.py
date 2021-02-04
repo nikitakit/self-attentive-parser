@@ -19,7 +19,7 @@ def locate_model(name):
     elif "/" not in name and "." not in name:
         import nltk.data
         try:
-            nltk_loc = nltk.data.find("models/{}/{}.pt".format(name, name))
+            nltk_loc = nltk.data.find(f"models/{name}")
             return nltk_loc.path
         except LookupError as e:
             arg = e.args[0].replace("nltk.download", "benepar.download")
