@@ -23,7 +23,7 @@ for ext_module in extensions:
 
 setuptools.setup(
     name="benepar",
-    version="0.1.2",
+    version="0.1.3",
     author="Nikita Kitaev",
     author_email="kitaev@cs.berkeley.edu",
     description="Berkeley Neural Parser",
@@ -46,6 +46,6 @@ setuptools.setup(
     extras_require={
         "cpu": ["tensorflow>=1.11.0"],
         "gpu": ["tensorflow-gpu>=1.11.0"],
-        "spacy": ["spacy>=2.0.9"],
+        "spacy": ["spacy>=2.0.9,<3.0.0"],
     },
 )
