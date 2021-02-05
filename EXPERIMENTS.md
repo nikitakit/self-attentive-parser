@@ -35,6 +35,7 @@ To evaluate:
 ```bash
 python src/main.py test \
     --test-path "data/wsj/test_23.LDC99T42" \
+    --no-predict-tags \
     --model-path models/English_bert_large_uncased_*.pt
 ```
 
@@ -82,6 +83,7 @@ fi
 python src/main.py test \
     --test-path data/spmrl/${SPMRL_LANG}.test \
     --evalb-dir EVALB_SPMRL \
+    --no-predict-tags \
     --model-path models/${SPMRL_LANG}_bert_base_multilingual_cased_*.pt \
     $EXTRA_ARGS
 ```
@@ -107,5 +109,6 @@ To evaluate:
 python src/main.py test \
     --test-path "data/ctb_5.1/ctb.test" \
     --text-processing "chinese" \
+    --no-predict-tags \
     --model-path models/Chinese_bert_base_chinese_*.pt
 ```
