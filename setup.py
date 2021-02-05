@@ -30,7 +30,7 @@ setuptools.setup(
     ),
     install_requires=[
         "nltk>=3.2",
-        "spacy>=2.0.9,<3.0.0",
+        "spacy>=2.0.9",
         "torch>=1.6.0",
         "torch-struct>=0.4",
         "genbmm>=0.1",

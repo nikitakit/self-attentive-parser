@@ -77,7 +77,10 @@ class BeneparComponent:
 
     Sample usage:
     >>> nlp = spacy.load('en_core_web_md')
-    >>> nlp.add_pipe(BeneparComponent("benepar_en3"))
+    >>> if spacy.__version__.startswith('2'):
+            nlp.add_pipe(BeneparComponent("benepar_en3"))
+        else:
+            nlp.add_pipe("benepar", config={"model": "benepar_en3"})
     >>> doc = nlp("The quick brown fox jumps over the lazy dog.")
     >>> sent = list(doc.sents)[0]
     >>> print(sent._.parse_string)
@@ -161,3 +164,43 @@ class BeneparComponent:
 
         doc._._constituent_data = constituent_data.finalize(doc, self._label_from_index)
         return doc
+
+
+def create_benepar_component(
+    nlp,
+    name,
+    model: str,
+    subbatch_max_tokens: int,
+    disable_tagger: bool,
+):
+    return BeneparComponent(
+        model,
+        subbatch_max_tokens=subbatch_max_tokens,
+        disable_tagger=disable_tagger,
+    )
+
+
+def register_benepar_component_factory():
+    # Starting with spaCy 3.0, nlp.add_pipe no longer directly accepts
+    # BeneparComponent instances. We must instead register a component factory.
+    import spacy
+
+    if spacy.__version__.startswith("2"):
+        return
+
+    from spacy.language import Language
+
+    Language.factory(
+        "benepar",
+        default_config={
+            "subbatch_max_tokens": 500,
+            "disable_tagger": False,
+        },
+        func=create_benepar_component,
+    )
+
+
+try:
+    register_benepar_component_factory()
+except ImportError:
+    pass
