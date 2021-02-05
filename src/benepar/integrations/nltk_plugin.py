@@ -106,7 +106,7 @@ class Parser:
     encouraged that you use spaCy and benepar.BeneparComponent instead.
 
     Sample usage:
-    >>> parser = benepar.Parser("benepar_en")
+    >>> parser = benepar.Parser("benepar_en3")
     >>> input_sentence = benepar.InputSentence(
         words=['"', 'Fly', 'safely', '.', '"'],
         space_after=[False, True, False, False, False],

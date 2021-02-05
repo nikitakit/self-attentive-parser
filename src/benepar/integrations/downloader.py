@@ -1,6 +1,6 @@
 import os
 
-BENEPAR_SERVER_INDEX = "https://kitaev.io/benepar_models/index.xml"
+BENEPAR_SERVER_INDEX = "https://kitaev.com/benepar/index.xml"
 
 _downloader = None
 def get_downloader():

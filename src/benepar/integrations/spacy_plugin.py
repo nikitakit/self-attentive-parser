@@ -76,9 +76,9 @@ class BeneparComponent:
     Berkeley Neural Parser (benepar) component for spaCy.
 
     Sample usage:
-    >>> nlp = spacy.load('en')
-    >>> nlp.add_pipe(BeneparComponent("benepar_en"))
-    >>> doc = nlp(u"The quick brown fox jumps over the lazy dog.")
+    >>> nlp = spacy.load('en_core_web_md')
+    >>> nlp.add_pipe(BeneparComponent("benepar_en3"))
+    >>> doc = nlp("The quick brown fox jumps over the lazy dog.")
     >>> sent = list(doc.sents)[0]
     >>> print(sent._.parse_string)
 
