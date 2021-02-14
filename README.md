@@ -2,7 +2,7 @@
 
 A high-accuracy parser with models for 11 languages, implemented in Python. Based on [Constituency Parsing with a Self-Attentive Encoder](https://arxiv.org/abs/1805.01052) from ACL 2018, with additional changes described in [Multilingual Constituency Parsing with Self-Attention and Pre-Training](https://arxiv.org/abs/1812.11760).
 
-**New February 2021:** Version 0.2.0a0 of the Berkeley Neural Parser is now out, with higher-quality pre-trained models for all languages. Inference now uses PyTorch instead of TensorFlow (training has always been PyTorch-only). Drops support for Python 2.7 and 3.5. Includes updated support for training and using your own parsers, based on your choice of [pre-trained model](https://huggingface.co/models).
+**New February 2021:** Version 0.2.0 of the Berkeley Neural Parser is now out, with higher-quality pre-trained models for all languages. Inference now uses PyTorch instead of TensorFlow (training has always been PyTorch-only). Drops support for Python 2.7 and 3.5. Includes updated support for training and using your own parsers, based on your choice of [pre-trained model](https://huggingface.co/models).
 
 ## Contents
 1. [Installation](#installation)
@@ -19,9 +19,9 @@ If you are primarily interested in training your own parsing models, skip to the
 
 To install the parser, run the command:
 ```bash
-$ pip install --pre benepar -f https://kitaev.com/benepar/deps.html
+$ pip install benepar
 ```
-**Note that without `--pre`, you'll get [the previous release](https://github.com/nikitakit/self-attentive-parser/tree/acl2019) instead, which uses different parser models.**
+*Note: benepar 0.2.0 is a major upgrade over the previous version, and comes with entirely new and higher-quality parser models. If you are not ready to upgrade, you can pin your benepar version to [the previous release (0.1.3)](https://github.com/nikitakit/self-attentive-parser/tree/acl2019).*
 
 Python 3.6 (or newer) and [PyTorch](https://pytorch.org/) 1.6 (or newer) are required. See the PyTorch website for instruction on how to select between GPU-enabled and CPU-only versions of PyTorch; benepar will automatically use the GPU if it is available to pytorch.
 

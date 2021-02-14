@@ -4,7 +4,7 @@ import sys
 
 setuptools.setup(
     name="benepar",
-    version="0.2.0a0",
+    version="0.2.0",
     author="Nikita Kitaev",
     author_email="kitaev@cs.berkeley.edu",
     description="Berkeley Neural Parser",
@@ -32,8 +32,7 @@ setuptools.setup(
         "nltk>=3.2",
         "spacy>=2.0.9",
         "torch>=1.6.0",
-        "torch-struct>=0.4",
-        "genbmm>=0.1",
+        "torch-struct>=0.5",
         "tokenizers>=0.9.4",
         "transformers[torch,tokenizers]>=4.2.2",
         "protobuf",
