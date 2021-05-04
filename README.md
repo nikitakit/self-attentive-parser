@@ -129,15 +129,15 @@ Model       | Language | Info
 `benepar_en3` | English | 95.40 F1 on [revised](https://catalog.ldc.upenn.edu/LDC2015T13) WSJ test set. The training data uses revised tokenization and syntactic annotation based on the same guidelines as the English Web Treebank and OntoNotes, which better matches modern tokenization practices in libraries like spaCy. Based on T5-small.
 `benepar_en3_large` | English | 96.29 F1 on [revised](https://catalog.ldc.upenn.edu/LDC2015T13) WSJ test set. The training data uses revised tokenization and syntactic annotation based on the same guidelines as the English Web Treebank and OntoNotes, which better matches modern tokenization practices in libraries like spaCy. Based on T5-large.
 `benepar_zh2` | Chinese | 92.56 F1 on CTB 5.1 test set. Usage with spaCy allows supports parsing from raw text, but the NLTK API only supports parsing previously tokenized sentences. Based on Chinese ELECTRA-180G-large.
-`benepar_ar` | Arabic | 90.52 F1 on SPMRL2013/2014 test set. Only supports using the NLTK API for parsing previously tokenized sentences. Parsing from raw text and spaCy integration are not supported. Based on XLM-R.
-`benepar_de` | German | 92.10 F1 on SPMRL2013/2014 test set. Based on XLM-R.
-`benepar_eu` | Basque | 93.36 F1 on SPMRL2013/2014 test set. Usage with spaCy first requires implementing Basque support in spaCy. Based on XLM-R.
-`benepar_fr` | French | 88.43 F1 on SPMRL2013/2014 test set. Based on XLM-R.
-`benepar_he` | Hebrew | 93.98 F1 on SPMRL2013/2014 test set. Only supports using the NLTK API for parsing previously tokenized sentences. Parsing from raw text and spaCy integration are not supported. Based on XLM-R.
-`benepar_hu` | Hungarian | 96.19 F1 on SPMRL2013/2014 test set. Usage with spaCy requires a [Hungarian model for spaCy](https://github.com/oroszgy/spacy-hungarian-models). The NLTK API only supports parsing previously tokenized sentences. Based on XLM-R.
-`benepar_ko` | Korean | 91.72 F1 on SPMRL2013/2014 test set. Can be used with spaCy's [multi-language sentence segmentation model](https://spacy.io/models/xx#xx_sent_ud_sm) (requires spaCy v3.0). The NLTK API only supports parsing previously tokenized sentences. Based on XLM-R.
-`benepar_pl` | Polish | 97.15 F1 on SPMRL2013/2014 test set. Based on XLM-R.
-`benepar_sv` | Swedish | 92.21 F1 on SPMRL2013/2014 test set. Can be used with spaCy's [multi-language sentence segmentation model](https://spacy.io/models/xx#xx_sent_ud_sm) (requires spaCy v3.0). Based on XLM-R.
+`benepar_ar2` | Arabic | 90.52 F1 on SPMRL2013/2014 test set. Only supports using the NLTK API for parsing previously tokenized sentences. Parsing from raw text and spaCy integration are not supported. Based on XLM-R.
+`benepar_de2` | German | 92.10 F1 on SPMRL2013/2014 test set. Based on XLM-R.
+`benepar_eu2` | Basque | 93.36 F1 on SPMRL2013/2014 test set. Usage with spaCy first requires implementing Basque support in spaCy. Based on XLM-R.
+`benepar_fr2` | French | 88.43 F1 on SPMRL2013/2014 test set. Based on XLM-R.
+`benepar_he2` | Hebrew | 93.98 F1 on SPMRL2013/2014 test set. Only supports using the NLTK API for parsing previously tokenized sentences. Parsing from raw text and spaCy integration are not supported. Based on XLM-R.
+`benepar_hu2` | Hungarian | 96.19 F1 on SPMRL2013/2014 test set. Usage with spaCy requires a [Hungarian model for spaCy](https://github.com/oroszgy/spacy-hungarian-models). The NLTK API only supports parsing previously tokenized sentences. Based on XLM-R.
+`benepar_ko2` | Korean | 91.72 F1 on SPMRL2013/2014 test set. Can be used with spaCy's [multi-language sentence segmentation model](https://spacy.io/models/xx#xx_sent_ud_sm) (requires spaCy v3.0). The NLTK API only supports parsing previously tokenized sentences. Based on XLM-R.
+`benepar_pl2` | Polish | 97.15 F1 on SPMRL2013/2014 test set. Based on XLM-R.
+`benepar_sv2` | Swedish | 92.21 F1 on SPMRL2013/2014 test set. Can be used with spaCy's [multi-language sentence segmentation model](https://spacy.io/models/xx#xx_sent_ud_sm) (requires spaCy v3.0). Based on XLM-R.
 `benepar_en3_wsj` | English | **Consider using `benepar_en3` or `benepar_en3_large` instead**. 95.55 F1 on [canonical](https://catalog.ldc.upenn.edu/LDC99T42) WSJ test set used for decades of English constituency parsing publications. Based on BERT-large-uncased. We believe that the revised annotation guidelines used for training `benepar_en3`/`benepar_en3_large` are more suitable for downstream use because they better handle language usage in web text, and are more consistent with modern practices in dependency parsing and libraries like spaCy. Nevertheless, we provide the `benepar_en3_wsj` model for cases where using the revised treebanking conventions are not appropriate, such as benchmarking different models on the same dataset.
 
 ## Training
