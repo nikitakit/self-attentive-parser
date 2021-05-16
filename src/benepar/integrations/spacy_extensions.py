@@ -1,4 +1,3 @@
-import json
 NOT_PARSED_SENTINEL = object()
 
 
