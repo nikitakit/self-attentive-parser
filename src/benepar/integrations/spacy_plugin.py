@@ -25,10 +25,9 @@ class PartialConstituentData:
             if self.starts[position] != prev:
                 prev = self.starts[position]
                 loc_to_constituent[self.starts[position]] = position
-
         return ConstituentData(
             self.starts, self.ends, self.labels, loc_to_constituent, label_vocab
-        )
+        ).serialize()
 
 
 class SentenceWrapper(BaseInputExample):

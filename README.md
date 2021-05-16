@@ -74,6 +74,48 @@ The following extension properties are available:
 
 These methods will raise an exception when called on a span that is not a constituent in the parse tree. Such errors can be avoided by traversing the parse tree starting at either sentence level (by iterating over `doc.sents`) or with an individual `Token` object.
 
+## Serialize pipeline with SpaCy
+
+### to_disk
+
+```python
+from spacy.tokens import DocBin
+
+doc = nlp("the little lion is sleeping")
+
+# save doc to file
+doc_bin = DocBin(store_user_data=True)
+doc_bin.add(doc)
+doc_bin.to_disk("./serialized.doc")
+
+# load file from disk
+doc_bin = DocBin().from_disk("./serialized.doc")
+restored_doc = list(doc_bin.get_docs(nlp.vocab))[0]
+
+list(restored_doc.sents)[0]._.parse_string
+# > '(SENT (NP (X the) (X little) (NOUN lion)) (VN (X is)) (AP (X sleeping)))'
+```
+
+### to_bytes
+```python
+from spacy.tokens import DocBin
+
+doc = nlp("the little lion is sleeping")
+
+# save doc to file
+doc_bin = DocBin(store_user_data=True)
+doc_bin.add(doc)
+_bytes = doc_bin.to_bytes()
+
+# load file from bytes
+doc_bin = DocBin().from_bytes(_bytes)
+restored_doc = list(doc_bin.get_docs(nlp.vocab))[0]
+
+list(restored_doc.sents)[0]._.parse_string
+# > '(SENT (NP (X the) (X little) (NOUN lion)) (VN (X is)) (AP (X sleeping)))'
+```
+
+
 ### Usage with NLTK
 
 There is also an NLTK interface, which is designed for use with pre-tokenized datasets and treebanks, or when integrating the parser into an NLP pipeline that already performs (at minimum) tokenization and sentence splitting. For parsing starting with raw text, it is **strongly encouraged** that you use spaCy and `benepar.BeneparComponent` instead.

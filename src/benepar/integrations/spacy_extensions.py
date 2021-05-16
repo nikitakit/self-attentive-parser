@@ -1,3 +1,4 @@
+import json
 NOT_PARSED_SENTINEL = object()
 
 
@@ -13,6 +14,14 @@ class ConstituentData:
         self.loc_to_constituent = loc_to_constituent
         self.label_vocab = label_vocab
 
+    def serialize(self):
+        return {
+            "starts": self.starts,
+            "ends": self.ends,
+            "labels": self.labels,
+            "loc_to_constituent": self.loc_to_constituent,
+            "label_vocab": self.label_vocab
+        }
 
 def get_constituent(span):
     constituent_data = span.doc._._constituent_data
@@ -22,15 +31,15 @@ def get_constituent(span):
             " Consider adding a BeneparComponent to the pipeline."
         )
 
-    search_start = constituent_data.loc_to_constituent[span.start]
-    if span.start + 1 < len(constituent_data.loc_to_constituent):
-        search_end = constituent_data.loc_to_constituent[span.start + 1]
+    search_start = constituent_data["loc_to_constituent"][span.start]
+    if span.start + 1 < len(constituent_data["loc_to_constituent"]):
+        search_end = constituent_data["loc_to_constituent"][span.start + 1]
     else:
-        search_end = len(constituent_data.ends)
+        search_end = len(constituent_data["ends"])
     found_position = None
     for position in range(search_start, search_end):
-        if constituent_data.ends[position] <= span.end:
-            if constituent_data.ends[position] == span.end:
+        if constituent_data["ends"][position] <= span.end:
+            if constituent_data["ends"][position] == span.end:
                 found_position = position
             break
 
@@ -41,13 +50,13 @@ def get_constituent(span):
 
 def get_labels(span):
     constituent_data, position = get_constituent(span)
-    label_num = constituent_data.labels[position]
-    return constituent_data.label_vocab[label_num]
+    label_num = constituent_data["labels"][position]
+    return constituent_data["label_vocab"][label_num]
 
 
 def parse_string(span):
     constituent_data, position = get_constituent(span)
-    label_vocab = constituent_data.label_vocab
+    label_vocab = constituent_data["label_vocab"]
     doc = span.doc
 
     idx = position - 1
@@ -56,9 +65,9 @@ def parse_string(span):
         nonlocal idx
         idx += 1
         i, j, label_idx = (
-            constituent_data.starts[idx],
-            constituent_data.ends[idx],
-            constituent_data.labels[idx],
+            constituent_data["starts"][idx],
+            constituent_data["ends"][idx],
+            constituent_data["labels"][idx],
         )
         label = label_vocab[label_idx]
         if (i + 1) >= j:
@@ -77,9 +86,9 @@ def parse_string(span):
         else:
             children = []
             while (
-                (idx + 1) < len(constituent_data.starts)
-                and i <= constituent_data.starts[idx + 1]
-                and constituent_data.ends[idx + 1] <= j
+                (idx + 1) < len(constituent_data["starts"])
+                and i <= constituent_data["starts"][idx + 1]
+                and constituent_data["ends"][idx + 1] <= j
             ):
                 children.append(make_str())
 
@@ -94,12 +103,12 @@ def parse_string(span):
 
 def get_subconstituents(span):
     constituent_data, position = get_constituent(span)
-    label_vocab = constituent_data.label_vocab
+    label_vocab = constituent_data["label_vocab"]
     doc = span.doc
 
-    while position < len(constituent_data.starts):
-        start = constituent_data.starts[position]
-        end = constituent_data.ends[position]
+    while position < len(constituent_data["starts"]):
+        start = constituent_data["starts"][position]
+        end = constituent_data["ends"][position]
 
         if span.end <= start or span.end < end:
             break
@@ -110,14 +119,14 @@ def get_subconstituents(span):
 
 def get_child_spans(span):
     constituent_data, position = get_constituent(span)
-    label_vocab = constituent_data.label_vocab
+    label_vocab = constituent_data["label_vocab"]
     doc = span.doc
 
     child_start_expected = span.start
     position += 1
-    while position < len(constituent_data.starts):
-        start = constituent_data.starts[position]
-        end = constituent_data.ends[position]
+    while position < len(constituent_data["starts"]):
+        start = constituent_data["starts"][position]
+        end = constituent_data["ends"][position]
 
         if span.end <= start or span.end < end:
             break
@@ -131,14 +140,14 @@ def get_child_spans(span):
 
 def get_parent_span(span):
     constituent_data, position = get_constituent(span)
-    label_vocab = constituent_data.label_vocab
+    label_vocab = constituent_data["label_vocab"]
     doc = span.doc
     sent = span.sent
 
     position -= 1
     while position >= 0:
-        start = constituent_data.starts[position]
-        end = constituent_data.ends[position]
+        start = constituent_data["starts"][position]
+        end = constituent_data["ends"][position]
 
         if start <= span.start and span.end <= end:
             return doc[start:end]
