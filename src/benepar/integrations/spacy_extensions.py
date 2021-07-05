@@ -53,6 +53,8 @@ def get_labels(span):
     label_num = constituent_data["labels"][position]
     return constituent_data["label_vocab"][label_num]
 
+def get_token_labels(token):
+    return get_labels(token.doc[token.i : token.i + 1])
 
 def parse_string(span):
     constituent_data, position = get_constituent(span)
@@ -100,6 +102,8 @@ def parse_string(span):
 
     return make_str()
 
+def parse_token_string(token):
+    return parse_string(token.doc[token.i : token.i + 1])
 
 def get_subconstituents(span):
     constituent_data, position = get_constituent(span)
@@ -157,6 +161,8 @@ def get_parent_span(span):
 
     return None
 
+def get_parent_token(token):
+    return get_parent_span(token.doc[token.i : token.i + 1])
 
 def install_spacy_extensions():
     from spacy.tokens import Doc, Span, Token
@@ -171,14 +177,14 @@ def install_spacy_extensions():
     Span.set_extension("children", getter=get_child_spans)
 
     Token.set_extension(
-        "labels", getter=lambda token: get_labels(token.doc[token.i : token.i + 1])
+        "labels", getter=get_token_labels
     )
     Token.set_extension(
         "parse_string",
-        getter=lambda token: parse_string(token.doc[token.i : token.i + 1]),
+        getter=parse_token_string,
     )
     Token.set_extension(
-        "parent", getter=lambda token: get_parent_span(token.doc[token.i : token.i + 1])
+        "parent", getter=get_parent_token
     )
 
 
