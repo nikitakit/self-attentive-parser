@@ -88,7 +88,7 @@ def retokenize(
 class Retokenizer:
     def __init__(self, pretrained_model_name_or_path, retain_start_stop=False):
         self.tokenizer = transformers.AutoTokenizer.from_pretrained(
-            pretrained_model_name_or_path, fast=True
+            pretrained_model_name_or_path, fast=False
         )
         if not self.tokenizer.is_fast:
             raise NotImplementedError(
