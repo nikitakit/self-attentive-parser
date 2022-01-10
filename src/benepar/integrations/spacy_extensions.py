@@ -161,16 +161,21 @@ def install_spacy_extensions():
     Span.set_extension("parent", getter=get_parent_span)
     Span.set_extension("children", getter=get_child_spans)
 
-    Token.set_extension(
-        "labels", getter=lambda token: get_labels(token.doc[token.i : token.i + 1])
-    )
-    Token.set_extension(
-        "parse_string",
-        getter=lambda token: parse_string(token.doc[token.i : token.i + 1]),
-    )
-    Token.set_extension(
-        "parent", getter=lambda token: get_parent_span(token.doc[token.i : token.i + 1])
-    )
+    Token.set_extension("labels", getter=_labels)
+    Token.set_extension("parse_string", getter=_parse_string)
+    Token.set_extension("parent", getter=_get_parent_span)
+
+
+def _labels(token):
+    return get_labels(token.doc[token.i : token.i + 1])
+
+
+def _parse_string(token):
+    return parse_string(token.doc[token.i : token.i + 1])
+
+
+def _get_parent_span(token):
+    return get_parent_span(token.doc[token.i : token.i + 1])
 
 
 try:
